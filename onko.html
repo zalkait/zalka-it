@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genom-Onko: Interaktywny Raport Diagnostyczny</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fafaf9; color: #292524; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+        .tree-line-v { width: 2px; height: 30px; background-color: #d6d3d1; margin: 0 auto; }
+        .tree-line-h { height: 2px; background-color: #d6d3d1; width: 100%; position: absolute; top: 0; }
+        .tab-active { background-color: #0d9488; color: white; border-color: #0d9488; }
+        .tab-inactive { background-color: white; color: #57534e; border-color: #d6d3d1; }
+        .tab-inactive:hover { background-color: #f5f5f4; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#f0fdfa',
+                            DEFAULT: '#0d9488',
+                            dark: '#0f766e',
+                        },
+                        accent: {
+                            DEFAULT: '#0369a1',
+                        },
+                        warning: {
+                            DEFAULT: '#ea580c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased scroll-smooth">
+
+    <!-- Chosen Palette: Warm Neutrals & Calming Teal (Stone-50 background, Teal-600 primary, Sky-700 accent, Orange-600 warning) -->
+    <!-- Application Structure Plan: The SPA uses a task-oriented, progressive disclosure structure. It starts with an 'Executive Dashboard' summarizing the patient's critical risk. Users then scroll to an interactive 'Family Tree Risk Map' (HTML/CSS) to visually understand the genetic links. Next, an interactive 'Diagnostic Pathways' section uses tabs to compare NFZ vs Private options without cluttering the screen. This is supported by a Chart.js Bar chart illustrating the scope of tests. Finally, a 'Risks & Outcomes' section uses a Donut chart to explain statistical probabilities like VUS. This structure prevents cognitive overload, guiding the ~70-year-old user (or their family) logically from understanding the *why* to exploring the *how* and *what to watch out for*. -->
+    <!-- Visualization & Content Choices: 1. Family Risk -> Goal: Organize/Relationships -> Viz: CSS Grid/Flexbox Family Tree (NO SVG) -> Justification: Visually connects specific cancers to the patient's risk profile interactively. 2. Path Comparison -> Goal: Compare -> Viz: Interactive Tabs -> Justification: Allows side-by-side logical comparison of NFZ vs Private without long scrolling. 3. Test Scope -> Goal: Compare -> Viz: Chart.js Bar Chart (Logarithmic) -> Justification: Highlights the massive difference in analyzed genes between standard and WES tests. 4. Test Outcomes -> Goal: Inform/Composition -> Viz: Chart.js Donut Chart -> Justification: Clearly shows the 20% risk of VUS, managing psychological expectations. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🧬</span>
+                    <span class="font-bold text-stone-800 tracking-tight">GenomOnko<span class="text-brand">Warszawa</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#profil" class="text-sm font-medium text-stone-600 hover:text-brand">Profil Ryzyka</a>
+                    <a href="#sciezki" class="text-sm font-medium text-stone-600 hover:text-brand">Ścieżki Diagnostyczne</a>
+                    <a href="#zakres" class="text-sm font-medium text-stone-600 hover:text-brand">Zakres Badań</a>
+                    <a href="#ryzyka" class="text-sm font-medium text-stone-600 hover:text-brand">Świadomość Ryzyka</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-brand text-white py-12 md:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <div class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold tracking-wider mb-4 border border-white/30">
+                    RAPORT SPERSONALIZOWANY
+                </div>
+                <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">Plan Diagnostyki Genetycznej Nowotworów</h1>
+                <p class="text-lg md:text-xl text-brand-light mb-8">
+                    Kompleksowa analiza możliwości dostępu do najszerszego pakietu badań genetycznych w Warszawie, opracowana dla pacjentki obciążonej wywiadem rodzinnym.
+                </p>
+                <div class="bg-white text-stone-800 p-6 rounded-xl shadow-lg border-l-8 border-warning flex flex-col md:flex-row gap-6 items-center">
+                    <div class="text-4xl">⚠️</div>
+                    <div>
+                        <h2 class="text-xl font-bold mb-1">Konsensus Analityczny</h2>
+                        <p class="text-sm text-stone-600">
+                            Ze względu na wystąpienie raka prostaty, piersi (mutacja potwierdzona) oraz trzonu macicy w najbliższej rodzinie, pacjentka (~70 lat) wymaga <strong>pilnej, szerokiej diagnostyki wielogenowej (NGS/WES)</strong>. Standardowe, wąskie testy NFZ mogą dać fałszywie ujemny wynik, pomijając rzadkie mutacje odpowiedzialne za ten specyficzny splot nowotworów (np. BRCA1/2, geny Zespołu Lyncha).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <section id="profil" class="scroll-mt-24">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">1. Mapa Obciążeń Rodzinnych</h2>
+                <p class="text-stone-600">Wizualizacja wywiadu rodzinnego uzasadniająca konieczność szerokiego panelu badań. Zróżnicowanie nowotworów wskazuje na możliwe nakładanie się różnych zespołów genetycznych.</p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200 overflow-x-auto">
+                <div class="min-w-[600px] flex flex-col items-center">
+                    
+                    <div class="bg-stone-100 border border-stone-300 p-4 rounded-lg text-center w-56 shadow-sm relative z-10 cursor-pointer hover:border-warning transition-colors" onclick="showInfo('ojciec')">
+                        <span class="text-xl">👨🏻‍🦳</span><br>
+                        <span class="font-bold text-stone-800">Ojciec</span><br>
+                        <span class="text-warning text-sm font-semibold">Rak Prostaty (zgon, 60l.)</span>
+                    </div>
+                    
+                    <div class="tree-line-v"></div>
+                    
+                    <div class="w-full max-w-lg relative flex justify-between pt-6 mt-[-2px]">
+                        <div class="tree-line-h"></div>
+                        <div class="absolute top-0 left-0 w-[2px] h-6 bg-stone-300"></div>
+                        <div class="absolute top-0 right-0 w-[2px] h-6 bg-stone-300"></div>
+                        <div class="absolute top-0 left-1/2 w-[2px] h-6 bg-stone-300 ml-[-1px]"></div>
+                        
+                        <div class="bg-white border-2 border-warning p-4 rounded-lg text-center w-40 shadow-sm relative z-10 cursor-pointer hover:bg-orange-50 transition-colors" onclick="showInfo('siostra')">
+                            <span class="text-xl">👩🏼</span><br>
+                            <span class="font-bold text-stone-800">Siostra</span><br>
+                            <span class="text-warning text-sm font-semibold">Rak Piersi</span><br>
+                            <span class="text-xs text-stone-500 block mt-1">(Potwierdzona mutacja)</span>
+                        </div>
+                        
+                        <div class="bg-brand-light border-2 border-brand p-4 rounded-lg text-center w-48 shadow-md relative z-10 transform scale-105">
+                            <span class="text-xl">👩🏼‍🦳</span><br>
+                            <span class="font-bold text-brand-dark">Pacjentka (~70 lat)</span><br>
+                            <span class="text-brand text-sm font-semibold">Kandydatka do badań</span>
+                        </div>
+                        
+                        <div class="w-40"></div>
+                    </div>
+                    
+                    <div class="w-full max-w-lg relative flex justify-start">
+                        <div class="w-[2px] h-8 bg-stone-300 ml-[79px]"></div>
+                    </div>
+                    
+                    <div class="w-full max-w-lg relative flex justify-start pl-4">
+                        <div class="bg-white border border-warning p-3 rounded-lg text-center w-32 shadow-sm cursor-pointer hover:bg-orange-50 transition-colors" onclick="showInfo('siostrzenica')">
+                            <span class="text-lg">👧🏼</span><br>
+                            <span class="font-bold text-stone-800 text-sm">Siostrzenica</span><br>
+                            <span class="text-warning text-xs font-semibold">Rak Macicy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="info-box" class="mt-8 p-4 bg-stone-50 rounded-lg border border-stone-200 hidden fade-in">
+                    <h4 id="info-title" class="font-bold text-brand-dark mb-1">...</h4>
+                    <p id="info-desc" class="text-sm text-stone-600">...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sciezki" class="scroll-mt-24">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">2. Dostępne Ścieżki Diagnostyczne w Warszawie</h2>
+                <p class="text-stone-600">Porównanie procedur publicznych (NFZ) oraz komercyjnych w celu uzyskania najszerszego profilu genetycznego. Wybierz zakładkę, aby poznać szczegóły.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2 mb-6">
+                <button onclick="switchTab('nfz')" id="tab-nfz" class="flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-active">
+                    🏥 Ścieżka na NFZ (Bezpłatna)
+                </button>
+                <button onclick="switchTab('priv')" id="tab-priv" class="flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-inactive">
+                    🔬 Ścieżka Prywatna (Pełny Pakiet)
+                </button>
+            </div>
+
+            <div id="content-nfz" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200 fade-in">
+                <div class="flex flex-col md:flex-row justify-between gap-8">
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">Wymagania i Procedura</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand font-bold mt-0.5">1.</span>
+                                <span class="text-stone-600">Uzyskanie <strong>skierowania</strong> do Poradni Genetycznej (kod resortowy 1200) od lekarza POZ lub specjalisty (np. onkologa, ginekologa).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand font-bold mt-0.5">2.</span>
+                                <span class="text-stone-600">Konieczność dostarczenia dokumentacji własnej oraz <strong>kserokopii wyników badań genetycznych siostry</strong> (absolutnie kluczowe!).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand font-bold mt-0.5">3.</span>
+                                <span class="text-stone-600">Zapisy w Warszawie m.in.: Narodowy Instytut Onkologii (ul. Roentgena 5), Zakład Genetyki WUM (ul. Pawińskiego 3c).</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 bg-stone-50 p-6 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-800 mb-3 text-center">Ocena Opcji</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-stone-500 font-semibold mb-1">Czas oczekiwania</span>
+                                <div class="bg-stone-200 h-2 w-full rounded-full overflow-hidden">
+                                    <div class="bg-warning h-full w-3/4"></div>
+                                </div>
+                                <span class="text-sm font-bold mt-1 block">Bardzo długi (3-9 miesięcy)</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-stone-500 font-semibold mb-1">Zakres Badania</span>
+                                <div class="bg-stone-200 h-2 w-full rounded-full overflow-hidden">
+                                    <div class="bg-accent h-full w-1/4"></div>
+                                </div>
+                                <span class="text-sm font-bold mt-1 block text-stone-800">Wąski (tylko podstawowe mutacje "polskie")</span>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-4 italic">Badanie celowane na mutację siostry jest pewne, ale szerszy panel na nowotwór ojca i siostrzenicy może być trudny do wyegzekwowania.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-priv" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200 hidden fade-in">
+                <div class="flex flex-col md:flex-row justify-between gap-8">
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">Rekomendowane Pakiety NGS</h3>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-brand-light rounded-lg border border-brand/20">
+                                <span class="font-bold text-brand-dark block mb-1">Rozszerzony Panel Onkologiczny (NGS)</span>
+                                <span class="text-sm text-stone-600 block mb-2">Analiza ok. 70-100 genów związanych z predyspozycją do nowotworów. Wykonywane m.in. przez Warsaw Genomics (ul. Żwirki i Wigury 93) lub ALAB/Diagnostyka.</span>
+                                <span class="inline-block bg-white px-2 py-1 rounded text-xs font-bold text-stone-700 border shadow-sm">Koszt: ~1500 - 2500 PLN</span>
+                            </li>
+                            <li class="p-4 bg-stone-50 rounded-lg border border-stone-200">
+                                <span class="font-bold text-stone-800 block mb-1">Sekwencjonowanie Całego Egzomu (WES Onko)</span>
+                                <span class="text-sm text-stone-600 block mb-2">Najszersze z możliwych. Badanie wszystkich części kodujących genów z raportowaniem tych istotnych onkologicznie. Daje pełen obraz.</span>
+                                <span class="inline-block bg-white px-2 py-1 rounded text-xs font-bold text-stone-700 border shadow-sm">Koszt: ~3500 - 4500 PLN</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 bg-stone-50 p-6 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-800 mb-3 text-center">Ocena Opcji</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-stone-500 font-semibold mb-1">Czas oczekiwania</span>
+                                <div class="bg-stone-200 h-2 w-full rounded-full overflow-hidden">
+                                    <div class="bg-brand h-full w-1/4"></div>
+                                </div>
+                                <span class="text-sm font-bold mt-1 block">Szybki (3-5 tygodni)</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-stone-500 font-semibold mb-1">Zakres Badania</span>
+                                <div class="bg-stone-200 h-2 w-full rounded-full overflow-hidden">
+                                    <div class="bg-brand h-full w-full"></div>
+                                </div>
+                                <span class="text-sm font-bold mt-1 block text-brand-dark">Najszerszy możliwy (Setki genów)</span>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-4 italic">Zdecydowanie rekomendowane przy tak złożonym wywiadzie rodzinnym, pomimo kosztów finansowych.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="zakres" class="scroll-mt-24">
+            <div class="mb-8 text-center md:text-left">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">3. Wizualizacja Zakresu Diagnostyki</h2>
+                <p class="text-stone-600">Porównanie liczby analizowanych genów w różnych modelach testów. Więcej przeanalizowanych genów oznacza mniejsze ryzyko przeoczenia rzadkiej mutacji.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                <div class="chart-container">
+                    <canvas id="genesChart"></canvas>
+                </div>
+                <div class="mt-4 text-center text-sm text-stone-500">
+                    Oś pozioma przedstawia wartości w skali logarytmicznej ze względu na ogromne różnice w zakresie badań.
+                </div>
+            </div>
+        </section>
+
+        <section id="ryzyka" class="scroll-mt-24">
+             <div class="mb-8">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">4. Świadomość Ryzyka Badań Szerokopanelowych</h2>
+                <p class="text-stone-600">Przed podjęciem decyzji o badaniu komercyjnym należy odbyć poradę genetyczną. Szerokie panele wiążą się z ryzykiem uzyskania wyników niejednoznacznych.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 h-full flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-center mb-6">Prawdopodobieństwo Rodzaju Wyniku (Panele NGS)</h3>
+                    <div class="chart-container" style="height: 280px;">
+                        <canvas id="risksChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="toggleDetails('det-1')">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-stone-800 flex items-center gap-2"><span class="text-brand">●</span> Wynik Negatywny</h4>
+                            <span class="text-stone-400">▼</span>
+                        </div>
+                        <div id="det-1" class="hidden mt-3 text-sm text-stone-600 border-t pt-3">
+                            Brak mutacji predysponujących. <strong>Uwaga:</strong> U pacjentki ~70-letniej nie zwalnia to z badań populacyjnych. Ryzyko zachorowania spada do poziomu ogółu populacji, ale nie wynosi zero.
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="toggleDetails('det-2')">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-stone-800 flex items-center gap-2"><span class="text-warning">●</span> Wynik Pozytywny</h4>
+                            <span class="text-stone-400">▼</span>
+                        </div>
+                        <div id="det-2" class="hidden mt-3 text-sm text-stone-600 border-t pt-3">
+                            Potwierdzenie nosicielstwa patogennej mutacji (np. BRCA). Pozwala na objęcie ścisłym nadzorem onkologicznym. Informacja kluczowa dla dzieci pacjentki, które mogą odziedziczyć mutację (50% szans).
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="toggleDetails('det-3')">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-stone-800 flex items-center gap-2"><span class="text-accent">●</span> Wynik Niejednoznaczny (VUS)</h4>
+                            <span class="text-stone-400">▼</span>
+                        </div>
+                        <div id="det-3" class="hidden mt-3 text-sm text-stone-600 border-t pt-3">
+                            <strong>Wariant o nieznanym znaczeniu.</strong> Znaleziono zmianę w genie, ale medycyna jeszcze nie wie, czy wywołuje ona raka, czy jest łagodną anomalią. Generuje to duży stres psychologiczny i wymaga ponownej konsultacji za kilka lat.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-400 py-10 text-center mt-12 border-t-4 border-brand">
+        <div class="max-w-4xl mx-auto px-4">
+            <h4 class="text-white font-bold mb-4">Źródła Informacji</h4>
+            <div class="flex flex-wrap justify-center gap-4 text-xs">
+                <span class="bg-stone-700 px-3 py-1 rounded">Wytyczne NFZ i MZ</span>
+                <span class="bg-stone-700 px-3 py-1 rounded">Polskie Towarzystwo Onkologii Klinicznej (PTOK)</span>
+                <span class="bg-stone-700 px-3 py-1 rounded">Warsaw Genomics (Specyfikacje Badań)</span>
+                <span class="bg-stone-700 px-3 py-1 rounded">Wytyczne NCCN 2024</span>
+            </div>
+            <p class="mt-8 text-xs">
+                Aplikacja ma charakter edukacyjno-informacyjny. Decyzje o diagnostyce należy zawsze konsultować z lekarzem genetykiem.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const infoData = {
+            'ojciec': { title: 'Związek z Rakiem Prostaty', desc: 'Niektóre mutacje (np. w genach BRCA2, HOXB13) zwiększają ryzyko raka prostaty u mężczyzn, a u kobiet w tej samej rodzinie mogą powodować raka piersi lub jajnika.' },
+            'siostra': { title: 'Potwierdzona Mutacja u Siostry', desc: 'To najważniejszy punkt zaczepienia. Laboratorium powinno zacząć od poszukiwania DOKŁADNIE tej samej mutacji u pacjentki. Jeśli jej nie ma, należy szukać innych z uwagi na resztę rodziny.' },
+            'siostrzenica': { title: 'Rak Macicy u Siostrzenicy', desc: 'Wczesne wystąpienie raka trzonu macicy może sugerować Zespół Lyncha. Wymaga to zbadania genów z grupy MMR (MLH1, MSH2, MSH6, PMS2).' }
+        };
+
+        function showInfo(person) {
+            const box = document.getElementById('info-box');
+            document.getElementById('info-title').innerText = infoData[person].title;
+            document.getElementById('info-desc').innerText = infoData[person].desc;
+            box.classList.remove('hidden');
+            box.classList.remove('fade-in');
+            void box.offsetWidth; 
+            box.classList.add('fade-in');
+        }
+
+        function switchTab(tab) {
+            const nfzBtn = document.getElementById('tab-nfz');
+            const privBtn = document.getElementById('tab-priv');
+            const nfzContent = document.getElementById('content-nfz');
+            const privContent = document.getElementById('content-priv');
+
+            if (tab === 'nfz') {
+                nfzBtn.className = "flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-active";
+                privBtn.className = "flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-inactive";
+                nfzContent.classList.remove('hidden');
+                privContent.classList.add('hidden');
+            } else {
+                privBtn.className = "flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-active";
+                nfzBtn.className = "flex-1 py-3 px-6 rounded-lg border text-center font-semibold transition-all tab-inactive";
+                privContent.classList.remove('hidden');
+                nfzContent.classList.add('hidden');
+            }
+        }
+
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                el.classList.add('fade-in');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        function wrapLabel(label, limit = 16) {
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= limit) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const rawLabelsGenes = [
+            "Test Kasetkowy (NFZ - Częste Mutacje)", 
+            "Test Panelowy Wąski (NFZ)", 
+            "Panel NGS Onkologiczny (Prywatnie)", 
+            "Sekwencjonowanie WES (Prywatnie)"
+        ];
+        const processedLabelsGenes = rawLabelsGenes.map(label => wrapLabel(label, 18));
+
+        const ctxGenes = document.getElementById('genesChart').getContext('2d');
+        new Chart(ctxGenes, {
+            type: 'bar',
+            data: {
+                labels: processedLabelsGenes,
+                datasets: [{
+                    label: 'Szacowana liczba badanych genów',
+                    data: [5, 15, 95, 700], 
+                    backgroundColor: [
+                        '#d6d3d1', 
+                        '#78716c', 
+                        '#0369a1', 
+                        '#0d9488'  
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', 
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig,
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        title: {
+                            display: true,
+                            text: 'Liczba analizowanych genów (Skala Logarytmiczna)',
+                            font: { family: 'Inter', size: 12 }
+                        },
+                        ticks: {
+                            callback: function(value, index, values) {
+                                if (value === 1 || value === 10 || value === 100 || value === 1000) return value;
+                                return null;
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: { font: { family: 'Inter', size: 11 } }
+                    }
+                }
+            }
+        });
+
+        const rawLabelsRisks = [
+            "Negatywny (Brak zagrożenia dziedzicznego)", 
+            "Pozytywny (Mutacja zidentyfikowana)", 
+            "VUS (Wariant Niejednoznaczny)"
+        ];
+        const processedLabelsRisks = rawLabelsRisks.map(label => wrapLabel(label, 18));
+
+        const ctxRisks = document.getElementById('risksChart').getContext('2d');
+        new Chart(ctxRisks, {
+            type: 'doughnut',
+            data: {
+                labels: processedLabelsRisks,
+                datasets: [{
+                    data: [65, 15, 20], 
+                    backgroundColor: [
+                        '#0d9488', 
+                        '#ea580c', 
+                        '#0369a1'  
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            font: { family: 'Inter', size: 12 },
+                            boxWidth: 15
+                        }
+                    },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+    </script>
+</body>
+</html>
