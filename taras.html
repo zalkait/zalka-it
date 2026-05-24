@@ -12,6 +12,9 @@
             --bg-color: #f4f7f5;
             --text-color: #333;
             --card-bg: #ffffff;
+            --warning-color: #f08c00;
+            --danger-bg: #fff5f5;
+            --danger-border: #ffc9c9;
         }
 
         body {
@@ -62,10 +65,9 @@
             color: var(--primary-color);
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 0.5rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
-        /* Tabela stylizowana */
         .table-container {
             overflow-x: auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -112,7 +114,6 @@
         .badge-z { background-color: #2b8a3e; }
         .badge-c { background-color: #1c7ed6; }
 
-        /* Sekcje z poradami */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -140,9 +141,56 @@
         .card h3 {
             margin-top: 0;
             color: var(--primary-color);
+        }
+
+        /* Nowe style dla identyfikacji skrzyń */
+        .zone-box {
+            background-color: var(--card-bg);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .zone-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .zone-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .zone-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+
+        .zone-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Style dla konfliktów */
+        .conflict-box {
+            background-color: var(--danger-bg);
+            border: 1px solid var(--danger-border);
+            border-left: 5px solid #e03131;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .conflict-box h4 {
+            margin: 0 0 0.5rem 0;
+            color: #c92a2a;
+            font-size: 1.1rem;
         }
 
         .tip-box {
@@ -180,7 +228,7 @@
 
 <header>
     <h1>Twój Poradnik Ogrodnika</h1>
-    <p>Kompleksowy plan nawożenia i nawadniania roślin na Twoim tarasie</p>
+    <p>Kompleksowy plan nawożenia, nawadniania oraz mapa roślin Twojego tarasu</p>
 </header>
 
 <div class="container">
@@ -188,7 +236,62 @@
         <p>Masz fantastyczny zestaw roślin – od pięknych, kolorowych jednorocznych, przez byliny, aż po krzewy. Nazywanie nawozów literami przez firmę Planton (H, S, K, Z, C) może na początku brzmieć skomplikowanie, ale w rzeczywistości jest genialne, bo każda litera odpowiada konkretnej grupie roślin. Poniżej znajdziesz kompletną, prostą rozpiskę krok po kroku.</p>
     </div>
 
-    <h2>1. Tabela Nawożenia – Co, czym i jak?</h2>
+    <h2>2. Mapa Twojego Tarasu (Identyfikacja od lewej do prawej)</h2>
+    <p>Rozpiska przygotowana na podstawie Twojego nagrania wideo, idąc dokładnie tak, jak prowadziłeś kamerę:</p>
+
+    <div class="zone-box">
+        <div class="zone-title">🟩 Strefa 1: Lewy róg i barierka (Początek filmu)</div>
+        <ul class="zone-list">
+            <li><strong>Czarna paletka na stoliku:</strong> Petunie / Surfinie (młode, intensywnie różowe sadzonki).</li>
+            <li><strong>Czarne skrzynki na barieruch (po lewej):</strong> Pelargonie (klasyczne, jeszcze przed pełnym rozkwitem).</li>
+            <li><strong>Brązowa okrągła donica na stoliku:</strong> Aloes (sukulent ukryty w głębi).</li>
+        </ul>
+    </div>
+
+    <div class="zone-box">
+        <div class="zone-title">⬜ Strefa 2: Duże białe skrzynie (Główna część tarasu)</div>
+        <ul class="zone-list">
+            <li><strong>Skrzynia 1 (Po lewej):</strong> Duży, bujny krzew to <strong>Hortensja ogrodowa</strong> (z różowo-zielonymi pąkami). Obok rośnie zielona <strong>Trzmielina</strong> jako tło.</li>
+            <li><strong>Skrzynia 2 (Środkowa):</strong> Krzewinki z drobnymi kwiatami to <strong>Azalie japońskie / Chamedafne</strong>. Dookoła nich rosną kolorowe <strong>Żurawki (Heuchera)</strong> o liściach limonkowych i bordowych.</li>
+            <li><strong>Skrzynia 3 (Po prawej):</strong> Zielony, gęsty krzew to <strong>Bukszpan</strong>. Tuż obok widać fioletowo-niebieskie kłosy <strong>Lawendy</strong>. Na środku stoi też <em>uschnięte drzewko iglaste</em>.</li>
+        </ul>
+    </div>
+
+    <div class="zone-box">
+        <div class="zone-title">🟫 Strefa 3: Skrzynki okienne i donice stojące (Koniec filmu)</div>
+        <ul class="zone-list">
+            <li><strong>Dwie podłużne skrzynki na ziemi:</strong> Kompozycja mieszana – bujne, amarantowe <strong>Petunie / Surfinie</strong> posadzone na przemian z drobnymi, różowymi <strong>Goździkami</strong>.</li>
+            <li><strong>Duże, wysokie donice stojące:</strong> Przepiękne, rozłożyste <strong>Paprocie ogrodowe</strong>.</li>
+            <li><strong>Mniejsze doniczki w tle:</strong> Sadzonki <strong>Truskawek / Poziomek</strong> oraz pędy <strong>Czosnku ozdobnego</strong>.</li>
+        </ul>
+    </div>
+
+
+    <h2>3. ⚠️ Konflikty Roślinne – Co się wyklucza?</h2>
+    <p>Na Twoim tarasie masz kilka miejsc, gdzie gatunki o skrajnie różnych potrzebach rosną obok siebie. Złe nawożenie lub podlewanie może uszkodzić jedno kosztem drugiego:</p>
+
+    <div class="conflict-box">
+        <h4>Krytyczny konflikt w Skrzyni 3: Bukszpan + Lawenda</h4>
+        <p>To dwie rośliny z zupełnie innych bajek posadzone razem:</p>
+        <ul>
+            <li><strong>Woda:</strong> Bukszpan lubi ziemię stale wilgotną i żyzną. Lawenda nienawidzi wilgoci – musi mieć sucho. Jeśli podlejesz skrzynię pod bukszpan, lawenda zgnije. Jeśli ją przesuszysz, bukszpan zżółknie.</li>
+            <li><strong>Nawóz:</strong> Bukszpan kocha azot (<span class="badge badge-z">Planton Z</span>). Jeśli podlejesz nim lawendę, roślina dostanie szoku, przestanie kwitnąć i stanie się wiotka.</li>
+            <li><strong>Rozwiązanie:</strong> Podlewaj i nawoź tę skrzynię "punktowo" – lej wodę z nawozem ściśle pod krzew bukszpanu, a wokół lawendy zachowaj suchą strefę.</li>
+        </ul>
+    </div>
+
+    <div class="conflict-box" style="background-color: #fff4e6; border-color: #ffe8cc; border-left-color: #f76707;">
+        <h4 style="color: #d9480f;">Zagrożenie dla Aloesu</h4>
+        <p>Aloes stoi tuż obok palety z petuniami, które karmisz silnym nawozem <span class="badge badge-s">Planton S</span>. Jeśli przez przypadek podlejesz nim Aloesa, możesz go bezpowrotnie spalić – sukulenty nie tolerują tak dużych dawek potasu i fosforu mineralnego.</p>
+    </div>
+
+    <div class="conflict-box" style="background-color: #f8f9fa; border-color: #e9ecef; border-left-color: #495057;">
+        <h4 style="color: #212529;">Kompozycja: Petunie + Goździki (Skrzynki na ziemi)</h4>
+        <p>Petunie to potężne "żarłoki" – rosną bardzo agresywnie. Goździki rosną wolniej. Stosowanie tam czystego nawozu <span class="badge badge-s">Planton S</span> może sprawić, że petunie całkowicie zarosną i zagłuszą goździki. <strong>Rozwiązanie:</strong> Używaj w tych skrzynkach bezpieczniejszego, bardziej zrównoważego <span class="badge badge-k">Planton K</span>.</p>
+    </div>
+
+
+    <h2>4. Tabela Nawożenia – Dawkowanie</h2>
     <p>Wszystkie Twoje nawozy (oprócz niebieskiego Plantonu C) to koncentraty w proszku, z których przygotowuje się roztwór. <strong>Podstawowa proporcja dla nawozów w proszku (H, S, K, Z) to 1 pełna łyżeczka (ok. 5g) na 5 litrów wody</strong>.</p>
 
     <div class="table-container">
@@ -196,41 +299,41 @@
             <thead>
                 <tr>
                     <th>Nawóz (Planton)</th>
-                    <th>Rośliny z Twojego tarasu</th>
+                    <th>Zastosowanie na Twoim tarasie</th>
                     <th>Częstotliwość i dawkowanie</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><span class="badge badge-h">Planton H</span><br><strong>Do Hortensji</strong></td>
-                    <td><strong>Hortensja ogrodowa</strong> (duży krzew w białej skrzyni z różowo-zielonymi kwiatami).</td>
+                    <td><strong>Hortensja ogrodowa</strong> (Skrzynia 1). Lej nawóz bezpośrednio pod pień krzewu.</td>
                     <td>Raz w tygodniu od maja do końca lipca.<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-s">Planton S</span><br><strong>Do Surfinii / Petunii</strong></td>
-                    <td><strong>Petunie / Surfinie</strong> (wszystkie amarantowe/różowe kwiaty trąbkowate w czarnej palecie oraz w podłużnych skrzynkach okiennych).</td>
+                    <td><strong>Petunie / Surfinie</strong> (Paletka na stole oraz w podłużnych skrzynkach).</td>
                     <td>Przy każdym podlewaniu (nawet codziennie w upały) – te rośliny to "żarłoki".<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-k">Planton K</span><br><strong>Do Pelargonii i kwitnących</strong></td>
-                    <td><strong>Pelargonie</strong> (w czarnych doniczkach na barieratyce), <strong>Goździki</strong> (drobne różowe kwiatuszki), <strong>Żurawki</strong> (kolorowe liście bordowe i limonkowe), <strong>Truskawki/Poziomki</strong>, <strong>Cebule (Czosnek ozdobny)</strong>, <strong>Azalie/Chamedafne</strong> (krzewinki z różowymi kwiatami w białych skrzyniach).</td>
+                    <td><strong>Pelargonie</strong>, <strong>Goździki</strong>, <strong>Żurawki</strong> (Skrzynia 2), <strong>Truskawki</strong>, <strong>Czosnek ozdobny</strong>, <strong>Azalie</strong> (Skrzynia 2).</td>
                     <td>1-2 razy w tygodniu od maja do sierpnia.<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-z">Planton Z</span><br><strong>Do roślin zielonych</strong></td>
-                    <td><strong>Paprocie</strong> (duże, zielone pióropusze w donicach), <strong>Bukszpan / Trzmielina</strong> (zielone krzewy w skrzyniach), <strong>Aloes</strong> (w brązowej donicy), <strong>Lawenda</strong> (bardzo oszczędnie).</td>
+                    <td><strong>Paprocie</strong>, <strong>Bukszpan</strong> (Skrzynia 3 – punktowo), <strong>Trzmielina</strong> (Skrzynia 1).</td>
                     <td>Raz na 2 tygodnie (wzmacnia same liście).<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-c">Planton C</span><br><strong>Długodziałający</strong></td>
-                    <td><strong>Dowolne nowo sadzone rośliny</strong> (np. w miejscach, gdzie widać pojedyncze, młode sadzonki w świeżej ziemi).</td>
-                    <td><strong>Uwaga: To są granulki!</strong> Ich NIE rozpuszcza się w wodzie. Sypiesz garść i mieszasz z ziemią podczas sadzenia roślin. Działa przez 3 miesiące.</td>
+                    <td><strong>Nowo sadzone rośliny</strong> (granulki podawane bezpośrednio do ziemi przy sadzeniu).</td>
+                    <td><strong>Uwaga: To są granulki!</strong> Ich NIE rozpuszcza się w wodzie. Sypiesz garść i mieszasz z ziemią. Działa przez 3 miesiące.</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <h2>2. Instrukcja prawidłowego nawadniania</h2>
+    <h2>5. Instrukcja prawidłowego nawadniania</h2>
     <div class="grid">
         <div class="card">
             <h3>💧 Test wilgotności</h3>
@@ -242,24 +345,15 @@
         </div>
     </div>
 
-    <h2>3. Triki i porady od Specjalisty Ogrodnictwa</h2>
-    
-    <div class="card" style="margin-top: 1.5rem;">
-        <h3>💡 Podział na "Pijaków" i "Pustynników"</h3>
-        <ul>
-            <li><strong>Pijacy (Podlewaj często):</strong> Hortensje oraz Petunie/Surfinie w upalne dni potrzebują wody <strong>codziennie</strong>, a czasem nawet dwa razy dziennie. Gdy mają sucho, natychmiast spektakularnie więdną.</li>
-            <li><strong>Pustynnicy (Podlewaj rzadko):</strong> Aloes i Lawenda nienawidzą stałej wilgoci. Aloes podlej dopiero, gdy ziemia wyschnie na wiór (raz na 1,5–2 tygodnie). Lawenda lubi umiarkowaną suszę – jeśli ją przelejesz, jej korzenie szybko zgniją.</li>
-        </ul>
-    </div>
-
-    <div class="card" style="margin-top: 1.5rem;">
+    <h2>6. Podsumowanie i pielęgnacja</h2>
+    <div class="card">
         <h3>✂️ Sekret bujnego kwitnienia</h3>
         <p>Petunie, pelargonie i goździki będą kwitły dwa razy mocniej, jeśli będziesz regularnie (raz na kilka dni) <strong>urywać lub odcinać stare, zwiędłe kwiatostany</strong>. Jeśli zostawisz je na roślinie, zacznie ona zawiązywać nasiona, co odbierze jej siły do produkcji nowych pąków.</p>
     </div>
 
     <div class="tip-box">
         <h4>⚠️ Pilna uwaga dotycząca uschniętego drzewka</h4>
-        <p>W jednej z podłużnych białych skrzyń (widocznej na filmie około 0:36) znajduje się całkowicie suche, brązowe drzewko/krzew owinięty żółtym sznurkiem. Ono niestety już obumarło. Wykop je jak najszybciej, ponieważ w suchej tkance mogą rozwijać się grzyby chorobotwórcze. W wolne miejsce możesz posadzić coś nowego i przy okazji wykorzystać niebieski nawóz <strong>Planton C</strong>, mieszając go ze świeżą ziemią!</p>
+        <p>W Skrzyni 3 (po prawej stronie) znajduje się całkowicie suche, brązowe drzewko/krzew owinięty żółtym sznurkiem. Ono niestety już obumarło. Wykop je jak najszybciej, ponieważ w suchej tkance mogą rozwijać się grzyby chorobotwórcze. W wolne miejsce możesz posadzić coś nowego i przy okazji wykorzystać niebieski nawóz <strong>Planton C</strong>, mieszasz go ze świeżą ziemią!</p>
     </div>
 </div>
 
