@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twój Poradnik Ogrodnika - Tarasowe Szaleństwo</title>
+    <style>
+        :root {
+            --primary-color: #2c5e3b;
+            --secondary-color: #8eb69b;
+            --accent-color: #d96b43;
+            --bg-color: #f4f7f5;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #1e4228);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .intro-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary-color);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Tabela stylizowana */
+        .table-container {
+            overflow-x: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #eef2f0;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background-color: #f9fbf9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .badge-h { background-color: #e6a1b8; color: #5c2c3a; }
+        .badge-s { background-color: #d6336c; }
+        .badge-k { background-color: #ced4da; color: #212529; }
+        .badge-z { background-color: #2b8a3e; }
+        .badge-c { background-color: #1c7ed6; }
+
+        /* Sekcje z poradami */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-box {
+            background-color: #fff9db;
+            border: 1px solid #ffe066;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .tip-box h4 {
+            margin: 0 0 0.5rem 0;
+            color: #f08c00;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Twój Poradnik Ogrodnika</h1>
+    <p>Kompleksowy plan nawożenia i nawadniania roślin na Twoim tarasie</p>
+</header>
+
+<div class="container">
+    <div class="intro-card">
+        <p>Masz fantastyczny zestaw roślin – od pięknych, kolorowych jednorocznych, przez byliny, aż po krzewy. Nazywanie nawozów literami przez firmę Planton (H, S, K, Z, C) może na początku brzmieć skomplikowanie, ale w rzeczywistości jest genialne, bo każda litera odpowiada konkretnej grupie roślin. Poniżej znajdziesz kompletną, prostą rozpiskę krok po kroku.</p>
+    </div>
+
+    <h2>1. Tabela Nawożenia – Co, czym i jak?</h2>
+    <p>Wszystkie Twoje nawozy (oprócz niebieskiego Plantonu C) to koncentraty w proszku, z których przygotowuje się roztwór. <strong>Podstawowa proporcja dla nawozów w proszku (H, S, K, Z) to 1 pełna łyżeczka (ok. 5g) na 5 litrów wody</strong>.</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nawóz (Planton)</th>
+                    <th>Rośliny z Twojego tarasu</th>
+                    <th>Częstotliwość i dawkowanie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-h">Planton H</span><br><strong>Do Hortensji</strong></td>
+                    <td><strong>Hortensja ogrodowa</strong> (duży krzew w białej skrzyni z różowo-zielonymi kwiatami).</td>
+                    <td>Raz w tygodniu od maja do końca lipca.<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-s">Planton S</span><br><strong>Do Surfinii / Petunii</strong></td>
+                    <td><strong>Petunie / Surfinie</strong> (wszystkie amarantowe/różowe kwiaty trąbkowate w czarnej palecie oraz w podłużnych skrzynkach okiennych).</td>
+                    <td>Przy każdym podlewaniu (nawet codziennie w upały) – te rośliny to "żarłoki".<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-k">Planton K</span><br><strong>Do Pelargonii i kwitnących</strong></td>
+                    <td><strong>Pelargonie</strong> (w czarnych doniczkach na barieratyce), <strong>Goździki</strong> (drobne różowe kwiatuszki), <strong>Żurawki</strong> (kolorowe liście bordowe i limonkowe), <strong>Truskawki/Poziomki</strong>, <strong>Cebule (Czosnek ozdobny)</strong>, <strong>Azalie/Chamedafne</strong> (krzewinki z różowymi kwiatami w białych skrzyniach).</td>
+                    <td>1-2 razy w tygodniu od maja do sierpnia.<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-z">Planton Z</span><br><strong>Do roślin zielonych</strong></td>
+                    <td><strong>Paprocie</strong> (duże, zielone pióropusze w donicach), <strong>Bukszpan / Trzmielina</strong> (zielone krzewy w skrzyniach), <strong>Aloes</strong> (w brązowej donicy), <strong>Lawenda</strong> (bardzo oszczędnie).</td>
+                    <td>Raz na 2 tygodnie (wzmacnia same liście).<br><small>Proporcja: 1 łyżeczka na 5L wody.</small></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-c">Planton C</span><br><strong>Długodziałający</strong></td>
+                    <td><strong>Dowolne nowo sadzone rośliny</strong> (np. w miejscach, gdzie widać pojedyncze, młode sadzonki w świeżej ziemi).</td>
+                    <td><strong>Uwaga: To są granulki!</strong> Ich NIE rozpuszcza się w wodzie. Sypiesz garść i mieszasz z ziemią podczas sadzenia roślin. Działa przez 3 miesiące.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>2. Instrukcja prawidłowego nawadniania</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>💧 Test wilgotności</h3>
+            <p>Zaniechaj podlewania "na oko". Przed każdym podaniem wody wciśnij palec w ziemię na głębokość 2-3 cm. Jeśli ziemia pod powierzchnią jest wilgotna i chłodna – odczekaj. Podlewaj tylko wtedy, gdy wierzch jest wyraźnie suchy.</p>
+        </div>
+        <div class="card">
+            <h3>⏰ Prawidłowa pora</h3>
+            <p>Podlewaj <strong>zawsze rano lub wieczorem</strong>. Nigdy nie rób tego w pełnym słońcu (w środku dnia), ponieważ krople wody na liściach działają jak soczewki i mogą wywołać poparzenia, a woda błyskawicznie wyparuje, zanim dotrze do korzeni.</p>
+        </div>
+    </div>
+
+    <h2>3. Triki i porady od Specjalisty Ogrodnictwa</h2>
+    
+    <div class="card" style="margin-top: 1.5rem;">
+        <h3>💡 Podział na "Pijaków" i "Pustynników"</h3>
+        <ul>
+            <li><strong>Pijacy (Podlewaj często):</strong> Hortensje oraz Petunie/Surfinie w upalne dni potrzebują wody <strong>codziennie</strong>, a czasem nawet dwa razy dziennie. Gdy mają sucho, natychmiast spektakularnie więdną.</li>
+            <li><strong>Pustynnicy (Podlewaj rzadko):</strong> Aloes i Lawenda nienawidzą stałej wilgoci. Aloes podlej dopiero, gdy ziemia wyschnie na wiór (raz na 1,5–2 tygodnie). Lawenda lubi umiarkowaną suszę – jeśli ją przelejesz, jej korzenie szybko zgniją.</li>
+        </ul>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem;">
+        <h3>✂️ Sekret bujnego kwitnienia</h3>
+        <p>Petunie, pelargonie i goździki będą kwitły dwa razy mocniej, jeśli będziesz regularnie (raz na kilka dni) <strong>urywać lub odcinać stare, zwiędłe kwiatostany</strong>. Jeśli zostawisz je na roślinie, zacznie ona zawiązywać nasiona, co odbierze jej siły do produkcji nowych pąków.</p>
+    </div>
+
+    <div class="tip-box">
+        <h4>⚠️ Pilna uwaga dotycząca uschniętego drzewka</h4>
+        <p>W jednej z podłużnych białych skrzyń (widocznej na filmie około 0:36) znajduje się całkowicie suche, brązowe drzewko/krzew owinięty żółtym sznurkiem. Ono niestety już obumarło. Wykop je jak najszybciej, ponieważ w suchej tkance mogą rozwijać się grzyby chorobotwórcze. W wolne miejsce możesz posadzić coś nowego i przy okazji wykorzystać niebieski nawóz <strong>Planton C</strong>, mieszając go ze świeżą ziemią!</p>
+    </div>
+</div>
+
+<footer>
+    <p>Poradnik przygotowany specjalnie dla Twojego tarasu. Niech rośnie zdrowo!</p>
+</footer>
+
+</body>
+</html>
