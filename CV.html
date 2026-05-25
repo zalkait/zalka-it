@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcin Załuski - Senior BI / ETL / SQL Developer</title>
+<style>
+  :root {
+    --primary-color: #1a202c;
+    --text-color: #2d3748;
+    --text-light: #718096;
+    --bg-sidebar: #f7fafc;
+    --accent-color: #3182ce;
+    --border-color: #e2e8f0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #ffffff;
+    padding: 0;
+  }
+
+  .cv-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* RWD dla komputerów - układ dwukolumnowy */
+  @media (min-width: 768px) {
+    .cv-container {
+      grid-template-columns: 320px 1fr;
+    }
+  }
+
+  /* LEWA KOLUMNA - PANEL BOCZNY */
+  .sidebar {
+    background-color: var(--bg-sidebar);
+    padding: 40px 30px;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .sidebar-section {
+    margin-bottom: 35px;
+  }
+
+  .sidebar h2 {
+    font-size: 13pt;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 5px;
+  }
+
+  .contact-link {
+    display: block;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 10pt;
+    margin-bottom: 10px;
+  }
+  
+  .contact-link strong {
+    color: var(--primary-color);
+    display: block;
+    font-size: 9pt;
+    text-transform: uppercase;
+  }
+
+  .skill-group {
+    margin-bottom: 15px;
+  }
+
+  .skill-group-title {
+    font-size: 9.5pt;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    background-color: #edf2f7;
+    color: #2b6cb0;
+    font-size: 8.5pt;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .skill-tag.ai-tag {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+    border: 1px dashed #63b3ed;
+  }
+
+  .cert-item {
+    font-size: 9pt;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 2px solid var(--accent-color);
+  }
+
+  /* PRAWA KOLUMNA - GŁÓWNA TREŚĆ */
+  .main-content {
+    padding: 40px 40px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .header h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .header .title-sub {
+    font-size: 14pt;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 14pt;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 3px;
+    margin: 30px 0 20px 0;
+  }
+
+  .profile-summary {
+    font-size: 10.5pt;
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+
+  /* BLOK DOŚWIADCZENIA */
+  .job-block {
+    margin-bottom: 25px;
+    page-break-inside: avoid;
+  }
+
+  .job-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+
+  @media (min-width: 600px) {
+    .job-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .job-title-company {
+    font-size: 11pt;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .job-company {
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  .job-date {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .job-bullets {
+    padding-left: 20px;
+  }
+
+  .job-bullets li {
+    font-size: 10pt;
+    margin-bottom: 5px;
+    color: #4a5568;
+  }
+
+  .edu-item {
+    margin-bottom: 15px;
+  }
+
+  .edu-title {
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .edu-school {
+    font-size: 10pt;
+    color: #4a5568;
+  }
+
+  .footer-rodo {
+    font-size: 8pt;
+    color: var(--text-light);
+    line-height: 1.4;
+    margin-top: 50px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    text-align: justify;
+  }
+</style>
+</head>
+<body>
+
+<div class="cv-container">
+  
+  <aside class="sidebar">
+    
+    <div class="sidebar-section">
+      <h2>Kontakt</h2>
+      <a href="mailto:m.zaluski@poczta.fm" class="contact-link">
+        <strong>E-mail</strong>
+        marcin.zaluski@poczta.fm
+      </a>
+      <a href="tel:+48502388094" class="contact-link">
+        <strong>Numer telefonu</strong>
+        +48 502 388 094
+      </a>
+      <div class="contact-link">
+        <strong>Lokalizacja</strong>
+        Warszawa / Kraków
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Umiejętności</h2>
+      
+      <div class="skill-group">
+        <div class="skill-group-title">Bazy danych & Języki</div>
+        <div class="skills-tags">
+          <span class="skill-tag">T-SQL (Expert)</span>
+          <span class="skill-tag">PL/SQL</span>
+          <span class="skill-tag">BigQuery</span>
+          <span class="skill-tag">MS SQL Server</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">Sybase</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Procesy ETL / ELT</div>
+        <div class="skills-tags">
+          <span class="skill-tag">SSIS</span>
+          <span class="skill-tag">Hurtownie Danych</span>
+          <span class="skill-tag">Integracja Systemów</span>
+          <span class="skill-tag">Migracja Danych</span>
+          <span class="skill-tag">SSDT</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Modelowanie & BI</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Kostki OLAP</span>
+          <span class="skill-tag">SSAS Tabular</span>
+          <span class="skill-tag">SSAS Multidimensional</span>
+          <span class="skill-tag">DAX</span>
+          <span class="skill-tag">MDX</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Looker Studio</span>
+          <span class="skill-tag">SSRS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI Developer Toolkit</div>
+        <div class="skills-tags">
+          <span class="skill-tag ai-tag">Prompt Engineering</span>
+          <span class="skill-tag ai-tag">GitHub Copilot</span>
+          <span class="skill-tag ai-tag">LLMs Automation</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Inne</div>
+        <div class="skills-tags">
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">PowerShell</span>
+          <span class="skill-tag">Python (podstawy)</span>
+          <span class="skill-tag">Data Quality</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Języki</h2>
+      <div class="skill-group-title">Angielski</div>
+      <p style="font-size: 9.5pt; margin-bottom: 8px; color: #4a5568;">B2 - Komunikacja biznesowa i dokumentacja</p>
+      <div class="skill-group-title">Niemiecki</div>
+      <p style="font-size: 9.5pt; color: #4a5568;">Podstawowy</p>
+    </div>
+
+  </aside>
+
+  <main class="main-content">
+    
+    <header class="header">
+      <h1>Marcin Załuski</h1>
+      <div class="title-sub">Senior BI / ETL / SQL Developer</div>
+    </header>
+
+    <section>
+      <div class="section-title">Podsumowanie Zawodowe</div>
+      <p class="profile-summary">
+        Doświadczony BI/ETL Developer z 20-letnim stażem w projektowaniu, rozwoju i optymalizacji systemów Business Intelligence oraz architektur hurtowni danych. Ekspert w obszarze zaawansowanego programowania T-SQL oraz projektowania wydajnych procesów ETL/ELT. Posiadam unikalne doświadczenie dziedzinowe w sektorze bankowym przy realizacji sprawozdawczości obligatoryjnej (COREP, FINREP).
+      </p>
+      <p class="profile-summary">
+        W codziennej pracy inżynierskiej aktywnie wykorzystuję zaawansowany Prompt Engineering oraz ekosystemy AI (LLM) jako booster produktywności, co pozwala mi na radykalne skrócenie czasu dostarczania kodu, automatyzację zadań skryptowych oraz szybki debugging złożonych procedur bazodanowych.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-title">Doświadczenie Zawodowe</div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">Senior Obligatory Reporting Contributor / BI Developer <br><span class="job-company">Aion Bank (UniCredit Group)</span></div>
+          <div class="job-date">12.2023 – Obecnie</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Odpowiedzialność za sprawozdawczość obligatoryjną banku (COREP, Leverage Ratio, Large Exposures) oraz integrację i spójny import danych do systemów analitycznych grupy UniCredit.</li>
+          <li>Projektowanie, wdrażanie oraz zaawansowana optymalizacja procedur przetwarzania i ładowania danych w Google BigQuery w celu skrócenia okien procesowych ETL.</li>
+          <li>Integracja wysoce rozproszonych danych finansowych z wielu systemów źródłowych przy ścisłym zachowaniu najwyższych standardów jakości danych (Data Quality).</li>
+          <li>Projektowanie i implementacja interaktywnych dashboardów zarządczych oraz przekrojowych analiz biznesowych w środowisku Looker Studio.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">BI Developer (Kontrakt B2B) <br><span class="job-company">EBIS Sp. z o.o. (dla: Sektor Produkcyjny / E-commerce)</span></div>
+          <div class="job-date">09.2022 – 11.2023</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Projektowanie, mapowanie struktur oraz optymalizacja wydajnościowa zaawancowanych kostek analitycznych OLAP w modelu Tabular (SSAS).</li>
+          <li>Rozwój, optymalizacja oraz wdrażanie stabilnych rozwiązań ETL integrujących dane operacyjne z systemów klasy ERP i CRM.</li>
+          <li>Budowanie zaawansowanych raportów biznesowych i dashboardów w Power BI z wykorzystaniem zaawansowanego modelowania DAX.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">BI Developer (Kontrakt B2B) <br><span class="job-company">ISCG Sp. z o.o. (dla: Sektor Usług / Enterprise)</span></div>
+          <div class="job-date">04.2022 – 08.2022</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Migracja systemów legacy oraz rozproszonych struktur klasy Business Intelligence do nowoczesnych architektur bazodanowych MS SQL Server.</li>
+          <li>Kompleksowe projektowanie, wdrażanie procesów ETL oraz zaawansowana integracja danych międzyplatformowych.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">Power BI Developer / BI Developer <br><span class="job-company">PKO BP Finat Sp. z o.o.</span></div>
+          <div class="job-date">05.2021 – 08.2022</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Tworzenie korporacyjnych raportów i zaawansowanych dashboardów w środowisku Power BI, bezpośrednio wspierających procesy decyzyjne w grupie kapitałowej.</li>
+          <li>Rozbudowa oraz strojenie wydajnościowe struktur analitycznych kostek OLAP (Tabular).</li>
+          <li>Głęboka analiza, refaktoryzacja kodu oraz optymalizacja procedur i funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych w procesach nocnych.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">BI Developer <br><span class="job-company">FlexiSolutions Sp. z o.o.</span></div>
+          <div class="job-date">10.2020 – 04.2021</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Rozwój, utrzymanie oraz optymalizacja wydajnościowa modułów autorskiego systemu FlexiReporting przeznaczonego do raportowania finansowego.</li>
+          <li>Rozbudowa struktur hurtowni danych opartej na MS SQL Server oraz automatyzacja procesów zasilających ETL w technologii SSIS.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">BI Developer (Kontrakt B2B) <br><span class="job-company">Mindbox S.A. (dla: Sektor Bankowy)</span></div>
+          <div class="job-date">09.2019 – 09.2020</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Prace inżynieryjne w zespole odpowiedzialnym za rozwój krytycznego systemu Ryzyka Kredytowego w bankowości komercyjnej.</li>
+          <li>Projektowanie pakietów Microsoft SSIS i migracja wielkich wolumenów danych z systemów dziedzinowych do centralnego repozytorium.</li>
+          <li>Profilowanie, analiza wydajnościowa i optymalizacja procedur składowanych SQL działających w procesach zamknięcia dnia (EOD).</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">BI Developer (Kontrakt B2B) <br><span class="job-company">VlogIT Sp. z o.o. (dla: Sektor Finansowy)</span></div>
+          <div class="job-date">03.2019 – 08.2019</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Rozbudowa architektury hurtowni danych opartej na środowisku SQL Server oraz implementacja procesów ETL i integracyjnych przy pomocy SSIS.</li>
+          <li>Rozwój, modyfikacja oraz strojenie wielowymiarowych struktur kostek analitycznych dla usług SSAS.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-header">
+          <div class="job-title-company">Developer / Analityk Bazodanowy <br><span class="job-company">Wolters Kluwer Polska S.A.</span></div>
+          <div class="job-date">04.2014 – 03.2019</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Projektowanie, implementacja i utrzymanie procesów zasilania hurtowni danych oraz integracji rozproszonych systemów dziedzinowych przy użyciu SSIS.</li>
+          <li>Przygotowywanie zaawansowanych struktur relacyjnych, widoków oraz procedur T-SQL zabezpieczających poprawne zasilanie wewnętrznego systemu CMS.</li>
+          <li>Optymalizacja wydajnościowa instancji bazodanowych MS SQL Server (zaawansowane strojenie indeksów, refaktoryzacja zapytań).</li>
+          <li>Aktywny udział w zespole projektującym i mapującym procesy migracji struktur danych do środowiska chmurowego Google Cloud Platform.</li>
+        </ul>
+      </div>
+
+      <div class="job-block">
+        <div class="job-title-company" style="font-size: 11pt; margin-bottom: 5px; border-bottom: 1px dashed var(--border-color); padding-bottom: 3px;">Wcześniejsze doświadczenie zawodowe (2006 – 2014)</div>
+        <ul class="job-bullets" style="list-style-type: square;">
+          <li><strong>Volkswagen Group Polska</strong> (01.2014 – 03.2014) | ETL Developer / Analityk Bazodanowy (rozwój procesów zasilających MS SQL/SSIS oraz raportów biznesowych).</li>
+          <li><strong>Główny Urząd Statystyczny (GUS) / Pentacomp</strong> (08.2013 – 10.2013) | ETL / BI Developer (projektowanie przepływów ETL w SSIS oraz strojenie kostek SSAS dla systemów GUS).</li>
+          <li><strong>PKO Bank Polski S.A. / Britenet</strong> (05.2013 – 07.2013) | BI Developer (rozwój i integracja korporacyjnej platformy raportowej Excel Services i SharePoint).</li>
+          <li><strong>Cegedim Group Poland Sp. z o.o.</strong> (10.2008 – 04.2013) | Software & CRM Customization Specialist (implementacja raportów i skryptów w środowiskach Oracle PL/SQL, Sybase, MS SQL, SSIS i SSRS).</li>
+          <li><strong>ILC Sp. z o.o.</strong> (05.2006 – 07.2008) | IT & Data Warehouse Specialist (współudział w budowie hurtowni danych od podstaw na MS SQL Server 2005, pakiety SSIS, kostki SSAS, MDX).</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section>
+      <div class="section-title">Wykształcenie i Szkolenia</div>
+      
+      <div class="edu-item">
+        <div class="edu-title">Studia Podyplomowe: Zarządzanie Projektami Informatycznymi</div>
+        <div class="edu-school">Warsaw School of Information Technology (WIT pod auspicjami PAN) | 2011 – 2012</div>
+      </div>
+      
+      <div class="edu-item">
+        <div class="edu-title">Studia Wyższe: Bazy Danych (Tytuł: Inżynier)</div>
+        <div class="edu-school">Warsaw School of Information Technology (WIT pod auspicjami PAN) | 2001 – 2009</div>
+      </div>
+
+      <div class="edu-item" style="margin-top: 20px;">
+        <div class="edu-title" style="font-size: 11pt; margin-bottom: 5px;">Wybrane Certyfikaty i Kursy:</div>
+        <ul class="job-bullets" style="margin-top: 5px;">
+          <li><strong>Microsoft Certified:</strong> Programming in HTML5 with JavaScript and CSS3 (2017)</li>
+          <li>Kurs: Power BI course (Power Query, DAX) – Skuteczne Raporty (2021)</li>
+          <li>Autoryzowane szkolenia Microsoft: MS-2791 (SSAS), MS-2792 (SSIS), MS-2793 (SSRS), MS-2780 (Maintaining SQL Server DB), MS-2349 (.NET C#)</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer-rodo">
+      Wyrażam zgodę na przetwarzanie moich danych osobowych na potrzeby obecnego procesu rekrutacyjnego oraz przyszłych rekrutacji, zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO).
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
