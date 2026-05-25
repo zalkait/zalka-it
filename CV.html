@@ -6,11 +6,11 @@
 <title>Marcin Załuski - Senior BI / ETL / SQL Developer</title>
 <style>
   :root {
-    --bg-sidebar: #f0f2f5;       /* Elegancki, czysty odcień stalowo-szary o wysokim kontraście */
-    --primary-dark: #1a202c;     /* Głęboka czerń nagłówków */
-    --accent-color: #2b6cb0;     /* Klasyczny biznesowy błękit dla ról i akcentów */
-    --text-main: #2d3748;        /* Tekst główny */
-    --text-muted: #4a5568;       /* Opisy obowiązków */
+    --bg-sidebar: #f0f2f5;       /* Elegancki stalowo-szary odcień o doskonałym kontraście w Chrome */
+    --primary-dark: #1a202c;     /* Głęboka czerń dla głównych nagłówków */
+    --accent-color: #2b6cb0;     /* Klasyczny błękit biznesowy */
+    --text-main: #2d3748;        /* Kolor tekstu podstawowego */
+    --text-muted: #4a5568;       /* Kolor opisów projektów */
     --badge-bg: #ffffff;         /* Tło pigułek technologicznych */
     --border-color: #cbd5e0;
   }
@@ -26,6 +26,8 @@
     color: var(--text-main);
     background-color: #f4f6f8;
     padding: 20px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Główny kontener strony */
@@ -35,19 +37,19 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
     border-radius: 4px;
     overflow: hidden;
   }
 
-  /* RWD: Przełączenie na dwie kolumny na desktopie */
+  /* RWD: Przełączenie na dwie kolumny na komputerach */
   @media (min-width: 768px) {
     .cv-page {
       grid-template-columns: 320px 1fr;
     }
   }
 
-  /* --- LEWA STRONA: PANELE BOCZNE --- */
+  /* --- LEWA KOLUMNA --- */
   .sidebar {
     background-color: var(--bg-sidebar);
     padding: 35px 25px;
@@ -68,7 +70,7 @@
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
 
   .sidebar h2 {
@@ -132,7 +134,6 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   }
 
-  /* Specjalna stylizacja sekcji AI z PDF */
   .tag-ai {
     background-color: #ebf8ff;
     color: #2b6cb0;
@@ -141,12 +142,13 @@
 
   .stars-rating {
     color: #2b6cb0;
-    font-size: 10pt;
+    font-size: 11pt;
     margin-bottom: 6px;
     display: block;
+    letter-spacing: 2px;
   }
 
-  /* --- PRAWA STRONA: SEKCJA GŁÓWNA --- */
+  /* --- PRAWA KOLUMNA --- */
   .main-body {
     padding: 40px 35px;
   }
@@ -194,7 +196,6 @@
     text-align: justify;
   }
 
-  /* Wpisy doświadczenia / edukacji / kursów */
   .experience-node {
     margin-bottom: 22px;
   }
@@ -465,7 +466,7 @@
           <div class="node-duration">2019-09 - 2020-09</div>
         </div>
         <ul class="node-details">
-          <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w bank.</li>
+          <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w banku.</li>
           <li>Migracja wielkich wolumenów danych z systemów dziedzinowych w oparciu o pakiety Microsoft SSIS.</li>
           <li>Profilowanie, analiza i optymalizacja procedur SQL działających w procesach zamknięcia dnia (EOD).</li>
         </ul>
@@ -521,4 +522,191 @@
         </div>
         <ul class="node-details">
           <li>Projektowanie i wdrażanie zaawancowanych przepływów danych (ETL) przy użyciu pakietu SQL Server Integration Services (SSIS).</li>
-          <li>Modyfikacja
+          <li>Modyfikacja i strojenie kostek analitycznych SQL Server Analysis Services (SSAS) na potrzeby systemów sprawozdawczych GUS.</li>
+        </ul>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">BI Developer
+            <div class="node-company">Britenet Sp. z o.o. (Kontrakt B2B dla: Sektor Bankowy), Warszawa</div>
+          </div>
+          <div class="node-duration">2013-05 - 2013-07</div>
+        </div>
+        <ul class="node-details">
+          <li>Rozwój i integracja platformy raportowej opartej na usługach Excel Services i SharePoint dla departamentów bankowych.</li>
+          <li>Pisanie dedykowanych procedur i skryptów PL/SQL agregujących dane analityczne.</li>
+        </ul>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Software Customization Specialist
+            <div class="node-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
+          </div>
+          <div class="node-duration">2011-11 - 2013-04</div>
+        </div>
+        <ul class="node-details">
+          <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL) oraz MS SQL Server.</li>
+          <li>Budowa i utrzymanie procesów integracji danych (ETL) za pomocą SSIS na potrzeby systemów CRM w sektorze farmaceutycznym i medycznym.</li>
+        </ul>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Programmer
+            <div class="node-company">Praxis S.A., Warszawa</div>
+          </div>
+          <div class="node-duration">2011-08 - 2011-10</div>
+        </div>
+        <ul class="node-details">
+          <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
+          <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
+          <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
+        </ul>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">CRM Customization Specialist
+            <div class="node-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
+          </div>
+          <div class="node-duration">2008-08 - 2011-07</div>
+        </div>
+        <ul class="node-details">
+          <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL), Sybase oraz MS SQL Server.</li>
+          <li>Tworzenie i wdrażanie standardów raportowych przy użyciu dedykowanych narzędzi.</li>
+        </ul>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">IT Specialist
+            <div class="node-company">ILC Sp. z o.o., Warszawa</div>
+          </div>
+          <div class="node-duration">2006-05 - 2008-07</div>
+        </div>
+        <ul class="node-details">
+          <li>Współudział w projektowaniu i budowie struktury hurtowni danych od podstaw na platformie MS SQL Server 2005.</li>
+          <li>Tworzenie i optymalizacja procesów zasilających ETL (SSIS) oraz budowanie kostek analitycznych SSAS.</li>
+          <li>Pisanie zapytań i skryptów analitycznych w językach MDX oraz T-SQL.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section>
+      <div class="section-heading">Wykształcenie</div>
+      
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Zarządzanie projektami (Studia Podyplomowe)
+            <div class="node-company">Warsaw School of Information Technology, Warszawa</div>
+          </div>
+          <div class="node-duration">2011-10 - 2012-06</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Bazy danych, Inżynier
+            <div class="node-company">Warsaw School of Information Technology, Warszawa</div>
+          </div>
+          <div class="node-duration">2001-10 - 2009-01</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">Certyfikaty</div>
+      
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Programming in HTML5 with JavaScript and CSS3
+            <div class="node-company">Microsoft Certified</div>
+          </div>
+          <div class="node-duration">2017-05</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">Kursy</div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Power BI course (Power Query, DAX)
+            <div class="node-company">Skuteczne Raporty</div>
+          </div>
+          <div class="node-duration">2021-03</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Power BI course
+            <div class="node-company">Elitmind</div>
+          </div>
+          <div class="node-duration">2020-11</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">Programming .NET - advanced course</div>
+          <div class="node-duration">2011-06</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-6463 Visual Studio 2008: ASP.NET 3.5</div>
+          <div class="node-duration">2010-10</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-2349 Programming with the Microsoft .NET Framework (Microsoft Visual C# .NET)</div>
+          <div class="node-duration">2010-10</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-2791 Implementing and Maintaining Microsoft SQL Server 2005 Analysis Services</div>
+          <div class="node-duration">2007-11</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-2792 Implementing and Maintaining Microsoft SQL Server 2005 Integration Services</div>
+          <div class="node-duration">2007-11</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-2793 Implementing and Maintaining Microsoft SQL Server 2005 Reporting Services</div>
+          <div class="node-duration">2007-11</div>
+        </div>
+      </div>
+
+      <div class="experience-node">
+        <div class="node-header">
+          <div class="node-title-group">MS-2780 Maintaining a Microsoft SQL Server 2005 Database</div>
+          <div class="node-duration">2007-03</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="rodo-footer">
+      Wyrażam zgodę na przetwarzanie moich danych osobowych na potrzeby obecnego procesu rekrutacyjnego oraz przyszłych rekrutacji, zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO).
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
