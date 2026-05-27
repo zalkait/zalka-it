@@ -1,0 +1,13 @@
+/* Domyślnie ukryj angielski */
+.en-only {
+    display: none !important;
+}
+
+/* Kiedy body ma klasę 'lang-en', pokazuj angielski, ukrywaj polski */
+body.lang-en .en-only {
+    display: block !important;
+}
+
+body.lang-en .pl-only {
+    display: none !important;
+}
