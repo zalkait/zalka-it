@@ -1,68 +1,111 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" data-theme="dark" data-lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marcin Załuski — Senior BI/ETL Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>Marcin Załuski — Senior BI/ETL Developer &amp; Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1b2a;
-    --navy-mid: #1a2f47;
-    --accent: #c8a96e;
-    --accent-light: #e8d5a8;
-    --off-white: #f4f0e8;
-    --muted: #8a9bb0;
-    --text: #1a1a2e;
-    --border: rgba(200, 169, 110, 0.25);
+  /* ── DESIGN TOKENS (ZGODNE Z INDEX.HTML) ───────────────── */
+  :root[data-theme="dark"] {
+    --bg-primary: #0b0f19;
+    --bg-secondary: #111827;
+    --bg-card: #1f2937;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --accent-blue: #3b82f6;
+    --accent-green: #10b981;
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+    --border-color: #374151;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --timeline-line: #374151;
   }
 
+  :root[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-card: #f1f5f9;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent-blue: #2563eb;
+    --accent-green: #059669;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #059669 100%);
+    --border-color: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.05);
+    --timeline-line: #e2e8f0;
+  }
+
+  /* ── MECHANIZM ZMIANY JĘZYKA ────────────────────────── */
+  html[data-lang="pl"] [lang="en"] { display: none !important; }
+  html[data-lang="en"] [lang="pl"] { display: none !important; }
+
+  /* ── RESET & BASE STYLES ───────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-main);
     min-height: 100vh;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ── PANELZ AKCJAMI (TOGGLES) ───────────────────────── */
+  .top-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 48px 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+
+  .toggle-btn:hover {
+    border-color: var(--accent-blue);
+    background-color: var(--bg-card);
   }
 
   /* ── HEADER ─────────────────────────────────────── */
   .header {
-    background: var(--navy);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    padding: 0;
   }
 
   .header::before {
     content: '';
     position: absolute;
-    top: -80px; right: -80px;
-    width: 380px; height: 380px;
+    top: -40px; right: -40px;
+    width: 400px; height: 400px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
     pointer-events: none;
-  }
-
-  .header::after {
-    content: 'BI';
-    position: absolute;
-    bottom: -30px; right: 40px;
-    font-family: 'Playfair Display', serif;
-    font-size: 200px;
-    font-weight: 900;
-    color: rgba(200,169,110,0.04);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
   }
 
   .header-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 56px 48px 48px;
+    padding: 40px 48px 48px;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 40px;
@@ -73,68 +116,72 @@
 
   .role-tag {
     display: inline-block;
-    font-family: 'DM Mono', monospace;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--border);
-    padding: 5px 14px;
-    border-radius: 2px;
+    color: var(--accent-blue);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 100px;
     margin-bottom: 20px;
     animation: fadeUp 0.6s ease both;
   }
 
   .name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 6vw, 72px);
-    font-weight: 900;
-    color: #fff;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
     animation: fadeUp 0.7s 0.1s ease both;
   }
 
-  .name span { color: var(--accent); }
+  .name span {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
   .summary {
-    font-size: 15px;
+    font-size: 14.5px;
     line-height: 1.7;
-    color: var(--muted);
-    max-width: 580px;
-    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 620px;
+    font-weight: 400;
     animation: fadeUp 0.7s 0.2s ease both;
   }
 
   /* ── CONTACT CARD ────────────────────────────────── */
   .contact-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
     padding: 28px 24px;
-    min-width: 240px;
+    min-width: 280px;
     position: relative; z-index: 1;
+    box-shadow: 0 10px 25px var(--shadow);
     animation: fadeUp 0.7s 0.3s ease both;
   }
 
   .contact-card h3 {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-blue);
     margin-bottom: 18px;
   }
 
   .contact-item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 14px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
+    font-size: 13.5px;
+    color: var(--text-main);
     line-height: 1.4;
   }
 
@@ -143,20 +190,21 @@
   .contact-icon {
     width: 18px;
     height: 18px;
-    color: var(--accent);
+    color: var(--accent-green);
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   .contact-item a {
     color: inherit;
     text-decoration: none;
     transition: color 0.2s;
+    font-weight: 500;
   }
 
-  .contact-item a:hover { color: var(--accent-light); }
+  .contact-item a:hover { color: var(--accent-blue); }
 
-  /* ── LAYOUT ──────────────────────────────────────── */
+  /* ── LAYOUT STRUCTURE ────────────────────────────── */
   .page {
     max-width: 1100px;
     margin: 0 auto;
@@ -165,7 +213,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 320px;
     gap: 56px;
     padding-top: 56px;
   }
@@ -174,24 +222,24 @@
   .section { margin-bottom: 52px; }
 
   .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--navy);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
     margin-bottom: 28px;
     display: flex;
     align-items: center;
     gap: 14px;
+    letter-spacing: -0.02em;
   }
 
   .section-title::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, var(--border), transparent);
+    background: linear-gradient(to right, var(--border-color), transparent);
   }
 
-  /* ── EXPERIENCE ──────────────────────────────────── */
+  /* ── EXPERIENCE TIMELINE ─────────────────────────── */
   .exp-item {
     display: grid;
     grid-template-columns: 110px 1fr;
@@ -207,18 +255,18 @@
     top: 28px;
     bottom: -36px;
     width: 1px;
-    background: var(--border);
+    background: var(--timeline-line);
   }
 
   .exp-item:last-child::before { display: none; }
 
   .exp-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
     padding-top: 4px;
     text-align: right;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .exp-content {
@@ -230,209 +278,215 @@
     content: '';
     position: absolute;
     left: -4px;
-    top: 8px;
+    top: 10px;
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+    background: var(--accent-green);
+    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 0 7px rgba(16, 185, 129, 0.2);
+    transition: all 0.3s;
   }
 
   .exp-role {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 16px;
-    color: var(--navy);
+    color: var(--text-main);
     margin-bottom: 4px;
     line-height: 1.3;
   }
 
   .exp-company {
-    font-size: 13px;
-    color: var(--accent);
-    font-style: italic;
+    font-size: 13.5px;
+    color: var(--accent-blue);
+    font-weight: 600;
     margin-bottom: 12px;
-    font-family: 'DM Sans', sans-serif;
   }
 
-  .exp-bullets {
-    list-style: none;
-    padding: 0;
-  }
+  .exp-bullets { list-style: none; padding: 0; }
 
   .exp-bullets li {
     font-size: 13.5px;
     line-height: 1.65;
-    color: #444;
-    padding-left: 14px;
+    color: var(--text-muted);
+    padding-left: 16px;
     position: relative;
-    margin-bottom: 6px;
-    font-weight: 300;
+    margin-bottom: 8px;
+    font-weight: 400;
   }
 
   .exp-bullets li::before {
-    content: '—';
+    content: '→';
     position: absolute;
     left: 0;
-    color: var(--accent);
-    font-size: 11px;
-    top: 2px;
+    color: var(--accent-blue);
+    font-size: 12px;
+    top: 0;
   }
 
-  /* ── SIDEBAR ─────────────────────────────────────── */
-  .sidebar { }
-
-  /* ── SKILLS ──────────────────────────────────────── */
+  /* ── SKILLS MODULE ───────────────────────────────── */
   .skill-block {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     padding: 20px;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 4px;
-    border-left: 3px solid var(--accent);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-block::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--accent-gradient);
   }
 
   .skill-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--navy);
-    margin-bottom: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
   }
 
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .skill-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10.5px;
-    background: var(--off-white);
-    color: var(--navy-mid);
-    padding: 3px 8px;
-    border-radius: 2px;
-    border: 1px solid rgba(0,0,0,0.08);
+    font-size: 11px;
+    background: var(--bg-primary);
+    color: var(--text-main);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
   }
 
-  .stars {
-    display: flex;
-    gap: 3px;
-    margin-top: 8px;
-  }
-
+  .stars { display: flex; gap: 4px; margin-top: 14px; }
   .star {
-    width: 10px; height: 10px;
+    width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-green);
   }
+  .star.empty { background: var(--border-color); }
 
-  .star.empty { background: #ddd; }
-
-  /* ── EDUCATION ───────────────────────────────────── */
+  /* ── EDUCATION MODULE ────────────────────────────── */
   .edu-item {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     padding: 16px;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 4px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
   }
 
   .edu-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-blue);
     margin-bottom: 4px;
   }
 
   .edu-degree {
-    font-weight: 500;
-    font-size: 13.5px;
-    color: var(--navy);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-main);
     margin-bottom: 2px;
   }
 
   .edu-school {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  /* ── COURSES ─────────────────────────────────────── */
-  .course-list {
-    list-style: none;
-  }
-
-  .course-list li {
     font-size: 12.5px;
-    color: #555;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-muted);
+  }
+
+  /* ── COURSES LIST ────────────────────────────────── */
+  .course-list { list-style: none; }
+  .course-list li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: flex-start;
-    font-weight: 300;
   }
-
   .course-list li:last-child { border-bottom: none; }
-
   .course-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-green);
+    min-width: 36px;
     padding-top: 2px;
-    min-width: 44px;
   }
 
-  /* ── CERT ────────────────────────────────────────── */
+  /* ── CERTIFICATE BADGE ───────────────────────────── */
   .cert-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--navy);
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-weight: 300;
+    gap: 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 13px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 500;
     margin-top: 4px;
   }
-
-  .cert-badge svg { color: var(--accent); flex-shrink: 0; }
+  .cert-badge svg { color: var(--accent-blue); flex-shrink: 0; }
 
   /* ── ANIMATIONS ──────────────────────────────────── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(15px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   .section {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
-  .section.visible {
-    opacity: 1;
-    transform: none;
-  }
+  .section.visible { opacity: 1; transform: none; }
 
-  /* ── PRINT ───────────────────────────────────────── */
+  /* ── PRINT COMPATIBILITY ─────────────────────────── */
   @media print {
-    .header::after { display: none; }
+    .top-bar, .toggle-btn { display: none !important; }
     .section { opacity: 1 !important; transform: none !important; }
-    body { background: white; }
+    :root {
+      --bg-primary: #ffffff !important;
+      --bg-secondary: #f8fafc !important;
+      --bg-card: #ffffff !important;
+      --text-main: #0f172a !important;
+      --text-muted: #334155 !important;
+      --border-color: #cbd5e1 !important;
+      --timeline-line: #cbd5e1 !important;
+    }
+    .contact-card { box-shadow: none !important; }
   }
 
-  @media (max-width: 800px) {
-    .header-inner { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: 1fr; }
-    .page { padding: 0 20px 60px; }
-    .header-inner { padding: 36px 20px 32px; }
+  @media (max-width: 850px) {
+    .header-inner { grid-template-columns: 1fr; gap: 30px; }
+    .grid { grid-template-columns: 1fr; gap: 40px; }
+    .page { padding: 0 24px 60px; }
+    .top-bar { padding: 20px 24px 0; }
+    .header-inner { padding: 30px 24px 40px; }
+    .exp-date { text-align: left; margin-bottom: 4px; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-item::before { left: 0; top: 40px; }
+    .exp-content { padding-left: 16px; margin-top: 8px; }
+    .exp-content::before { left: -4px; top: 10px; }
   }
 </style>
 </head>
 <body>
+
+<!-- TOP ACTIONS BAR -->
+<div class="top-bar">
+  <button class="toggle-btn" id="lang-toggle">
+    <span id="lang-icon">🇬🇧</span> <span id="lang-text">English</span>
+  </button>
+  <button class="toggle-btn" id="theme-toggle">
+    <span id="theme-icon">☀️</span> <span id="theme-text">Light</span>
+  </button>
+</div>
 
 <!-- HEADER -->
 <header class="header">
@@ -440,12 +494,18 @@
     <div class="header-left">
       <span class="role-tag">Senior BI/ETL Developer &amp; Data Engineer</span>
       <h1 class="name">Marcin<br><span>Załuski</span></h1>
-      <p class="summary">
-        Doświadczony BI/ETL Developer z ponad 20-letnim stażem w projektowaniu, rozwoju i optymalizacji systemów Business Intelligence oraz hurtowni danych. Ekspert w obszarze zaawansowanego programowania T-SQL oraz budowania efektywnych procesów ETL. Unikalne doświadczenie w sektorze bankowym przy raportowaniu obligatoryjnym (COREP). Aktywnie wykorzystuje zaawansowany Prompt Engineering i narzędzia AI jako booster produktywności.
+      
+      <p lang="pl" class="summary">
+        Doświadczony BI/ETL Developer z ponad 20-letnim stażem w projektowaniu, rozwoju i optymalizacji systemów Business Intelligence oraz hurtowni danych[cite: 4]. Ekspert w obszarze zaawansowanego programowania T-SQL oraz budowania efektywnych procesów ETL[cite: 4]. Unikalne doświadczenie w sektorze bankowym przy raportowaniu obligatoryjnym (COREP)[cite: 4]. Aktywnie wykorzystuje zaawansowany Prompt Engineering i narzędzia AI jako booster produktywności[cite: 4].
+      </p>
+      <p lang="en" class="summary">
+        Experienced BI/ETL Developer &amp; Data Engineer with over 20 years of expertise in designing, developing, and performance-tuning Business Intelligence systems and Data Warehouses (DWH). Expert in advanced T-SQL programming and building highly efficient ETL/ELT pipelines. Possess unique experience in the banking sector, specializing in regulatory and obligatory reporting (COREP). Actively leverage advanced language models (LLMs) to boost technical productivity.
       </p>
     </div>
+    
     <div class="contact-card">
-      <h3>Kontakt</h3>
+      <h3 lang="pl">Kontakt</h3>
+      <h3 lang="en">Contact</h3>
       <div class="contact-item">
         <svg class="contact-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
         <a href="mailto:m.zaluski@poczta.fm">m.zaluski@poczta.fm</a>
@@ -473,180 +533,283 @@
     <!-- LEFT: EXPERIENCE -->
     <main>
       <section class="section">
-        <h2 class="section-title">Doświadczenie</h2>
+        <h2 lang="pl" class="section-title">Doświadczenie</h2>
+        <h2 lang="en" class="section-title">Work Experience</h2>
 
+        <!-- JOB 1 -->
         <div class="exp-item">
-          <div class="exp-date">2023-12<br>— obecnie</div>
+          <div lang="pl" class="exp-date">2023-12<br>— obecnie</div>
+          <div lang="en" class="exp-date">2023-12<br>— Present</div>
           <div class="exp-content">
             <div class="exp-role">Senior Obligatory Reporting Contributor</div>
             <div class="exp-company">Aion Bank (UniCredit Group), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Odpowiedzialność za sprawozdawczość obligatoryjną banku (COREP, Leverage Ratio, Large Exposures) oraz integrację i import danych do systemów grupy UniCredit.</li>
-              <li>Projektowanie, rozbudowa oraz optymalizacja procedur ładowania danych w BigQuery w celu skrócenia okien procesowych ETL.</li>
-              <li>Integracja rozproszonych danych finansowych z wielu systemów źródłowych przy zapewnieniu najwyższych standardów jakości danych (Data Quality).</li>
-              <li>Tworzenie interaktywnych dashboardów zarządczych oraz analiz w środowisku Looker Studio.</li>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Odpowiedzialność za sprawozdawczość obligatoryjną banku (COREP, Leverage Ratio, Large Exposures) oraz integrację i import danych do systemów grupy UniCredit[cite: 4].</li>
+              <li>Projektowanie, rozbudowa oraz optymalizacja procedur ładowania danych w BigQuery w celu skrócenia okien procesowych ETL[cite: 4].</li>
+              <li>Integracja rozproszonych danych finansowych z wielu systemów źródłowych przy zapewnieniu najwyższych standardów jakości danych (Data Quality)[cite: 4].</li>
+              <li>Tworzenie interaktywnych dashboardów zarządczych oraz analiz w środowisku Looker Studio[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Responsible for the bank's regulatory and obligatory reporting (COREP, Leverage Ratio, Large Exposures) as well as data integration and ingestion into UniCredit Group systems.</li>
+              <li>Designing, expanding, and performance-tuning data loading procedures in BigQuery to minimize ETL processing windows.</li>
+              <li>Integrating highly distributed financial data from multiple legacy and modern source systems while ensuring the highest Data Quality standards.</li>
+              <li>Creating interactive management dashboards and analytical reports within the Looker Studio environment.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 2 -->
         <div class="exp-item">
-          <div class="exp-date">2022-09<br>— 2023-11</div>
+          <div lang="pl" class="exp-date">2022-09<br>— 2023-11</div>
+          <div lang="en" class="exp-date">2022-09<br>— 2023-11</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">EBIS Sp. z o.o. (Kontrakt B2B, Sektor Produkcyjny), Kraków</div>
-            <ul class="exp-bullets">
-              <li>Projektowanie, rozbudowa oraz optymalizacja wydajnościowa zaawansowanych kostek analitycznych OLAP w modelu Tabular.</li>
-              <li>Rozwój i wdrażanie rozwiązań ETL integrujących dane z systemów klasy ERP i CRM.</li>
-              <li>Budowanie zaawansowanych raportów biznesowych w Power BI z wykorzystaniem modelowania DAX.</li>
+            <div lang="pl" class="exp-company">EBIS Sp. z o.o. (Kontrakt B2B, Sektor Produkcyjny), Kraków[cite: 4]</div>
+            <div lang="en" class="exp-company">EBIS Sp. z o.o. (B2B Contract, Manufacturing Sector), Kraków</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Projektowanie, rozbudowa oraz optymalizacja wydajnościowa zaawansowanych kostek analitycznych OLAP w modelu Tabular[cite: 4].</li>
+              <li>Rozwój i wdrażanie rozwiązań ETL integrujących dane z systemów klasy ERP i CRM[cite: 4].</li>
+              <li>Budowanie zaawansowanych raportów biznesowych w Power BI z wykorzystaniem modelowania DAX[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Designing, extending, and performance-tuning advanced OLAP analytical cubes in the Tabular model.</li>
+              <li>Developing and implementing robust ETL solutions integrating data from Enterprise ERP and CRM systems.</li>
+              <li>Building comprehensive, advanced business reports in Power BI utilizing DAX modeling.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 3 -->
         <div class="exp-item">
           <div class="exp-date">2022-04<br>— 2022-08</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">ISCG Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Migracja legacy systemów i rozwiązań klasy Business Intelligence do nowoczesnych architektur bazodanowych MS SQL Server.</li>
-              <li>Kompleksowe projektowanie i implementacja procesów ETL oraz integracja danych międzyplatformowych.</li>
+            <div class="exp-company">ISCG Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Migracja legacy systemów i rozwiązań klasy Business Intelligence do nowoczesnych architektur bazodanowych MS SQL Server[cite: 4].</li>
+              <li>Kompleksowe projektowanie i implementacja procesów ETL oraz integracja danych międzyplatformowych[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Migrating legacy Business Intelligence systems and solutions to modern MS SQL Server database architectures.</li>
+              <li>End-to-end design and implementation of production ETL processes and cross-platform data integration.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 4 -->
         <div class="exp-item">
           <div class="exp-date">2021-05<br>— 2022-08</div>
           <div class="exp-content">
             <div class="exp-role">Power BI Developer / BI Developer</div>
-            <div class="exp-company">PKO BP Finat Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Tworzenie dedykowanych raportów i dashboardów w Power BI wspierających procesy decyzyjne w grupie kapitałowej.</li>
-              <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
-              <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
+            <div class="exp-company">PKO BP Finat Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Tworzenie dedykowanych raportów i dashboardów w Power BI wspierających procesy decyzyjne w grupie kapitałowej[cite: 4].</li>
+              <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular)[cite: 4].</li>
+              <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Creating dedicated Power BI reports and dashboards supporting key decision-making processes across the capital group.</li>
+              <li>Extending and performance-tuning corporate OLAP analytical cubes (Tabular).</li>
+              <li>Analyzing, refactoring, and optimizing existing T-SQL procedures and functions to eliminate performance bottlenecks.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 5 -->
         <div class="exp-item">
           <div class="exp-date">2020-10<br>— 2021-04</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">FlexiSolutions Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Rozwój, utrzymanie oraz optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego.</li>
-              <li>Rozbudowa struktur hurtowni danych opartej na MS SQL Server oraz procesów zasilających ETL (SSIS).</li>
+            <div class="exp-company">FlexiSolutions Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Rozwój, utrzymanie oraz optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego[cite: 4].</li>
+              <li>Rozbudowa struktur hurtowni danych opartej na MS SQL Server oraz procesów zasilających ETL (SSIS)[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Developing, maintaining, and performance-tuning the proprietary FlexiReporting system dedicated to financial and corporate reporting.</li>
+              <li>Expanding Data Warehouse structures based on MS SQL Server and SSIS feeding processes.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 6 -->
         <div class="exp-item">
-          <div class="exp-date">2019-09<br>— 2020-09</div>
+          <div lang="pl" class="exp-date">2019-09<br>— 2020-09</div>
+          <div lang="en" class="exp-date">2019-09<br>— 2020-09</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">Mindbox S.A. (Kontrakt B2B, Sektor Bankowy), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w banku.</li>
-              <li>Migracja wielkich wolumenów danych z systemów dziedzinowych w oparciu o pakiety Microsoft SSIS.</li>
-              <li>Profilowanie, analiza i optymalizacja procedur SQL działających w procesach zamknięcia dnia (EOD).</li>
+            <div lang="pl" class="exp-company">Mindbox S.A. (Kontrakt B2B, Sektor Bankowy), Warszawa[cite: 4]</div>
+            <div lang="en" class="exp-company">Mindbox S.A. (B2B Contract, Banking Sector), Warsaw</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w banku[cite: 4].</li>
+              <li>Migracja wielkich wolumenów danych z systemów dziedzinowych w oparciu o pakiety Microsoft SSIS[cite: 4].</li>
+              <li>Profilowanie, analiza i optymalizacja procedur SQL działających w procesach zamknięcia dnia (EOD)[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Software development within the engineering team expanding a critical Credit Risk system for the bank.</li>
+              <li>Migrating large volumes of financial data from various domain systems using Microsoft SSIS packages.</li>
+              <li>Profiling, analyzing, and optimizing complex SQL procedures operating within critical End-of-Day (EOD) processing windows.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 7 -->
         <div class="exp-item">
-          <div class="exp-date">2019-03<br>— 2019-08</div>
+          <div lang="pl" class="exp-date">2019-03<br>— 2019-08</div>
+          <div lang="en" class="exp-date">2019-03<br>— 2019-08</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">VlogIT Sp. z o.o. (Kontrakt B2B, Sektor Finansowy), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Rozbudowa hurtowni danych dla SQL Server oraz projektowanie procesów ETL i integracyjnych w oparciu o SSIS.</li>
-              <li>Rozwój, modyfikacja oraz optymalizacja wielowymiarowych kostek analitycznych dla SSAS.</li>
+            <div lang="pl" class="exp-company">VlogIT Sp. z o.o. (Kontrakt B2B, Sektor Finansowy), Warszawa[cite: 4]</div>
+            <div lang="en" class="exp-company">VlogIT Sp. z o.o. (B2B Contract, Financial Sector), Warsaw</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Rozbudowa hurtowni danych dla SQL Server oraz projektowanie procesów ETL i integracyjnych w oparciu o SSIS[cite: 4].</li>
+              <li>Rozwój, modyfikacja oraz optymalizacja wielowymiarowych kostek analitycznych dla SSAS[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Expanding SQL Server Data Warehouse structures and designing ETL integration processes using SSIS.</li>
+              <li>Developing, modifying, and performance-tuning multidimensional analytical cubes for SSAS.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 8 -->
         <div class="exp-item">
           <div class="exp-date">2014-04<br>— 2019-03</div>
           <div class="exp-content">
             <div class="exp-role">Developer</div>
-            <div class="exp-company">Wolters Kluwer Polska S.A., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Projektowanie i implementacja procesów zasilania hurtowni danych oraz integracji systemów z wykorzystaniem SSIS.</li>
-              <li>Przygotowywanie zaawansowanych struktur i procedur T-SQL na potrzeby zasilania wewnętrznego systemu CMS.</li>
-              <li>Optymalizacja wydajnościowa baz danych MS SQL Server (strojenie indeksów, refaktoryzacja zapytań i widoków).</li>
-              <li>Udział w projektowaniu procesów migracji struktur danych do środowiska chmurowego Google Cloud.</li>
+            <div class="exp-company">Wolters Kluwer Polska S.A., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Projektowanie i implementacja procesów zasilania hurtowni danych oraz integracji systemów z wykorzystaniem SSIS[cite: 4].</li>
+              <li>Przygotowywanie zaawansowanych struktur i procedur T-SQL na potrzeby zasilania wewnętrznego systemu CMS[cite: 4].</li>
+              <li>Optymalizacja wydajnościowa baz danych MS SQL Server (strojenie indeksów, refaktoryzacja zapytań i widoków)[cite: 4].</li>
+              <li>Udział w projektowaniu procesów migracji struktur danych do środowiska chmurowego Google Cloud[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Designing and implementing data warehouse ingestion pipelines and cross-system integration via SSIS.</li>
+              <li>Developing advanced T-SQL structures and stored procedures to feed internal CMS systems.</li>
+              <li>Optimizing MS SQL Server performance through index tuning, query refactoring, and view optimization.</li>
+              <li>Participating in designing data structure migration workflows to the Google Cloud environment.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 9 -->
         <div class="exp-item">
           <div class="exp-date">2013-11<br>— 2014-03</div>
           <div class="exp-content">
             <div class="exp-role">ETL Developer</div>
-            <div class="exp-company">Britenet Sp. z o.o. (Kontrakt B2B, Sektor Bankowy/Automoto), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
-              <li>Przygotowywanie zapytań SQL oraz raportów analitycznych wspierających działy biznesowe importera.</li>
+            <div lang="pl" class="exp-company">Britenet Sp. z o.o. (Kontrakt B2B, Sektor Bankowy/Automoto), Warszawa[cite: 4]</div>
+            <div lang="en" class="exp-company">Britenet Sp. z o.o. (B2B Contract, Banking &amp; Automotive), Warsaw</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS[cite: 4].</li>
+              <li>Przygotowywanie zapytań SQL oraz raportów analitycznych wspierających działy biznesowe importera[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Analyzing and developing ETL pipelines based on MS SQL Server and SSIS to support business data reporting.</li>
+              <li>Preparing SQL queries and analytical reports supporting the importer's business divisions.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 10 -->
         <div class="exp-item">
           <div class="exp-date">2013-08<br>— 2013-10</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">Pentacomp Systemy Informatyczne S.A. (Kontrakt B2B, Sektor Publiczny), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Projektowanie i wdrażanie zaawansowanych przepływów danych (ETL) przy użyciu SSIS.</li>
-              <li>Modyfikacja i strojenie kostek analitycznych SSAS na potrzeby systemów sprawozdawczych GUS.</li>
+            <div lang="pl" class="exp-company">Pentacomp Systemy Informatyczne S.A. (Kontrakt B2B, Sektor Publiczny), Warszawa[cite: 4]</div>
+            <div lang="en" class="exp-company">Pentacomp Systemy Informatyczne S.A. (B2B Contract, Public Sector), Warsaw</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Projektowanie i wdrażanie zaawansowanych przepływów danych (ETL) przy użyciu SSIS[cite: 4].</li>
+              <li>Modyfikacja i strojenie kostek analitycznych SSAS na potrzeby systemów sprawozdawczych GUS[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Designing advanced SSIS data flows and tuning SSAS cubes for central statistical reporting systems (GUS).</li>
+              <li>Modifying and performance-tuning SQL Server Analysis Services structures.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 11 -->
         <div class="exp-item">
           <div class="exp-date">2013-05<br>— 2013-07</div>
           <div class="exp-content">
             <div class="exp-role">BI Developer</div>
-            <div class="exp-company">Britenet Sp. z o.o. (Kontrakt B2B, Sektor Bankowy), Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Rozwój i integracja platformy raportowej opartej na Excel Services i SharePoint dla departamentów bankowych.</li>
-              <li>Pisanie dedykowanych procedur i skryptów PL/SQL agregujących dane analityczne.</li>
+            <div lang="pl" class="exp-company">Britenet Sp. z o.o. (Kontrakt B2B, Sektor Bankowy), Warszawa[cite: 4]</div>
+            <div lang="en" class="exp-company">Britenet Sp. z o.o. (B2B Contract, Banking Sector), Warsaw</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Rozwój i integracja platformy raportowej opartej na Excel Services i SharePoint dla departamentów bankowych[cite: 4].</li>
+              <li>Pisanie dedykowanych procedur i skryptów PL/SQL agregujących dane analityczne[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Developing a reporting platform using Excel Services, SharePoint, and corporate portals.</li>
+              <li>Writing dedicated PL/SQL aggregation procedures and analytical scripts.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 12 -->
         <div class="exp-item">
           <div class="exp-date">2011-11<br>— 2013-04</div>
           <div class="exp-content">
             <div class="exp-role">Software Customization Specialist</div>
-            <div class="exp-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL) oraz MS SQL Server.</li>
-              <li>Budowa i utrzymanie procesów integracji danych (ETL) za pomocą SSIS na potrzeby systemów CRM w sektorze farmaceutycznym.</li>
+            <div class="exp-company">Cegedim Group Poland Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL) oraz MS SQL Server[cite: 4].</li>
+              <li>Budowa i utrzymanie procesów integracji danych (ETL) za pomocą SSIS na potrzeby systemów CRM w sektorze farmaceutycznym[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Implementing analytical scripts (PL/SQL, T-SQL) and customized reporting modules in Oracle and SQL Server.</li>
+              <li>Building and maintaining SSIS integration workflows for pharma-sector CRM structures.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 13 -->
         <div class="exp-item">
           <div class="exp-date">2008-08<br>— 2011-07</div>
           <div class="exp-content">
             <div class="exp-role">CRM Customization Specialist</div>
-            <div class="exp-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL), Sybase oraz MS SQL Server.</li>
-              <li>Tworzenie i wdrażanie standardów raportowych przy użyciu dedykowanych narzędzi.</li>
+            <div class="exp-company">Cegedim Group Poland Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL), Sybase oraz MS SQL Server[cite: 4].</li>
+              <li>Tworzenie i wdrażanie standardów raportowych przy użyciu dedykowanych narzędzi[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Designing dedicated analytical reports and cross-platform scripts across Oracle, Sybase, and MS SQL Server.</li>
+              <li>Formulating and deploying strict corporate data reporting standards.</li>
             </ul>
           </div>
         </div>
 
+        <!-- JOB 14 -->
         <div class="exp-item">
           <div class="exp-date">2006-05<br>— 2008-07</div>
           <div class="exp-content">
             <div class="exp-role">IT Specialist</div>
-            <div class="exp-company">ILC Sp. z o.o., Warszawa</div>
-            <ul class="exp-bullets">
-              <li>Współudział w projektowaniu i budowie struktury hurtowni danych od podstaw na platformie MS SQL Server 2005.</li>
-              <li>Tworzenie i optymalizacja procesów zasilających ETL (SSIS) oraz budowanie kostek analitycznych SSAS.</li>
-              <li>Pisanie zapytań i skryptów analitycznych w językach MDX oraz T-SQL.</li>
+            <div class="exp-company">ILC Sp. z o.o., Warszawa[cite: 4]</div>
+            
+            <ul lang="pl" class="exp-bullets">
+              <li>Współudział w projektowaniu i budowie struktury hurtowni danych od podstaw na platformie MS SQL Server 2005[cite: 4].</li>
+              <li>Tworzenie i optymalizacja procesów zasilających ETL (SSIS) oraz budowanie kostek analitycznych SSAS[cite: 4].</li>
+              <li>Pisanie zapytań i skryptów analitycznych w językach MDX oraz T-SQL[cite: 4].</li>
+            </ul>
+            <ul lang="en" class="exp-bullets">
+              <li>Co-designing an MS SQL Server data warehouse architecture from scratch[cite: 4].</li>
+              <li>Creating, maintaining, and performance-tuning operational ETL (SSIS) streams and SSAS blocks.</li>
+              <li>Developing advanced analytical logic layers using MDX and T-SQL engines.</li>
             </ul>
           </div>
         </div>
@@ -659,83 +822,75 @@
 
       <!-- SKILLS -->
       <section class="section">
-        <h2 class="section-title">Umiejętności</h2>
+        <h2 lang="pl" class="section-title">Umiejętności</h2>
+        <h2 lang="en" class="section-title">Skills Overview</h2>
 
+        <!-- BLOCK 1 -->
         <div class="skill-block">
-          <div class="skill-name">Bazy danych &amp; Języki</div>
+          <div lang="pl" class="skill-name">Bazy danych &amp; Języki[cite: 4]</div>
+          <div lang="en" class="skill-name">Databases &amp; Languages</div>
           <div class="skill-tags">
-            <span class="skill-tag">T-SQL</span>
-            <span class="skill-tag">PL/SQL</span>
-            <span class="skill-tag">BigQuery</span>
-            <span class="skill-tag">Sybase</span>
-            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">T-SQL</span><span class="skill-tag">PL/SQL</span><span class="skill-tag">BigQuery</span><span class="skill-tag">Sybase</span><span class="skill-tag">MySQL</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
           </div>
         </div>
 
+        <!-- BLOCK 2 -->
         <div class="skill-block">
-          <div class="skill-name">Procesy ETL/ELT</div>
+          <div lang="pl" class="skill-name">Procesy ETL/ELT[cite: 4]</div>
+          <div lang="en" class="skill-name">ETL/ELT Data Pipelines</div>
           <div class="skill-tags">
-            <span class="skill-tag">Microsoft SSIS</span>
-            <span class="skill-tag">Architektura przepływu danych</span>
-            <span class="skill-tag">Migracje</span>
+            <span class="skill-tag">Microsoft SSIS</span><span class="skill-tag">Data Ingestion</span><span class="skill-tag">Migrations</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
           </div>
         </div>
 
+        <!-- BLOCK 3 -->
         <div class="skill-block">
-          <div class="skill-name">Modelowanie &amp; Architektura</div>
+          <div lang="pl" class="skill-name">Modelowanie &amp; Architektura[cite: 4]</div>
+          <div lang="en" class="skill-name">Modeling &amp; Architecture</div>
           <div class="skill-tags">
-            <span class="skill-tag">OLAP Tabular</span>
-            <span class="skill-tag">OLAP Multidim.</span>
-            <span class="skill-tag">SSAS</span>
-            <span class="skill-tag">SSDT</span>
-            <span class="skill-tag">MDX</span>
-            <span class="skill-tag">DAX</span>
+            <span class="skill-tag">OLAP Tabular</span><span class="skill-tag">OLAP Multidim.</span><span class="skill-tag">SSAS</span><span class="skill-tag">SSDT</span><span class="skill-tag">MDX</span><span class="skill-tag">DAX</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star empty"></div>
           </div>
         </div>
 
+        <!-- BLOCK 4 -->
         <div class="skill-block">
-          <div class="skill-name">Raportowanie &amp; Wizualizacja</div>
+          <div lang="pl" class="skill-name">Raportowanie &amp; Wizualizacja[cite: 4]</div>
+          <div lang="en" class="skill-name">Reporting &amp; Dashboards</div>
           <div class="skill-tags">
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Looker Studio</span>
-            <span class="skill-tag">SSRS</span>
-            <span class="skill-tag">Excel Services</span>
+            <span class="skill-tag">Power BI</span><span class="skill-tag">Looker Studio</span><span class="skill-tag">SSRS</span><span class="skill-tag">Excel Services</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star empty"></div>
           </div>
         </div>
 
+        <!-- BLOCK 5 -->
         <div class="skill-block">
-          <div class="skill-name">AI Dev. Toolkit</div>
+          <div lang="pl" class="skill-name">AI Dev. Toolkit[cite: 4]</div>
+          <div lang="en" class="skill-name">AI Dev. Toolkit</div>
           <div class="skill-tags">
-            <span class="skill-tag">Gemini</span>
-            <span class="skill-tag">Deep Search</span>
-            <span class="skill-tag">LM Studio</span>
-            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">Gemini</span><span class="skill-tag">Deep Search</span><span class="skill-tag">LM Studio</span><span class="skill-tag">Prompt Eng.</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star empty"></div>
           </div>
         </div>
 
+        <!-- BLOCK 6 -->
         <div class="skill-block">
-          <div class="skill-name">Automatyzacja &amp; Kontrola wersji</div>
+          <div lang="pl" class="skill-name">Automatyzacja &amp; Kontrola wersji[cite: 4]</div>
+          <div lang="en" class="skill-name">Automation &amp; Version Control</div>
           <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">SVN</span>
-            <span class="skill-tag">PowerShell</span>
-            <span class="skill-tag">C#</span>
-            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Git</span><span class="skill-tag">SVN</span><span class="skill-tag">PowerShell</span><span class="skill-tag">C#</span><span class="skill-tag">Python</span>
           </div>
           <div class="stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star empty"></div><div class="star empty"></div>
@@ -745,41 +900,47 @@
 
       <!-- EDUCATION -->
       <section class="section">
-        <h2 class="section-title">Wykształcenie</h2>
+        <h2 lang="pl" class="section-title">Wykształcenie</h2>
+        <h2 lang="en" class="section-title">Education</h2>
+        
         <div class="edu-item">
           <div class="edu-year">2011 — 2012</div>
-          <div class="edu-degree">Zarządzanie projektami</div>
-          <div class="edu-school">Warsaw School of Information Technology</div>
+          <div lang="pl" class="edu-degree">Zarządzanie projektami[cite: 4]</div>
+          <div lang="en" class="edu-degree">Postgraduate Studies in Project Management</div>
+          <div class="edu-school">Warsaw School of Information Technology[cite: 4]</div>
         </div>
         <div class="edu-item">
           <div class="edu-year">2001 — 2009</div>
-          <div class="edu-degree">Bazy danych, Inżynier</div>
-          <div class="edu-school">Warsaw School of Information Technology</div>
+          <div lang="pl" class="edu-degree">Bazy danych, Inżynier[cite: 4]</div>
+          <div lang="en" class="edu-degree">Databases, Engineer's Degree (B.Sc.)</div>
+          <div class="edu-school">Warsaw School of Information Technology[cite: 4]</div>
         </div>
       </section>
 
       <!-- COURSES -->
       <section class="section">
-        <h2 class="section-title">Kursy</h2>
+        <h2 lang="pl" class="section-title">Kursy</h2>
+        <h2 lang="en" class="section-title">Courses</h2>
         <ul class="course-list">
-          <li><span class="course-year">2021</span> Power BI course (Power Query, DAX)</li>
-          <li><span class="course-year">2020</span> Power BI course</li>
-          <li><span class="course-year">2011</span> Programming .NET – advanced course</li>
-          <li><span class="course-year">2010</span> MS-6463 Visual Studio 2008: ASP.NET 3.5</li>
-          <li><span class="course-year">2010</span> MS-2349 Programming with .NET Framework (C#)</li>
-          <li><span class="course-year">2007</span> MS-2791 SQL Server 2005 Analysis Services</li>
-          <li><span class="course-year">2007</span> MS-2792 SQL Server 2005 Integration Services</li>
-          <li><span class="course-year">2007</span> MS-2793 SQL Server 2005 Reporting Services</li>
-          <li><span class="course-year">2007</span> MS-2780 Maintaining SQL Server 2005</li>
+          <li><span class="course-year">2021</span> Power BI course (Power Query, DAX)[cite: 4]</li>
+          <li><span class="course-year">2020</span> Power BI course[cite: 4]</li>
+          <li><span class="course-year">2011</span> Programming .NET – advanced course[cite: 4]</li>
+          <li><span class="course-year">2010</span> MS-6463 Visual Studio 2008: ASP.NET 3.5[cite: 4]</li>
+          <li><span class="course-year">2010</span> MS-2349 Programming with .NET Framework (C#)[cite: 4]</li>
+          <li><span class="course-year">2007</span> MS-2791 SQL Server 2005 Analysis Services[cite: 4]</li>
+          <li><span class="course-year">2007</span> MS-2792 SQL Server 2005 Integration Services[cite: 4]</li>
+          <li><span class="course-year">2007</span> MS-2793 SQL Server 2005 Reporting Services[cite: 4]</li>
+          <li><span class="course-year">2007</span> MS-2780 Maintaining SQL Server 2005[cite: 4]</li>
         </ul>
       </section>
 
       <!-- CERT -->
       <section class="section">
-        <h2 class="section-title">Certyfikaty</h2>
+        <h2 lang="pl" class="section-title">Certyfikaty</h2>
+        <h2 lang="en" class="section-title">Certifications</h2>
         <div class="cert-badge">
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
-          Programming in HTML5 with JavaScript and CSS3 — 2017
+          Programming in HTML5 with JavaScript and CSS3 — 2017[cite: 4]
         </div>
       </section>
 
@@ -788,16 +949,59 @@
 </div>
 
 <script>
-  // Intersection Observer for scroll reveal
+  const htmlElement = document.documentElement;
+
+  // 1. MECHANIZM ZMIANY MOTYWU (DARK/LIGHT)
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeText = document.getElementById('theme-text');
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    let newTheme = 'dark';
+    
+    if (currentTheme === 'dark') {
+      newTheme = 'light';
+      themeIcon.textContent = '🌙';
+      themeText.textContent = 'Dark';
+    } else {
+      newTheme = 'dark';
+      themeIcon.textContent = '☀️';
+      themeText.textContent = 'Light';
+    }
+    htmlElement.setAttribute('data-theme', newTheme);
+  });
+
+  // 2. MECHANIZM ZMIANY JĘZYKA (PL/EN)
+  const langToggleBtn = document.getElementById('lang-toggle');
+  const langIcon = document.getElementById('lang-icon');
+  const langText = document.getElementById('lang-text');
+
+  langToggleBtn.addEventListener('click', () => {
+    const currentLang = htmlElement.getAttribute('data-lang');
+    if (currentLang === 'pl') {
+      htmlElement.setAttribute('data-lang', 'en');
+      htmlElement.setAttribute('lang', 'en');
+      langIcon.textContent = '🇵🇱';
+      langText.textContent = 'Polski';
+    } else {
+      htmlElement.setAttribute('data-lang', 'pl');
+      htmlElement.setAttribute('lang', 'pl');
+      langIcon.textContent = '🇬🇧';
+      langText.textContent = 'English';
+    }
+  });
+
+  // 3. SCROLL REVEAL ANIMATION (INTERSECTION OBSERVER)
   const sections = document.querySelectorAll('.section');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        setTimeout(() => entry.target.classList.add('visible'), i * 50);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
   sections.forEach(s => observer.observe(s));
 </script>
