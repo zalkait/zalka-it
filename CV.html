@@ -1,711 +1,727 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marcin Załuski - Senior BI / ETL / SQL Developer</title>
-<style>
-  :root {
-    --bg-sidebar: #f0f2f5;       /* Elegancki stalowo-szary odcień o doskonałym kontraście w Chrome */
-    --primary-dark: #1a202c;     /* Głęboka czerń dla głównych nagłówków */
-    --accent-color: #2b6cb0;     /* Klasyczny błękit biznesowy */
-    --text-main: #2d3748;        /* Kolor tekstu podstawowego */
-    --text-muted: #4a5568;       /* Kolor opisów projektów */
-    --badge-bg: #ffffff;         /* Tło pigułek technologicznych */
-    --border-color: #cbd5e0;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcin Załuski - Senior BI/ETL Developer & Data Engineer</title>
+    <style>
+        /* RESET I PODSTAWOWE STYLE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #1e293b;
+            background-color: #f8fafc;
+            padding: 40px 20px;
+        }
+        
+        /* KONTENER GŁÓWNY */
+       .cv-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+        /* NAGŁÓWEK (PEŁNA SZEROKOŚĆ) */
+       .cv-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 40px;
+            border-bottom: 5px solid #3b82f6;
+        }
+       .cv-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+       .cv-header.title {
+            font-size: 1.25rem;
+            color: #3b82f6;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+        }
+       .cv-header.summary {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            max-width: 900px;
+        }
 
-  body {
-    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-    color: var(--text-main);
-    background-color: #f4f6f8;
-    padding: 20px 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+        /* UKŁAD DWUKOLUMNOWY */
+       .cv-body {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+        }
 
-  /* Główny kontener strony */
-  .cv-page {
-    background: #ffffff;
-    max-width: 1020px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-    border-radius: 4px;
-    overflow: hidden;
-  }
+        /* LEWA KOLUMNA (SIDEBAR) */
+       .cv-sidebar {
+            background-color: #f1f5f9;
+            padding: 40px 30px;
+            border-right: 1px solid #e2e8f0;
+        }
+       .sidebar-section {
+            margin-bottom: 35px;
+        }
+       .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+       .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #0f172a;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
 
-  /* RWD: Przełączenie na dwie kolumny na komputerach */
-  @media (min-width: 768px) {
-    .cv-page {
-      grid-template-columns: 320px 1fr;
-    }
-  }
+        /* Dane kontaktowe */
+       .contact-list {
+            list-style: none;
+        }
+       .contact-item {
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+       .contact-label {
+            font-weight: 600;
+            color: #475569;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+       .contact-item a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+       .contact-item a:hover {
+            text-decoration: underline;
+        }
 
-  /* --- LEWA KOLUMNA --- */
-  .sidebar {
-    background-color: var(--bg-sidebar);
-    padding: 35px 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    border-right: 1px solid var(--border-color);
-  }
+        /* Estetyczne tagi umiejętności */
+       .skills-group {
+            margin-bottom: 20px;
+        }
+       .skills-group-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+       .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+       .skill-badge {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
 
-  .profile-photo-container {
-    text-align: center;
-    margin-bottom: 10px;
-  }
+        /* PRAWA KOLUMNA (GŁÓWNA TREŚĆ) */
+       .cv-main {
+            padding: 40px;
+        }
+       .main-section {
+            margin-bottom: 40px;
+        }
+       .main-section:last-child {
+            margin-bottom: 0;
+        }
+       .main-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+        }
 
-  .profile-photo {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  }
+        /* Elementy historii pracy i nauki */
+       .timeline-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+       .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+       .timeline-date {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #475569;
+        }
+       .timeline-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+       .timeline-company {
+            font-size: 0.9rem;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+       .timeline-bullets {
+            list-style-type: none;
+        }
+       .timeline-bullets li {
+            font-size: 0.85rem;
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+       .timeline-bullets li::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
 
-  .sidebar h2 {
-    font-size: 11pt;
-    font-weight: 700;
-    color: var(--primary-dark);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-  }
+        /* Kursy i certyfikaty */
+       .courses-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+       .course-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+       .course-name {
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
 
-  .contact-box {
-    font-size: 10pt;
-    line-height: 1.5;
-  }
+        /* STOPKA Z RODO */
+       .cv-footer {
+            background-color: #f8fafc;
+            padding: 25px 40px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.7rem;
+            color: #64748b;
+            text-align: justify;
+            line-height: 1.4;
+        }
 
-  .contact-item {
-    margin-bottom: 12px;
-  }
+        /* RESPONSYWNOŚĆ DLA SMARTFONÓW/TABLETÓW */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+           .cv-body {
+                grid-template-columns: 1fr;
+            }
+           .cv-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                padding: 30px 20px;
+            }
+           .cv-main {
+                padding: 30px 20px;
+            }
+           .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+           .timeline-date {
+                margin-bottom: 5px;
+            }
+           .courses-grid {
+                grid-template-columns: 80px 1fr;
+                gap: 5px;
+            }
+        }
 
-  .contact-item span {
-    display: block;
-    font-weight: 700;
-    font-size: 8.5pt;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .contact-item a {
-    color: var(--accent-color);
-    text-decoration: none;
-  }
-
-  .skill-category {
-    margin-bottom: 18px;
-  }
-
-  .skill-title {
-    font-size: 9.5pt;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--primary-dark);
-  }
-
-  .skills-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .tag {
-    background-color: var(--badge-bg);
-    color: var(--primary-dark);
-    font-size: 8.5pt;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid #cbd5e0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-  }
-
-  .tag-ai {
-    background-color: #ebf8ff;
-    color: #2b6cb0;
-    border: 1px solid #bee3f8;
-  }
-
-  .stars-rating {
-    color: #2b6cb0;
-    font-size: 11pt;
-    margin-bottom: 6px;
-    display: block;
-    letter-spacing: 2px;
-  }
-
-  /* --- PRAWA KOLUMNA --- */
-  .main-body {
-    padding: 40px 35px;
-  }
-
-  .main-header {
-    margin-bottom: 25px;
-    border-bottom: 3px solid var(--primary-dark);
-    padding-bottom: 15px;
-  }
-
-  .main-header h1 {
-    font-size: 30pt;
-    font-weight: 800;
-    color: var(--primary-dark);
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-  }
-
-  .main-header .occupation {
-    font-size: 15pt;
-    color: var(--accent-color);
-    font-weight: 600;
-    margin-top: 5px;
-  }
-
-  .section-heading {
-    font-size: 13pt;
-    font-weight: 700;
-    color: var(--primary-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 25px 0 15px 0;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .section-heading:first-of-type {
-    margin-top: 0;
-  }
-
-  .about-text {
-    font-size: 10.5pt;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    text-align: justify;
-  }
-
-  .experience-node {
-    margin-bottom: 22px;
-  }
-
-  .node-header {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 6px;
-  }
-
-  @media (min-width: 600px) {
-    .node-header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-  }
-
-  .node-title-group {
-    font-size: 11pt;
-    font-weight: 700;
-    color: var(--primary-dark);
-  }
-
-  .node-company {
-    font-size: 10pt;
-    color: #4a5568;
-    font-weight: 600;
-    margin-top: 2px;
-  }
-
-  .node-duration {
-    font-size: 9.5pt;
-    color: #718096;
-    font-style: italic;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .node-details {
-    padding-left: 18px;
-    margin-top: 4px;
-  }
-
-  .node-details li {
-    font-size: 10pt;
-    color: var(--text-muted);
-    margin-bottom: 5px;
-    line-height: 1.4;
-  }
-
-  .rodo-footer {
-    font-size: 8pt;
-    color: #a0aec0;
-    line-height: 1.4;
-    margin-top: 45px;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 15px;
-    text-align: justify;
-  }
-</style>
+        /* STYLE WYDRUKU PDF (CONTROL+P) */
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+                color: #000000;
+                font-size: 11px; /* Optymalizacja wielkości tekstu do druku */
+            }
+           .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+           .cv-header {
+                background-color: #ffffff!important;
+                color: #000000!important;
+                border-bottom: 3px solid #000000;
+                padding: 20px 0;
+            }
+           .cv-header h1 {
+                color: #000000!important;
+                font-size: 24pt;
+            }
+           .cv-header.title {
+                color: #555555!important;
+                font-size: 13pt;
+                margin-bottom: 10px;
+            }
+           .cv-header.summary {
+                color: #333333!important;
+                font-size: 9.5pt;
+            }
+           .cv-body {
+                grid-template-columns: 240px 1fr; /* Węższa lewa kolumna na wydruku */
+            }
+           .cv-sidebar {
+                background-color: #ffffff!important;
+                border-right: 1px solid #cccccc;
+                padding: 20px 15px 0 0;
+            }
+           .sidebar-title {
+                border-bottom: 2px solid #000000;
+                color: #000000;
+            }
+           .skill-badge {
+                background-color: #f1f5f9!important; /* Bardzo jasne tło taga, aby nie marnować tuszu */
+                border: 1px solid #cbd5e1;
+                color: #000000!important;
+                font-size: 8pt;
+            }
+           .cv-main {
+                padding: 20px 0 0 25px;
+            }
+           .main-title {
+                border-bottom: 2px solid #000000;
+                color: #000000;
+            }
+           .timeline-company {
+                color: #000000!important;
+            }
+           .timeline-bullets li::before {
+                color: #000000!important;
+            }
+           .timeline-item {
+                page-break-inside: avoid; /* Unikanie ucinania pojedynczych stanowisk na przejściu stron */
+            }
+           .cv-footer {
+                background-color: #ffffff!important;
+                border-top: 1px solid #cccccc;
+                padding: 15px 0;
+                font-size: 7.5pt;
+                color: #555555;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="cv-page">
-  
-  <aside class="sidebar">
+<div class="cv-container">
     
-    <div class="profile-photo-container">
-      <img src="https://www.zalka.it/cv_pic.jpg" alt="Marcin Załuski" class="profile-photo">
-    </div>
-
-    <div class="contact-box">
-      <h2>Kontakt</h2>
-      <div class="contact-item">
-        <span>E-mail</span>
-        <a href="mailto:m.zaluski@poczta.fm">m.zaluski@poczta.fm</a>
-      </div>
-      <div class="contact-item">
-        <span>Numer telefonu</span>
-        <a href="tel:+48502388094">502 388 094</a>
-      </div>
-      <div class="contact-item">
-        <span>Lokalizacja</span>
-        Warszawa / Kraków
-      </div>
-    </div>
-
-    <div>
-      <h2>Umiejętności</h2>
-      
-      <div class="skill-category">
-        <div class="skill-title">Bazy danych & Języki</div>
-        <div class="skills-wrapper">
-          <span class="tag">T-SQL</span>
-          <span class="tag">PL/SQL</span>
-          <span class="tag">BigQuery</span>
-          <span class="tag">Sybase</span>
-          <span class="tag">MySQL</span>
+    <header class="cv-header">
+        <h1>Marcin Załuski</h1>
+        <div class="title">Senior BI/ETL Developer & Data Engineer</div>
+        <div class="summary">
+            Doświadczony BI/ETL Developer z ponad 20-letnim stażem w projektowaniu, rozwoju i optymalizacji systemów Business Intelligence oraz hurtowni danych. Ekspert w obszarze zaawansowanego programowania T-SQL oraz budowania efektywnych procesów ETL. Posiadam unikalne doświadczenie w sektorze bankowym przy raportowaniu obligatoryjnym (COREP). W codziennej pracy aktywnie wykorzystuję zaawansowany Prompt Engineering i narzędzia AI jako booster produktywności, co pozwala mi na skrócenie czasu dostarczania kodu, automatyzację zadań oraz szybki debugging złożonych procedur.
         </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">Procesy ETL/ELT</div>
-        <div class="skills-wrapper">
-          <span class="tag">SSIS</span>
-          <span class="tag">Architektura przepływu danych</span>
-          <span class="tag">Integracja systemów heterogenicznych</span>
-          <span class="tag">Migracja danych</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">Database Architecture</div>
-        <div class="skills-wrapper">
-          <span class="tag">SQL Server Data Tools</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">Modelowanie analityczne</div>
-        <div class="skills-wrapper">
-          <span class="tag">Kostki OLAP (Tabular/Multidimensional)</span>
-          <span class="tag">SSAS</span>
-          <span class="tag">MDX</span>
-          <span class="tag">DAX</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">Raportowanie & Wizualizacja</div>
-        <div class="skills-wrapper">
-          <span class="tag">Power BI</span>
-          <span class="tag">Looker Studio</span>
-          <span class="tag">Excel Services</span>
-          <span class="tag">SSRS</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">AI Developer Toolkit</div>
-        <span class="stars-rating">★★</span>
-        <div class="skills-wrapper">
-          <span class="tag tag-ai">Zaawansowany Prompt Engineering</span>
-          <span class="tag tag-ai">GitHub Copilot/LLMs</span>
-          <span class="tag tag-ai">Automatyzacja zadań</span>
-          <span class="tag tag-ai">Optymalizacja zapytań SQL</span>
-          <span class="tag tag-ai">Generowanie skryptów PowerShell/C#</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-title">Inne</div>
-        <div class="skills-wrapper">
-          <span class="tag">C#</span>
-          <span class="tag">PowerShell</span>
-          <span class="tag">Python (podstawy)</span>
-          <span class="tag">Analityka danych</span>
-          <span class="tag">Data Quality</span>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <h2>Języki</h2>
-      <div class="skill-title">Angielski</div>
-      <p style="font-size: 9.5pt; color: var(--text-muted); margin-bottom: 10px;">B2 – Aktywna komunikacja biznesowa</p>
-      <div class="skill-title">Niemiecki</div>
-      <p style="font-size: 9.5pt; color: var(--text-muted);">Podstawowy</p>
-    </div>
-
-  </aside>
-
-  <main class="main-body">
-    
-    <header class="main-header">
-      <h1>Marcin Załuski</h1>
-      <div class="occupation">Senior BI / ETL / SQL Developer</div>
     </header>
 
-    <section>
-      <div class="section-heading">Podsumowanie Zawodowe</div>
-      <p class="about-text">
-        Doświadczony BI/ETL Developer z ponad 20-letnim stażem w projektowaniu, rozwoju i optymalizacji systemów Business Intelligence oraz hurtowni danych. Ekspert w obszarze zaawansowanego programowania T-SQL oraz budowania efektywnych procesów ETL. Posiadam unikalne doświadczenie w sektorze bankowym przy raportowaniu obligatoryjnym (COREP).
-      </p>
-      <p class="about-text">
-        W codziennej pracy aktywnie wykorzystuję zaawansowany Prompt Engineering i narzędzia AI jako booster produktywności, co pozwala mi na skrócenie czasu dostarczania kodu, automatyzację zadań oraz szybki debugging złożonych procedur.
-      </p>
-    </section>
+    <div class="cv-body">
+        
+        <aside class="cv-sidebar">
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Kontakt</h2>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <span class="contact-label">E-mail</span>
+                        <a href="mailto:m.zaluski@poczta.fm">m.zaluski@poczta.fm</a>
+                    </li>
+                    <li class="contact-item">
+                        <span class="contact-label">Telefon</span>
+                        <a href="tel:502388094">502 388 094</a>
+                    </li>
+                    <li class="contact-item">
+                        <span class="contact-label">LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank">linkedin.com/in/marcin-zaluski</a>
+                    </li>
+                    <li class="contact-item">
+                        <span class="contact-label">Strona WWW</span>
+                        <a href="https://www.zalka.it/" target="_blank">zalka.it</a>
+                    </li>
+                </ul>
+            </div>
 
-    <section>
-      <div class="section-heading">Doświadczenie Zawodowe</div>
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Umiejętności</h2>
+                
+                <div class="skills-group">
+                    <div class="skills-group-title">Bazy danych & Języki</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">T-SQL</span>
+                        <span class="skill-badge">PL/SQL</span>
+                        <span class="skill-badge">BigQuery</span>
+                        <span class="skill-badge">Sybase</span>
+                        <span class="skill-badge">MySQL</span>
+                        <span class="skill-badge">Bazy heterogeniczne</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Senior Obligatory Reporting Contributor
-            <div class="node-company">Aion Bank (UniCredit Group), Warszawa</div>
-          </div>
-          <div class="node-duration">2023-12 - obecnie</div>
-        </div>
-        <ul class="node-details">
-          <li>Odpowiedzialność za sprawozdawczość obligatoryjną banku (COREP, Leverage Ratio, Large Exposures) oraz integrację i import danych do systemów grupy UniCredit.</li>
-          <li>Projektowanie, rozbudowa oraz optymalizacja procedur ładowania danych w BigQuery w celu skrócenia okien procesowych ETL.</li>
-          <li>Integracja rozproszonych danych finansowych z wielu systemów źródłowych przy zapewnieniu najwyższych standardów jakości danych (Data Quality).</li>
-          <li>Tworzenie interaktywnych dashboardów zarządczych oraz analiz w środowisku Looker Studio.</li>
-        </ul>
-      </div>
+                <div class="skills-group">
+                    <div class="skills-group-title">Procesy ETL/ELT</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">Microsoft SSIS</span>
+                        <span class="skill-badge">Architektura przepływu danych</span>
+                        <span class="skill-badge">Migracje danych</span>
+                        <span class="skill-badge">Integracja międzyplatformowa</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">EBIS Sp. z o.o. (Kontrakt B2B dla: Sektor Produkcyjny), Kraków</div>
-          </div>
-          <div class="node-duration">2022-09 - 2023-11</div>
-        </div>
-        <ul class="node-details">
-          <li>Projektowanie, rozbudowa oraz optymalizacja wydajnościowa zaawancowanych kostek analitycznych OLAP w modelu Tabular.</li>
-          <li>Rozwój i wdrażanie rozwiązań ETL integrujących dane z systemów klasy ERP i CRM.</li>
-          <li>Budowanie zaawancowanych raportów biznesowych w Power BI z wykorzystaniem modelowania DAX.</li>
-        </ul>
-      </div>
+                <div class="skills-group">
+                    <div class="skills-group-title">Modelowanie & Architektura</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">Kostki OLAP (Tabular)</span>
+                        <span class="skill-badge">Kostki Multidimensional</span>
+                        <span class="skill-badge">SSAS</span>
+                        <span class="skill-badge">SSDT</span>
+                        <span class="skill-badge">MDX</span>
+                        <span class="skill-badge">DAX</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">ISCG Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2022-04 - 2022-08</div>
-        </div>
-        <ul class="node-details">
-          <li>Migracja legacy systemów i rozwiązań klasy Business Intelligence do nowoczesnych architektur bazodanowych MS SQL Server.</li>
-          <li>Kompleksowe projektowanie i implementacja procesów ETL oraz integracja danych międzyplatformowych.</li>
-        </ul>
-      </div>
+                <div class="skills-group">
+                    <div class="skills-group-title">Raportowanie & Wizualizacja</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">Power BI</span>
+                        <span class="skill-badge">Looker Studio</span>
+                        <span class="skill-badge">SSRS</span>
+                        <span class="skill-badge">Excel Services</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Power BI Developer, BI Developer
-            <div class="node-company">PKO BP Finat Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2021-05 - 2022-08</div>
-        </div>
-        <ul class="node-details">
-          <li>Tworzenie dedykowanych raportów i dashboardów w Power BI wspierających procesy decyzyjne w grupie kapitałowej.</li>
-          <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
-          <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
-        </ul>
-      </div>
+                <div class="skills-group">
+                    <div class="skills-group-title">AI Dev. Toolkit</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">Gemini</span>
+                        <span class="skill-badge">Deep Search</span>
+                        <span class="skill-badge">LM Studio</span>
+                        <span class="skill-badge">Prompt Engineering</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">FlexiSolutions Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2020-10 - 2021-04</div>
-        </div>
-        <ul class="node-details">
-          <li>Rozwój, utrzymanie oraz optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego.</li>
-          <li>Rozbudowa struktur hurtowni danych opartej na MS SQL Server oraz procesów zasilających ETL (SSIS).</li>
-        </ul>
-      </div>
+                <div class="skills-group">
+                    <div class="skills-group-title">Automatyzacja & Inne</div>
+                    <div class="skills-container">
+                        <span class="skill-badge">Git</span>
+                        <span class="skill-badge">SVN</span>
+                        <span class="skill-badge">PowerShell</span>
+                        <span class="skill-badge">C#</span>
+                        <span class="skill-badge">Python (podstawy)</span>
+                        <span class="skill-badge">Data Quality</span>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">Mindbox S.A. (Kontrakt B2B dla: Sektor Bankowy), Warszawa</div>
-          </div>
-          <div class="node-duration">2019-09 - 2020-09</div>
-        </div>
-        <ul class="node-details">
-          <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w banku.</li>
-          <li>Migracja wielkich wolumenów danych z systemów dziedzinowych w oparciu o pakiety Microsoft SSIS.</li>
-          <li>Profilowanie, analiza i optymalizacja procedur SQL działających w procesach zamknięcia dnia (EOD).</li>
-        </ul>
-      </div>
+            </div>
+        </aside>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">VlogIT Sp. z o.o. (Kontrakt B2B dla: Sektor Finansowy), Warszawa</div>
-          </div>
-          <div class="node-duration">2019-03 - 2019-08</div>
-        </div>
-        <ul class="node-details">
-          <li>Rozbudowa hurtowni danych dla SQL Server oraz projektowanie procesów ETL i integracyjnych w oparciu o SSIS.</li>
-          <li>Rozwój, modyfikacja oraz optymalizacja wielwymiarowych kostek analitycznych dla SSAS.</li>
-        </ul>
-      </div>
+        <main class="cv-main">
+            
+            <section class="main-section">
+                <h2 class="main-title">Doświadczenie zawodowe</h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">12/2023 — obecnie</div>
+                    <div class="timeline-content">
+                        <h3>Senior Obligatory Reporting Contributor</h3>
+                        <div class="timeline-company">Aion Bank (UniCredit Group), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Odpowiedzialność za sprawozdawczość obligatoryjną banku (COREP, Leverage Ratio, Large Exposures) oraz integrację i import danych do systemów grupy UniCredit.</li>
+                            <li>Projektowanie, rozbudowa oraz optymalizacja procedur ładowania danych w BigQuery w celu skrócenia okien procesowych ETL.</li>
+                            <li>Integracja rozproszonych danych finansowych z wielu systemów źródłowych przy zapewnieniu najwyższych standardów jakości danych (Data Quality).</li>
+                            <li>Tworzenie interaktywnych dashboardów zarządczych oraz analiz w środowisku Looker Studio.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Developer
-            <div class="node-company">Wolters Kluwer Polska S.A., Warszawa</div>
-          </div>
-          <div class="node-duration">2014-04 - 2019-03</div>
-        </div>
-        <ul class="node-details">
-          <li>Projektowanie i implementacja procesów zasilania hurtowni danych oraz integracji systemów z wykorzystaniem SSIS.</li>
-          <li>Przygotowywanie zaawansowanych struktur i procedur T-SQL na potrzeby zasilania wewnętrznego systemu CMS.</li>
-          <li>Optymalizacja wydajnościowa baz danych MS SQL Server (strojenie indeksów, refaktoryzacja zapytań i widoków).</li>
-          <li>Udział w projektowaniu procesów migracji struktur danych do środowiska chmurowego Google Cloud.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">09/2022 — 11/2023</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">EBIS Sp. z o.o. (Kontrakt B2B dla: Sektor Produkcyjny), Kraków</div>
+                        <ul class="timeline-bullets">
+                            <li>Projektowanie, rozbudowa oraz optymalizacja wydajnościowa zaawancowanych kostek analitycznych OLAP w modelu Tabular.</li>
+                            <li>Rozwój i wdrażanie rozwiązań ETL integrujących dane z systemów klasy ERP i CRM.</li>
+                            <li>Budowanie zaawancowanych raportów biznesowych w Power BI z wykorzystaniem modelowania DAX.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">ETL Developer
-            <div class="node-company">Britenet Sp. z o.o. (Kontrakt B2B dla: Sektor Bankowy, Automoto), Warszawa</div>
-          </div>
-          <div class="node-duration">2013-11 - 2014-03</div>
-        </div>
-        <ul class="node-details">
-          <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
-          <li>Przygotowywanie zapytań SQL oraz raportów analitycznych wspierających działy biznesowe importera.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">04/2022 — 08/2022</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">ISCG Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Migracja legacy systemów i rozwiązań klasy Business Intelligence do nowoczesnych architektur bazodanowych MS SQL Server.</li>
+                            <li>Kompleksowe projektowanie i implementacja procesów ETL oraz integracja danych międzyplatformowych.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">Pentacomp Systemy Informatyczne S.A. (Kontrakt B2B dla: Sektora Publicznego), Warszawa</div>
-          </div>
-          <div class="node-duration">2013-08 - 2013-10</div>
-        </div>
-        <ul class="node-details">
-          <li>Projektowanie i wdrażanie zaawancowanych przepływów danych (ETL) przy użyciu pakietu SQL Server Integration Services (SSIS).</li>
-          <li>Modyfikacja i strojenie kostek analitycznych SQL Server Analysis Services (SSAS) na potrzeby systemów sprawozdawczych GUS.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">05/2021 — 08/2022</div>
+                    <div class="timeline-content">
+                        <h3>Power BI Developer, BI Developer</h3>
+                        <div class="timeline-company">PKO BP Finat Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Tworzenie dedykowanych raportów i dashboardów w Power BI wspierających procesy decyzyjne w grupie kapitałowej.</li>
+                            <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
+                            <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">BI Developer
-            <div class="node-company">Britenet Sp. z o.o. (Kontrakt B2B dla: Sektor Bankowy), Warszawa</div>
-          </div>
-          <div class="node-duration">2013-05 - 2013-07</div>
-        </div>
-        <ul class="node-details">
-          <li>Rozwój i integracja platformy raportowej opartej na usługach Excel Services i SharePoint dla departamentów bankowych.</li>
-          <li>Pisanie dedykowanych procedur i skryptów PL/SQL agregujących dane analityczne.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10/2020 — 04/2021</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">FlexiSolutions Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Rozwój, utrzymanie oraz optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego.</li>
+                            <li>Rozbudowa struktur hurtowni danych opartej na MS SQL Server oraz procesów zasilających ETL (SSIS).</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Software Customization Specialist
-            <div class="node-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2011-11 - 2013-04</div>
-        </div>
-        <ul class="node-details">
-          <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL) oraz MS SQL Server.</li>
-          <li>Budowa i utrzymanie procesów integracji danych (ETL) za pomocą SSIS na potrzeby systemów CRM w sektorze farmaceutycznym i medycznym.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">09/2019 — 09/2020</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">Mindbox S.A. (Kontrakt B2B dla: Sektor Bankowy), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego w banku.</li>
+                            <li>Migracja wielkich wolumenów danych z systemów dziedzinowych w oparciu o pakiety Microsoft SSIS.</li>
+                            <li>Profilowanie, analiza i optymalizacja procedur SQL działających w procesach zamknięcia dnia (EOD).</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Programmer
-            <div class="node-company">Praxis S.A., Warszawa</div>
-          </div>
-          <div class="node-duration">2011-08 - 2011-10</div>
-        </div>
-        <ul class="node-details">
-          <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
-          <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
-          <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">03/2019 — 08/2019</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">VlogIT Sp. z o.o. (Kontrakt B2B dla: Sektor Finansowy), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Rozbudowa hurtowni danych dla SQL Server oraz projektowanie procesów ETL i integracyjnych w oparciu o SSIS.</li>
+                            <li>Rozwój, modyfikacja oraz optymalizacja wielowymiarowych kostek analitycznych dla SSAS.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">CRM Customization Specialist
-            <div class="node-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2008-08 - 2011-07</div>
-        </div>
-        <ul class="node-details">
-          <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL), Sybase oraz MS SQL Server.</li>
-          <li>Tworzenie i wdrażanie standardów raportowych przy użyciu dedykowanych narzędzi.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">04/2014 — 03/2019</div>
+                    <div class="timeline-content">
+                        <h3>Developer</h3>
+                        <div class="timeline-company">Wolters Kluwer Polska S.A., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Projektowanie i implementacja procesów zasilania hurtowni danych oraz integracji systemów z wykorzystaniem SSIS.</li>
+                            <li>Przygotowywanie zaawancowanych struktur i procedur T-SQL na potrzeby zasilania wewnętrznego systemu CMS.</li>
+                            <li>Optymalizacja wydajnościowa baz danych MS SQL Server (strojenie indeksów, refaktoryzacja zapyń i widoków).</li>
+                            <li>Udział w projektowaniu procesów migracji struktur danych do środowiska chmurowego Google Cloud.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">IT Specialist
-            <div class="node-company">ILC Sp. z o.o., Warszawa</div>
-          </div>
-          <div class="node-duration">2006-05 - 2008-07</div>
-        </div>
-        <ul class="node-details">
-          <li>Współudział w projektowaniu i budowie struktury hurtowni danych od podstaw na platformie MS SQL Server 2005.</li>
-          <li>Tworzenie i optymalizacja procesów zasilających ETL (SSIS) oraz budowanie kostek analitycznych SSAS.</li>
-          <li>Pisanie zapytań i skryptów analitycznych w językach MDX oraz T-SQL.</li>
-        </ul>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">11/2013 — 03/2014</div>
+                    <div class="timeline-content">
+                        <h3>ETL Developer</h3>
+                        <div class="timeline-company">Britenet Sp. z o.o. (Kontrakt B2B dla: Sektor Bankowy, Automoto), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
+                            <li>Przygotowywanie zapytań SQL oraz raportów analitycznych wspierających działy biznesowe importera.</li>
+                        </ul>
+                    </div>
+                </div>
 
-    </section>
+                <div class="timeline-item">
+                    <div class="timeline-date">08/2013 — 10/2013</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">Pentacomp Systemy Informatyczne S.A. (Kontrakt B2B dla: Sektora Publicznego), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Projektowanie i wdrażanie zaawancowanych przepływów danych (ETL) przy użyciu pakietu SQL Server Integration Services (SSIS).</li>
+                            <li>Modyfikacja i strojenie kostek analitycznych SQL Server Analysis Services (SSAS) na potrzeby systemów sprawozdawczych GUS.</li>
+                        </ul>
+                    </div>
+                </div>
 
-    <section>
-      <div class="section-heading">Wykształcenie</div>
-      
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Zarządzanie projektami (Studia Podyplomowe)
-            <div class="node-company">Warsaw School of Information Technology, Warszawa</div>
-          </div>
-          <div class="node-duration">2011-10 - 2012-06</div>
-        </div>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">05/2013 — 07/2013</div>
+                    <div class="timeline-content">
+                        <h3>BI Developer</h3>
+                        <div class="timeline-company">Britenet Sp. z o.o. (Kontrakt B2B dla: Sektor Bankowy), Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Rozwój i integracja platformy raportowej opartej na usługach Excel Services i SharePoint dla departamentów bankowych.</li>
+                            <li>Pisanie dedykowanych procedur i skryptów PL/SQL agregujących dane analityczne.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Bazy danych, Inżynier
-            <div class="node-company">Warsaw School of Information Technology, Warszawa</div>
-          </div>
-          <div class="node-duration">2001-10 - 2009-01</div>
-        </div>
-      </div>
-    </section>
+                <div class="timeline-item">
+                    <div class="timeline-date">11/2011 — 04/2013</div>
+                    <div class="timeline-content">
+                        <h3>Software Customization Specialist</h3>
+                        <div class="timeline-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL) oraz MS SQL Server.</li>
+                            <li>Budowa i utrzymanie procesów integracji danych (ETL) za pomocą SSIS na potrzeby systemów CRM w sektorze farmaceutycznym i medycznym.</li>
+                        </ul>
+                    </div>
+                </div>
 
-    <section>
-      <div class="section-heading">Certyfikaty</div>
-      
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Programming in HTML5 with JavaScript and CSS3
-            <div class="node-company">Microsoft Certified</div>
-          </div>
-          <div class="node-duration">2017-05</div>
-        </div>
-      </div>
-    </section>
+                <div class="timeline-item">
+                    <div class="timeline-date">08/2011 — 10/2011</div>
+                    <div class="timeline-content">
+                        <h3>Programmer</h3>
+                        <div class="timeline-company">Praxis S.A., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Analiza i rozwój procesów zasilających ETL w oparciu o MS SQL Server i SSIS.</li>
+                            <li>Rozbudowa oraz strojenie wydajnościowe kostek analitycznych OLAP (Tabular).</li>
+                            <li>Analiza, refaktoryzacja i optymalizacja istniejących procedur oraz funkcji T-SQL w celu eliminacji wąskich gardeł wydajnościowych.</li>
+                        </ul>
+                    </div>
+                </div>
 
-    <section>
-      <div class="section-heading">Kursy</div>
+                <div class="timeline-item">
+                    <div class="timeline-date">08/2008 — 07/2011</div>
+                    <div class="timeline-content">
+                        <h3>CRM Customization Specialist</h3>
+                        <div class="timeline-company">Cegedim Group Poland Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle (PL/SQL), Sybase oraz MS SQL Server.</li>
+                            <li>Tworzenie i wdrażanie standardów raportowych przy użyciu dedykowanych narzędzi.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Power BI course (Power Query, DAX)
-            <div class="node-company">Skuteczne Raporty</div>
-          </div>
-          <div class="node-duration">2021-03</div>
-        </div>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">05/2006 — 07/2008</div>
+                    <div class="timeline-content">
+                        <h3>IT Specialist</h3>
+                        <div class="timeline-company">ILC Sp. z o.o., Warszawa</div>
+                        <ul class="timeline-bullets">
+                            <li>Współudział w projektowaniu i budowie struktury hurtowni danych od podstaw na platformie MS SQL Server 2005.</li>
+                            <li>Tworzenie i optymalizacja procesów zasilających ETL (SSIS) oraz budowanie kostek analitycznych SSAS.</li>
+                            <li>Pisanie zapytań i skryptów analitycznych w językach MDX oraz T-SQL.</li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Power BI course
-            <div class="node-company">Elitmind</div>
-          </div>
-          <div class="node-duration">2020-11</div>
-        </div>
-      </div>
+            </section>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">Programming .NET - advanced course</div>
-          <div class="node-duration">2011-06</div>
-        </div>
-      </div>
+            <section class="main-section">
+                <h2 class="main-title">Wykształcenie</h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">10/2011 — 06/2012</div>
+                    <div class="timeline-content">
+                        <h3>Zarządzanie projektami</h3>
+                        <div class="timeline-company">Wyższa Szkoła Technologii Informatycznych (WSTI), Warszawa</div>
+                    </div>
+                </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-6463 Visual Studio 2008: ASP.NET 3.5</div>
-          <div class="node-duration">2010-10</div>
-        </div>
-      </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10/2001 — 01/2009</div>
+                    <div class="timeline-content">
+                        <h3>Bazy danych, Inżynier</h3>
+                        <div class="timeline-company">Wyższa Szkoła Technologii Informatycznych (WSTI), Warszawa</div>
+                    </div>
+                </div>
+            </section>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-2349 Programming with the Microsoft .NET Framework (Microsoft Visual C# .NET)</div>
-          <div class="node-duration">2010-10</div>
-        </div>
-      </div>
+            <section class="main-section" style="page-break-inside: avoid;">
+                <h2 class="main-title">Kursy i Szkolenia</h2>
+                
+                <div class="courses-grid">
+                    <div class="course-date">03/2021</div>
+                    <div class="course-name">Power BI course (Power Query, DAX)</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">11/2020</div>
+                    <div class="course-name">Power BI course</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">06/2011</div>
+                    <div class="course-name">Programming.NET — advanced course</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">10/2010</div>
+                    <div class="course-name">MS-6463 Visual Studio 2008: ASP.NET 3.5</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">10/2010</div>
+                    <div class="course-name">MS-2349 Programming with the Microsoft.NET Framework (C#.NET)</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">11/2007</div>
+                    <div class="course-name">MS-2791 Implementing and Maintaining MS SQL Server 2005 Analysis Services</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">11/2007</div>
+                    <div class="course-name">MS-2792 Implementing and Maintaining MS SQL Server 2005 Integration Services</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">11/2007</div>
+                    <div class="course-name">MS-2793 Implementing and Maintaining MS SQL Server 2005 Reporting Services</div>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-date">03/2007</div>
+                    <div class="course-name">MS-2780 Maintaining a Microsoft SQL Server 2005 Database</div>
+                </div>
+            </section>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-2791 Implementing and Maintaining Microsoft SQL Server 2005 Analysis Services</div>
-          <div class="node-duration">2007-11</div>
-        </div>
-      </div>
+            <section class="main-section" style="page-break-inside: avoid;">
+                <h2 class="main-title">Certyfikaty</h2>
+                
+                <div class="courses-grid">
+                    <div class="course-date">05/2017</div>
+                    <div class="course-name">Programming in HTML5 with JavaScript and CSS3</div>
+                </div>
+            </section>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-2792 Implementing and Maintaining Microsoft SQL Server 2005 Integration Services</div>
-          <div class="node-duration">2007-11</div>
-        </div>
-      </div>
+        </main>
+    </div>
 
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-2793 Implementing and Maintaining Microsoft SQL Server 2005 Reporting Services</div>
-          <div class="node-duration">2007-11</div>
-        </div>
-      </div>
-
-      <div class="experience-node">
-        <div class="node-header">
-          <div class="node-title-group">MS-2780 Maintaining a Microsoft SQL Server 2005 Database</div>
-          <div class="node-duration">2007-03</div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="rodo-footer">
-      Wyrażam zgodę na przetwarzanie moich danych osobowych na potrzeby obecnego procesu rekrutacyjnego oraz przyszłych rekrutacji, zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO).
+    <footer class="cv-footer">
+        Wyrażam zgodę na przetwarzanie moich danych osobowych na potrzeby obecnego procesu rekrutacyjnego oraz przyszłych rekrutacji, zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO).
     </footer>
 
-  </main>
 </div>
 
 </body>
