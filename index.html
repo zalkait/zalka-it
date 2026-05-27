@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="dark">
+<html lang="pl" data-theme="dark" data-lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,10 @@
             --border-color: #e2e8f0;
             --shadow: rgba(0, 0, 0, 0.05);
         }
+
+        /* MECHANIZM ZMIANY JĘZYKA PRZEZ CSS */
+        html[data-lang="pl"] [lang="en"] { display: none !important; }
+        html[data-lang="en"] [lang="pl"] { display: none !important; }
 
         /* RESET I OGÓLNE STYLIZOWANIE */
         * {
@@ -91,7 +95,7 @@
        .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
             list-style: none;
         }
 
@@ -107,12 +111,18 @@
             color: var(--accent-blue);
         }
 
-        /* Przełącznik Motywu */
+       .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Przełączniki */
        .theme-toggle-btn {
             background: none;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-family: inherit;
@@ -662,10 +672,12 @@
            .project-card { grid-template-columns: 1fr; }
            .project-visual { border-right: none; border-bottom: 1px solid var(--border-color); padding: 40px; }
            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+           .nav-actions { gap: 6px; }
+           .theme-toggle-btn { padding: 6px 10px; font-size: 0.75rem; }
         }
 
         @media (max-width: 768px) {
-           .nav-links { display: none; } /* Uproszczenie do wersji mobilnej */
+           .nav-links { display: none; } 
            .hero h1 { font-size: 2.25rem; }
            .hero { padding: 140px 0 80px 0; }
            .form-row { grid-template-columns: 1fr; gap: 0; }
@@ -680,50 +692,83 @@
         <div class="container nav-wrapper">
             <a href="#" class="logo">zalka.it</a>
             <ul class="nav-links">
-                <li><a href="#about">O mnie</a></li>
-                <li><a href="#services">Usługi</a></li>
-                <li><a href="#tech">Technologie</a></li>
-                <li><a href="#projects">Projekty</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-                <li>
-                    <button class="theme-toggle-btn" id="theme-toggle">
-                        <span id="theme-icon">☀️</span> <span id="theme-text">Light Mode</span>
-                    </button>
-                </li>
+                <!-- Wersja polska nawigacji -->
+                <li lang="pl"><a href="#about">O mnie</a></li>
+                <li lang="pl"><a href="#services">Usługi</a></li>
+                <li lang="pl"><a href="#tech">Technologie</a></li>
+                <li lang="pl"><a href="#projects">Projekty</a></li>
+                <li lang="pl"><a href="#contact">Kontakt</a></li>
+                
+                <!-- Wersja angielska nawigacji -->
+                <li lang="en"><a href="#about">About</a></li>
+                <li lang="en"><a href="#services">Services</a></li>
+                <li lang="en"><a href="#tech">Tech Stack</a></li>
+                <li lang="en"><a href="#projects">Projects</a></li>
+                <li lang="en"><a href="#contact">Contact</a></li>
             </ul>
+            
+            <div class="nav-actions">
+                <!-- Przełącznik języka -->
+                <button class="theme-toggle-btn" id="lang-toggle">
+                    <span id="lang-icon">🇬🇧</span> <span id="lang-text">English</span>
+                </button>
+                <!-- Przełącznik motywu -->
+                <button class="theme-toggle-btn" id="theme-toggle">
+                    <span id="theme-icon">☀️</span> <span id="theme-text">Light</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <section class="hero" id="about">
         <div class="container">
-            <div class="hero-badge">
+            <!-- HERO PL -->
+            <div lang="pl" class="hero-badge">
                 <span></span> Dostępny do kontraktów B2B / Doradztwa technicznego
             </div>
-            <h1>Projektuję wydajne architektury DWH oraz <span>skalowalne procesy ETL/ELT</span></h1>
-            <p class="hero-lead">
+            <h1 lang="pl">Projektuję wydajne architektury DWH oraz <span>skalowalne procesy ETL/ELT</span></h1>
+            <p lang="pl" class="hero-lead">
                 Nazywam się Marcin Załuski. Od ponad 20 lat łączę inżynierię danych z biznesowym wymaganiem stabilności finansowej. Specjalizuję się w systemach Business Intelligence, hurtowniach danych oraz sprawozdawczości regulacyjnej (COREP/FINREP) dla czołowych instytucji finansowych i banków. Wykorzystuję zaawansowane narzędzia AI, aby drastycznie skracać czas wdrożeń i optymalizować zapytania SQL.
             </p>
-            <div class="hero-ctas">
+            <div lang="pl" class="hero-ctas">
                 <a href="#contact" class="btn btn-primary">Porozmawiajmy o projekcie</a>
-                <a href="#projects" class="btn btn-secondary">Zobacz wybrane realizacje</a>
+                <a href="#projects" class="btn btn-secondary">Zobacz realizacje</a>
             </div>
 
+            <!-- HERO EN -->
+            <div lang="en" class="hero-badge">
+                <span></span> Available for B2B Contracts / Technical Consulting
+            </div>
+            <h1 lang="en">I design efficient DWH architectures and <span>scalable ETL/ELT pipelines</span></h1>
+            <p lang="en" class="hero-lead">
+                My name is Marcin Załuski. For over 20 years, I have been bridging the gap between data engineering and business demands for financial stability. I specialize in Business Intelligence systems, corporate Data Warehouses, and regulatory/obligatory reporting (COREP/FINREP) for leading financial institutions and banks. I leverage advanced AI environments to drastically compress deployment times and performance-tune complex SQL logic.
+            </p>
+            <div lang="en" class="hero-ctas">
+                <a href="#contact" class="btn btn-primary">Let's discuss your project</a>
+                <a href="#projects" class="btn btn-secondary">View case studies</a>
+            </div>
+
+            <!-- METRYKI (Wspólne liczby, różne opisy) -->
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-num">20+</div>
-                    <div class="metric-label">Lat Doświadczenia w BI/IT</div>
+                    <div lang="pl" class="metric-label">Lat Doświadczenia w BI/IT</div>
+                    <div lang="en" class="metric-label">Years of Experience in BI/IT</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">100+</div>
-                    <div class="metric-label">Zoptymalizowanych Potoków danych</div>
+                    <div lang="pl" class="metric-label">Zoptymalizowanych Potoków danych</div>
+                    <div lang="en" class="metric-label">Optimized Data Pipelines</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">COREP</div>
-                    <div class="metric-label">Unikalna Specjalizacja Bankowa</div>
+                    <div lang="pl" class="metric-label">Unikalna Specjalizacja Bankowa</div>
+                    <div lang="en" class="metric-label">Unique Banking Specialization</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">AI-Ready</div>
-                    <div class="metric-label">Wydajność Pracy Booster x2</div>
+                    <div lang="pl" class="metric-label">Wydajność Pracy Booster x2</div>
+                    <div lang="en" class="metric-label">Productivity Booster x2</div>
                 </div>
             </div>
         </div>
@@ -732,42 +777,75 @@
     <section class="section" id="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Czym się zajmuję</span>
-                <h2 class="section-title">Architektura danych dostosowana do skali</h2>
+                <span lang="pl" class="section-tag">Czym się zajmuję</span>
+                <h2 lang="pl" class="section-title">Architektura danych dostosowana do skali</h2>
+                
+                <span lang="en" class="section-tag">What I do</span>
+                <h2 lang="en" class="section-title">Data Architecture Built for Scale</h2>
             </div>
 
             <div class="services-grid">
                 
+                <!-- USŁUGA 1: ETL -->
                 <div class="service-card">
                     <div class="service-icon">🌐</div>
-                    <h3>Architektura Hurtowni Danych & ETL/ELT</h3>
-                    <p>Projektuję, buduję i optymalizuję rozproszone systemy bazodanowe i hurtownie danych, które gwarantują płynny przepływ i transformację informacji w organizacji.</p>
-                    <ul class="service-bullets">
+                    
+                    <h3 lang="pl">Architektura Hurtowni Danych & ETL/ELT</h3>
+                    <p lang="pl">Projektuję, buduję i optymalizuję rozproszone systemy bazodanowe i hurtownie danych, które gwarantują płynny przepływ i transformację informacji w organizacji.</p>
+                    <ul lang="pl" class="service-bullets">
                         <li>Kompleksowe potoki danych w Google BigQuery i MS SQL Server</li>
                         <li>Automatyzacja procesów zasilających z wykorzystaniem Microsoft SSIS</li>
                         <li>Migracja legacy systemów BI do nowoczesnych chmur obliczeniowych</li>
                     </ul>
+
+                    <h3 lang="en">Data Warehouse Architecture & ETL/ELT</h3>
+                    <p lang="en">I design, build, and optimize distributed database systems and enterprise data warehouses that guarantee seamless information flow and data transformation across your organization.</p>
+                    <ul lang="en" class="service-bullets">
+                        <li>End-to-end data pipelines in Google BigQuery and MS SQL Server</li>
+                        <li>Data ingestion automation utilizing Microsoft SSIS packages</li>
+                        <li>Migration of legacy Business Intelligence systems to modern cloud environments</li>
+                    </ul>
                 </div>
 
+                <!-- USŁUGA 2: COREP -->
                 <div class="service-card">
                     <div class="service-icon">🏦</div>
-                    <h3>Sprawozdawczość Regulacyjna COREP</h3>
-                    <p>Dostarczam precyzyjne rozwiązania analityczne i raportowe, wspierające departamenty sprawozdawczości obligatoryjnej w spełnianiu rygorystycznych wymogów nadzorczych.</p>
-                    <ul class="service-bullets">
+                    
+                    <h3 lang="pl">Sprawozdawczość Regulacyjna COREP</h3>
+                    <p lang="pl">Dostarczam precyzyjne rozwiązania analityczne i raportowe, wspierające departamenty sprawozdawczości obligatoryjnej w spełnianiu rygorystycznych wymogów nadzorczych.</p>
+                    <ul lang="pl" class="service-bullets">
                         <li>Automatyzacja COREP, Leverage Ratio, Large Exposures</li>
                         <li>Walidacja spójności oraz audytowalności danych (Data Quality)</li>
                         <li>Integracja heterogenicznych systemów źródłowych w strukturę banku</li>
                     </ul>
+
+                    <h3 lang="en">COREP Regulatory Reporting</h3>
+                    <p lang="en">I deliver precise analytical and reporting solutions that support obligatory reporting departments in fully meeting rigorous financial supervisory and compliance requirements.</p>
+                    <ul lang="en" class="service-bullets">
+                        <li>Automation of COREP, Leverage Ratio, and Large Exposures frameworks</li>
+                        <li>Data consistency validation and auditability infrastructure (Data Quality)</li>
+                        <li>Ingestion of highly distributed, heterogeneous source systems into banking structures</li>
+                    </ul>
                 </div>
 
+                <!-- USŁUGA 3: BI -->
                 <div class="service-card">
                     <div class="service-icon">📊</div>
-                    <h3>Wizualizacja Danych & BI Dashboards</h3>
-                    <p>Zmieniam petabajty surowych tabel finansowych i operacyjnych w interaktywne, czytelne i intuicyjne dashboardy menedżerskie, które realnie wspierają kluczowe decyzje.</p>
-                    <ul class="service-bullets">
+                    
+                    <h3 lang="pl">Wizualizacja Danych & BI Dashboards</h3>
+                    <p lang="pl">Zmieniam petabajty surowych tabel finansowych i operacyjnych w interaktywne, czytelne i intuicyjne dashboardy menedżerskie, które realnie wspierają kluczowe decyzje.</p>
+                    <ul lang="pl" class="service-bullets">
                         <li>Zaawansowane modelowanie analityczne DAX i MDX</li>
                         <li>Projektowanie nowoczesnych raportów w Power BI oraz Looker Studio</li>
                         <li>Utrzymanie i optymalizacja wydajnościowa kostek OLAP (Tabular)</li>
+                    </ul>
+
+                    <h3 lang="en">Data Visualization & BI Dashboards</h3>
+                    <p lang="en">I transform complex layers of raw financial and operational tables into clean, interactive, and intuitive corporate dashboards that effectively drive executive decision-making.</p>
+                    <ul lang="en" class="service-bullets">
+                        <li>Advanced analytical modeling using DAX and MDX languages</li>
+                        <li>Designing modern enterprise reports in Power BI and Looker Studio</li>
+                        <li>Maintenance and performance-tuning of OLAP analytical cubes (Tabular)</li>
                     </ul>
                 </div>
 
@@ -778,14 +856,18 @@
     <section class="tech-showcase" id="tech">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Mój Stack Technologiczny</span>
-                <h2 class="section-title">Technologie, które napędzają Twoje dane</h2>
+                <span lang="pl" class="section-tag">Mój Stack Technologiczny</span>
+                <h2 lang="pl" class="section-title">Technologie, które napędzają Twoje dane</h2>
+                
+                <span lang="en" class="section-tag">My Tech Stack</span>
+                <h2 lang="en" class="section-title">Technologies That Power Your Data</h2>
             </div>
 
             <div class="tech-categories">
                 
                 <div class="tech-col">
-                    <h3>Bazy & Języki</h3>
+                    <h3 lang="pl">Bazy & Języki</h3>
+                    <h3 lang="en">Databases & Languages</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">T-SQL (Expert)</span>
                         <span class="tech-badge">PL/SQL</span>
@@ -796,16 +878,19 @@
                 </div>
 
                 <div class="tech-col">
-                    <h3>Procesy ETL & Integracje</h3>
+                    <h3 lang="pl">Procesy ETL & Integracje</h3>
+                    <h3 lang="en">ETL Pipelines & Ingestion</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">Microsoft SSIS</span>
-                        <span class="tech-badge">Google Cloud Data Transfer</span>
+                        <span class="tech-badge">Google Cloud Transfer</span>
                         <span class="tech-badge">Data Quality Automation</span>
+                        <span class="tech-badge">Git / SVN (SCM)</span>
                     </div>
                 </div>
 
                 <div class="tech-col">
-                    <h3>Modelowanie & Raporty</h3>
+                    <h3 lang="pl">Modelowanie & Raporty</h3>
+                    <h3 lang="en">Modeling & Analytics</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">Power BI</span>
                         <span class="tech-badge">Looker Studio</span>
@@ -816,7 +901,8 @@
                 </div>
 
                 <div class="tech-col">
-                    <h3>AI Developer Tools</h3>
+                    <h3 lang="pl">Narzędzia AI & Automatyzacja</h3>
+                    <h3 lang="en">AI Tools & Automation</h3>
                     <div class="tech-tags">
                         <span class="tech-badge ai-badge">Prompt Engineering</span>
                         <span class="tech-badge ai-badge">Gemini / Deep Search</span>
@@ -832,50 +918,71 @@
     <section class="section" id="projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Case Studies</span>
-                <h2 class="section-title">Doświadczenie przekute w realne wyniki</h2>
+                <span lang="pl" class="section-tag">Case Studies</span>
+                <h2 lang="pl" class="section-title">Doświadczenie przekute w realne wyniki</h2>
+                
+                <span lang="en" class="section-tag">Case Studies</span>
+                <h2 lang="en" class="section-title">Experience Translated into Real Results</h2>
             </div>
 
+            <!-- PROJEKT 1 -->
             <div class="project-card">
                 <div class="project-visual">
                     <div class="project-visual-icon">🏛️</div>
                     <div class="project-metric-box">
                         <div class="project-metric-val">-35%</div>
-                        <div class="project-metric-lbl">Okna Procesowego ETL</div>
+                        <div lang="pl" class="project-metric-lbl">Okna Procesowego ETL</div>
+                        <div lang="en" class="project-metric-lbl">ETL Processing Window</div>
                     </div>
                 </div>
                 <div class="project-content">
                     <span class="project-client">Aion Bank (UniCredit Group)</span>
-                    <h3>Integracja Systemów i Sprawozdawczość COREP</h3>
-                    <p>
-                        Zaprojektowałem, wdrożyłem i zoptymalizowałem rozproszony potok zasilający do hurtowni BigQuery, zabezpieczając sprawozdawczość obligatoryjną banku.
-                    </p>
-                    <ul class="project-bullets">
+                    
+                    <h3 lang="pl">Integracja Systemów i Sprawozdawczość COREP</h3>
+                    <p lang="pl">Zaprojektowałem, wdrożyłem i zoptymalizowałem rozproszony potok zasilający do hurtowni BigQuery, zabezpieczając sprawozdawczość obligatoryjną banku.</p>
+                    <ul lang="pl" class="project-bullets">
                         <li>Dostarczenie stabilnych i bezbłędnych raportów COREP, Leverage Ratio i Large Exposures.</li>
                         <li>Integracja rozproszonych danych finansowych z wielu platform źródłowych.</li>
                         <li>Stworzenie intuicyjnych dashboardów zarządczych Looker Studio dla kluczowych interesariuszy.</li>
                     </ul>
+
+                    <h3 lang="en">Systems Integration & COREP Regulatory Reporting</h3>
+                    <p lang="en">Designed, implemented, and performance-tuned a highly distributed data ingestion workflow into a BigQuery data warehouse, securing the bank's core regulatory compliance architecture.</p>
+                    <ul lang="en" class="project-bullets">
+                        <li>Seamless delivery of critical COREP, Leverage Ratio, and Large Exposures data layers.</li>
+                        <li>Integration of highly distributed financial records across multiple native source environments.</li>
+                        <li>Built interactive, clean Looker Studio management dashboards for key organizational stakeholders.</li>
+                    </ul>
                 </div>
             </div>
 
+            <!-- PROJEKT 2 -->
             <div class="project-card">
                 <div class="project-visual">
                     <div class="project-visual-icon">🚀</div>
                     <div class="project-metric-box">
                         <div class="project-metric-val">B2B</div>
-                        <div class="project-metric-lbl">Model Kontraktu</div>
+                        <div lang="pl" class="project-metric-lbl">Model Kontraktu</div>
+                        <div lang="en" class="project-metric-lbl">Contract Model</div>
                     </div>
                 </div>
                 <div class="project-content">
                     <span class="project-client">EBIS / Sektor Produkcyjny &amp; E-commerce</span>
-                    <h3>Analityka Biznesowa Power BI &amp; Kostki OLAP</h3>
-                    <p>
-                        Odpowiadałem za wdrożenie kompleksowego środowiska analitycznego integrującego dane systemów klasy ERP oraz CRM.
-                    </p>
-                    <ul class="project-bullets">
+                    
+                    <h3 lang="pl">Analityka Biznesowa Power BI &amp; Kostki OLAP</h3>
+                    <p lang="pl">Odpowiadałem za wdrożenie kompleksowego środowiska analitycznego integrującego dane systemów klasy ERP oraz CRM.</p>
+                    <ul lang="pl" class="project-bullets">
                         <li>Projektowanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular.</li>
                         <li>Maksymalizacja wydajności zapytań poprzez precyzyjne modelowanie DAX.</li>
                         <li>Przyspieszenie procesów raportowania zarządczego dla kadry C-level.</li>
+                    </ul>
+
+                    <h3 lang="en">Power BI Business Intelligence &amp; OLAP Cubes Deployment</h3>
+                    <p lang="en">Accountable for deploying a complete, unified analytical ecosystem integrating transactional records across multiple enterprise-level ERP and CRM systems.</p>
+                    <ul lang="en" class="project-bullets">
+                        <li>End-to-end design and performance-tuning of advanced OLAP cubes utilizing Tabular models.</li>
+                        <li>Maximizing query speeds and loading performance via rigorous DAX query optimization.</li>
+                        <li>Accelerated management reporting processes tailored for C-level corporate executives.</li>
                     </ul>
                 </div>
             </div>
@@ -887,10 +994,15 @@
         <div class="container">
             <div class="contact-grid">
                 
+                <!-- DANE KONTAKTOWE -->
                 <div class="contact-info">
-                    <span class="section-tag">Napisz do mnie</span>
-                    <h3>Rozpocznijmy współpracę nad Twoimi danymi</h3>
-                    <p>Poszukujesz eksperta, który uporządkuje przepływ danych w Twojej firmie, zautomatyzuje powtarzalne raporty, zoptymalizuje legacy kody SQL lub wdroży system raportowania regulacyjnego COREP? Napisz do mnie bezpośrednio.</p>
+                    <span lang="pl" class="section-tag">Napisz do mnie</span>
+                    <h3 lang="pl">Rozpocznijmy współpracę nad Twoimi danymi</h3>
+                    <p lang="pl">Poszukujesz eksperta, który uporządkuje przepływ danych w Twojej firmie, zautomatyzuje powtarzalne raporty, zoptymalizuje legacy kody SQL lub wdroży system raportowania regulacyjnego COREP? Napisz do mnie bezpośrednio.</p>
+                    
+                    <span lang="en" class="section-tag">Get in touch</span>
+                    <h3 lang="en">Let's Transform Your Data Infrastructure</h3>
+                    <p lang="en">Are you searching for an expert to orchestrate your data streams, automate repetitive operational reporting, performance-tune legacy SQL scripts, or deploy solid COREP regulatory frameworks? Drop me a line directly.</p>
                     
                     <ul class="contact-details">
                         <li class="contact-detail-item">
@@ -903,41 +1015,51 @@
                         <li class="contact-detail-item">
                             <div class="contact-icon-wrapper">📞</div>
                             <div class="contact-detail-content">
-                                <span>Telefon</span>
+                                <span lang="pl">Telefon</span>
+                                <span lang="en">Phone</span>
                                 <a href="tel:502388094">502 388 094</a>
                             </div>
                         </li>
                         <li class="contact-detail-item">
                             <div class="contact-icon-wrapper">🌐</div>
                             <div class="contact-detail-content">
-                                <span>Lokalizacja</span>
-                                <p>Warszawa / Kraków (Hybrydowo / Zdalnie)</p>
+                                <span lang="pl">Lokalizacja</span>
+                                <span lang="en">Location</span>
+                                <p lang="pl">Warszawa / Kraków (Hybrydowo / Zdalnie)</p>
+                                <p lang="en">Warsaw / Krakow, Poland (Hybrid / Remote)</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
+                <!-- FORMULARZ -->
                 <div class="contact-form">
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Wiadomość wysłana! (Symulacja formularza)');">
+                    <form action="#" method="POST" id="main-contact-form">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="name">Imię i Nazwisko</label>
+                                <label lang="pl" for="name">Imię i Nazwisko</label>
+                                <label lang="en" for="name">Full Name</label>
                                 <input type="text" id="name" class="form-control" placeholder="Jan Kowalski" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">E-mail</label>
+                                <label lang="pl" for="email">E-mail</label>
+                                <label lang="en" for="email">E-mail Address</label>
                                 <input type="email" id="email" class="form-control" placeholder="jan@firma.pl" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Temat rozmowy</label>
-                            <input type="text" id="subject" class="form-control" placeholder="np. Projekt Hurtowni Danych / COREP" required>
+                            <label lang="pl" for="subject">Temat rozmowy</label>
+                            <label lang="en" for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Data Warehouse / COREP Project" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Twoja wiadomość</label>
-                            <textarea id="message" rows="5" class="form-control" placeholder="Opisz krótko wyzwanie lub projekt..." required></textarea>
+                            <label lang="pl" for="message">Twoja wiadomość</label>
+                            <label lang="en" for="message">Your Message</label>
+                            <textarea id="message" rows="5" class="form-control" placeholder="..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Wyślij zapytanie ofertowe</button>
+                        
+                        <button lang="pl" type="submit" class="btn btn-primary" style="width: 100%;">Wyślij zapytanie ofertowe</button>
+                        <button lang="en" type="submit" class="btn btn-primary" style="width: 100%;">Submit Request for Proposal</button>
                     </form>
                 </div>
 
@@ -947,15 +1069,17 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Marcin Załuski. Wszelkie prawa zastrzeżone. | <a href="https://www.zalka.it/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">zalka.it</a></p>
+            <p>&copy; 2026 Marcin Załuski. <span lang="pl">Wszelkie prawa zastrzeżone.</span><span lang="en">All rights reserved.</span> | <a href="https://www.zalka.it/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">zalka.it</a></p>
         </div>
     </footer>
 
     <script>
+        const htmlElement = document.documentElement;
+        
+        // MOTYW (DARK/LIGHT)
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const themeText = document.getElementById('theme-text');
-        const htmlElement = document.documentElement;
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
@@ -964,14 +1088,46 @@
             if (currentTheme === 'dark') {
                 newTheme = 'light';
                 themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark Mode';
+                themeText.textContent = 'Dark';
             } else {
                 newTheme = 'dark';
                 themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light Mode';
+                themeText.textContent = 'Light';
             }
-            
             htmlElement.setAttribute('data-theme', newTheme);
+        });
+
+        // JĘZYK (PL/EN)
+        const langToggleBtn = document.getElementById('lang-toggle');
+        const langIcon = document.getElementById('lang-icon');
+        const langText = document.getElementById('lang-text');
+        const formContact = document.getElementById('main-contact-form');
+
+        langToggleBtn.addEventListener('click', () => {
+            const currentLang = htmlElement.getAttribute('data-lang');
+            if (currentLang === 'pl') {
+                htmlElement.setAttribute('data-lang', 'en');
+                htmlElement.setAttribute('lang', 'en');
+                langIcon.textContent = '🇵🇱';
+                langText.textContent = 'Polski';
+            } else {
+                htmlElement.setAttribute('data-lang', 'pl');
+                htmlElement.setAttribute('lang', 'pl');
+                langIcon.textContent = '🇬🇧';
+                langText.textContent = 'English';
+            }
+        });
+
+        // Obsługa symulacji formularza z uwzględnieniem aktywnego języka
+        formContact.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const activeLang = htmlElement.getAttribute('data-lang');
+            if (activeLang === 'pl') {
+                alert('Wiadomość została wysłana pomyślnie!');
+            } else {
+                alert('Message sent successfully!');
+            }
+            formContact.reset();
         });
     </script>
 </body>
