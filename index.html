@@ -35,6 +35,10 @@
             --shadow: rgba(0, 0, 0, 0.05);
         }
 
+        /* SILNIK JĘZYKOWY (CSS LANGUAGE CONTROLLER) - POPRAWIONY */
+        html[lang="pl"].en-only { display: none!important; }
+        html[lang="en"].pl-only { display: none!important; }
+
         /* RESET I OGÓLNE STYLIZOWANIE */
         * {
             box-sizing: border-box;
@@ -52,7 +56,7 @@
             line-height: 1.6;
         }
 
-       .container {
+      .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
@@ -71,14 +75,14 @@
             transition: background-color 0.3s;
         }
 
-       .nav-wrapper {
+      .nav-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 80px;
         }
 
-       .logo {
+      .logo {
             font-size: 1.25rem;
             font-weight: 800;
             letter-spacing: -0.03em;
@@ -88,14 +92,14 @@
             text-decoration: none;
         }
 
-       .nav-links {
+      .nav-links {
             display: flex;
             align-items: center;
             gap: 32px;
             list-style: none;
         }
 
-       .nav-links a {
+      .nav-links a {
             color: var(--text-main);
             text-decoration: none;
             font-size: 0.9rem;
@@ -103,16 +107,22 @@
             transition: color 0.2s;
         }
 
-       .nav-links a:hover {
+      .nav-links a:hover {
             color: var(--accent-blue);
         }
 
-        /* Przełącznik Motywu */
-       .theme-toggle-btn {
+      .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Przyciski narzędziowe */
+      .theme-toggle-btn,.lang-toggle-btn {
             background: none;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-family: inherit;
@@ -124,18 +134,18 @@
             transition: all 0.2s;
         }
 
-       .theme-toggle-btn:hover {
+      .theme-toggle-btn:hover,.lang-toggle-btn:hover {
             border-color: var(--accent-blue);
             background-color: var(--bg-card);
         }
 
         /* HERO SECTION */
-       .hero {
+      .hero {
             padding: 180px 0 100px 0;
             position: relative;
         }
 
-       .hero::before {
+      .hero::before {
             content: '';
             position: absolute;
             top: 10%;
@@ -148,7 +158,7 @@
             pointer-events: none;
         }
 
-       .hero-badge {
+      .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -162,7 +172,7 @@
             margin-bottom: 24px;
         }
 
-       .hero-badge span {
+      .hero-badge span {
             width: 8px;
             height: 8px;
             background-color: var(--accent-green);
@@ -177,7 +187,7 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
-       .hero h1 {
+      .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.15;
@@ -186,25 +196,25 @@
             max-width: 900px;
         }
 
-       .hero h1 span {
+      .hero h1 span {
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-       .hero-lead {
+      .hero-lead {
             font-size: 1.15rem;
             color: var(--text-muted);
             max-width: 750px;
             margin-bottom: 40px;
         }
 
-       .hero-ctas {
+      .hero-ctas {
             display: flex;
             gap: 16px;
         }
 
-       .btn {
+      .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -217,31 +227,31 @@
             cursor: pointer;
         }
 
-       .btn-primary {
+      .btn-primary {
             background: var(--accent-gradient);
             color: #ffffff!important;
             border: none;
             box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
         }
 
-       .btn-primary:hover {
+      .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
 
-       .btn-secondary {
+      .btn-secondary {
             background-color: transparent;
             color: var(--text-main);
             border: 1px solid var(--border-color);
         }
 
-       .btn-secondary:hover {
+      .btn-secondary:hover {
             background-color: var(--bg-card);
             border-color: var(--text-main);
         }
 
         /* O MNIE / METRYKI */
-       .metrics-grid {
+      .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 24px;
@@ -253,11 +263,11 @@
             box-shadow: 0 10px 30px var(--shadow);
         }
 
-       .metric-card {
+      .metric-card {
             text-align: center;
         }
 
-       .metric-num {
+      .metric-num {
             font-size: 2.5rem;
             font-weight: 800;
             background: var(--accent-gradient);
@@ -266,7 +276,7 @@
             margin-bottom: 4px;
         }
 
-       .metric-label {
+      .metric-label {
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-muted);
@@ -275,16 +285,16 @@
         }
 
         /* USŁUGI (OFFER / EXPERTISE) */
-       .section {
+      .section {
             padding: 100px 0;
         }
 
-       .section-header {
+      .section-header {
             text-align: center;
             margin-bottom: 60px;
         }
 
-       .section-tag {
+      .section-tag {
             font-size: 0.8rem;
             font-weight: 700;
             color: var(--accent-blue);
@@ -294,19 +304,19 @@
             margin-bottom: 12px;
         }
 
-       .section-title {
+      .section-title {
             font-size: 2.25rem;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
 
-       .services-grid {
+      .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
-       .service-card {
+      .service-card {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             padding: 40px;
@@ -316,7 +326,7 @@
             overflow: hidden;
         }
 
-       .service-card::after {
+      .service-card::after {
             content: '';
             position: absolute;
             top: 0;
@@ -328,46 +338,46 @@
             transition: opacity 0.3s;
         }
 
-       .service-card:hover {
+      .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px var(--shadow);
             border-color: var(--accent-blue);
         }
 
-       .service-card:hover::after {
+      .service-card:hover::after {
             opacity: 1;
         }
 
-       .service-icon {
+      .service-icon {
             font-size: 2rem;
             margin-bottom: 24px;
             display: inline-block;
         }
 
-       .service-card h3 {
+      .service-card h3 {
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 16px;
         }
 
-       .service-card p {
+      .service-card p {
             font-size: 0.9rem;
             color: var(--text-muted);
             margin-bottom: 20px;
         }
 
-       .service-bullets {
+      .service-bullets {
             list-style: none;
         }
 
-       .service-bullets li {
+      .service-bullets li {
             font-size: 0.85rem;
             margin-bottom: 8px;
             padding-left: 20px;
             position: relative;
         }
 
-       .service-bullets li::before {
+      .service-bullets li::before {
             content: "✓";
             color: var(--accent-green);
             position: absolute;
@@ -376,20 +386,20 @@
         }
 
         /* TECHNOLOGIE (TECH STACK) */
-       .tech-showcase {
+      .tech-showcase {
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             padding: 100px 0;
         }
 
-       .tech-categories {
+      .tech-categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 30px;
         }
 
-       .tech-col h3 {
+      .tech-col h3 {
             font-size: 1rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -400,13 +410,13 @@
             padding-bottom: 8px;
         }
 
-       .tech-tags {
+      .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
 
-       .tech-badge {
+      .tech-badge {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
@@ -417,19 +427,19 @@
             transition: all 0.2s;
         }
 
-       .tech-badge:hover {
+      .tech-badge:hover {
             border-color: var(--accent-blue);
             color: var(--accent-blue);
             transform: scale(1.05);
         }
 
-       .tech-badge.ai-badge {
+      .tech-badge.ai-badge {
             border-color: var(--accent-green);
             color: var(--accent-green);
         }
 
         /* PROJEKTY (CASE STUDIES) */
-       .project-card {
+      .project-card {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             background-color: var(--bg-secondary);
@@ -441,11 +451,11 @@
             transition: border-color 0.3s;
         }
 
-       .project-card:hover {
+      .project-card:hover {
             border-color: var(--accent-blue);
         }
 
-       .project-visual {
+      .project-visual {
             background: var(--bg-card);
             display: flex;
             flex-direction: column;
@@ -456,13 +466,13 @@
             position: relative;
         }
 
-       .project-visual-icon {
+      .project-visual-icon {
             font-size: 4rem;
             margin-bottom: 20px;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
         }
 
-       .project-metric-box {
+      .project-metric-box {
             background-color: rgba(var(--bg-primary), 0.5);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -470,27 +480,27 @@
             text-align: center;
         }
 
-       .project-metric-val {
+      .project-metric-val {
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--accent-green);
         }
 
-       .project-metric-lbl {
+      .project-metric-lbl {
             font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
         }
 
-       .project-content {
+      .project-content {
             padding: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-       .project-client {
+      .project-client {
             font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -499,32 +509,32 @@
             margin-bottom: 8px;
         }
 
-       .project-content h3 {
+      .project-content h3 {
             font-size: 1.75rem;
             font-weight: 800;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
 
-       .project-content p {
+      .project-content p {
             font-size: 0.95rem;
             color: var(--text-muted);
             margin-bottom: 24px;
         }
 
-       .project-bullets {
+      .project-bullets {
             list-style: none;
             margin-bottom: 24px;
         }
 
-       .project-bullets li {
+      .project-bullets li {
             font-size: 0.85rem;
             margin-bottom: 10px;
             padding-left: 20px;
             position: relative;
         }
 
-       .project-bullets li::before {
+      .project-bullets li::before {
             content: "→";
             color: var(--accent-blue);
             position: absolute;
@@ -533,41 +543,41 @@
         }
 
         /* KONTAKT (CONTACT) */
-       .contact-section {
+      .contact-section {
             padding: 100px 0;
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
         }
 
-       .contact-grid {
+      .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 60px;
         }
 
-       .contact-info h3 {
+      .contact-info h3 {
             font-size: 1.75rem;
             font-weight: 800;
             margin-bottom: 20px;
         }
 
-       .contact-info p {
+      .contact-info p {
             color: var(--text-muted);
             margin-bottom: 40px;
         }
 
-       .contact-details {
+      .contact-details {
             list-style: none;
         }
 
-       .contact-detail-item {
+      .contact-detail-item {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 24px;
         }
 
-       .contact-icon-wrapper {
+      .contact-icon-wrapper {
             width: 48px;
             height: 48px;
             background-color: var(--bg-card);
@@ -579,7 +589,7 @@
             font-size: 1.25rem;
         }
 
-       .contact-detail-content span {
+      .contact-detail-content span {
             display: block;
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -587,7 +597,7 @@
             font-weight: 700;
         }
 
-       .contact-detail-content a,.contact-detail-content p {
+      .contact-detail-content a,.contact-detail-content p {
             font-size: 1rem;
             font-weight: 600;
             color: var(--text-main);
@@ -595,12 +605,12 @@
             margin-bottom: 0;
         }
 
-       .contact-detail-content a:hover {
+      .contact-detail-content a:hover {
             color: var(--accent-blue);
         }
 
         /* Formularz */
-       .contact-form {
+      .contact-form {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             padding: 40px;
@@ -608,18 +618,18 @@
             box-shadow: 0 10px 30px var(--shadow);
         }
 
-       .form-row {
+      .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-bottom: 20px;
         }
 
-       .form-group {
+      .form-group {
             margin-bottom: 20px;
         }
 
-       .form-group label {
+      .form-group label {
             display: block;
             font-size: 0.8rem;
             font-weight: 700;
@@ -628,7 +638,7 @@
             margin-bottom: 8px;
         }
 
-       .form-control {
+      .form-control {
             width: 100%;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -640,7 +650,7 @@
             transition: all 0.2s;
         }
 
-       .form-control:focus {
+      .form-control:focus {
             outline: none;
             border-color: var(--accent-blue);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
@@ -658,19 +668,19 @@
 
         /* RESPONSYWNOŚĆ DLA SMARTFONÓW/TABLETÓW */
         @media (max-width: 992px) {
-           .hero h1 { font-size: 2.75rem; }
-           .project-card { grid-template-columns: 1fr; }
-           .project-visual { border-right: none; border-bottom: 1px solid var(--border-color); padding: 40px; }
-           .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+          .hero h1 { font-size: 2.75rem; }
+          .project-card { grid-template-columns: 1fr; }
+          .project-visual { border-right: none; border-bottom: 1px solid var(--border-color); padding: 40px; }
+          .contact-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
         @media (max-width: 768px) {
-           .nav-links { display: none; } /* Uproszczenie do wersji mobilnej */
-           .hero h1 { font-size: 2.25rem; }
-           .hero { padding: 140px 0 80px 0; }
-           .form-row { grid-template-columns: 1fr; gap: 0; }
-           .form-row.form-group { margin-bottom: 20px; }
-           .metrics-grid { padding: 20px; gap: 30px; }
+          .nav-links { display: none; } /* Uproszczenie do wersji mobilnej */
+          .hero h1 { font-size: 2.25rem; }
+          .hero { padding: 140px 0 80px 0; }
+          .form-row { grid-template-columns: 1fr; gap: 0; }
+          .form-row.form-group { margin-bottom: 20px; }
+          .metrics-grid { padding: 20px; gap: 30px; }
         }
     </style>
 </head>
@@ -679,51 +689,84 @@
     <header>
         <div class="container nav-wrapper">
             <a href="#" class="logo">zalka.it</a>
+            
             <ul class="nav-links">
-                <li><a href="#about">O mnie</a></li>
-                <li><a href="#services">Usługi</a></li>
-                <li><a href="#tech">Technologie</a></li>
-                <li><a href="#projects">Projekty</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-                <li>
-                    <button class="theme-toggle-btn" id="theme-toggle">
-                        <span id="theme-icon">☀️</span> <span id="theme-text">Light Mode</span>
-                    </button>
-                </li>
+                <li class="pl-only"><a href="#about">O mnie</a></li>
+                <li class="pl-only"><a href="#services">Usługi</a></li>
+                <li class="pl-only"><a href="#tech">Technologie</a></li>
+                <li class="pl-only"><a href="#projects">Projekty</a></li>
+                <li class="pl-only"><a href="#contact">Kontakt</a></li>
+                
+                <li class="en-only"><a href="#about">About Me</a></li>
+                <li class="en-only"><a href="#services">Services</a></li>
+                <li class="en-only"><a href="#tech">Tech Stack</a></li>
+                <li class="en-only"><a href="#projects">Projects</a></li>
+                <li class="en-only"><a href="#contact">Contact</a></li>
             </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle-btn" id="theme-toggle">
+                    <span id="theme-icon">☀️</span> 
+                    <span id="theme-text" class="pl-only">Light Mode</span>
+                    <span id="theme-text-en" class="en-only">Light Mode</span>
+                </button>
+                
+                <button class="lang-toggle-btn" id="lang-toggle">
+                    <span id="lang-flag">🇬🇧</span> <span id="lang-text">English</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <section class="hero" id="about">
         <div class="container">
             <div class="hero-badge">
-                <span></span> Dostępny do kontraktów B2B / Doradztwa technicznego
+                <span></span> 
+                <span class="pl-only">Dostępny do kontraktów B2B / Doradztwa technicznego</span>
+                <span class="en-only">Available for B2B contracts / Technical consulting</span>
             </div>
-            <h1>Projektuję wydajne architektury DWH oraz <span>skalowalne procesy ETL/ELT</span></h1>
-            <p class="hero-lead">
+            
+            <h1 class="pl-only">Projektuję wydajne architektury DWH oraz <span>skalowalne procesy ETL/ELT</span></h1>
+            <h1 class="en-only">I design high-performance DWH architectures and <span>scalable ETL/ELT pipelines</span></h1>
+            
+            <p class="hero-lead pl-only">
                 Nazywam się Marcin Załuski. Od ponad 20 lat łączę inżynierię danych z biznesowym wymaganiem stabilności finansowej. Specjalizuję się w systemach Business Intelligence, hurtowniach danych oraz sprawozdawczości regulacyjnej (COREP/FINREP) dla czołowych instytucji finansowych i banków. Wykorzystuję zaawansowane narzędzia AI, aby drastycznie skracać czas wdrożeń i optymalizować zapytania SQL.
             </p>
+            <p class="hero-lead en-only">
+                My name is Marcin Załuski. For over 20 years, I have been bridging the gap between data engineering and the financial sector's demand for data stability. I specialize in Business Intelligence systems, Enterprise Data Warehouses (EDW), and regulatory reporting (COREP/FINREP) for leading financial institutions and banks. I leverage advanced AI tools to drastically accelerate delivery timelines and optimize complex SQL queries.
+            </p>
+            
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Porozmawiajmy o projekcie</a>
-                <a href="#projects" class="btn btn-secondary">Zobacz wybrane realizacje</a>
+                <a href="#contact" class="btn btn-primary">
+                    <span class="pl-only">Porozmawiajmy o projekcie</span>
+                    <span class="en-only">Let's talk about your project</span>
+                </a>
+                <a href="#projects" class="btn btn-secondary">
+                    <span class="pl-only">Zobacz wybrane realizacje</span>
+                    <span class="en-only">View selected case studies</span>
+                </a>
             </div>
 
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-num">20+</div>
-                    <div class="metric-label">Lat Doświadczenia w BI/IT</div>
+                    <div class="metric-label pl-only">Lat Doświadczenia w BI/IT</div>
+                    <div class="metric-label en-only">Years of BI/IT Experience</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">100+</div>
-                    <div class="metric-label">Zoptymalizowanych Potoków danych</div>
+                    <div class="metric-label pl-only">Zoptymalizowanych Potoków danych</div>
+                    <div class="metric-label en-only">Optimized Data Pipelines</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">COREP</div>
-                    <div class="metric-label">Unikalna Specjalizacja Bankowa</div>
+                    <div class="metric-label pl-only">Unikalna Specjalizacja Bankowa</div>
+                    <div class="metric-label en-only">Unique Banking Specialization</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">AI-Ready</div>
-                    <div class="metric-label">Wydajność Pracy Booster x2</div>
+                    <div class="metric-label pl-only">Wydajność Pracy Booster x2</div>
+                    <div class="metric-label en-only">Work Efficiency Booster x2</div>
                 </div>
             </div>
         </div>
@@ -732,42 +775,65 @@
     <section class="section" id="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Czym się zajmuję</span>
-                <h2 class="section-title">Architektura danych dostosowana do skali</h2>
+                <span class="section-tag pl-only">Czym się zajmuję</span>
+                <span class="section-tag en-only">My Expertise</span>
+                <h2 class="section-title pl-only">Architektura danych dostosowana do skali</h2>
+                <h2 class="section-title en-only">Data Architecture Tailored to Scale</h2>
             </div>
 
             <div class="services-grid">
                 
                 <div class="service-card">
                     <div class="service-icon">🌐</div>
-                    <h3>Architektura Hurtowni Danych & ETL/ELT</h3>
-                    <p>Projektuję, buduję i optymalizuję rozproszone systemy bazodanowe i hurtownie danych, które gwarantują płynny przepływ i transformację informacji w organizacji.</p>
-                    <ul class="service-bullets">
+                    <h3 class="pl-only">Architektura Hurtowni Danych &amp; ETL/ELT</h3>
+                    <h3 class="en-only">Data Warehouse Architecture &amp; ETL/ELT</h3>
+                    <p class="pl-only">Projektuję, buduję i optymalizuję rozproszone systemy bazodanowe i hurtownie danych, które gwarantują płynny przepływ i transformację informacji w organizacji.</p>
+                    <p class="en-only">I design, build, and optimize distributed database systems and enterprise data warehouses that guarantee seamless data flow and transformation across your organization.</p>
+                    <ul class="service-bullets pl-only">
                         <li>Kompleksowe potoki danych w Google BigQuery i MS SQL Server</li>
                         <li>Automatyzacja procesów zasilających z wykorzystaniem Microsoft SSIS</li>
                         <li>Migracja legacy systemów BI do nowoczesnych chmur obliczeniowych</li>
+                    </ul>
+                    <ul class="service-bullets en-only">
+                        <li>End-to-end data pipelines in Google BigQuery and MS SQL Server</li>
+                        <li>Automating data loading pipelines using Microsoft SSIS</li>
+                        <li>Migrating legacy BI systems to modern cloud environments</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">🏦</div>
-                    <h3>Sprawozdawczość Regulacyjna COREP</h3>
-                    <p>Dostarczam precyzyjne rozwiązania analityczne i raportowe, wspierające departamenty sprawozdawczości obligatoryjnej w spełnianiu rygorystycznych wymogów nadzorczych.</p>
-                    <ul class="service-bullets">
+                    <h3 class="pl-only">Sprawozdawczość Regulacyjna COREP</h3>
+                    <h3 class="en-only">Regulatory &amp; COREP Reporting</h3>
+                    <p class="pl-only">Dostarczam precyzyjne rozwiązania analityczne i raportowe, wspierające departamenty sprawozdawczości obligatoryjnej w spełnianiu rygorystycznych wymogów nadzorczych.</p>
+                    <p class="en-only">I deliver precise analytical and reporting solutions supporting regulatory reporting departments in meeting strict supervisory requirements.</p>
+                    <ul class="service-bullets pl-only">
                         <li>Automatyzacja COREP, Leverage Ratio, Large Exposures</li>
                         <li>Walidacja spójności oraz audytowalności danych (Data Quality)</li>
                         <li>Integracja heterogenicznych systemów źródłowych w strukturę banku</li>
+                    </ul>
+                    <ul class="service-bullets en-only">
+                        <li>Automating COREP, Leverage Ratio, and Large Exposures reporting</li>
+                        <li>Validating data consistency and auditability (Data Quality)</li>
+                        <li>Integrating heterogeneous source systems into banking infrastructures</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">📊</div>
-                    <h3>Wizualizacja Danych & BI Dashboards</h3>
-                    <p>Zmieniam petabajty surowych tabel finansowych i operacyjnych w interaktywne, czytelne i intuicyjne dashboardy menedżerskie, które realnie wspierają kluczowe decyzje.</p>
-                    <ul class="service-bullets">
+                    <h3 class="pl-only">Wizualizacja Danych &amp; BI Dashboards</h3>
+                    <h3 class="en-only">Data Visualization &amp; BI Dashboards</h3>
+                    <p class="pl-only">Zmieniam petabajty surowych tabel finansowych i operacyjnych w interaktywne, czytelne i intuicyjne dashboardy menedżerskie, które realnie wspierają kluczowe decyzje.</p>
+                    <p class="en-only">I transform petabytes of raw financial and operational tables into interactive, clean, and intuitive executive dashboards that support critical business decisions.</p>
+                    <ul class="service-bullets pl-only">
                         <li>Zaawansowane modelowanie analityczne DAX i MDX</li>
                         <li>Projektowanie nowoczesnych raportów w Power BI oraz Looker Studio</li>
                         <li>Utrzymanie i optymalizacja wydajnościowa kostek OLAP (Tabular)</li>
+                    </ul>
+                    <ul class="service-bullets en-only">
+                        <li>Advanced analytical modeling using DAX and MDX</li>
+                        <li>Designing modern reports and dashboards in Power BI and Looker Studio</li>
+                        <li>Maintaining and performance-tuning corporate OLAP cubes (Tabular)</li>
                     </ul>
                 </div>
 
@@ -778,14 +844,17 @@
     <section class="tech-showcase" id="tech">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Mój Stack Technologiczny</span>
-                <h2 class="section-title">Technologie, które napędzają Twoje dane</h2>
+                <span class="section-tag pl-only">Mój Stack Technologiczny</span>
+                <span class="section-tag en-only">My Tech Stack</span>
+                <h2 class="section-title pl-only">Technologie, które napędzają Twoje dane</h2>
+                <h2 class="section-title en-only">Technologies That Power Your Data</h2>
             </div>
 
             <div class="tech-categories">
                 
                 <div class="tech-col">
-                    <h3>Bazy & Języki</h3>
+                    <h3 class="pl-only">Bazy &amp; Języki</h3>
+                    <h3 class="en-only">Databases &amp; Languages</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">T-SQL (Expert)</span>
                         <span class="tech-badge">PL/SQL</span>
@@ -796,7 +865,8 @@
                 </div>
 
                 <div class="tech-col">
-                    <h3>Procesy ETL & Integracje</h3>
+                    <h3 class="pl-only">Procesy ETL &amp; Integracje</h3>
+                    <h3 class="en-only">ETL Processes &amp; Integrations</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">Microsoft SSIS</span>
                         <span class="tech-badge">Google Cloud Data Transfer</span>
@@ -805,7 +875,8 @@
                 </div>
 
                 <div class="tech-col">
-                    <h3>Modelowanie & Raporty</h3>
+                    <h3 class="pl-only">Modelowanie &amp; Raporty</h3>
+                    <h3 class="en-only">Modeling &amp; Reporting</h3>
                     <div class="tech-tags">
                         <span class="tech-badge">Power BI</span>
                         <span class="tech-badge">Looker Studio</span>
@@ -816,7 +887,8 @@
                 </div>
 
                 <div class="tech-col">
-                    <h3>AI Developer Tools</h3>
+                    <h3 class="pl-only">AI Developer Tools</h3>
+                    <h3 class="en-only">AI Developer Tools</h3>
                     <div class="tech-tags">
                         <span class="tech-badge ai-badge">Prompt Engineering</span>
                         <span class="tech-badge ai-badge">Gemini / Deep Search</span>
@@ -832,8 +904,10 @@
     <section class="section" id="projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Case Studies</span>
-                <h2 class="section-title">Doświadczenie przekute w realne wyniki</h2>
+                <span class="section-tag pl-only">Case Studies</span>
+                <span class="section-tag en-only">Case Studies</span>
+                <h2 class="section-title pl-only">Doświadczenie przekute w realne wyniki</h2>
+                <h2 class="section-title en-only">Experience Translated into Results</h2>
             </div>
 
             <div class="project-card">
@@ -841,19 +915,28 @@
                     <div class="project-visual-icon">🏛️</div>
                     <div class="project-metric-box">
                         <div class="project-metric-val">-35%</div>
-                        <div class="project-metric-lbl">Okna Procesowego ETL</div>
+                        <div class="project-metric-lbl pl-only">Okna Procesowego ETL</div>
+                        <div class="project-metric-lbl en-only">ETL Processing Window</div>
                     </div>
                 </div>
                 <div class="project-content">
-                    <span class="project-client">Aion Bank (UniCredit Group)</span>
-                    <h3>Integracja Systemów i Sprawozdawczość COREP</h3>
-                    <p>
-                        Zaprojektowałem, wdrożyłem i zoptymalizowałem rozproszony potok zasilający do hurtowni BigQuery, zabezpieczając sprawozdawczość obligatoryjną banku.
-                    </p>
-                    <ul class="project-bullets">
+                    <span class="project-client">UniCredit Poland (formerly Aion Bank)</span>
+                    
+                    <h3 class="pl-only">Integracja Systemów i Sprawozdawczość COREP</h3>
+                    <h3 class="en-only">System Integration &amp; COREP Regulatory Reporting</h3>
+                    
+                    <p class="pl-only">Zaprojektowałem, wdrożyłem i zoptymalizowałem rozproszony potok zasilający do hurtowni BigQuery, zabezpieczając sprawozdawczość obligatoryjną banku.</p>
+                    <p class="en-only">Designed, expanded, and optimized distributed data loading procedures in BigQuery, securing the bank's regulatory and obligatory reporting pipelines.</p>
+                    
+                    <ul class="project-bullets pl-only">
                         <li>Dostarczenie stabilnych i bezbłędnych raportów COREP, Leverage Ratio i Large Exposures.</li>
                         <li>Integracja rozproszonych danych finansowych z wielu platform źródłowych.</li>
                         <li>Stworzenie intuicyjnych dashboardów zarządczych Looker Studio dla kluczowych interesariuszy.</li>
+                    </ul>
+                    <ul class="project-bullets en-only">
+                        <li>Ensuring stable and error-free COREP, Leverage Ratio, and Large Exposures filings.</li>
+                        <li>Integrating highly distributed financial data from multiple legacy and modern sources.</li>
+                        <li>Creating interactive Looker Studio management dashboards for key stakeholders.</li>
                     </ul>
                 </div>
             </div>
@@ -863,19 +946,28 @@
                     <div class="project-visual-icon">🚀</div>
                     <div class="project-metric-box">
                         <div class="project-metric-val">B2B</div>
-                        <div class="project-metric-lbl">Model Kontraktu</div>
+                        <div class="project-metric-lbl pl-only">Model Kontraktu</div>
+                        <div class="project-metric-lbl en-only">Contract Model</div>
                     </div>
                 </div>
                 <div class="project-content">
                     <span class="project-client">EBIS / Sektor Produkcyjny &amp; E-commerce</span>
-                    <h3>Analityka Biznesowa Power BI &amp; Kostki OLAP</h3>
-                    <p>
-                        Odpowiadałem za wdrożenie kompleksowego środowiska analitycznego integrującego dane systemów klasy ERP oraz CRM.
-                    </p>
-                    <ul class="project-bullets">
+                    
+                    <h3 class="pl-only">Analityka Biznesowa Power BI &amp; Kostki OLAP</h3>
+                    <h3 class="en-only">Power BI Business Analytics &amp; OLAP Cubes</h3>
+                    
+                    <p class="pl-only">Odpowiadałem za wdrożenie kompleksowego środowiska analitycznego integrującego dane systemów klasy ERP oraz CRM.</p>
+                    <p class="en-only">Responsible for designing, expanding, and performance-tuning corporate analytical platforms integrating data from Enterprise ERP and CRM systems.</p>
+                    
+                    <ul class="project-bullets pl-only">
                         <li>Projektowanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular.</li>
                         <li>Maksymalizacja wydajności zapytań poprzez precyzyjne modelowanie DAX.</li>
                         <li>Przyspieszenie procesów raportowania zarządczego dla kadry C-level.</li>
+                    </ul>
+                    <ul class="project-bullets en-only">
+                        <li>Designing, extending, and performance-tuning corporate OLAP analytical cubes (Tabular models).</li>
+                        <li>Maximized data retrieval efficiency and report speed using advanced DAX modeling.</li>
+                        <li>Building comprehensive management dashboards in Power BI to speed up executive workflow.</li>
                     </ul>
                 </div>
             </div>
@@ -888,9 +980,14 @@
             <div class="contact-grid">
                 
                 <div class="contact-info">
-                    <span class="section-tag">Napisz do mnie</span>
-                    <h3>Rozpocznijmy współpracę nad Twoimi danymi</h3>
-                    <p>Poszukujesz eksperta, który uporządkuje przepływ danych w Twojej firmie, zautomatyzuje powtarzalne raporty, zoptymalizuje legacy kody SQL lub wdroży system raportowania regulacyjnego COREP? Napisz do mnie bezpośrednio.</p>
+                    <span class="section-tag pl-only">Napisz do mnie</span>
+                    <span class="section-tag en-only">Get In Touch</span>
+                    
+                    <h3 class="pl-only">Rozpocznijmy współpracę nad Twoimi danymi</h3>
+                    <h3 class="en-only">Let's Leverage Your Data Together</h3>
+                    
+                    <p class="pl-only">Poszukujesz eksperta, który uporządkuje przepływ danych w Twojej firmie, zautomatyzuje powtarzalne raporty, zoptymalizuje legacy kody SQL lub wdroży system raportowania regulacyjnego COREP? Napisz do mnie bezpośrednio.</p>
+                    <p class="en-only">Are you looking for an expert to organize data pipelines in your company, automate repetitive reports, optimize legacy SQL queries, or implement robust COREP regulatory systems? Write to me directly.</p>
                     
                     <ul class="contact-details">
                         <li class="contact-detail-item">
@@ -903,25 +1000,29 @@
                         <li class="contact-detail-item">
                             <div class="contact-icon-wrapper">📞</div>
                             <div class="contact-detail-content">
-                                <span>Telefon</span>
+                                <span class="pl-only">Telefon</span>
+                                <span class="en-only">Phone</span>
                                 <a href="tel:502388094">502 388 094</a>
                             </div>
                         </li>
                         <li class="contact-detail-item">
                             <div class="contact-icon-wrapper">🌐</div>
                             <div class="contact-detail-content">
-                                <span>Lokalizacja</span>
-                                <p>Warszawa / Kraków (Hybrydowo / Zdalnie)</p>
+                                <span class="pl-only">Lokalizacja</span>
+                                <span class="en-only">Location</span>
+                                <p class="pl-only">Warszawa / Kraków (Hybrydowo / Zdalnie)</p>
+                                <p class="en-only">Warsaw / Cracow (Hybrid / Remote)</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
                 <div class="contact-form">
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Wiadomość wysłana! (Symulacja formularza)');">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert(document.documentElement.getAttribute('lang') === 'pl'? 'Wiadomość wysłana!' : 'Message sent!');">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="name">Imię i Nazwisko</label>
+                                <label for="name" class="pl-only">Imię i Nazwisko</label>
+                                <label for="name" class="en-only">Full Name</label>
                                 <input type="text" id="name" class="form-control" placeholder="Jan Kowalski" required>
                             </div>
                             <div class="form-group">
@@ -930,14 +1031,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Temat rozmowy</label>
-                            <input type="text" id="subject" class="form-control" placeholder="np. Projekt Hurtowni Danych / COREP" required>
+                            <label for="subject" class="pl-only">Temat rozmowy</label>
+                            <label for="subject" class="en-only">Subject</label>
+                            <input type="text" id="subject" class="form-control" data-pl-placeholder="np. Projekt Hurtowni Danych / COREP" data-en-placeholder="e.g., Data Warehouse Project / COREP" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Twoja wiadomość</label>
-                            <textarea id="message" rows="5" class="form-control" placeholder="Opisz krótko wyzwanie lub projekt..." required></textarea>
+                            <label for="message" class="pl-only">Twoja wiadomość</label>
+                            <label for="message" class="en-only">Your Message</label>
+                            <textarea id="message" rows="5" class="form-control" data-pl-placeholder="Opisz krótko wyzwanie lub projekt..." data-en-placeholder="Briefly describe your challenge or project..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Wyślij zapytanie ofertowe</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span class="pl-only">Wyślij zapytanie ofertowe</span>
+                            <span class="en-only">Send Inquiry</span>
+                        </button>
                     </form>
                 </div>
 
@@ -947,16 +1053,67 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Marcin Załuski. Wszelkie prawa zastrzeżone. | <a href="https://www.zalka.it/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">zalka.it</a></p>
+            <p>&copy; 2026 Marcin Załuski. <span class="pl-only">Wszelkie prawa zastrzeżone.</span><span class="en-only">All rights reserved.</span> | <a href="https://www.zalka.it/" target="_blank" style="color: var(--accent-blue); text-decoration: none;">zalka.it</a></p>
         </div>
     </footer>
 
     <script>
+        // ELEMENTY DOM
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const themeText = document.getElementById('theme-text');
+        const themeTextEn = document.getElementById('theme-text-en');
         const htmlElement = document.documentElement;
 
+        const langToggleBtn = document.getElementById('lang-toggle');
+        const langFlag = document.getElementById('lang-flag');
+        const langText = document.getElementById('lang-text');
+
+        // MULTILINGUAL SYSTEM PLACEHOLDERÓW
+        const translatablePlaceholders = document.querySelectorAll('[data-pl-placeholder]');
+
+        function updatePlaceholders(lang) {
+            translatablePlaceholders.forEach(el => {
+                const placeholderValue = lang === 'pl'? el.getAttribute('data-pl-placeholder') : el.getAttribute('data-en-placeholder');
+                el.setAttribute('placeholder', placeholderValue);
+            });
+        }
+
+        // BEZPIECZNY SILNIK JĘZYKOWY (Uruchamianie lokalne file:/// bez awarii w Chrome)
+        let currentLang = 'pl';
+        try {
+            currentLang = localStorage.getItem('site-lang') || 'pl';
+        } catch (e) {
+            console.warn("Storage restricted. Fallback to default 'pl' language.");
+        }
+
+        htmlElement.setAttribute('lang', currentLang);
+        updateLangUI(currentLang);
+        updatePlaceholders(currentLang);
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'pl'? 'en' : 'pl';
+            htmlElement.setAttribute('lang', currentLang);
+            try {
+                localStorage.setItem('site-lang', currentLang);
+            } catch (e) {
+                // Ignorujemy błędy braku dostępu na lokalnym dysku
+            }
+            updateLangUI(currentLang);
+            updatePlaceholders(currentLang);
+        });
+
+        function updateLangUI(lang) {
+            if (lang === 'pl') {
+                langFlag.textContent = '🇬🇧';
+                langText.textContent = 'English';
+            } else {
+                langFlag.textContent = '🇵🇱';
+                langText.textContent = 'Polski';
+            }
+        }
+
+        // PRZEŁĄCZNIK TRYBU CIEMNEGO / JASNEGO
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             let newTheme = 'dark';
@@ -965,10 +1122,12 @@
                 newTheme = 'light';
                 themeIcon.textContent = '🌙';
                 themeText.textContent = 'Dark Mode';
+                themeTextEn.textContent = 'Dark Mode';
             } else {
                 newTheme = 'dark';
                 themeIcon.textContent = '☀️';
                 themeText.textContent = 'Light Mode';
+                themeTextEn.textContent = 'Light Mode';
             }
             
             htmlElement.setAttribute('data-theme', newTheme);
