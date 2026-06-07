@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twój Poradnik Ogrodnika - Rośliny Domowe i Tarasowe V4</title>
+    <title>Poradnik Ogrodnika - Krakowska Dżungla Marcina V4.5</title>
     <style>
         :root {
-            --primary-color: #2c5e3b;
-            --secondary-color: #8eb69b;
-            --accent-color: #d96b43;
-            --bg-color: #f4f7f5;
-            --text-color: #333;
+            --primary-color: #1b4d3e;
+            --secondary-color: #70a1ff;
+            --accent-purple: #8c7ae6;
+            --bg-color: #f5f7f6;
+            --text-color: #2f3542;
             --card-bg: #ffffff;
-            --warning-color: #f08c00;
-            --danger-bg: #fff5f5;
-            --danger-border: #ffc9c9;
-            --info-blue: #1c7ed6;
-            --bio-green: #2b8a3e;
-            --bio-bg: #f4fce3;
+            --warning-amber: #e1b12c;
+            --danger-red: #c23616;
+            --safe-green: #44bd32;
+            --border-color: #dcdde1;
         }
 
         body {
@@ -30,70 +28,93 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), #1e4228);
+            background: linear-gradient(135deg, var(--primary-color), #0f3025);
             color: white;
             text-align: center;
-            padding: 2.5rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             letter-spacing: 1px;
         }
 
         header p {
-            margin: 0.5rem 0 0 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
+            margin: 0.6rem 0 0 0;
+            font-size: 1.15rem;
+            opacity: 0.85;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
 
-        .intro-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        .alert-bar {
+            background-color: #e3fafc;
             border-left: 5px solid var(--secondary-color);
+            padding: 1rem;
+            border-radius: 6px;
             margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
         h2 {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            margin-top: 2.5rem;
-            font-size: 1.6rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.4rem;
+            margin-top: 3rem;
+            font-size: 1.7rem;
         }
 
-        h3 {
-            color: #1e4228;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
             margin-top: 1.5rem;
-            font-size: 1.2rem;
-            background-color: #eef2f0;
-            padding: 0.5rem;
-            border-radius: 4px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .zone-header {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .plant-item {
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
         }
 
         .table-container {
             overflow-x: auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            margin: 1.5rem 0;
             background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            min-width: 650px;
+            min-width: 700px;
         }
 
         th {
@@ -105,12 +126,12 @@
 
         td {
             padding: 1rem;
-            border-bottom: 1px solid #eef2f0;
+            border-bottom: 1px solid #f1f2f6;
             vertical-align: top;
         }
 
         tr:hover {
-            background-color: #f9fbf9;
+            background-color: #f8f9fa;
         }
 
         .badge {
@@ -118,333 +139,258 @@
             padding: 0.25rem 0.6rem;
             border-radius: 4px;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: white;
             text-align: center;
-            margin-bottom: 0.3rem;
         }
 
         .badge-h { background-color: #e6a1b8; color: #5c2c3a; }
         .badge-s { background-color: #d6336c; }
-        .badge-k { background-color: #ced4da; color: #212529; }
+        .badge-k { background-color: #2f3542; }
         .badge-z { background-color: #2b8a3e; }
-        .badge-c { background-color: #1c7ed6; }
         .badge-bio { background-color: #1e7e34; }
+        .badge-cote { background-color: #1c7ed6; }
 
-        .badge-moist-stale { background-color: #1c7ed6; }
-        .badge-moist-umiarkowane { background-color: #2b8a3e; }
-        .badge-moist-lekko { background-color: #f08c00; }
-        .badge-moist-suche { background-color: #e03131; }
+        .badge-stale { background-color: #0984e3; }
+        .badge-umiarkowane { background-color: #2bccb8; }
+        .badge-lekko { background-color: #e1b12c; }
+        .badge-suche { background-color: #c23616; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            header h1 { font-size: 1.7rem; }
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
-        }
-
-        .zone-box {
-            background-color: var(--card-bg);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .zone-title {
-            font-size: 1.15rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
-        }
-
-        .zone-list {
-            list-style-type: none;
-            padding-left: 0;
-            margin: 0;
-        }
-
-        .zone-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #f0f0f0;
-        }
-
-        .zone-list li:last-child {
-            border-bottom: none;
-        }
-
-        .conflict-box {
-            background-color: var(--danger-bg);
-            border: 1px solid var(--danger-border);
-            border-left: 5px solid #e03131;
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .conflict-box h4 {
-            margin: 0 0 0.5rem 0;
-            color: #b02a2a;
-            font-size: 1.1rem;
-        }
+        .badge-toxic { background-color: var(--danger-red); }
+        .badge-safe { background-color: var(--safe-green); }
+        .badge-warning { background-color: var(--warning-amber); }
 
         .tip-box {
-            background-color: #fff9db;
-            border: 1px solid #ffe066;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
+            background-color: #f7f9fa;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
         }
 
         .tip-box h4 {
             margin: 0 0 0.5rem 0;
-            color: #d9480f;
-        }
-
-        .eco-box {
-            background-color: #eaf2f8;
-            border-left: 5px solid var(--info-blue);
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .eco-box h4 {
-            margin: 0 0 0.5rem 0;
-            color: #1a5276;
-            font-size: 1.15rem;
-        }
-
-        ul, ol {
-            padding-left: 1.2rem;
-        }
-
-        li {
-            margin-bottom: 0.4rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #777;
-            font-size: 0.9rem;
-            margin-top: 3rem;
-            border-top: 1px solid #e0e0e0;
+            padding: 2.5rem;
+            color: #747d8c;
+            font-size: 0.95rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Poradnik Pielęgnacji Roślin Domowych i Tarasowych</h1>
-    <p>Spersonalizowany system zarządzania zielenią – Kraków</p>
+    <h1>Krakowska Dżungla Tarasowa Marcina</h1>
+    <p>Zintegrowany Ekosystem Pielęgnacji Roślin Domowych i Tarasowych - V4.5 (Aktualizacja Statusu)</p>
 </header>
 
 <div class="container">
-    <div class="intro-card">
-        <p><strong>Zintegrowany Plan Pielęgnacji V4:</strong> Poradnik obejmuje ocieniony, zachodni taras graniczący z lasem oraz wnętrze krakowskiego mieszkania. Układ uwzględnia optymalizację nawadniania pod kątem Twojego grafiku obecności (czwartek – niedziela), pełne wykorzystanie zakupionych nawozów z Biohumusem, bezpieczne stosowanie sprawdzonych domowych sposobów DIY oraz rygorystyczne wytyczne ochrony zdrowia Twojego kota.</p>
+    <div class="alert-bar">
+        <strong>Status Realny na Czerwiec 2026:</strong> Wizualna weryfikacja potwierdza doskonałą kondycję roślin. Wszystkie duże białe skrzynie są w pełni zaizolowane styropianem, co stabilizuje temperaturę korzeni. Usunięto przekwitłe pędy nasienne szafirków i czosnków, dając cebulom przestrzeń do regeneracji podziemnej. Zastosowano kompletną ochronę miedzianą przed ślimakami nagimi.
     </div>
 
-    <h2>1. Mapa i Pielęgnacja Roślin Domowych w Krakowie</h2>
-    <p>Identyfikacja i wytyczne dla roślin doniczkowych wewnątrz mieszkania:</p>
-    <div class="zone-box">
-        <div class="zone-title">🏠 Salon i Parapety Wewnętrzne</div>
-        <ul class="zone-list">
-            <li><strong>Trzykrotka (Tradescantia zebrina) [złota donica]:</strong> Rośnie błyskawicznie, lubi jasne miejsca. Podlewaj regularnie (czwartek/niedziela). Idealna do zasilania nawozem <span class="badge badge-z">Planton Z</span>.</li>
-            <li><strong>Skrzydłokwiat (Spathiphyllum) [długa biała skrzynka]:</strong> Wymaga stale wilgotnej ziemi i półcienia. Gdy ma za sucho, spektakularnie opuszcza liście. Podlewaj miękką wodą i zasilaj ekologicznym Biohumusem.</li>
-            <li><strong>Palma Chamedora [biała skrzynka]:</strong> Wybitnie cieniolubna elegancja. Podlewaj dopiero, gdy wierzch ziemi przesechł. Nienawidzi zastojów wody w korzeniach.</li>
-            <li><strong>Sansewieria niska ('Hahnii') [biała skrzynka]:</strong> Roślina pancerna, idealna na dni, gdy wyjeżdżasz. Magazynuje wodę, podlewaj raz na dwa tygodnie.</li>
-            <li><strong>Fikus Bonsai (Ficus Ginseng) [parapet]:</strong> Wrażliwy na przelanie i przeciągi. Podlewaj oszczędnie, gdy ziemia lekko przeschnie.</li>
-            <li><strong>Kalanchoe omszone ("Kocie uszy") [zielona doniczka]:</strong> Sukulent owłosiony. Podlewaj sporadycznie, kocha jasny parapet.</li>
-        </ul>
+    <h2>1. Aktualny Układ i Stanowiska Roślin (Stan Faktyczny)</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="zone-header">🧗 Strefa Wisząca i Barierki</div>
+            <div class="plant-item">
+                <strong>Bakopa (Sutera) [Doniczka podwieszona od sąsiada]:</strong> Przepiękna kaskada drobnych białych kwiatów. Wymaga stałej wilgotności bryły korzeniowej.
+            </div>
+            <div class="plant-item">
+                <strong>Pelargonie Czerwone + Wilczomlecz 'Diamond Frost':</strong> Czarne skrzynki na barieruch. Genialny kontrast bieli i krwistej czerwieni. Bardzo odporne na wiatr.
+            </div>
+            <div class="plant-item">
+                <strong>Petunie / Surfinie Różowe:</strong> Wiszące i stojące donice na eleganckich czarno-białych stojakach. Obfite kwitnienie wymagające regularnego karmienia.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="zone-header">🪵 Główne Skrzynie Drewniane (Izolowane)</div>
+            <div class="plant-item">
+                <strong>Hortensja Ogrodowa (Fioletowo-Niebieska):</strong> Absolutna Królowa Tarasu w centralnej skrzyni. Towarzyszy jej Tojeść rozesłana (Lysimachia) spływająca limonkowym wodospadem.
+            </div>
+            <div class="plant-item">
+                <strong>Miks Żurawki i Nemezji:</strong> Przepiękne kępy kolorowych liści (żurawki limonkowate, bordowe i purpurowe) połączone z gęstym dywanem wielobarwnych nemezji oraz mchem (karmnik ościsty).
+            </div>
+            <div class="plant-item">
+                <strong>Paprocie Ogrodowe i Bukszpan:</strong> Potężne, soczyście zielone kępy w głębokim cieniu leśnym. Czują się tu jak w naturalnym środowisku.
+            </div>
+            <div class="plant-item">
+                <strong>Azalie Japońskie:</strong> W pełni ulistnione, kompaktowe krzewy w osobnych sekcjach skrzyniowych, obsypane pąkami.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="zone-header">🍓 Uprawy Użytkowe i Parapety Zewnętrzne</div>
+            <div class="plant-item">
+                <strong>Truskawki i Poziomki:</strong> Uprawiane w dedykowanych donicach stojących, zawiązują już pierwsze, zdrowe zielone owoce.
+            </div>
+            <div class="plant-item">
+                <strong>Młode Słoneczniki:</strong> Doniczki stabilizowane bambusowymi wykałaczkami i patyczkami. Rosną dynamicznie w górę.
+            </div>
+            <div class="plant-item">
+                <strong>Długie Korytka Okienne:</strong> Dywan z surfinii, gipsówki i drobnych goździków podtrzymujący spektakularny miks kolorystyczny.
+            </div>
+        </div>
     </div>
 
-    <h2>2. Tabela Podlewania i Wilgotności Gleby (Mieszkanie + Taras)</h2>
+    <h2>2. Zaktualizowany Harmonogram Podlewania pod Twój Grafik</h2>
+    <p>Ocieniony mikroklimat spowalnia parowanie. Wykorzystaj ten harmonogram w cyklu czwartek - niedziela:</p>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Grupa roślin / Gatunek</th>
-                    <th>Docelowa wilgotność podłoża</th>
-                    <th>Strategia podlewania w Twoim grafiku (Czwartek - Niedziela)</th>
+                    <th>Grupa Roślin</th>
+                    <th>Docelowy Stan Gleby</th>
+                    <th>Czwartek (Po powrocie)</th>
+                    <th>Niedziela (Przed wyjazdem)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Hortensje</strong> (wszystkie), <strong>Paprocie ogrodowe</strong>, <strong>Skrzydłokwiat</strong></td>
-                    <td><span class="badge badge-moist-stale">Stale wilgotne</span></td>
-                    <td>Ziemia jak lekko odciśnięta gąbka. Podlej obficie w <strong>czwartek</strong> po przyjeździe oraz bardzo mocno w <strong>niedzielę</strong> przed wyjazdem do Warszawy.</td>
+                    <td>Hortensje, Paprocie, Bakopa, Skrzydłokwiat (wewnątrz)</td>
+                    <td><span class="badge badge-stale">Stale wilgotne</span></td>
+                    <td>Sprawdź palcem bryłę. Podlej obficie miękką, odstaną wodą.</td>
+                    <td>Podlej bardzo mocno, pozwalając wodzie spłynąć na podstawki. Zapas starczy na dni nieobecności.</td>
                 </tr>
                 <tr>
-                    <td><strong>Petunie / Surfinie</strong>, <strong>Trzykrotka</strong>, <strong>Mięta</strong></td>
-                    <td><span class="badge badge-moist-umiarkowane">Umiarkowanie wilgotne</span></td>
-                    <td>Podlewaj regularnie w <strong>czwartek</strong> oraz <strong>niedzielę</strong>. W paletkach na stole nalej wody do podstawka zbiorczego w niedzielę, by piły od dołu podczas nieobecności.</td>
+                    <td>Petunie, Surfinie, Nemezje, Trzykrotka, Mięta</td>
+                    <td><span class="badge badge-umiarkowane">Umiarkowanie wilgotne</span></td>
+                    <td>Podlej umiarkowanie, jeśli wierzch ziemi na 2 cm jest suchy.</td>
+                    <td>Podlej obficie. W małych paletkach produkcyjnych wlej wodę bezpośrednio do podstawka zbiorczego.</td>
                 </tr>
                 <tr>
-                    <td><strong>Pelargonie, Goździki, Żurawki, Trzmielina, Bukszpan, Fikus Bonsai</strong></td>
-                    <td><span class="badge badge-moist-lekko">Lekko wilgotne (z przesychaniem)</span></td>
-                    <td>Pozwól górnej warstwie gleby (ok. 2-3 cm) wyraźnie przeschnąć przed kolejnym podaniem wody. Podlewaj w <strong>czwartek</strong> oraz profilaktycznie w <strong>niedzielę</strong>.</td>
+                    <td>Pelargonie, Goździki, Żurawki, Bukszpan, Lawenda, Fikus Bonsai</td>
+                    <td><span class="badge badge-lekko">Lekko wilgotne (przesychające)</span></td>
+                    <td>Podlewaj tylko wtedy, gdy ziemia jest wyraźnie sucha i lekka.</td>
+                    <td>Podlej profilaktycznie umiarkowaną ilością wody. Nie twórz bagnistego podłoża.</td>
                 </tr>
                 <tr>
-                    <td><strong>Azalie Japońskie</strong>, <strong>Palma Chamedora</strong>, <strong>Truskawki</strong></td>
-                    <td><span class="badge badge-moist-lekko">Stale lekko wilgotne</span></td>
-                    <td>Płytki system korzeniowy. Nie tolerują suszy ani zalania. Podlewaj mniejszymi, równomiernymi porcjami w <strong>czwartek</strong> oraz <strong>niedzielę</strong>.</td>
-                </tr>
-                <tr>
-                    <td><strong>Rozchodnik Okazały</strong>, <strong>Sansewieria</strong>, <strong>Aloes</strong>, <strong>Kalanchoe</strong></td>
-                    <td><span class="badge badge-moist-suche">Suche / Sukulenty</span></td>
-                    <td>Pozwól podłożu całkowicie wyschnąć. Podlewaj rzadko – maksymalnie <strong>raz na 1,5 do 2 tygodni</strong> (wyłącznie w wybrany czwartek). Ignoruj w pozostałe dni.</td>
+                    <td>Rozchodnik, Sansewieria, Kalanchoe, Aloes</td>
+                    <td><span class="badge badge-suche">Suche / Sukulenty</span></td>
+                    <td>Podlewaj maksymalnie raz na 2 tygodnie. Jeśli ziemia jest sucha - wlej małą porcję.</td>
+                    <td><strong>Całkowicie ignoruj.</strong> Nadmiar wody w cieniu zabije ich korzenie w kilka dni.</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <h2>3. Rozszerzony Plan Nawożenia (Wszystkie nawozy mineralne i Biohumus)</h2>
-    <p>Dawkowanie nawozów Planton: <strong>1 pełna łyżeczka na 5 litrów wody</strong>. Biohumus stosuj według instrukcji (naturalny, bezpieczny dla plonów ziół).</p>
+    <h2>3. Kompleksowy Plan Zasilania Wszystkimi Nawozami</h2>
+    <p>Dawkowanie koncentratów mineralnych Planton: <strong>1 pełna łyżeczka na 5 litrów odstanej wody</strong> (od maja do końca lipca).</p>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Nawóz</th>
-                    <th>Przypisane rośliny</th>
-                    <th>Częstotliwość i metoda stosowania</th>
+                    <th>Przeznaczenie na Twoim Tarasie i w Domu</th>
+                    <th>Częstotliwość i Metoda Aplikacji</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><span class="badge badge-h">Planton H</span></td>
-                    <td>Hortensja fioletowo-niebieska, azalie japońskie oraz duże zielone hortensje bukietowe na tarasie.</td>
-                    <td>Raz w tygodniu (w każdy czwartek po powrocie). Idealno zakwasza podłoże.</td>
+                    <td>Wszystkie Hortensje (w tym Królowa Tarasu) oraz Azalie Japońskie.</td>
+                    <td>Raz w tygodniu (w każdy czwartek po przyjeździe). Utrzymuje kwaśne pH.</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-s">Planton S</span></td>
-                    <td>Młode petunie w palecie oraz skrzynka okienna z petuniami i gipsówką.</td>
-                    <td>Do każdego podlewania w okresie kwitnienia (czwartek i niedziela). Silny stymulator pąków.</td>
+                    <td>Młode surfinie/petunie w paletkach oraz korytka okienne.</td>
+                    <td>Do każdego podlewania (czwartek i niedziela). Potężny stymulator pąków.</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-k">Planton K</span></td>
-                    <td>Pelargonie z wilczomleczem na barierkach, truskawki/poziomki, goździki.</td>
-                    <td>Raz w tygodniu (w niedzielę). Zbalansowany i bezpieczny skład.</td>
+                    <td><strong>Główny Napęd:</strong> Bakopa, Nemezje, Pelargonie, Portulaka, Truskawki.</td>
+                    <td>Raz w tygodniu (w niedzielę). Dostarcza potasu dla nieprzerwanego kwitnienia.</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-z">Planton Z</span></td>
-                    <td>Paprocie, bukszpan, trzmielina, żurawki (taras) oraz <strong>Trzykrotka</strong> i <strong>Fikus Bonsai</strong> (dom).</td>
-                    <td>Raz na 2-3 tygodnie. Wspomaga rozwój soczystych zielonych liści w cieniu.</td>
+                    <td>Paprocie ogrodowe, Bukszpan, Trzmielina oraz domowa Trzykrotka i Fikus Bonsai.</td>
+                    <td>Raz na 2-3 tygodnie. Wspomaga rozwój soczystych i gęstych zielonych liści.</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-bio">Biohumus</span></td>
-                    <td><strong>Dom:</strong> Skrzydłokwiat, Palma Chamedora, Sansewieria, Kalanchoe, siewki.<br><strong>Taras:</strong> Mięta (zioło jadalne).</td>
-                    <td>Raz na 2 tygodnie. Organiczny, w 100% bezpieczny nawóz biologiczny, idealny do wnętrz i upraw jadalnych.</td>
+                    <td>Palma Chamedora, Skrzydłokwiat, siewki, Mięta oraz jako bezpieczna odżywka dla Bakopy.</td>
+                    <td>Raz na 2 tygodnie. W 100% naturalny, poprawia biologiczną strukturę podłoża.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-cote">Planton Cote</span></td>
+                    <td>Granulat długodziałający w saszetce.</td>
+                    <td><strong>Schowaj na przyszłość.</strong> Stosuj wyłącznie mieszając go z ziemią podczas sadzenia nowych roślin.</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <h2>4. 🌿 Domowa Apteka i Ekologia – Sprawdzone porady i triki DIY</h2>
-    <p>Wykorzystanie kuchennych odpadków i naturalnych naparów to genialny sposób na wzmocnienie roślin, pod warunkiem zachowania zasad biologii i fizjologii roślin:</p>
-    
-    <div class="eco-box">
-        <h4>🍌 Wywar ze skórek bananów (Potasowa bomba dla obfitego kwitnienia)</h4>
-        <p><strong>Gdzie stosować:</strong> Idealna odżywka dla Twoich intensywnie kwitnących, tarasowych "żarłoków": <strong>Petunii, Surfinii oraz Pelargonii</strong>.</p>
-        <p><strong>Jak przygotować:</strong> Świeżą skórkę banana zalej w słoiku 1 litrem ciepłej wody. Odstaw na 24–48 godzin w ciemne miejsce. Wyjmij skórkę, a powstały płyn rozcieńczaj w proporcji 1:1 z odstaną wodą z konewki przy podlewaniu weekendowym. Dostarcza potasu i fosforu odpowiedzialnych za pąki.</p>
+    <h2>4. 🌿 Eko-Ogrodnictwo DIY: Domowe Triki Organiczne</h2>
+    <div class="tip-box">
+        <h4>☕ Fusy z kawy (Dla fioletowej Hortensji, Azalii, Skrzydłokwiatu i Paproci)</h4>
+        <p>Fusy bogate są w azot i potas oraz naturalnie zakwaszają podłoże. <strong>Krytyczna zasada:</strong> Musisz rozłożyć je na talerzu i wysuszyć na wiór. Wilgotne fusy rzucone do donicy natychmiast splesnieją w cieniu i przyciągną ziemiórki. Suche fusy zmieszaj płytko z wierzchnią warstwą ziemi raz w miesiącu.</p>
+    </div>
+    <div class="tip-box">
+        <h4>🥚 Skorupki jajek (Wyłącznie dla Bukszpanu, Lawendy i Sansewierii)</h4>
+        <p>Skorupki to doskonałe źródło wapnia podnoszące odczyn gleby do zasadowego. Sparz je wrzątkiem, wysusz i zmiel na drobny pył. <strong>BEZWZGLĘDNY ZAKAZ:</strong> Nigdy nie syp skorupek pod hortensje i azalie! Wapń zneutralizuje kwasowość gleby, wywołując u nich ciężką chorobę (chlorozę) i blokując kwitnienie.</p>
+    </div>
+    <div class="tip-box">
+        <h4>🍌 Wywar ze skórek bananów (Dla Petunii, Surfinii, Nemezji i Bakopy)</h4>
+        <p>Potasowa bomba stymulująca pąki kwiatowe. Skórkę banana zalej w słoiku 1 litrem ciepłej wody i odstaw na 24-48 godzin. Płyn rozcieńczaj w proporcji 1:1 z czystą wodą podczas weekendowego nawożenia.</p>
+    </div>
+    <div class="tip-box">
+        <h4>🥕 Woda po warzywach oraz Napar z czosnku</h4>
+        <p>Niesolona i ostudzona woda po gotowaniu ziemniaków lub warzyw to świetna pożywka mineralna dla mikroflory w glebie (stosuj pod paprocie i żurawki). Napar z rozgniecionego czosnku (odstawiony na 24h w wodzie) chroni ocienione podłoże przed pleśnią i mszycami, będąc w 100% przyjaznym dla kota.</p>
     </div>
 
-    <div class="eco-box">
-        <h4>☕ Fusy z kawy (Azotowo-potasowe zakwaszanie)</h4>
-        <p><strong>Gdzie stosować:</strong> Wyłącznie rośliny kwasolubne i liściaste. Na tarasie: <strong>Hortensje i Azalie</strong>. W domu: <strong>Skrzydłokwiat oraz Paprocie</strong>.</p>
-        <p><strong>Zasada aplikacji:</strong> Fusy musisz uprzednio <strong>całkowicie wysuszyć na wiór</strong>. Wilgotne fusy rzucone na ziemię natychmiast pokryją się pleśnią i ściągną ziemiórki. Suche fusy wymieszaj płytko z ziemią (1-2 łyżeczki na doniczkę) raz w miesiącu.</p>
-    </div>
-
-    <div class="eco-box" style="border-left-color: var(--warning-color);">
-        <h4 style="color: #a04000;">🥚 Skorupki jajek (Źródło Wapnia + Podnoszenie pH gleby)</h4>
-        <p><strong>Gdzie stosować:</strong> Rośliny lubiące podłoże zasadowe lub obojętne. Na tarasie: <strong>Bukszpan i Lawenda</strong>. W domu: <strong>Sansewieria</strong>.</p>
-        <p><strong>🚨 CRITICAL ZAKAZ:</strong> Nigdy nie syp skorupek pod hortensje i azalie! Wapń zneutralizuje kwaśny odczyn podłoża, co wywoła u tych roślin chlorozę (żółknięcie liści) i zablokuje kwitnienie.</p>
-        <p><strong>Zasada aplikacji:</strong> Skorupki sparz wrzątkiem, wysusz i zmiel na drobny pył w młynku. Posyp nimi wierzch ziemi wokół bukszpanu czy lawendy raz na 2 miesiące.</p>
-    </div>
-
-    <div class="eco-box" style="border-left-color: var(--warning-color);">
-        <h4 style="color: #a04000;">🥕 Woda po gotowaniu warzyw (Zastrzyk mikroelementów)</h4>
-        <p><strong>Gdzie stosować:</strong> Wszystkie rośliny zielone i byliny: <strong>Paprocie, Żurawki, Trzykrotka, Skrzydłokwiat</strong>.</p>
-        <p><strong>Zasada aplikacji:</strong> Woda musi być <strong>całkowicie niesolona</strong> i ostudzona. Sól zniszczyłaby korzenie. Taka woda po ziemniakach czy jajkach zawiera skrobię i cenne minerały, które doskonale karmią pożyteczną mikroflorę w glebie.</p>
-    </div>
-
-    <div class="eco-box" style="border-left-color: var(--primary-color);">
-        <h4 style="color: var(--primary-color);">🧄 Napar z czosnku (Bariera przeciwgrzybowa i na szkodniki - bezpieczna dla kota)</h4>
-        <p><strong>Gdzie stosować:</strong> Profilaktyka przeciwko mszycom, ziemiórkom i pleśni. Wybitnie przydatna w wilgotnym, ocienionym środowisku Twojego tarasu.</p>
-        <p><strong>Jak przygotować:</strong> Rozgnieć 2-3 ząbki czosnku, zalej 1 litrem letniej wody i odstaw na 24 godziny. Przecedź płyn. Możesz nim podlewać ziemię lub przelać do atomizera i raz na 2 tygodnie spryskać liście roślin. Metoda jest w 100% bezpieczna dla Twojego kota.</p>
-    </div>
-
-    <h2>5. 🐈 Rozszerzony Alert Bezpieczeństwa dla Kota</h2>
-    <p>Kot ma swobodny dostęp do parapetów wewnętrznych i skrzyń. Zabezpiecz rośliny toksyczne przed pogryzieniem:</p>
+    <h2>5. 🐈 Alert Bezpieczeństwa dla Twojego Kota</h2>
+    <p>Ponieważ kot swobodnie eksploruje mieszkanie oraz taras, pamiętaj o rygorystycznym podziale bezpieczeństwa:</p>
     <div class="table-container">
         <table>
             <thead>
-                <tr style="background-color: #c92a2a; color: white;">
-                    <th>Obszar</th>
-                    <th>Gatunki TOKSYCZNE (Blokuj dostęp kota!)</th>
-                    <th>Gatunki BEZPIECZNE (Nietoksyczne)</th>
+                <tr>
+                    <th>Status Bezpieczeństwa</th>
+                    <th>Rośliny na Tarasie (Zewnętrzne)</th>
+                    <th>Rośliny w Mieszkaniu (Wewnętrzne)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="font-weight: bold;">Wnętrze mieszkania</td>
-                    <td>
-                        • <strong>Skrzydłokwiat:</strong> Zawiera kryształy szczawianu wapnia (silny obrzęk pyszczka).<br>
-                        • <strong>Sansewieria:</strong> Zawiera saponiny (wymioty, biegunka).<br>
-                        • <strong>Fikus Bonsai:</strong> Toksyczny sok mleczny (lateks).<br>
-                        • <strong>Kalanchoe omszone:</strong> Niebezpieczne glikozydy nasercowe.<br>
-                        • <strong>Trzykrotka:</strong> Sok może wywołać alergie skórne.
-                    </td>
-                    <td style="background-color: var(--bio-bg);">
-                        • <strong>Palma Chamedora:</strong> W 100% bezpieczna, nietoksyczna i przyjazna kotom. Może stać na podłodze.<br>
-                        • <strong>Siewki słoneczników:</strong> Całkowicie bezpieczna zielenina.
-                    </td>
+                    <td><span class="badge badge-toxic">BEZWZGLĘDNIE TOKSYCZNE</span></td>
+                    <td>Hortensje (wszystkie), Bukszpan, Pelargonie, Aloes (silnie przeczyszczający).</td>
+                    <td>Skrzydłokwiat (szczawiany), Fikus Bonsai (sok mleczny), Kalanchoe omszone (glikozydy).</td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">Taras (Zewnętrzne)</td>
-                    <td>
-                        • Hortensje (wszystkie odmiany)<br>
-                        • Bukszpan<br>
-                        • Pelargonie<br>
-                        • Aloes (silne działanie przeczyszczające)
-                    </td>
-                    <td style="background-color: var(--bio-bg);">
-                        • Paprocie ogrodowe<br>
-                        • Żurawki i Rozchodnik<br>
-                        • Truskawki / Poziomki<br>
-                        • Mięta w doniczce
-                    </td>
+                    <td><span class="badge badge-warning">OSTRZEŻENIE / KONTROLA</span></td>
+                    <td><strong>Koleusy (Solenostemon):</strong> Zawierają diterpeny, mogą podrażnić żołądek. <br><strong>Lawenda:</strong> Posiada linalool. W dużych ilościach szkodzi kotom - trzymaj pod kontrolą.</td>
+                    <td><strong>Trzykrotka:</strong> Sok w łodygach u wrażliwych kotów może wywołać alergie kontaktowe na skórze.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-safe">100% BEZPIECZNE</span></td>
+                    <td>Paprocie ogrodowe, Żurawki, Szafirki/Czosnki (po ścięciu liści brak ryzyka), Truskawki, Poziomki, Mięta, Bakopa, Nemezje.</td>
+                    <td><strong>Palma Chamedora:</strong> Całkowicie przyjazna kotom, może stać bezpośrednio na podłodze. Siewki słonecznika.</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <h2>6. Zadania Pilne i Ochrona Przed Szkodnikami</h2>
-    <div class="card">
-        <h3>🐌 Ślimaki Nagie (Pomrowy)</h3>
-        <p>Twoja taśma miedziana to wzorcowa robota techniczna – idealnie odcina szkodnikom wejście z pobliskiego lasu. W każdy czwartek po przyjeździe zajrzyj profilaktycznie pod spody donic. W razie konieczności użycia granulek, stosuj wyłącznie te oparte na <strong>fosforanie (III) żelaza</strong> (są bezpieczne dla kotów i ptaków). Unikaj toksycznego metaldehydu!</p>
-    </div>
-    <div class="tip-box">
-        <h4>⚠️ Uschnięte drzewko (Skrzynia 3)</h4>
-        <p>Wytnij suche, brązowe drzewko owinięte żółtym sznurkiem przy najbliższym pobycie w Krakowie. W wilgotnym cieniu martwe gałęzie sprzyjają rozwojowi grzybów patogennych. W puste miejsce dosyp świeżej ziemi z granulatem <span class="badge badge-c">Planton Cote</span> i posadź bezpieczną roślinę cieniolubną (np. nową paproć lub kolejną żurawkę).</p>
+    <h2>6. 🌦️ Pogotowie Burzowe: Co chronić przed ulewami?</h2>
+    <div class="tip-box" style="border-left-color: var(--danger-red);">
+        <h4>🚨 Rośliny kategorycznie nienawidzące przelania w cieniu:</h4>
+        <ul>
+            <li><strong>Aloes oraz Kalanchoe (Kocie Uszy):</strong> Sukulenty. Podczas zapowiedzi ulewy natychmiast zabieraj je ze stolika pod daszek lub do domu. Nadmiar wody w ocienionym mikroklimacie to dla nich gnicie korzeni w 48 godzin.</li>
+            <li><strong>Lawenda (Wysoka biała donica):</strong> Lubi suchy, śródziemnomorski klimat. Krótki deszcz jej nie zaszkodzi (donica ma doskonały drenaż), ale przy kilkudniowych opadach przestaw donicę pod zadaszenie tarasu, blisko ściany budynku.</li>
+            <li><strong>Bakopa i Nemezje:</strong> Silna, gwałtowna ulewa mechanicznie niszczy i rozrywa ich delikatne płatki kwiatów. Jeśli zapowiadane jest oberwanie chmury, schowanie ich pod zadaszenie uchroni kwiaty przed "sklepaniem" i brązowieniem.</li>
+        </ul>
     </div>
 </div>
 
 <footer>
-    <p>Poradnik Ogrodniczy V4 – Marcin. Pełna harmonia w domu i na tarasie. Niech rośnie zdrowo!</p>
+    <p>Poradnik Ogrodniczy V4.5 dla Marcina. Stabilność, bezpieczeństwo i bujny rozkwit leśnego zakątka w Krakowie. Niech rośnie zdrowo!</p>
 </footer>
 
 </body>
