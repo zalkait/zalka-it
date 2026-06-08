@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poradnik Ogrodnika - Warszawskie Królestwo Marcina V1.0</title>
+    <style>
+        :root {
+            --primary-dark: #2f3640;
+            --accent-green: #2ecc71;
+            --hoya-pink: #fda7df;
+            --raven-black: #1e1e24;
+            --bg-light: #f8f9fa;
+            --card-white: #ffffff;
+            --alert-red: #ea2027;
+            --warning-orange: #f79f1f;
+            --border-muted: #dcdde1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), #1c2026);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.6rem 0 0 0;
+            font-size: 1.2rem;
+            opacity: 0.85;
+            color: var(--hoya-pink);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .diagnostic-card {
+            background-color: #fff5f5;
+            border-left: 6px solid var(--alert-red);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .diagnostic-card h3 {
+            margin: 0 0 0.8rem 0;
+            color: var(--alert-red);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-muted);
+        }
+
+        .zone-header {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-muted);
+            padding-bottom: 0.5rem;
+        }
+
+        .plant-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .plant-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #f1f2f6;
+        }
+
+        .plant-list li:last-child {
+            border-bottom: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background-color: var(--card-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 700px;
+        }
+
+        th {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f2f6;
+            vertical-align: top;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .badge-z { background-color: #2b8a3e; }
+        .badge-k { background-color: #8c7ae6; }
+        .badge-bio { background-color: #1e7e34; }
+
+        .badge-dry { background-color: #e1b12c; }
+        .badge-mid { background-color: #44bd32; }
+        .badge-frequent { background-color: #0984e3; }
+
+        .badge-toxic { background-color: var(--alert-red); }
+        .badge-safe { background-color: var(--accent-green); }
+
+        .pro-tip {
+            background-color: #f1f2f6;
+            border-left: 5px solid var(--primary-dark);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pro-tip h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-dark);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: #747d8c;
+            font-size: 0.95rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-muted);
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Warszawskie Królestwo Roślin Marcina</h1>
+    <p>Spersonalizowany System Pielęgnacji Zieleni Domowej i Kolekcji Hoyi</p>
+</header>
+
+<div class="container">
+
+    <div class="diagnostic-card">
+        <h3>🚨 PILNE: Diagnoza Medyczna - Fikus Sprężysty (Balkon)</h3>
+        <p><strong>Zaobserwowane objawy:</strong> Górne liście intensywnie żółkną z czarnymi, rozlewającymi się plamami martwiczymi. Dolne liście posiadają rozległe, białawe, wysuszone odbarwienia.</p>
+        <p><strong>Przyczyna:</strong> Szok termiczny oraz **ciężkie poparzenie słoneczne**. Warszawski balkon dostarcza agresywnego, bezpośredniego słońca. Brak wcześniejszego hartowania oraz podlewanie w pełnym słońcu doprowadziło do uszkodzenia tkanek liści i podgotowania korzeni w rozgrzanej donicy.</p>
+        <p><strong>Akcja Ratunkowa:</strong> 
+            1. Przestaw drzewko natychmiast w miejsce o **świetle rozproszonym** (np. za gęste Fikusy Benjamina lub do pokoju przy oknie). 
+            2. Całkowicie wstrzymaj się z nawożeniem mineralnym (Planton Z stop!). 
+            3. Podlewaj rzadko, wyłącznie gdy ziemia przeschnie do połowy donicy. Do wody dodawaj wyłącznie **Biohumus**, który stymuluje regenerację chorych korzeni.
+        </p>
+    </div>
+
+    <h2>1. Inwentaryzacja Strefowa Mieszkania i Przedszkola Sadzonek</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="zone-header">🛋️ Strefa Komody i Pokoju (Żelazne Sukulenty)</div>
+            <ul class="plant-list">
+                <li><strong>Zamiokulkas 'Raven' [Duża donica]:</strong> Imponujący okaz o ciemnych, niemal czarnych, skórzastych liściach, profesjonalnie stabilizowany tyczkami.</li>
+                <li><strong>Sansewieria Gwinejska (Wężownica):</strong> Stabilna, wysoka kępa w białej donicy. Idealny oczyszczacz powietrza wybaczający suszę.</li>
+                <li><strong>Epipremnum Złociste (Pothos):</strong> Gęste, bujne pnącze, fantastycznie rozwijające się w warunkach pokojowych.</li>
+                <li><strong>Przedszkole Sukulentów:</strong> Małe białe doniczki z młodymi sansewieriami oraz pojedynczymi sadzonkami zamiokulkasów.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="zone-header">🌸 Wiszące i Parapety Wewnętrzne (Pasja: Hoye)</div>
+            <ul class="plant-list">
+                <li><strong>Hoya carnosa 'Tricolor' [Wisząca pleciona kula]:</strong> Absolutny klejnot kolekcji. Cudowne pnącze o liściach z szerokim kremowo-białym i pastelowo-różowym marginesem.</li>
+                <li><strong>Hoya kerrii / grubolistna [Przy żelazku]:</strong> Odmiana o niesamowicie mięsistych, grubych liściach (część w kształcie serca), potrzebująca wsparcia patyczka.</li>
+                <li><strong>Przedszkole Hoyi (Inkubator na oknie):</strong> Rządek małych białych doniczek na parapecie z pieczołowicie ukorzenianymi młodymi sadzonkami woskowatych hoyi.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="zone-header">☀️ Słoneczny Balkon Warszawski (Fikusy)</div>
+            <ul class="plant-list">
+                <li><strong>Fikus Benjamina (Klasyczny zielony):</strong> Duże, zdrowe drzewko w szarej donicy, świetnie zagęszczone.</li>
+                <li><strong>Fikus Benjamina 'Variegata':</strong> Odmiana o drobnych, biało-zielonych liściach. Posiadasz duży egzemplarz oraz całą serię małych sadzonkowych klonów na zewnętrznym parapecie.</li>
+                <li><strong>Fikus Sprężysty (Ficus elastica):</strong> Wysokie, strukturalne drzewo (obecnie w fazie intensywnej regeneracji po poparzeniu słonecznym).</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>2. Tabela Podlewania w Warunkach Warszawskich</h2>
+    <p>W mieszkaniu parowanie jest stabilne, natomiast na słonecznym balkonie fikusy piją znacznie szybciej niż rośliny w Krakowie:</p>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Grupa Roślin</th>
+                    <th>Docelowa Wilgotność</th>
+                    <th>Częstotliwość i Wskazówki Podlewania</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fikusy Benjamina (Duże na balkonie) oraz Epipremnum</td>
+                    <td><span class="badge badge-mid">Umiarkowana</span></td>
+                    <td>Podlewaj regularnie, gdy wierzchnia warstwa ziemi (ok. 3 cm) wyraźnie przeschnie. Na balkonie w upalne dni mogą wymagać wody co 2-3 dni.</td>
+                </tr>
+                <tr>
+                    <td>Hoye (Wszystkie odmiany oraz przedszkole na parapecie)</td>
+                    <td><span class="badge badge-dry">Niska (Sukulentyczna)</span></td>
+                    <td>Traktuj je jak sukulenty. Ich grube liście magazynują wodę. Podlewaj rzadko, dopiero gdy cała bryła korzeniowa dobrze przeschnie. Sadzonki w małych kubeczkach kontroluj częściej, ale mikro-porcjami.</td>
+                </tr>
+                <tr>
+                    <td>Zamiokulkas 'Raven', Sansewierie (Duże i małe sadzonki)</td>
+                    <td><span class="badge badge-dry">Skrajnie niska</span></td>
+                    <td>Całkowite przesuszenie bryły pomiędzy podlewaniami. Podlewaj raz na 2-3 tygodnie. Zamiokulkas magazynuje wodę w podziemnych bulwach – nadmiar wody go zabije.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>3. Strategia Zasilania: Hybryda Biohumusu i Plantonu</h2>
+    <p>W Warszawie nawozy mineralne stosujemy ostrożnie – **zmniejsz dawkę Plantonu o połowę** (pół łyżeczki na 5 litrów wody), by nie zasolić małych doniczek.</p>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rodzaj Nawozu</th>
+                    <th>Przypisane Rośliny w Warszawie</th>
+                    <th>Częstotliwość i Cel Stosowania</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-z">Planton Z (Zielone)</span></td>
+                    <td>Zdrowe Fikusy Benjamina (duże i sadzonki na balkonie) oraz Epipremnum.</td>
+                    <td>Raz na 3 tygodnie (od kwietnia do końca sierpnia). Buduje potężną, soczystą masę zielonych liści.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-k">Planton K (Kwitnące)</span></td>
+                    <td><strong>Tajna Broń:</strong> Wszystkie Hoye (wisząca Tricolor, sercowata i przedszkole).</td>
+                    <td>Raz na 3 tygodnie. Potas i fosfor w nim zawarte stymulują hoye do zakładania woskowych baldachów kwiatowych.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-bio">Biohumus (Organiczny)</span></td>
+                    <td><strong>Wszyscy lokatorzy:</strong> Głównie chory Fikus sprężysty, Zamiokulkasy, Sansewierie i młode siewki.</td>
+                    <td>Można stosować bezpiecznie do każdego podlewania. Idealnie odżywia podłoże bez ryzyka przenawożenia młodych sadzonek.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>4. 🐈 Warszawski Alert Bezpieczeństwa dla Kota</h2>
+    <p>Twoja nowa pasja kolekcjonerska (Hoye) przynosi genialne wieści dla Twojego czworonoga!</p>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr style="background-color: #c92a2a; color: white;">
+                    <th>Status Toksyczności</th>
+                    <th>Gatunki w Twoim Mieszkaniu</th>
+                    <th>Środki Ostrożności</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-toxic">TOKSYCZNE</span></td>
+                    <td>
+                        • <strong>Wszystkie Fikusy:</strong> Ich sok mleczny zawiera lateks (silne zatrucia).<br>
+                        • <strong>Zamiokulkasy:</strong> Zawierają kryształy szczawianu wapnia.<br>
+                        • <strong>Sansewierie:</strong> Zawierają wywołujące mdłości saponiny.<br>
+                        • <strong>Epipremnum:</strong> Powoduje silne podrażnienia pyszczka.
+                    </td>
+                    <td>Wszystkie te rośliny (zwłaszcza stojące na podłodze duże fikusy czy zamiokulkas) powinny być pod stałą kontrolą, jeśli kot wykazuje tendencję do podgryzania liści.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-safe">100% BEZPIECZNE</span></td>
+                    <td>
+                        • <strong>Wszystkie HOYE (Woskownice):</strong> Wisząca Tricolor, sercowata oraz całe przedszkole sadzonek na parapecie.
+                    </td>
+                    <td>Genialna wiadomość! Twoje niesamowite przedszkole hoyi może stać w dowolnym miejscu. Nawet jeśli kot z ciekawości skubnie liść woskownicy, jest w pełni bezpieczny.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>5. Pro-Tipy Ogrodnika dla Roślin Domowych w Warszawie</h2>
+    <div class="pro-tip">
+        <h4>🧼 Spa dla liści (Zamiokulkas 'Raven' + Fikusy)</h4>
+        <p>Czarne liście odmiany 'Raven' oraz duże blaszki fikusów błyskawicznie łapią kurz w miejskim mieszkaniu, co blokuje fotosyntezę. Raz na miesiąc przemyj je miękką szmatką zwilżoną wodą z kroplą soku z cytryny – zmyjesz osady z twardej wody i nadasz im niesamowity, głęboki blask.</p>
+    </div>
+    <div class="pro-tip">
+        <h4>🥦 Woda po gotowaniu warzyw jako booster mikroflory</h4>
+        <p>Twoje epipremnum oraz fikusy oszaleją ze szczęścia, jeśli raz na jakiś czas podlejesz je **całkowicie niesoloną** i ostudzoną wodą po gotowaniu warzyw lub jajek. To darmowy zastrzyk skrobi i minerałów, które świetnie współgrają z Biohumusem.</p>
+    </div>
+</div>
+
+<footer>
+    <p>Poradnik Ogrodniczy Warszawa V1.0 – Marcin. Idealny balans pomiędzy pasją hodowlaną a bezpieczeństwem domu. Niech rośnie zdrowo!</p>
+</footer>
+
+</body>
+</html>
