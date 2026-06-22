@@ -95,12 +95,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   <div class="divider"><span>BPM FINDER</span></div>
 
   <div class="row">
-    <input type="password" class="field" id="apiKey" placeholder="Klucz API GetSongBPM…" style="font-family:monospace;font-size:13px">
-    <button class="btn-orange" onclick="saveKey()">ZAPISZ</button>
-  </div>
-  <div class="status" id="keyStatus">Klucz nie ustawiony</div>
-
-  <div class="row">
     <input type="text" class="field" id="searchInput" placeholder="Artysta – tytuł…">
     <button class="btn-orange" id="searchBtn" onclick="doSearch()">⌕</button>
   </div>
@@ -113,10 +107,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 </div>
 <script>
-const API = 'https://api.getsong.co';
+const API = '/api/bpm';
 let bpm=80, sig=4, isPlaying=false, tapTimes=[];
 let audioCtx=null, schedId=null, nextTime=0, beatIdx=0;
-let apiKey='';
 const LA=25, AH=0.1;
 const TMAP=[[0,'Larghissimo'],[40,'Largo'],[60,'Larghetto'],[66,'Adagio'],[76,'Andante'],[108,'Moderato'],[120,'Allegretto'],[132,'Allegro'],[168,'Vivace'],[176,'Presto'],[200,'Prestissimo']];
 const tname=b=>{let n=TMAP[0][1];for(const[t,l]of TMAP)if(b>=t)n=l;return n};
@@ -169,35 +162,22 @@ function tapTempo(){
   if(tapTimes.length>=2){const d=tapTimes.slice(1).map((t,i)=>t-tapTimes[i]);setBpm(Math.round(60000/(d.reduce((a,b)=>a+b,0)/d.length)));}
 }
 
-function saveKey(){
-  const k=document.getElementById('apiKey').value.trim();
-  if(!k)return;
-  apiKey=k;
-  document.getElementById('apiKey').value='';
-  setStatus('✓ Klucz ustawiony — gotowy do wyszukiwania','var(--green)');
-}
-function setStatus(msg,color){const el=document.getElementById('keyStatus');el.textContent=msg;el.style.color=color||'var(--muted)';}
-
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
 async function doSearch(){
   const q=document.getElementById('searchInput').value.trim();
   if(!q)return;
-  if(!apiKey){document.getElementById('results').innerHTML='<div class="msg">Najpierw wklej klucz API powyżej</div>';return;}
   const btn=document.getElementById('searchBtn');
   btn.textContent='…';btn.disabled=true;
   document.getElementById('results').innerHTML='';
   try{
-    const url=`${API}/search/?api_key=${apiKey}&type=song&lookup=${encodeURIComponent(q)}&limit=5`;
-    const res=await fetch(url);
-    if(res.status===401||res.status===403){setStatus('✗ Nieprawidłowy klucz API','var(--red)');return;}
+    const res=await fetch(`${API}?q=${encodeURIComponent(q)}`);
+    if(!res.ok){document.getElementById('results').innerHTML='<div class="msg">Błąd połączenia z serwerem</div>';return;}
     const data=await res.json();
     const songs=data.search||[];
     if(!songs.length){document.getElementById('results').innerHTML='<div class="msg">Nie znaleziono utworów</div>';return;}
-
-    // Fetch BPM for each song in parallel
     const details=await Promise.all(
-      songs.map(s=>fetch(`${API}/song/?api_key=${apiKey}&id=${s.id}`).then(r=>r.json()).catch(()=>null))
+      songs.map(s=>fetch(`${API}?id=${s.id}`).then(r=>r.json()).catch(()=>null))
     );
     const items=songs.map((s,i)=>{
       const d=details[i]?.song;
@@ -205,11 +185,7 @@ async function doSearch(){
     });
     showResults(items);
   }catch(e){
-    if(e.message&&e.message.includes('CORS')||e.name==='TypeError'){
-      document.getElementById('results').innerHTML='<div class="msg">Błąd CORS — API nie obsługuje zapytań z przeglądarki</div>';
-    }else{
-      document.getElementById('results').innerHTML='<div class="msg">Błąd połączenia</div>';
-    }
+    document.getElementById('results').innerHTML='<div class="msg">Błąd połączenia</div>';
   }finally{btn.textContent='⌕';btn.disabled=false;}
 }
 
