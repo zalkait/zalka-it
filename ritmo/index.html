@@ -5,166 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>RITMO</title>
 <style>
-:root {
-  --bg:      #0C0C0C;
-  --card:    #161616;
-  --border:  #272727;
-  --org:     #F97316;
-  --org-dim: rgba(249,115,22,0.15);
-  --txt:     #F0F0F0;
-  --muted:   #555;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-body {
-  background: var(--bg);
-  color: var(--txt);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-}
-
-.app {
-  width: 100%;
-  max-width: 440px;
-  padding: 28px 16px 56px;
-}
-
-/* Header */
-.header { text-align: center; margin-bottom: 32px; }
-.logo   { font-size: 10px; letter-spacing: 6px; color: var(--muted); text-transform: uppercase; margin-bottom: 3px; }
-.sub    { font-size: 9px; color: #333; letter-spacing: 3px; }
-
-/* Beat dots */
-.beats  { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 28px; min-height: 20px; }
-.beat   { width: 11px; height: 11px; border-radius: 50%; background: #1E1E1E; transition: background 0.04s, box-shadow 0.04s; flex-shrink: 0; }
-.beat.accent { width: 16px; height: 16px; background: #2A2A2A; border: 1px solid #3A3A3A; }
-.beat.active { background: var(--org) !important; box-shadow: 0 0 10px var(--org), 0 0 22px rgba(249,115,22,.35); border-color: var(--org) !important; }
-
-/* BPM number */
-.bpm-display {
-  text-align: center;
-  font-size: 96px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -5px;
-  font-family: 'Courier New', Courier, monospace;
-  color: var(--txt);
-  transition: color 0.3s;
-  user-select: none;
-  margin-bottom: 6px;
-}
-.bpm-display.playing { color: var(--org); }
-.tempo-label { text-align: center; font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 22px; }
-
-/* Slider */
-.slider-wrap { padding: 0 4px; margin-bottom: 18px; }
-input[type=range] {
-  -webkit-appearance: none; appearance: none;
-  width: 100%; height: 3px; border-radius: 2px;
-  background: #222; cursor: pointer;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--org); cursor: pointer;
-  box-shadow: 0 0 8px rgba(249,115,22,.5);
-}
-.slider-labels { display: flex; justify-content: space-between; color: #333; font-size: 10px; margin-top: 5px; }
-
-/* ±BPM */
-.adj-row { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
-.btn-adj {
-  background: var(--card); border: 1px solid var(--border);
-  color: #AAA; border-radius: 8px;
-  padding: 12px 14px; font-size: 13px; cursor: pointer;
-  font-family: monospace; font-weight: 600;
-  min-width: 56px; letter-spacing: .5px;
-  transition: background .1s;
-}
-.btn-adj:active { background: #222; }
-
-/* Signature */
-.sig-row { display: flex; gap: 6px; justify-content: center; margin-bottom: 24px; }
-.btn-sig {
-  background: var(--card); border: 1px solid var(--border);
-  color: var(--muted); border-radius: 7px;
-  padding: 10px 16px; font-size: 13px; cursor: pointer;
-  transition: all .15s;
-}
-.btn-sig.active {
-  background: var(--org-dim);
-  border-color: var(--org);
-  color: var(--org);
-  font-weight: 700;
-}
-
-/* Play / Tap */
-.main-row { display: flex; gap: 10px; margin-bottom: 36px; }
-.btn-play {
-  flex: 2; background: var(--org); color: #FFF;
-  border: none; border-radius: 12px;
-  padding: 22px 0; font-size: 15px; font-weight: 800;
-  cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
-  box-shadow: 0 0 24px rgba(249,115,22,.3);
-  transition: all .2s;
-}
-.btn-play.playing { background: #3B1FA8; box-shadow: 0 0 24px rgba(124,58,237,.3); }
-.btn-tap {
-  flex: 1; background: var(--card); color: #CCC;
-  border: 1px solid var(--border); border-radius: 12px;
-  padding: 22px 0; font-size: 13px; font-weight: 700;
-  cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
-  transition: background .1s;
-}
-.btn-tap:active { background: #222; }
-
-/* Divider */
-.divider { position: relative; border-top: 1px solid var(--border); margin-bottom: 24px; }
-.divider span {
-  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-  background: var(--bg); padding: 0 12px;
-  font-size: 9px; color: #333; letter-spacing: 4px; text-transform: uppercase;
-}
-
-/* Search */
-.search-row { display: flex; gap: 8px; margin-bottom: 14px; }
-.search-input {
-  flex: 1; background: var(--card); border: 1px solid var(--border);
-  border-radius: 9px; color: var(--txt);
-  padding: 14px; font-size: 14px; outline: none;
-  font-family: inherit; transition: border-color .2s;
-}
-.search-input:focus { border-color: var(--org); }
-.btn-search {
-  background: var(--org-dim); border: 1px solid var(--org);
-  color: var(--org); border-radius: 9px;
-  padding: 0 18px; font-size: 22px; cursor: pointer;
-  transition: all .2s;
-}
-.btn-search:disabled { background: var(--card); border-color: var(--border); color: var(--muted); cursor: default; }
-
-/* Result */
-.result-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 16px;
-  animation: fadeIn .3s ease;
-}
-.result-meta  { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
-.result-body  { display: flex; align-items: center; justify-content: space-between; }
-.result-bpm   { font-size: 48px; font-weight: 800; font-family: monospace; color: var(--org); letter-spacing: -2px; }
-.result-bpm span { font-size: 16px; font-weight: 400; color: var(--muted); margin-left: 4px; }
-.btn-apply {
-  background: var(--org-dim); color: var(--org);
-  border: 1px solid var(--org); border-radius: 9px;
-  padding: 13px 22px; font-size: 13px; font-weight: 800;
-  cursor: pointer; letter-spacing: 1px; transition: all .2s;
-}
-.btn-apply.flash { background: var(--org); color: #000; }
-.result-none { color: var(--muted); font-size: 13px; text-align: center; padding: 8px 0; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; } }
+:root{--bg:#0C0C0C;--card:#161616;--border:#272727;--org:#F97316;--org-dim:rgba(249,115,22,.15);--txt:#F0F0F0;--muted:#555;--green:#22C55E;--red:#EF4444}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--txt);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
+.app{width:100%;max-width:440px;padding:28px 16px 56px}
+.header{text-align:center;margin-bottom:32px}
+.logo{font-size:10px;letter-spacing:6px;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
+.sub{font-size:9px;color:#333;letter-spacing:3px}
+.beats{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:24px;min-height:20px}
+.beat{width:11px;height:11px;border-radius:50%;background:#1E1E1E;transition:background .05s;flex-shrink:0;border:2px solid transparent}
+.beat.acc{width:15px;height:15px;background:#2A2A2A;border-color:#3A3A3A}
+.beat.on{background:var(--org)!important;border-color:var(--org)!important}
+.bpm-display{text-align:center;font-size:88px;font-weight:800;line-height:1;letter-spacing:-5px;font-family:'Courier New',monospace;color:var(--txt);transition:color .3s;user-select:none;margin-bottom:4px}
+.bpm-display.playing{color:var(--org)}
+.tempo-label{text-align:center;font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
+.slider-wrap{padding:0 4px;margin-bottom:16px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:2px;background:#222;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--org);cursor:pointer;box-shadow:0 0 8px rgba(249,115,22,.4)}
+.slider-labels{display:flex;justify-content:space-between;color:#333;font-size:10px;margin-top:4px}
+.adj-row{display:flex;gap:6px;justify-content:center;margin-bottom:18px}
+.btn-adj{background:var(--card);border:1px solid var(--border);color:#AAA;border-radius:8px;padding:12px 14px;font-size:13px;cursor:pointer;font-family:monospace;font-weight:600;min-width:56px;letter-spacing:.5px}
+.btn-adj:active{background:#222}
+.sig-row{display:flex;gap:6px;justify-content:center;margin-bottom:22px}
+.btn-sig{background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:10px 16px;font-size:13px;cursor:pointer;transition:all .15s}
+.btn-sig.active{background:var(--org-dim);border-color:var(--org);color:var(--org);font-weight:700}
+.main-row{display:flex;gap:10px;margin-bottom:32px}
+.btn-play{flex:2;background:var(--org);color:#fff;border:none;border-radius:12px;padding:22px 0;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:2px;text-transform:uppercase;box-shadow:0 0 24px rgba(249,115,22,.25);transition:all .2s}
+.btn-play.playing{background:#3B1FA8;box-shadow:0 0 24px rgba(124,58,237,.25)}
+.btn-tap{flex:1;background:var(--card);color:#CCC;border:1px solid var(--border);border-radius:12px;padding:22px 0;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;text-transform:uppercase}
+.btn-tap:active{background:#222}
+.divider{position:relative;border-top:1px solid var(--border);margin-bottom:22px}
+.divider span{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--bg);padding:0 12px;font-size:9px;color:#333;letter-spacing:4px;text-transform:uppercase}
+.field{background:var(--card);border:1px solid var(--border);border-radius:9px;color:var(--txt);padding:13px 14px;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;width:100%}
+.field:focus{border-color:var(--org)}
+.field::placeholder{color:var(--muted)}
+.row{display:flex;gap:8px;margin-bottom:10px;align-items:stretch}
+.btn-orange{background:var(--org-dim);color:var(--org);border:1px solid var(--org);border-radius:9px;padding:0 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:.5px;transition:all .15s;flex-shrink:0}
+.btn-orange:active{background:var(--org);color:#000}
+.status{font-size:11px;margin-bottom:14px;min-height:16px;color:var(--muted)}
+.track{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.track-info{flex:1;min-width:0}
+.track-name{font-size:13px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.track-artist{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track-bpm{font-size:24px;font-weight:800;font-family:monospace;color:var(--org);flex-shrink:0;letter-spacing:-1px}
+.btn-set{background:var(--org);color:#000;border:none;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0;letter-spacing:.5px;transition:all .15s;white-space:nowrap}
+.btn-set.ok{background:var(--green)!important;color:#fff}
+.msg{text-align:center;font-size:13px;color:var(--muted);padding:14px 0}
+.powered{text-align:center;margin-top:20px;font-size:10px;color:#333}
+.powered a{color:#444;text-decoration:none}
+.powered a:hover{color:var(--org)}
 </style>
 </head>
 <body>
@@ -176,7 +65,6 @@ input[type=range]::-webkit-slider-thumb {
   </div>
 
   <div class="beats" id="beats"></div>
-
   <div class="bpm-display" id="bpmDisplay">80</div>
   <div class="tempo-label" id="tempoLabel">BPM · Andante</div>
 
@@ -201,210 +89,154 @@ input[type=range]::-webkit-slider-thumb {
 
   <div class="main-row">
     <button class="btn-play" id="playBtn" onclick="togglePlay()">▶  START</button>
-    <button class="btn-tap"           onclick="tapTempo()">TAP</button>
+    <button class="btn-tap" onclick="tapTempo()">TAP</button>
   </div>
 
   <div class="divider"><span>BPM FINDER</span></div>
 
-  <div class="search-row">
-    <input type="text" class="search-input" id="searchInput" placeholder="Artysta – tytuł utworu...">
-    <button class="btn-search" onclick="openTunebat()" title="Szukaj na Tunebat">⌕</button>
+  <div class="row">
+    <input type="password" class="field" id="apiKey" placeholder="Klucz API GetSongBPM…" style="font-family:monospace;font-size:13px">
+    <button class="btn-orange" onclick="saveKey()">ZAPISZ</button>
+  </div>
+  <div class="status" id="keyStatus">Klucz nie ustawiony</div>
+
+  <div class="row">
+    <input type="text" class="field" id="searchInput" placeholder="Artysta – tytuł…">
+    <button class="btn-orange" id="searchBtn" onclick="doSearch()">⌕</button>
   </div>
 
-  <p style="font-size:12px;color:var(--muted);text-align:center;margin:0 0 14px">
-    Otwiera Tunebat · wróć i wpisz BPM poniżej
-  </p>
+  <div id="results"></div>
 
-  <div style="display:flex;gap:8px;align-items:stretch">
-    <input type="number" id="manualBpm" placeholder="BPM np. 128"
-      min="20" max="240" step="1"
-      style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:9px;color:var(--txt);padding:14px;font-size:22px;font-family:monospace;font-weight:700;outline:none;text-align:center;transition:border-color .2s;-moz-appearance:textfield">
-    <button onclick="applyManual()"
-      style="background:var(--org);color:#000;border:none;border-radius:9px;padding:0 22px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:1px;white-space:nowrap"
-      id="applyManBtn">USTAW</button>
+  <div class="powered">
+    BPM data: <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM.com</a>
   </div>
 
 </div>
-
 <script>
-// ── State ──────────────────────────────────────
-let bpm        = 80;
-let sig        = 4;
-let isPlaying  = false;
-let tapTimes   = [];
+const API = 'https://api.getsong.co';
+let bpm=80, sig=4, isPlaying=false, tapTimes=[];
+let audioCtx=null, schedId=null, nextTime=0, beatIdx=0;
+let apiKey='';
+const LA=25, AH=0.1;
+const TMAP=[[0,'Larghissimo'],[40,'Largo'],[60,'Larghetto'],[66,'Adagio'],[76,'Andante'],[108,'Moderato'],[120,'Allegretto'],[132,'Allegro'],[168,'Vivace'],[176,'Presto'],[200,'Prestissimo']];
+const tname=b=>{let n=TMAP[0][1];for(const[t,l]of TMAP)if(b>=t)n=l;return n};
 
-// ── Audio scheduler ────────────────────────────
-let audioCtx   = null;
-let schedId    = null;
-let nextTime   = 0;
-let beatIdx    = 0;
-
-const LOOKAHEAD = 25;        // ms interval
-const AHEAD     = 0.1;       // s lookahead
-
-function ctx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
+function getCtx(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
   return audioCtx;
 }
+function scheduleClick(beat,time){
+  const c=getCtx(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);
+  o.frequency.setValueAtTime(beat===0?1400:900,time);
+  g.gain.setValueAtTime(beat===0?0.9:0.55,time);
+  g.gain.exponentialRampToValueAtTime(0.001,time+0.045);
+  o.start(time);o.stop(time+0.05);
+  setTimeout(()=>flashBeat(beat),Math.max(0,(time-getCtx().currentTime)*1000));
+}
+function scheduler(){const c=getCtx();while(nextTime<c.currentTime+AH){scheduleClick(beatIdx,nextTime);nextTime+=60/bpm;beatIdx=(beatIdx+1)%sig;}}
+function startMetronome(){const c=getCtx();beatIdx=0;nextTime=c.currentTime+0.05;schedId=setInterval(scheduler,LA);isPlaying=true;syncBtn();}
+function stopMetronome(){clearInterval(schedId);isPlaying=false;syncBtn();flashBeat(-1);}
+function togglePlay(){isPlaying?stopMetronome():startMetronome();}
 
-function scheduleClick(beat, time) {
-  const c   = ctx();
-  const osc = c.createOscillator();
-  const g   = c.createGain();
-  osc.connect(g);
-  g.connect(c.destination);
-  const accent = beat === 0;
-  osc.frequency.setValueAtTime(accent ? 1400 : 900, time);
-  g.gain.setValueAtTime(accent ? 0.9 : 0.55, time);
-  g.gain.exponentialRampToValueAtTime(0.001, time + 0.045);
-  osc.start(time);
-  osc.stop(time + 0.05);
-  const ms = Math.max(0, (time - c.currentTime) * 1000);
-  setTimeout(() => flashBeat(beat), ms);
+function renderDots(){
+  const el=document.getElementById('beats');el.innerHTML='';
+  for(let i=0;i<sig;i++){const d=document.createElement('div');d.className='beat'+(i===0?' acc':'');d.id='d'+i;el.appendChild(d);}
+}
+function flashBeat(b){for(let i=0;i<sig;i++){const d=document.getElementById('d'+i);if(d)d.classList.toggle('on',i===b);}}
+
+function setBpm(v){
+  bpm=Math.min(240,Math.max(20,Math.round(+v)));
+  document.getElementById('bpmDisplay').textContent=bpm;
+  document.getElementById('tempoLabel').textContent='BPM · '+tname(bpm);
+  document.getElementById('bpmSlider').value=bpm;
+}
+function changeBpm(d){setBpm(bpm+d);}
+document.getElementById('bpmSlider').addEventListener('input',e=>setBpm(e.target.value));
+
+function setSig(n){sig=n;beatIdx=0;renderDots();document.querySelectorAll('.btn-sig').forEach((b,i)=>b.classList.toggle('active',[2,3,4,6][i]===n));}
+
+function syncBtn(){
+  const b=document.getElementById('playBtn'),n=document.getElementById('bpmDisplay');
+  if(isPlaying){b.textContent='■  STOP';b.classList.add('playing');n.classList.add('playing');}
+  else{b.textContent='▶  START';b.classList.remove('playing');n.classList.remove('playing');}
 }
 
-function scheduler() {
-  const c = ctx();
-  while (nextTime < c.currentTime + AHEAD) {
-    scheduleClick(beatIdx, nextTime);
-    nextTime += 60 / bpm;
-    beatIdx = (beatIdx + 1) % sig;
-  }
+function tapTempo(){
+  const now=Date.now();
+  tapTimes=tapTimes.filter(t=>now-t<3500);tapTimes.push(now);tapTimes=tapTimes.slice(-8);
+  if(tapTimes.length>=2){const d=tapTimes.slice(1).map((t,i)=>t-tapTimes[i]);setBpm(Math.round(60000/(d.reduce((a,b)=>a+b,0)/d.length)));}
 }
 
-function startMetronome() {
-  const c = ctx();
-  beatIdx  = 0;
-  nextTime = c.currentTime + 0.05;
-  schedId  = setInterval(scheduler, LOOKAHEAD);
-  isPlaying = true;
-  syncPlayBtn();
+function saveKey(){
+  const k=document.getElementById('apiKey').value.trim();
+  if(!k)return;
+  apiKey=k;
+  document.getElementById('apiKey').value='';
+  setStatus('✓ Klucz ustawiony — gotowy do wyszukiwania','var(--green)');
+}
+function setStatus(msg,color){const el=document.getElementById('keyStatus');el.textContent=msg;el.style.color=color||'var(--muted)';}
+
+document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+
+async function doSearch(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q)return;
+  if(!apiKey){document.getElementById('results').innerHTML='<div class="msg">Najpierw wklej klucz API powyżej</div>';return;}
+  const btn=document.getElementById('searchBtn');
+  btn.textContent='…';btn.disabled=true;
+  document.getElementById('results').innerHTML='';
+  try{
+    const url=`${API}/search/?api_key=${apiKey}&type=song&lookup=${encodeURIComponent(q)}&limit=5`;
+    const res=await fetch(url);
+    if(res.status===401||res.status===403){setStatus('✗ Nieprawidłowy klucz API','var(--red)');return;}
+    const data=await res.json();
+    const songs=data.search||[];
+    if(!songs.length){document.getElementById('results').innerHTML='<div class="msg">Nie znaleziono utworów</div>';return;}
+
+    // Fetch BPM for each song in parallel
+    const details=await Promise.all(
+      songs.map(s=>fetch(`${API}/song/?api_key=${apiKey}&id=${s.id}`).then(r=>r.json()).catch(()=>null))
+    );
+    const items=songs.map((s,i)=>{
+      const d=details[i]?.song;
+      return{name:s.title||s.name,artist:s.artist?.name||'',bpm:d?.tempo?parseInt(d.tempo):null};
+    });
+    showResults(items);
+  }catch(e){
+    if(e.message&&e.message.includes('CORS')||e.name==='TypeError'){
+      document.getElementById('results').innerHTML='<div class="msg">Błąd CORS — API nie obsługuje zapytań z przeglądarki</div>';
+    }else{
+      document.getElementById('results').innerHTML='<div class="msg">Błąd połączenia</div>';
+    }
+  }finally{btn.textContent='⌕';btn.disabled=false;}
 }
 
-function stopMetronome() {
-  clearInterval(schedId);
-  isPlaying = false;
-  syncPlayBtn();
-  flashBeat(-1);
+function showResults(items){
+  const box=document.getElementById('results');
+  if(!items.length){box.innerHTML='<div class="msg">Brak wyników</div>';return;}
+  box.innerHTML=items.map((r,i)=>`
+    <div class="track">
+      <div class="track-info">
+        <div class="track-name">${r.name}</div>
+        <div class="track-artist">${r.artist}</div>
+      </div>
+      ${r.bpm
+        ?`<div class="track-bpm">${r.bpm}</div><button class="btn-set" id="s${i}" onclick="applyBpm(${r.bpm},${i})">USTAW</button>`
+        :`<div style="font-size:11px;color:var(--muted)">brak BPM</div>`}
+    </div>`).join('');
 }
 
-function togglePlay() {
-  isPlaying ? stopMetronome() : startMetronome();
-}
-
-// ── Beat dots ──────────────────────────────────
-function renderDots() {
-  const el = document.getElementById('beats');
-  el.innerHTML = '';
-  for (let i = 0; i < sig; i++) {
-    const d = document.createElement('div');
-    d.className = 'beat' + (i === 0 ? ' accent' : '');
-    d.id = 'dot-' + i;
-    el.appendChild(d);
-  }
-}
-
-function flashBeat(beat) {
-  for (let i = 0; i < sig; i++) {
-    const d = document.getElementById('dot-' + i);
-    if (d) d.classList.toggle('active', i === beat);
-  }
-}
-
-// ── BPM ───────────────────────────────────────
-const TEMPO_MAP = [
-  [0,'Larghissimo'],[40,'Largo'],[60,'Larghetto'],
-  [66,'Adagio'],[76,'Andante'],[108,'Moderato'],
-  [120,'Allegretto'],[132,'Allegro'],[168,'Vivace'],
-  [176,'Presto'],[200,'Prestissimo']
-];
-function tempoName(b) {
-  let n = TEMPO_MAP[0][1];
-  for (const [t,l] of TEMPO_MAP) if (b >= t) n = l;
-  return n;
-}
-
-function setBpm(val) {
-  bpm = Math.min(240, Math.max(30, Math.round(+val)));
-  document.getElementById('bpmDisplay').textContent = bpm;
-  document.getElementById('tempoLabel').textContent = 'BPM · ' + tempoName(bpm);
-  document.getElementById('bpmSlider').value = bpm;
-}
-
-function changeBpm(d) { setBpm(bpm + d); }
-
-document.getElementById('bpmSlider').addEventListener('input', e => setBpm(e.target.value));
-
-// ── Signature ─────────────────────────────────
-function setSig(n) {
-  sig = n;
-  beatIdx = 0;
-  renderDots();
-  document.querySelectorAll('.btn-sig').forEach((b, i) => {
-    b.classList.toggle('active', [2,3,4,6][i] === n);
-  });
-}
-
-// ── Play button ───────────────────────────────
-function syncPlayBtn() {
-  const btn = document.getElementById('playBtn');
-  const num = document.getElementById('bpmDisplay');
-  if (isPlaying) {
-    btn.textContent = '■  STOP';
-    btn.classList.add('playing');
-    num.classList.add('playing');
-  } else {
-    btn.textContent = '▶  START';
-    btn.classList.remove('playing');
-    num.classList.remove('playing');
-  }
-}
-
-// ── Tap tempo ─────────────────────────────────
-function tapTempo() {
-  const now = Date.now();
-  tapTimes  = tapTimes.filter(t => now - t < 3500);
-  tapTimes.push(now);
-  tapTimes  = tapTimes.slice(-8);
-  if (tapTimes.length >= 2) {
-    const diffs = tapTimes.slice(1).map((t,i) => t - tapTimes[i]);
-    const avg   = diffs.reduce((a,b) => a + b, 0) / diffs.length;
-    setBpm(Math.round(60000 / avg));
-  }
-}
-
-// ── BPM Finder — Tunebat + manual input ───────
-function openTunebat() {
-  const q = document.getElementById('searchInput').value.trim();
-  const url = q
-    ? 'https://tunebat.com/Search?q=' + encodeURIComponent(q)
-    : 'https://tunebat.com';
-  window.open(url, '_blank');
-}
-
-function applyManual() {
-  const val = parseInt(document.getElementById('manualBpm').value, 10);
-  if (!val || val < 20 || val > 240) return;
+function applyBpm(val,i){
   setBpm(val);
-  document.getElementById('manualBpm').value = '';
-  const btn = document.getElementById('applyManBtn');
-  btn.textContent = '✓ OK';
-  setTimeout(() => { btn.textContent = 'USTAW'; }, 900);
+  const b=document.getElementById('s'+i);
+  if(!b)return;
+  b.textContent='✓ OK';b.classList.add('ok');
+  setTimeout(()=>{b.textContent='USTAW';b.classList.remove('ok');},1000);
 }
 
-document.getElementById('manualBpm').addEventListener('keydown', e => {
-  if (e.key === 'Enter') applyManual();
-});
-
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') openTunebat();
-});
-
-// ── Init ──────────────────────────────────────
-renderDots();
-setBpm(80);
+renderDots();setBpm(80);
 </script>
-<a href="https://getsongbpm.com">BPM data: GetSongBPM.com</a>
 </body>
 </html>
