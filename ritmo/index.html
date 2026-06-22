@@ -177,11 +177,11 @@ input[type=range]::-webkit-slider-thumb {
 
   <div class="beats" id="beats"></div>
 
-  <div class="bpm-display" id="bpmDisplay">120</div>
-  <div class="tempo-label" id="tempoLabel">BPM · Allegretto</div>
+  <div class="bpm-display" id="bpmDisplay">80</div>
+  <div class="tempo-label" id="tempoLabel">BPM · Andante</div>
 
   <div class="slider-wrap">
-    <input type="range" id="bpmSlider" min="20" max="240" value="120">
+    <input type="range" id="bpmSlider" min="20" max="240" value="80">
     <div class="slider-labels"><span>20</span><span>240</span></div>
   </div>
 
@@ -208,16 +208,27 @@ input[type=range]::-webkit-slider-thumb {
 
   <div class="search-row">
     <input type="text" class="search-input" id="searchInput" placeholder="Artysta – tytuł utworu...">
-    <button class="btn-search" id="searchBtn" onclick="doSearch()">⌕</button>
+    <button class="btn-search" onclick="openTunebat()" title="Szukaj na Tunebat">⌕</button>
   </div>
 
-  <div id="resultBox"></div>
+  <p style="font-size:12px;color:var(--muted);text-align:center;margin:0 0 14px">
+    Otwiera Tunebat · wróć i wpisz BPM poniżej
+  </p>
+
+  <div style="display:flex;gap:8px;align-items:stretch">
+    <input type="number" id="manualBpm" placeholder="BPM np. 128"
+      min="20" max="240" step="1"
+      style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:9px;color:var(--txt);padding:14px;font-size:22px;font-family:monospace;font-weight:700;outline:none;text-align:center;transition:border-color .2s;-moz-appearance:textfield">
+    <button onclick="applyManual()"
+      style="background:var(--org);color:#000;border:none;border-radius:9px;padding:0 22px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:1px;white-space:nowrap"
+      id="applyManBtn">USTAW</button>
+  </div>
 
 </div>
 
 <script>
 // ── State ──────────────────────────────────────
-let bpm        = 120;
+let bpm        = 80;
 let sig        = 4;
 let isPlaying  = false;
 let tapTimes   = [];
@@ -363,80 +374,36 @@ function tapTempo() {
   }
 }
 
-// ── BPM search ────────────────────────────────
-async function doSearch() {
+// ── BPM Finder — Tunebat + manual input ───────
+function openTunebat() {
   const q = document.getElementById('searchInput').value.trim();
-  if (!q) return;
-
-  const btn = document.getElementById('searchBtn');
-  btn.textContent = '…';
-  btn.disabled = true;
-  document.getElementById('resultBox').innerHTML = '';
-
-  try {
-    const res  = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        system:
-          'You are a music BPM lookup tool. Search the web for the BPM of the requested song. ' +
-          'Respond ONLY with a raw JSON object — no markdown, no backticks, no extra text:\n' +
-          '{"bpm":<integer or null>,"title":"<song title>","artist":"<artist name>","found":<true|false>}',
-        messages: [{ role: 'user', content: 'Find BPM for: ' + q }],
-      }),
-    });
-
-    const data  = await res.json();
-    const txt   = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    const clean = txt.replace(/```[\w]*\n?/g, '').trim();
-    showResult(JSON.parse(clean));
-  } catch(e) {
-    showResult({ found: false });
-  } finally {
-    btn.textContent = '⌕';
-    btn.disabled = false;
-  }
+  const url = q
+    ? 'https://tunebat.com/Search?q=' + encodeURIComponent(q)
+    : 'https://tunebat.com';
+  window.open(url, '_blank');
 }
 
-function showResult(r) {
-  const box = document.getElementById('resultBox');
-  if (r && r.found && r.bpm) {
-    const meta = [r.artist, r.title].filter(Boolean).join(' – ');
-    box.innerHTML = `
-      <div class="result-card">
-        <div class="result-meta">${meta || 'Wynik'}</div>
-        <div class="result-body">
-          <div class="result-bpm">${r.bpm}<span>BPM</span></div>
-          <button class="btn-apply" id="applyBtn" onclick="applyBpm(${r.bpm})">USTAW</button>
-        </div>
-      </div>`;
-  } else {
-    box.innerHTML = `
-      <div class="result-card">
-        <div class="result-none">Nie znaleziono BPM. Spróbuj inaczej.</div>
-      </div>`;
-  }
-}
-
-function applyBpm(val) {
+function applyManual() {
+  const val = parseInt(document.getElementById('manualBpm').value, 10);
+  if (!val || val < 20 || val > 240) return;
   setBpm(val);
-  const b = document.getElementById('applyBtn');
-  if (!b) return;
-  b.textContent = '✓ OK';
-  b.classList.add('flash');
-  setTimeout(() => { b.textContent = 'USTAW'; b.classList.remove('flash'); }, 900);
+  document.getElementById('manualBpm').value = '';
+  const btn = document.getElementById('applyManBtn');
+  btn.textContent = '✓ OK';
+  setTimeout(() => { btn.textContent = 'USTAW'; }, 900);
 }
+
+document.getElementById('manualBpm').addEventListener('keydown', e => {
+  if (e.key === 'Enter') applyManual();
+});
 
 document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
+  if (e.key === 'Enter') openTunebat();
 });
 
 // ── Init ──────────────────────────────────────
 renderDots();
-setBpm(120);
+setBpm(80);
 </script>
 </body>
 </html>
