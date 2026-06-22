@@ -13,7 +13,8 @@ module.exports = async function handler(req, res) {
   if (id) {
     url = `${BASE}/song/?api_key=${key}&id=${encodeURIComponent(id)}`;
   } else if (q) {
-    url = `${BASE}/search/?api_key=${key}&type=song&lookup=${encodeURIComponent(q)}&limit=5`;
+    const type = ['song','artist','both'].includes(req.query.type) ? req.query.type : 'both';
+    url = `${BASE}/search/?api_key=${key}&type=${type}&lookup=${encodeURIComponent(q)}&limit=10`;
   } else {
     return res.status(400).json({ error: 'Missing parameter: q or id' });
   }
