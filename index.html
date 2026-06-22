@@ -1,987 +1,1261 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="dark">
+<html lang="pl" data-theme="dark" data-lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZalkaIT — Marcin Załuski | BI / ETL Developer, Data Engineer, AI</title>
-<meta name="description" content="Marcin Załuski (ZalkaIT) — BI/ETL Developer i Data Engineer z ponad 20-letnim doświadczeniem: hurtownie danych, ETL/ELT, T-SQL, Power BI, BigQuery, COREP, AI w praktyce.">
-<meta name="keywords" content="BI Developer, ETL Developer, Data Engineer, T-SQL, PL/SQL, BigQuery, Power BI, SSIS, COREP, hurtownia danych, DWH, AI, prompt engineering">
-<meta name="author" content="Marcin Załuski">
+<title>Marcin Załuski | ZalkaIT — BI/ETL Developer, Data Engineer, AI</title>
+<meta name="description" content="Marcin Załuski — BI/ETL Developer i Data Engineer z 20-letnim doświadczeniem. T-SQL, SSIS, Power BI, BigQuery, sprawozdawczość regulacyjna COREP dla sektora bankowego.">
+<meta name="theme-color" content="#0a0e16">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="ZalkaIT — Marcin Załuski | BI / ETL Developer, Data Engineer, AI">
-<meta property="og:description" content="Ponad 20 lat doświadczenia w BI, ETL/ELT, hurtowniach danych i raportowaniu regulacyjnym. Obecnie: AI w praktyce analityka danych.">
-<meta property="og:url" content="https://zalka.it">
-<meta property="og:image" content="https://zalka.it/assets/logo-full.jpg">
+<meta property="og:title" content="Marcin Załuski | ZalkaIT — BI/ETL Developer, Data Engineer, AI">
+<meta property="og:description" content="20+ lat w BI, ETL i inżynierii danych. T-SQL, SSIS, BigQuery, Power BI, sprawozdawczość COREP, AI w pracy z danymi.">
+<meta property="og:image" content="https://www.zalka.it/assets/zalkait-lockup-1200.jpg">
+<meta property="og:url" content="https://www.zalka.it/">
 <meta property="og:locale" content="pl_PL">
+<meta name="twitter:card" content="summary_large_image">
 
-<!-- JSON-LD: Person -->
+<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Marcin Załuski",
-  "url": "https://zalka.it",
-  "jobTitle": "BI / ETL Developer, Data Engineer",
-  "worksFor": { "@type": "Organization", "name": "ZalkaIT" },
+  "jobTitle": "BI/ETL Developer & Data Engineer",
+  "url": "https://www.zalka.it/",
+  "email": "mailto:contact@zalka.it",
   "sameAs": ["https://www.linkedin.com/in/marcin-zaluski/"],
-  "knowsAbout": ["Business Intelligence", "ETL", "Data Warehousing", "T-SQL", "BigQuery", "Power BI", "COREP", "Artificial Intelligence"]
+  "worksFor": { "@type": "Organization", "name": "ZalkaIT" }
 }
 </script>
 
 <style>
-  /* =========================================================
-     DESIGN TOKENS
-     Signature element: "circuit trace" — przerywane, kątowe
-     linie inspirowane literą Z w logo ZalkaIT, używane jako
-     separatory sekcji i akcenty przy nagłówkach.
-     ========================================================= */
-  :root{
-    --bg:#0A0E17;
-    --bg-2:#0D1320;
-    --bg-card:#101828;
-    --border:rgba(45,212,232,0.16);
-    --border-strong:rgba(45,212,232,0.35);
-    --cyan:#2DD4E8;
-    --violet:#7C5CFC;
-    --red:#FF4D5E;
-    --text:#E7ECF6;
-    --text-dim:#9AA7C2;
-    --font-display:'Space Grotesk', 'Inter', sans-serif;
-    --font-body:'Inter', sans-serif;
-    --container:1180px;
-    --radius:14px;
-    --transition:0.25s ease;
-  }
-  [data-theme="light"]{
-    --bg:#F7F9FC;
-    --bg-2:#FFFFFF;
-    --bg-card:#FFFFFF;
-    --border:rgba(10,14,23,0.08);
-    --border-strong:rgba(45,212,232,0.45);
-    --cyan:#0EA5BF;
-    --violet:#6342E0;
-    --red:#E0394C;
-    --text:#0A0E17;
-    --text-dim:#4B5876;
-  }
+/* ============ RESET & BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--font-body);
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
-    transition:background var(--transition), color var(--transition);
-    overflow-x:hidden;
-  }
-  h1,h2,h3,h4{font-family:var(--font-display); line-height:1.15; font-weight:600; letter-spacing:-0.01em;}
-  a{color:var(--cyan); text-decoration:none;}
-  img{max-width:100%; display:block;}
-  .container{max-width:var(--container); margin:0 auto; padding:0 24px;}
-  section{padding:96px 0;}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--font-display); font-size:13px; letter-spacing:0.18em;
-    text-transform:uppercase; color:var(--cyan); margin-bottom:14px;
-  }
-  .eyebrow::before{
-    content:""; display:block; width:22px; height:2px; background:var(--cyan);
-  }
-  .section-title{font-size:clamp(28px,4vw,42px); margin-bottom:16px;}
-  .section-lead{color:var(--text-dim); max-width:640px; font-size:17px; margin-bottom:48px;}
+:root{
+  --bg:#0a0e16;
+  --bg-soft:#0d1320;
+  --card:rgba(255,255,255,0.035);
+  --card-border:rgba(255,255,255,0.09);
+  --text:#edf1f7;
+  --text-dim:#9aa7bc;
+  --text-faint:#5b6780;
+  --cyan:#2dd4e8;
+  --cyan-rgb:45,212,232;
+  --violet:#7c5cfc;
+  --violet-rgb:124,92,252;
+  --coral:#ff4d5e;
+  --coral-rgb:255,77,94;
+  --radius:14px;
+  --radius-sm:9px;
+  --maxw:1180px;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --shadow-glow:0 0 0 1px rgba(var(--cyan-rgb),0.14),0 18px 50px -20px rgba(var(--cyan-rgb),0.25);
+}
+html[data-theme="light"]{
+  --bg:#f5f7fb;
+  --bg-soft:#ffffff;
+  --card:#ffffff;
+  --card-border:rgba(15,23,38,0.10);
+  --text:#101726;
+  --text-dim:#48536b;
+  --text-faint:#838fa6;
+  --cyan:#0b93a8;
+  --violet:#5b3df0;
+  --shadow-glow:0 0 0 1px rgba(15,23,38,0.06),0 18px 40px -24px rgba(15,23,38,0.18);
+}
 
-  /* ---- circuit trace divider (signature element) ---- */
-  .trace{
-    width:100%; height:34px; margin:0 auto;
-    display:block;
-  }
-  .trace path{fill:none; stroke:var(--border-strong); stroke-width:1.5;}
-  .trace circle{fill:var(--cyan); opacity:0.7;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .35s ease,color .35s ease;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(var(--violet-rgb),0.14), transparent 60%),
+    radial-gradient(700px 500px at -5% 30%, rgba(var(--cyan-rgb),0.10), transparent 60%),
+    radial-gradient(circle, rgba(var(--cyan-rgb),0.05) 1px, transparent 1.4px);
+  background-size:auto,auto,26px 26px;
+}
+html[data-theme="light"] body::before{
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(var(--violet-rgb),0.08), transparent 60%),
+    radial-gradient(700px 500px at -5% 30%, rgba(var(--cyan-rgb),0.07), transparent 60%),
+    radial-gradient(circle, rgba(15,23,38,0.05) 1px, transparent 1.4px);
+  background-size:auto,auto,26px 26px;
+}
+main,header,footer{position:relative;z-index:1}
 
-  /* ---- buttons ---- */
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--font-display); font-weight:600; font-size:15px;
-    padding:13px 26px; border-radius:8px; border:1px solid transparent;
-    cursor:pointer; transition:all var(--transition); white-space:nowrap;
-  }
-  .btn-primary{background:var(--cyan); color:#06181D;}
-  .btn-primary:hover{background:var(--red); color:#fff; box-shadow:0 0 24px rgba(255,77,94,0.35); transform:translateY(-2px);}
-  .btn-outline{border-color:var(--border-strong); color:var(--text);}
-  .btn-outline:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+input,textarea,select{font:inherit;color:var(--text);background:var(--bg-soft);border:1px solid var(--card-border);border-radius:var(--radius-sm)}
 
-  /* ===================== NAVBAR ===================== */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:1000;
-    background:rgba(10,14,23,0.72); backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border);
-    transition:background var(--transition), border-color var(--transition);
-  }
-  [data-theme="light"] header{background:rgba(247,249,252,0.82);}
-  nav{
-    display:flex; align-items:center; justify-content:space-between;
-    height:72px;
-  }
-  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:20px;}
-  .brand img{width:36px; height:36px; border-radius:8px; object-fit:cover;}
-  .brand .it{color:var(--cyan);}
-  .nav-links{display:flex; gap:32px; align-items:center;}
-  .nav-links a{
-    color:var(--text); font-size:15px; font-weight:500; position:relative; padding:4px 0;
-  }
-  .nav-links a::after{
-    content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--cyan);
-    transition:width var(--transition);
-  }
-  .nav-links a:hover::after{width:100%;}
-  .nav-controls{display:flex; align-items:center; gap:10px;}
-  .icon-btn{
-    width:40px; height:40px; border-radius:8px; border:1px solid var(--border);
-    background:transparent; color:var(--text); cursor:pointer; display:flex;
-    align-items:center; justify-content:center; transition:all var(--transition);
-    font-family:var(--font-display); font-weight:600; font-size:13px;
-  }
-  .icon-btn:hover{border-color:var(--cyan); color:var(--cyan);}
-  .hamburger{display:none; flex-direction:column; gap:4px; width:40px; height:40px; border:1px solid var(--border); border-radius:8px; background:transparent; cursor:pointer; align-items:center; justify-content:center;}
-  .hamburger span{display:block; width:18px; height:2px; background:var(--text);}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--cyan);color:#04141a;padding:10px 16px;border-radius:0 0 8px 0;z-index:999;font-weight:600}
+.skip-link:focus{left:0}
 
-  @media (max-width: 880px){
-    .nav-links{
-      position:absolute; top:72px; left:0; right:0; flex-direction:column;
-      background:var(--bg-2); border-bottom:1px solid var(--border);
-      padding:16px 24px; gap:18px; max-height:0; overflow:hidden;
-      transition:max-height var(--transition);
-    }
-    .nav-links.open{max-height:360px; padding:20px 24px;}
-    .hamburger{display:flex;}
-  }
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
 
-  /* ===================== HERO ===================== */
-  .hero{
-    position:relative; padding-top:180px; padding-bottom:120px;
-    overflow:hidden; min-height:92vh; display:flex; align-items:center;
-  }
-  #network-canvas{
-    position:absolute; inset:0; width:100%; height:100%; z-index:0;
-    opacity:0.55;
-  }
-  [data-theme="light"] #network-canvas{opacity:0.22;}
-  .hero-content{position:relative; z-index:1; max-width:760px;}
-  .hero .eyebrow{font-size:13px;}
-  .hero h1{font-size:clamp(36px,6vw,64px); margin-bottom:18px;}
-  .hero h1 .accent{color:var(--cyan);}
-  .hero p.lead{font-size:18px; color:var(--text-dim); max-width:600px; margin-bottom:28px;}
-  .badge{
-    display:inline-flex; align-items:center; gap:8px;
-    border:1px solid var(--border-strong); border-radius:999px;
-    padding:6px 16px; font-size:13px; color:var(--cyan); margin-bottom:24px;
-    font-family:var(--font-display); font-weight:600;
-  }
-  .badge .dot{width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
-  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
+.mono{font-family:var(--font-mono)}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.8rem;
+  color:var(--cyan);
+  letter-spacing:.02em;
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:14px;height:1px;background:var(--cyan);display:inline-block}
 
-  /* ===================== REVEAL ===================== */
-  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease;}
-  .reveal.visible{opacity:1; transform:translateY(0);}
+.section{padding:108px 0}
+@media (max-width:760px){.section{padding:74px 0}}
 
-  /* ===================== O MNIE ===================== */
-  .about-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:start;}
-  .about-text p{color:var(--text-dim); margin-bottom:16px; font-size:16px;}
-  .linkedin-link{
-    display:inline-flex; align-items:center; gap:10px; margin-top:8px;
-    font-family:var(--font-display); font-weight:600; color:var(--text); border:1px solid var(--border);
-    border-radius:8px; padding:10px 18px; transition:all var(--transition);
-  }
-  .linkedin-link:hover{border-color:var(--cyan); color:var(--cyan);}
-  .stats-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .stat-card{
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:24px; transition:all var(--transition); position:relative; overflow:hidden;
-  }
-  .stat-card:hover{border-color:var(--border-strong); box-shadow:0 0 28px rgba(45,212,232,0.10); transform:translateY(-3px);}
-  .stat-card .num{font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--cyan); margin-bottom:8px; letter-spacing:0.02em;}
-  .stat-card .label{font-size:14px; color:var(--text-dim);}
-  @media (max-width:880px){.about-grid{grid-template-columns:1fr; gap:40px;} .stats-grid{grid-template-columns:1fr 1fr;}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 24px;border-radius:10px;
+  font-weight:600;font-size:.95rem;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--cyan);color:#04141a;box-shadow:0 14px 30px -12px rgba(var(--cyan-rgb),0.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -10px rgba(var(--cyan-rgb),0.6)}
+.btn-ghost{border:1px solid var(--card-border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
 
-  /* ===================== USŁUGI ===================== */
-  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .service-card{
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:28px; transition:all var(--transition); position:relative;
-  }
-  .service-card:hover{border-color:var(--cyan); box-shadow:0 0 30px rgba(45,212,232,0.12); transform:translateY(-4px);}
-  .service-card .icon{width:42px; height:42px; margin-bottom:18px; color:var(--cyan);}
-  .service-card.new .icon{color:var(--violet);}
-  .service-card h3{font-size:18px; margin-bottom:10px;}
-  .service-card p{font-size:14.5px; color:var(--text-dim);}
-  .tag-new{
-    display:inline-block; margin-top:14px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--violet); border:1px solid var(--violet); border-radius:999px; padding:4px 12px; font-family:var(--font-display); font-weight:600;
-  }
-  @media (max-width:980px){.services-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:620px){.services-grid{grid-template-columns:1fr;}}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:.74rem;
+  padding:5px 11px;border-radius:99px;
+  border:1px solid var(--card-border);color:var(--text-dim);
+  background:rgba(255,255,255,0.02);
+}
 
-  /* ===================== PROJEKTY (oś kariery) ===================== */
-  .timeline{position:relative; padding-left:32px;}
-  .timeline::before{
-    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
-    background:linear-gradient(to bottom, var(--cyan), var(--violet), transparent);
-  }
-  .timeline-item{position:relative; margin-bottom:36px;}
-  .timeline-item::before{
-    content:""; position:absolute; left:-32px; top:6px; width:13px; height:13px; border-radius:50%;
-    background:var(--bg); border:2px solid var(--cyan); box-shadow:0 0 0 4px var(--bg);
-  }
-  .project-card{
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:24px 28px; transition:all var(--transition);
-  }
-  .project-card:hover{border-color:var(--border-strong); box-shadow:0 0 24px rgba(124,92,252,0.10);}
-  .project-card .meta{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline; margin-bottom:8px;}
-  .project-card .date{font-family:var(--font-display); font-size:13px; color:var(--cyan); font-weight:600; letter-spacing:0.05em;}
-  .project-card h3{font-size:19px;}
-  .project-card .industry{font-size:13px; color:var(--text-dim); font-style:italic;}
-  .project-card p{color:var(--text-dim); font-size:14.5px; margin:10px 0 14px;}
-  .pills{display:flex; flex-wrap:wrap; gap:8px;}
-  .pill{
-    font-size:12px; font-family:var(--font-display); font-weight:600; letter-spacing:0.02em;
-    border:1px solid var(--border-strong); color:var(--cyan); border-radius:999px; padding:4px 12px;
-  }
-  .earlier-note{
-    margin-top:8px; padding:18px 24px; border-left:2px dashed var(--border-strong);
-    color:var(--text-dim); font-size:14.5px; font-style:italic;
-  }
+/* ============ DIVIDER ============ */
+.divider{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.divider svg{width:100%;height:34px;display:block;opacity:.55}
+.divider path{fill:none;stroke:var(--cyan);stroke-width:1.4}
+.divider circle{fill:var(--cyan)}
 
-  /* ===================== TECHNOLOGIE ===================== */
-  .tech-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .tech-group{
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px;
-  }
-  .tech-group h3{
-    font-size:14px; text-transform:uppercase; letter-spacing:0.1em; color:var(--violet);
-    margin-bottom:16px; font-family:var(--font-display);
-  }
-  .tech-tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .tech-tag{
-    font-size:13px; padding:6px 12px; border-radius:6px; border:1px solid var(--border);
-    color:var(--text); transition:all var(--transition);
-  }
-  .tech-tag:hover{border-color:var(--cyan); color:var(--cyan);}
-  @media (max-width:980px){.tech-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:620px){.tech-grid{grid-template-columns:1fr;}}
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,14,22,0.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--card-border);
+}
+html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.18rem}
+.brand-mark{
+  width:36px;height:36px;border-radius:9px;overflow:hidden;flex:none;
+  box-shadow:0 0 0 1px rgba(var(--cyan-rgb),0.4),0 0 18px -4px rgba(var(--cyan-rgb),0.55);
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand span.it{color:var(--cyan)}
 
-  /* ===================== KONTAKT ===================== */
-  .contact-grid{display:grid; grid-template-columns:1fr 1.2fr; gap:56px;}
-  .contact-info p{color:var(--text-dim); margin-bottom:24px;}
-  .contact-list{list-style:none; display:flex; flex-direction:column; gap:14px;}
-  .contact-list li{display:flex; align-items:center; gap:12px; font-size:15px;}
-  .contact-list .ic{width:22px; height:22px; color:var(--cyan); flex-shrink:0;}
-  .form-group{margin-bottom:18px;}
-  .form-group label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--text-dim); font-family:var(--font-display); letter-spacing:0.03em;}
-  .form-group input, .form-group select, .form-group textarea{
-    width:100%; padding:13px 14px; border-radius:8px; border:1px solid var(--border);
-    background:var(--bg-2); color:var(--text); font-family:var(--font-body); font-size:15px;
-    transition:border-color var(--transition);
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus{
-    outline:none; border-color:var(--cyan);
-  }
-  .form-group textarea{resize:vertical; min-height:120px;}
-  .form-note{font-size:13px; color:var(--text-dim); margin-top:14px;}
-  @media (max-width:880px){.contact-grid{grid-template-columns:1fr;}}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:.93rem;color:var(--text-dim);position:relative;padding:4px 0}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--cyan);transition:width .2s ease}
+.nav-links a:hover::after{width:100%}
 
-  /* ===================== FOOTER ===================== */
-  footer{border-top:1px solid var(--border); padding:48px 0 32px;}
-  .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:32px;}
-  .footer-brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:18px;}
-  .footer-brand img{width:30px; height:30px; border-radius:6px;}
-  .footer-tagline{color:var(--text-dim); font-size:14px; margin-top:8px; max-width:280px;}
-  .footer-links{display:flex; gap:24px; flex-wrap:wrap;}
-  .footer-links a{color:var(--text-dim); font-size:14px;}
-  .footer-links a:hover{color:var(--cyan);}
-  .footer-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
-    color:var(--text-dim); font-size:12.5px; border-top:1px solid var(--border); padding-top:24px;
-  }
+.nav-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:38px;height:38px;border-radius:9px;border:1px solid var(--card-border);
+  display:flex;align-items:center;justify-content:center;color:var(--text-dim);
+  transition:border-color .2s ease,color .2s ease;
+}
+.icon-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+#lang-toggle{font-family:var(--font-mono);font-size:.78rem;font-weight:600;width:auto;padding:0 12px}
+.burger{display:none}
 
-  /* ===================== CHAT PLACEHOLDER ===================== */
-  .chat-fab{
-    position:fixed; bottom:24px; right:24px; z-index:900;
-    width:58px; height:58px; border-radius:50%; background:var(--cyan);
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
-    box-shadow:0 6px 24px rgba(45,212,232,0.35); border:none; color:#06181D;
-    transition:all var(--transition);
-  }
-  .chat-fab:hover{background:var(--violet); color:#fff; transform:translateY(-3px);}
-  .chat-tooltip{
-    position:fixed; bottom:92px; right:24px; z-index:900;
-    background:var(--bg-card); border:1px solid var(--border-strong); border-radius:10px;
-    padding:12px 16px; font-size:13px; max-width:240px; color:var(--text-dim);
-    display:none; box-shadow:0 8px 30px rgba(0,0,0,0.3);
-  }
-  .chat-fab:focus + .chat-tooltip, .chat-fab:hover + .chat-tooltip{display:block;}
+.mobile-menu{display:none;border-top:1px solid var(--card-border);background:var(--bg-soft)}
+.mobile-menu.open{display:block}
+.mobile-menu ul{display:flex;flex-direction:column;padding:10px 28px 18px}
+.mobile-menu a{display:block;padding:12px 0;color:var(--text-dim);border-bottom:1px solid var(--card-border)}
+.mobile-menu li:last-child a{border-bottom:none}
 
-  /* lang toggle styling */
-  #lang-toggle{font-family:var(--font-display); font-weight:700; font-size:13px; width:auto; padding:0 12px;}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--card-border);border-radius:9px;color:var(--text)}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:64px 0 70px;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:minmax(0,1fr) 480px;
+  gap:40px;align-items:center;
+}
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-console{display:none}
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 14px;border-radius:99px;border:1px solid rgba(var(--cyan-rgb),0.35);
+  background:rgba(var(--cyan-rgb),0.07);color:var(--cyan);
+  font-size:.8rem;font-weight:500;margin-bottom:20px;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 3px rgba(var(--cyan-rgb),0.25);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hero-kicker{font-family:var(--font-mono);font-size:.82rem;color:var(--text-faint);letter-spacing:.03em;margin-bottom:16px}
+.hero-kicker .sep{color:var(--text-faint);margin:0 8px}
+
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.12;margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--cyan)}
+.hero p.lead{font-size:1.08rem;color:var(--text-dim);max-width:54ch;margin-bottom:34px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* console panel */
+.hero-console{position:relative;height:540px}
+.console-card{
+  position:absolute;width:300px;border-radius:var(--radius);
+  background:var(--card);backdrop-filter:blur(8px);
+  border:1px solid var(--card-border);
+  box-shadow:var(--shadow-glow);
+  padding:14px 16px 16px;
+  animation:float 7s ease-in-out infinite;
+  will-change:transform;
+}
+@media (prefers-reduced-motion:reduce){.console-card{animation:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.console-card .ch-title{
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);
+  margin-bottom:12px;
+}
+.ch-dots{display:flex;gap:5px}
+.ch-dots span{width:7px;height:7px;border-radius:50%;background:var(--card-border)}
+.status-ok{color:#2de87a;font-size:.68rem;font-family:var(--font-mono);display:flex;align-items:center;gap:5px}
+.status-ok::before{content:"";width:6px;height:6px;border-radius:50%;background:#2de87a;box-shadow:0 0 0 3px rgba(45,232,122,0.22)}
+
+.c-pipeline{top:6px;left:0;z-index:3;animation-delay:0s}
+.c-sql{top:64px;left:150px;width:330px;z-index:4;animation-delay:.9s}
+.c-corep{top:336px;left:6px;width:270px;z-index:2;animation-delay:1.8s}
+.c-bi{top:300px;left:290px;width:190px;z-index:2;animation-delay:1.3s}
+.c-bubble{top:-22px;left:300px;width:185px;z-index:5;animation-delay:.5s;padding:12px 14px}
+
+.bar-track{height:6px;border-radius:99px;background:rgba(255,255,255,0.08);overflow:hidden;margin:6px 0 10px}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--violet));width:82%}
+.pipeline-row{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim)}
+
+.sql-snippet{font-family:var(--font-mono);font-size:.74rem;line-height:1.65;color:var(--text-dim);white-space:pre}
+.sql-snippet .kw{color:var(--cyan)}
+.sql-snippet .cm{color:var(--text-faint)}
+.sql-snippet .ok{color:#2de87a}
+
+.corep-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.corep-list li{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim)}
+.corep-list li::before{content:"✓";color:#2de87a;font-weight:700;font-size:.78rem}
+.corep-foot{font-family:var(--font-mono);font-size:.68rem;color:var(--text-faint)}
+
+.bi-bars{display:flex;align-items:flex-end;gap:7px;height:64px;margin-bottom:6px}
+.bi-bars span{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--cyan),var(--violet))}
+.bi-foot{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.62rem;color:var(--text-faint)}
+
+.c-bubble p{font-size:.74rem;color:var(--text-dim);margin-bottom:6px}
+.c-bubble .b-ai{color:var(--violet);font-weight:600;font-family:var(--font-mono);font-size:.66rem;display:block;margin-bottom:3px}
+.c-bubble .b-user{color:var(--cyan);font-weight:600;font-family:var(--font-mono);font-size:.66rem;display:block;margin:6px 0 3px}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+@media (max-width:880px){.about-grid{grid-template-columns:1fr}}
+.about-grid h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:22px;max-width:18ch}
+.about-grid p{color:var(--text-dim);margin-bottom:16px;max-width:60ch}
+.li-btn{
+  margin-top:22px;display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border:1px solid var(--card-border);border-radius:10px;font-size:.88rem;font-weight:500;
+  transition:border-color .2s ease,color .2s ease;
+}
+.li-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat-card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);
+  padding:20px;transition:border-color .25s ease,transform .25s ease;
+}
+.stat-card:hover{border-color:rgba(var(--cyan-rgb),0.45);transform:translateY(-3px)}
+.stat-card .v{font-family:var(--font-mono);font-weight:600;font-size:1.18rem;color:var(--cyan);margin-bottom:6px}
+.stat-card .l{font-size:.83rem;color:var(--text-dim)}
+
+/* ============ SERVICES ============ */
+.svc-head{max-width:62ch;margin-bottom:46px}
+.svc-head h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc-card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);
+  padding:26px 24px;transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease;
+}
+.svc-card:hover{border-color:rgba(var(--cyan-rgb),0.4);transform:translateY(-4px);box-shadow:var(--shadow-glow)}
+.svc-icon{
+  width:42px;height:42px;border-radius:10px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(var(--cyan-rgb),0.1);color:var(--cyan);
+}
+.svc-card:nth-child(3n+2) .svc-icon{background:rgba(var(--violet-rgb),0.12);color:var(--violet)}
+.svc-card h3{font-size:1.05rem;margin-bottom:10px}
+.svc-card p{font-size:.89rem;color:var(--text-dim)}
+.new-badge{
+  display:inline-flex;margin-top:14px;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.03em;
+  color:var(--violet);border:1px solid rgba(var(--violet-rgb),0.4);background:rgba(var(--violet-rgb),0.08);
+  padding:4px 9px;border-radius:99px;
+}
+
+/* ============ PROJECTS ============ */
+.proj-head{max-width:62ch;margin-bottom:46px}
+.proj-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:14px}
+.proj-head p{color:var(--text-dim)}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--cyan),var(--violet) 60%,transparent)}
+.t-item{position:relative;margin-bottom:18px}
+.t-item::before{
+  content:"";position:absolute;left:-30px;top:24px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--cyan);
+}
+.t-card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);
+  padding:20px 22px;transition:border-color .25s ease;
+}
+.t-card:hover{border-color:rgba(var(--cyan-rgb),0.4)}
+.t-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}
+.t-period{font-family:var(--font-mono);font-size:.78rem;color:var(--cyan)}
+.t-company{font-size:1.05rem;font-weight:600;font-family:var(--font-display)}
+.t-industry{font-size:.8rem;color:var(--text-faint);font-style:italic}
+.t-card p.t-desc{color:var(--text-dim);font-size:.92rem;margin-bottom:14px}
+.t-tags{display:flex;flex-wrap:wrap;gap:8px}
+.t-note{margin-top:26px;padding-left:6px;font-size:.86rem;color:var(--text-faint);font-style:italic;max-width:70ch}
+
+/* ============ TECH ============ */
+.tech-head{max-width:62ch;margin-bottom:46px}
+.tech-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:14px}
+.tech-head p{color:var(--text-dim)}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:980px){.tech-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.tech-grid{grid-template-columns:1fr}}
+.tech-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px}
+.tech-card h3{
+  font-family:var(--font-mono);font-size:.78rem;letter-spacing:.04em;color:var(--violet);
+  margin-bottom:16px;text-transform:uppercase;
+}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px}
+@media (max-width:880px){.contact-grid{grid-template-columns:1fr}}
+.contact-grid h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:14px}
+.contact-grid p.lead{color:var(--text-dim);margin-bottom:30px;max-width:48ch}
+.contact-line{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:.94rem}
+.contact-line .ic{
+  width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:rgba(var(--cyan-rgb),0.1);color:var(--cyan);flex:none;
+}
+.contact-line a:hover{color:var(--cyan)}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.82rem;color:var(--text-dim);margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:11px 13px;font-size:.93rem}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan)}
+.field textarea{resize:vertical;min-height:120px}
+.form-note{font-size:.78rem;color:var(--text-faint);margin-top:10px;max-width:46ch}
+.rodo-note{font-size:.72rem;color:var(--text-faint);margin-top:14px;max-width:50ch;line-height:1.55}
+.consent-row{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;
+  font-size:.82rem;color:var(--text-dim);cursor:pointer;line-height:1.45;
+}
+.consent-row input{width:16px;height:16px;flex:none;margin-top:2px;accent-color:var(--cyan)}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--card-border);padding:46px 0 30px}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px}
+.footer-brand .brand{margin-bottom:10px}
+.footer-brand p{font-size:.84rem;color:var(--text-faint);max-width:36ch}
+.footer-links{display:flex;flex-wrap:wrap;gap:22px}
+.footer-links a{font-size:.88rem;color:var(--text-dim)}
+.footer-links a:hover{color:var(--cyan)}
+.footer-bottom{
+  max-width:var(--maxw);margin:30px auto 0;padding:20px 28px 0;border-top:1px solid var(--card-border);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
+  font-size:.78rem;color:var(--text-faint);
+}
+
+/* ============ CHAT FAB ============ */
+.chat-fab{
+  position:fixed;right:22px;bottom:22px;z-index:200;
+  width:54px;height:54px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  display:flex;align-items:center;justify-content:center;color:#04141a;
+  box-shadow:0 14px 30px -10px rgba(var(--cyan-rgb),0.55);
+  transition:transform .2s ease;
+}
+.chat-fab:hover{transform:scale(1.07)}
+.chat-panel{
+  position:fixed;right:22px;bottom:88px;z-index:200;width:300px;
+  background:var(--bg-soft);border:1px solid var(--card-border);border-radius:var(--radius);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.5);padding:18px;
+}
+.chat-panel h4{font-size:.95rem;margin-bottom:8px}
+.chat-panel p{font-size:.82rem;color:var(--text-dim);margin-bottom:14px}
+.chat-panel input{width:100%;padding:9px 12px;font-size:.85rem;opacity:.6}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ============ i18n ============ */
+[data-i18n][lang]{display:none}
+html[data-lang="pl"] [data-i18n-lang="en"]{display:none !important}
+html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link" data-i18n="skip">Przejdź do treści</a>
 
-<!-- ===================== HEADER / NAV ===================== -->
-<header>
-  <nav class="container">
-    <a href="#top" class="brand">
-      <img src="assets/logo-mark.jpg" alt="ZalkaIT logo">
+<header class="nav">
+  <div class="wrap">
+    <a href="#main" class="brand">
+      <span class="brand-mark"><img src="assets/zt-mark-96.png" alt="ZalkaIT"></span>
       <span>Zalka<span class="it">IT</span></span>
     </a>
-    <div class="nav-links" id="nav-links">
+    <nav class="nav-links" aria-label="Sekcje strony">
       <a href="#about" data-i18n="nav.about">O mnie</a>
       <a href="#services" data-i18n="nav.services">Usługi</a>
       <a href="#projects" data-i18n="nav.projects">Projekty</a>
       <a href="#tech" data-i18n="nav.tech">Technologie</a>
       <a href="#contact" data-i18n="nav.contact">Kontakt</a>
-    </div>
-    <div class="nav-controls">
-      <button class="icon-btn" id="lang-toggle" aria-label="Zmień język">EN</button>
-      <button class="icon-btn" id="theme-toggle" aria-label="Zmień motyw">
-        <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/></svg>
+    </nav>
+    <div class="nav-actions">
+      <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <button id="lang-toggle" class="icon-btn mono" aria-label="Zmień język">EN</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Przełącz tryb jasny/ciemny">
+        <svg id="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7" stroke-linecap="round"/></svg>
+        <svg id="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.7 6.7 0 0 0 10.5 10.5z" stroke-linejoin="round"/></svg>
       </button>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-</header>
-
-<!-- ===================== HERO ===================== -->
-<section class="hero" id="top">
-  <canvas id="network-canvas"></canvas>
-  <div class="container hero-content">
-    <div class="badge"><span class="dot"></span><span data-i18n="hero.badge">Dostępny do kontraktów B2B</span></div>
-    <div class="eyebrow" data-i18n="hero.eyebrow">BI / ETL Developer · Data Engineer · AI</div>
-    <h1 data-i18n="hero.h1">Projektuję wydajne architektury <span class="accent">DWH</span> oraz skalowalne procesy <span class="accent">ETL/ELT</span></h1>
-    <p class="lead" data-i18n="hero.lead">Ponad 20 lat doświadczenia w Business Intelligence i inżynierii danych — od T-SQL i SSIS po BigQuery, Power BI i raportowanie regulacyjne sektora bankowego. Obecnie wdrażam AI do realnych problemów analitycznych.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary" data-i18n="hero.cta1">Napisz do mnie</a>
-      <a href="https://zalka.it/CV" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="hero.cta2">Zobacz CV</a>
+      <button id="burger" class="burger" aria-label="Otwórz menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
     </div>
   </div>
-</section>
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#about" data-i18n="nav.about">O mnie</a></li>
+      <li><a href="#services" data-i18n="nav.services">Usługi</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
+      <li><a href="#tech" data-i18n="nav.tech">Technologie</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+      <li><a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+    </ul>
+  </div>
+</header>
 
-<!-- ===================== O MNIE ===================== -->
-<section id="about">
-  <div class="container">
-    <div class="eyebrow reveal" data-i18n="about.eyebrow">O mnie</div>
-    <h2 class="section-title reveal" data-i18n="about.title">Dane, które mają sens — i AI, które pomaga je odkrywać</h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge"><span class="dot"></span><span data-i18n="hero.badge">Dostępny do kontraktów B2B</span></span>
+        <div class="hero-kicker">BI / ETL DEVELOPER<span class="sep">·</span>DATA ENGINEER<span class="sep">·</span>AI</div>
+        <h1 data-i18n="hero.h1">Projektuję wydajne architektury <span class="accent">DWH</span> i skalowalne potoki <span class="accent">ETL/ELT</span></h1>
+        <p class="lead" data-i18n="hero.lead">Ponad 20 lat w Business Intelligence i inżynierii danych — od T-SQL i SSIS po BigQuery, Power BI i sprawozdawczość regulacyjną sektora bankowego. Obecnie wdrażam AI do realnych problemów analitycznych.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary" data-i18n="hero.cta1">Napisz do mnie</a>
+          <a href="#projects" class="btn btn-ghost" data-i18n="hero.cta2">Zobacz projekty</a>
+        </div>
+      </div>
+
+      <div class="hero-console" aria-hidden="true">
+        <div class="console-card c-pipeline">
+          <div class="ch-title"><span>etl_pipeline.log</span><span class="status-ok">ONLINE</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <div class="pipeline-row"><span>staging → core_dwh</span><span>82%</span></div>
+          <div class="pipeline-row" data-i18n="hero.console.pipeline.rows"><span>wiersze: 12.4M</span><span>błędy: 0</span></div>
+        </div>
+
+        <div class="console-card c-sql">
+          <div class="ch-title"><span>query_tuning.sql</span><div class="ch-dots"><span></span><span></span><span></span></div></div>
+          <pre class="sql-snippet"><code><span class="cm">-- before: 480ms</span>
+<span class="kw">SELECT</span> acct_id, <span class="kw">SUM</span>(exposure)
+<span class="kw">FROM</span> core.fact_exposures
+<span class="kw">WHERE</span> period = @asof
+<span class="kw">GROUP BY</span> acct_id;
+<span class="cm">-- after index: 38ms <span class="ok">✓</span></span></code></pre>
+        </div>
+
+        <div class="console-card c-corep">
+          <div class="ch-title"><span>corep_validation</span></div>
+          <ul class="corep-list">
+            <li>COREP</li><li>Leverage Ratio</li><li>Large Exposures</li>
+          </ul>
+          <div class="corep-foot" data-i18n="hero.console.corep">0 rozbieżności</div>
+        </div>
+
+        <div class="console-card c-bi">
+          <div class="ch-title"><span>power_bi</span></div>
+          <div class="bi-bars"><span style="height:38%"></span><span style="height:62%"></span><span style="height:48%"></span><span style="height:88%"></span></div>
+          <div class="bi-foot"><span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span></div>
+        </div>
+
+        <div class="console-card c-bubble">
+          <span class="b-user">YOU</span>
+          <p data-i18n="hero.console.q">Zoptymalizuj ten CTE</p>
+          <span class="b-ai">AI</span>
+          <p data-i18n="hero.console.a" style="margin-bottom:0">Indeks na (acct_id, period) → -88% czasu</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L470,17 L540,4 L630,30 L700,17 L1200,17"/><circle cx="540" cy="4" r="3.4"/><circle cx="630" cy="30" r="3.4"/></svg></div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow mono" data-i18n="about.eyebrow">-- o_mnie</span>
+        <h2 data-i18n="about.h2">Dane, które mają sens — i AI, które pomaga je odkrywać</h2>
         <p data-i18n="about.p1">Od ponad 20 lat pracuję jako BI/ETL Developer i Data Engineer. Specjalizuję się w T-SQL i PL/SQL, projektowaniu i optymalizacji hurtowni danych (DWH) oraz procesach ETL/ELT — od klasycznego SSIS po BigQuery.</p>
         <p data-i18n="about.p2">Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.</p>
-        <p data-i18n="about.p3">Od kilku lat aktywnie wykorzystuję modele LLM (Gemini, lokalne modele w LM Studio) i prompt engineering, by zwiększać produktywność, automatyzować analizę danych i rozwiązywać złożone problemy biznesowe. Obecnie poszerzam kompetencje w kierunku AI — automatyzacje, asystenci, agenty.</p>
-        <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="linkedin-link">
-          <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        <p data-i18n="about.p3">Od kilku miesięcy intensywnie zgłębiam możliwości AI — testuję modele LLM i prompt engineering, wykorzystując narzędzia AI do przyspieszania i optymalizacji pracy nad złożonymi projektami oraz automatyzacji analizy danych. To nowy, ale bardzo praktyczny kierunek rozwoju, który aktywnie rozwijam.</p>
+        <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="li-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
           <span data-i18n="about.linkedin">Profil LinkedIn</span>
         </a>
       </div>
-      <div class="stats-grid reveal">
-        <div class="stat-card"><div class="num" data-i18n="about.stat1.num">20+ lat doświadczenia</div><div class="label" data-i18n="about.stat1.label">w BI, ETL i inżynierii danych</div></div>
-        <div class="stat-card"><div class="num" data-i18n="about.stat2.num">Sektor bankowy</div><div class="label" data-i18n="about.stat2.label">COREP · Leverage Ratio · Large Exposures</div></div>
-        <div class="stat-card"><div class="num" data-i18n="about.stat3.num">BigQuery · T-SQL</div><div class="label" data-i18n="about.stat3.label">SSIS · Power BI · OLAP/DAX</div></div>
-        <div class="stat-card"><div class="num" data-i18n="about.stat4.num">AI & Prompt Engineering</div><div class="label" data-i18n="about.stat4.label">w codziennej pracy z danymi</div></div>
+      <div class="stat-grid reveal">
+        <div class="stat-card"><div class="v">20+</div><div class="l" data-i18n="about.stat1">lat doświadczenia w BI, ETL i inżynierii danych</div></div>
+        <div class="stat-card"><div class="v mono">COREP</div><div class="l" data-i18n="about.stat2">Sektor bankowy — Leverage Ratio, Large Exposures</div></div>
+        <div class="stat-card"><div class="v mono">T-SQL</div><div class="l" data-i18n="about.stat3">BigQuery, SSIS, Power BI, OLAP/DAX</div></div>
+        <div class="stat-card"><div class="v mono">AI</div><div class="l" data-i18n="about.stat4">Prompt engineering w codziennej pracy z danymi</div></div>
       </div>
     </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L500,17 L570,30 L660,4 L730,17 L1200,17"/><circle cx="570" cy="30" r="3.4"/><circle cx="660" cy="4" r="3.4"/></svg></div>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="svc-head reveal">
+        <span class="eyebrow mono" data-i18n="services.eyebrow">-- uslugi</span>
+        <h2 data-i18n="services.h2">W czym mogę pomóc</h2>
+      </div>
+      <div class="svc-grid">
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/><path d="M4 11.5v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
+          <h3 data-i18n="services.c1.title">Projektowanie i optymalizacja DWH</h3>
+          <p data-i18n="services.c1.desc">Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h5l2-5 4 10 2-5h5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3 data-i18n="services.c2.title">Procesy ETL/ELT</h3>
+          <p data-i18n="services.c2.desc">Budowa i wdrażanie procesów ETL/ELT — SSIS, BigQuery i rozwiązania cross-platform, od źródeł po raporty.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3 data-i18n="services.c3.title">Optymalizacja T-SQL / PL-SQL</h3>
+          <p data-i18n="services.c3.desc">Performance tuning procedur i zapytań — analiza planów wykonania, indeksy, refaktoryzacja kodu pod kątem szybkości.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M11 20V4M18 20v-7" stroke-linecap="round"/></svg></span>
+          <h3 data-i18n="services.c4.title">Raportowanie i dashboardy</h3>
+          <p data-i18n="services.c4.desc">Power BI, Looker Studio, kostki OLAP i modele DAX — czytelne dashboardy zamieniające dane w decyzje.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3.2v5.4c0 4.6-3 7.9-7 9.4-4-1.5-7-4.8-7-9.4V6.2L12 3z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3 data-i18n="services.c5.title">Sprawozdawczość regulacyjna COREP</h3>
+          <p data-i18n="services.c5.desc">Wsparcie w raportowaniu regulacyjnym sektora bankowego — COREP i podobne wymogi nadzorcze, oparte na rzetelnych danych.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <span class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke-linecap="round"/><circle cx="12" cy="12" r="3.4"/></svg></span>
+          <h3 data-i18n="services.c6.title">AI w pracy z danymi</h3>
+          <p data-i18n="services.c6.desc">Praktyczne wykorzystanie modeli LLM i prompt engineeringu — automatyzacja analiz oraz przyspieszanie pracy nad złożonymi projektami BI/ETL.</p>
+          <span class="new-badge" data-i18n="services.c6.badge">NOWY OBSZAR — ROZWIJAM SIĘ</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L420,17 L490,4 L580,30 L650,17 L1200,17"/><circle cx="490" cy="4" r="3.4"/><circle cx="580" cy="30" r="3.4"/></svg></div>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="proj-head reveal">
+        <span class="eyebrow mono" data-i18n="projects.eyebrow">-- projekty</span>
+        <h2 data-i18n="projects.h2">Wybrane doświadczenie</h2>
+        <p data-i18n="projects.sub">Oś kariery — od kostek OLAP w sektorze publicznym, przez branżę automotive i wydawnictwo, po sprawozdawczość regulacyjną w bankowości.</p>
+      </div>
+
+      <div class="timeline">
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2023 — <span data-i18n="projects.now">obecnie</span></span>
+              <span class="t-company">Aion Bank (UniCredit Group)</span>
+              <span class="t-industry" data-i18n="projects.p1.industry">Sektor bankowy</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p1.desc">Sprawozdawczość regulacyjna COREP, integracja danych w BigQuery oraz budowa dashboardów w Looker Studio na potrzeby raportowania nadzorczego.</p>
+            <div class="t-tags"><span class="pill">BigQuery</span><span class="pill">COREP</span><span class="pill">Looker Studio</span><span class="pill">SQL</span></div>
+          </div>
+        </div>
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2022 — 2023</span>
+              <span class="t-company">EBIS</span>
+              <span class="t-industry" data-i18n="projects.p2.industry">Sektor produkcyjny</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p2.desc">Budowa kostek OLAP oraz procesów ETL zasilających dane z systemów ERP i CRM, a następnie dashboardy Power BI z modelami DAX.</p>
+            <div class="t-tags"><span class="pill">SSAS</span><span class="pill">ETL</span><span class="pill">Power BI</span><span class="pill">DAX</span></div>
+          </div>
+        </div>
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2021 — 2022</span>
+              <span class="t-company">PKO BP Finat</span>
+              <span class="t-industry" data-i18n="projects.p3.industry">Sektor bankowy</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p3.desc">Tworzenie dedykowanych raportów Power BI oraz rozbudowa i strojenie wydajnościowe kostek OLAP (Tabular) wspierających decyzje w grupie kapitałowej.</p>
+            <div class="t-tags"><span class="pill">Power BI</span><span class="pill">OLAP Tabular</span><span class="pill">DAX</span><span class="pill">SSAS</span></div>
+          </div>
+        </div>
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2014 — 2019</span>
+              <span class="t-company">Wolters Kluwer Polska</span>
+              <span class="t-industry" data-i18n="projects.p4.industry">Wydawnictwo / Legal-tech</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p4.desc">Rozwój hurtowni danych, integracja procesów w SSIS oraz migracja wybranych rozwiązań do Google Cloud.</p>
+            <div class="t-tags"><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">Google Cloud</span><span class="pill">T-SQL</span></div>
+          </div>
+        </div>
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2013 — 2014</span>
+              <span class="t-company">Volkswagen Group Polska</span>
+              <span class="t-industry" data-i18n="projects.p5.industry">Automotive (kontrakt)</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p5.desc">Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne — projektowanie struktur danych oraz implementacja w SSIS.</p>
+            <div class="t-tags"><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">BI</span></div>
+          </div>
+        </div>
+
+        <div class="t-item reveal">
+          <div class="t-card">
+            <div class="t-top">
+              <span class="t-period mono">2013</span>
+              <span class="t-company">GUS — Główny Urząd Statystyczny</span>
+              <span class="t-industry" data-i18n="projects.p6.industry">Sektor publiczny</span>
+            </div>
+            <p class="t-desc" data-i18n="projects.p6.desc">Budowa i optymalizacja kostek analitycznych SSAS oraz raportowania opartego na Excel Services dla potrzeb statystyki publicznej.</p>
+            <div class="t-tags"><span class="pill">SSAS</span><span class="pill">Excel Services</span><span class="pill">OLAP</span></div>
+          </div>
+        </div>
+
+        <p class="t-note reveal" data-i18n="projects.note">Wcześniejsze lata (2007–2013): projekty BI/ETL dla sektora farmaceutycznego (Sanofi-Aventis, Zentiva, Adamed) — budowa systemów raportowych z danych CRM, oraz pierwsze wdrożenia hurtowni danych od podstaw.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L460,17 L530,30 L620,4 L690,17 L1200,17"/><circle cx="530" cy="30" r="3.4"/><circle cx="620" cy="4" r="3.4"/></svg></div>
+
+  <!-- ============ TECH STACK ============ -->
+  <section class="section" id="tech">
+    <div class="wrap">
+      <div class="tech-head reveal">
+        <span class="eyebrow mono" data-i18n="tech.eyebrow">-- stack</span>
+        <h2 data-i18n="tech.h2">Technologie, które napędzają Twoje dane</h2>
+        <p data-i18n="tech.sub">Narzędzia i technologie, z którymi pracuję najczęściej — od baz danych po wczesne wdrożenia AI.</p>
+      </div>
+      <div class="tech-grid">
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g1">Bazy danych &amp; Języki</h3>
+          <div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">MySQL</span><span class="pill">C#</span></div>
+        </div>
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g2">ETL / ELT</h3>
+          <div class="tech-tags"><span class="pill">SSIS</span><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span><span class="pill">Integration Services</span></div>
+        </div>
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g3">Modelowanie &amp; OLAP</h3>
+          <div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span><span class="pill">DAX</span><span class="pill">Star/Snowflake</span></div>
+        </div>
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g4">BI &amp; Raportowanie</h3>
+          <div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span><span class="pill">Excel Services</span></div>
+        </div>
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g5">AI &amp; Automatyzacja</h3>
+          <div class="tech-tags"><span class="pill">Gemini / Deep Search</span><span class="pill">LM Studio (local LLM)</span><span class="pill">Prompt Engineering</span><span class="pill">Automatyzacja analiz</span></div>
+        </div>
+
+        <div class="tech-card reveal">
+          <h3 data-i18n="tech.g6">Narzędzia &amp; SCM</h3>
+          <div class="tech-tags"><span class="pill">Git / SVN</span><span class="pill">TOAD</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L480,17 L550,4 L640,30 L710,17 L1200,17"/><circle cx="550" cy="4" r="3.4"/><circle cx="640" cy="30" r="3.4"/></svg></div>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="eyebrow mono" data-i18n="contact.eyebrow">-- kontakt</span>
+        <h2 data-i18n="contact.h2">Porozmawiajmy o Twoim projekcie</h2>
+        <p class="lead" data-i18n="contact.lead">Niezależnie czy potrzebujesz wsparcia przy hurtowni danych, optymalizacji procesów ETL, czy chcesz porozmawiać o wdrożeniu AI — napisz, odpowiem najszybciej jak mogę.</p>
+
+        <div class="contact-line">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <a href="mailto:contact@zalka.it">contact@zalka.it</a>
+        </div>
+        <div class="contact-line">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></span>
+          <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">linkedin.com/in/marcin-zaluski</a>
+        </div>
+      </div>
+
+      <form class="reveal" id="contact-form" novalidate>
+        <div class="field">
+          <label for="f-name" data-i18n="contact.form.name">Imię i nazwisko</label>
+          <input id="f-name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="f-email" data-i18n="contact.form.email">Email</label>
+          <input id="f-email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="f-subject" data-i18n="contact.form.subject">Temat</label>
+          <select id="f-subject" name="subject">
+            <option value="general" data-i18n="contact.form.opt1">Zapytanie ogólne</option>
+            <option value="bi-etl" data-i18n="contact.form.opt2">Projekt BI / ETL</option>
+            <option value="training" data-i18n="contact.form.opt3">Szkolenie</option>
+            <option value="ai" data-i18n="contact.form.opt4">Automatyzacja AI</option>
+            <option value="other" data-i18n="contact.form.opt5">Inne</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-message" data-i18n="contact.form.message">Wiadomość</label>
+          <textarea id="f-message" name="message" required></textarea>
+        </div>
+        <input type="text" name="_honey" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent-row">
+          <input type="checkbox" id="f-consent" name="consent" required>
+          <span data-i18n="contact.form.consent">Wyrażam zgodę na przetwarzanie podanych danych w celu odpowiedzi na zapytanie (RODO).</span>
+        </label>
+        <button type="submit" class="btn btn-primary" id="f-submit" data-i18n="contact.form.submit">Wyślij wiadomość</button>
+        <p class="form-note" id="form-status">Wiadomość (temat: „Zapytanie ogólne”) trafi na adres contact@zalka.it — bez otwierania programu pocztowego.</p>
+        <p class="rodo-note" data-i18n="contact.form.rodo">Administrator danych: Marcin Załuski (ZalkaIT), contact@zalka.it. Dane służą wyłącznie do udzielenia odpowiedzi na wiadomość i nie są przekazywane dalej poza dostawcą formularza (FormSubmit). Przysługuje Ci prawo dostępu, sprostowania, usunięcia i sprzeciwu wobec przetwarzania.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <a href="#main" class="brand"><span class="brand-mark"><img src="assets/zt-mark-96.png" alt="ZalkaIT"></span><span>Zalka<span class="it">IT</span></span></a>
+      <p data-i18n="footer.tagline">BI / ETL Developer · Data Engineer · SQL · Data Warehouse &amp; Cloud Solutions · AI</p>
+    </div>
+    <nav class="footer-links" aria-label="Stopka — sekcje">
+      <a href="#about" data-i18n="nav.about">O mnie</a>
+      <a href="#services" data-i18n="nav.services">Usługi</a>
+      <a href="#projects" data-i18n="nav.projects">Projekty</a>
+      <a href="#tech" data-i18n="nav.tech">Technologie</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+      <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
   </div>
-</section>
-
-<svg class="trace reveal" viewBox="0 0 1180 34" preserveAspectRatio="none"><path d="M0 17 H400 L430 5 H750 L780 29 H1180"/><circle cx="430" cy="5" r="3"/><circle cx="780" cy="29" r="3"/></svg>
-
-<!-- ===================== USŁUGI ===================== -->
-<section id="services">
-  <div class="container">
-    <div class="eyebrow reveal" data-i18n="services.eyebrow">Usługi</div>
-    <h2 class="section-title reveal" data-i18n="services.title">W czym mogę pomóc</h2>
-    <p class="section-lead reveal" data-i18n="services.lead">Zakres współpracy B2B — od projektowania architektury danych, przez optymalizację wydajności, po raportowanie i wczesne wdrożenia AI.</p>
-    <div class="services-grid">
-
-      <div class="service-card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-        <h3 data-i18n="services.s1.title">Projektowanie i optymalizacja DWH</h3>
-        <p data-i18n="services.s1.desc">Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h6l3-7 3 14 3-7h6"/></svg>
-        <h3 data-i18n="services.s2.title">Procesy ETL/ELT</h3>
-        <p data-i18n="services.s2.desc">Budowa i wdrażanie procesów ETL/ELT — SSIS, BigQuery i rozwiązania cross-platform, od źródeł po raporty.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <h3 data-i18n="services.s3.title">Optymalizacja T-SQL / PL-SQL</h3>
-        <p data-i18n="services.s3.desc">Performance tuning procedur i zapytań — analiza planów wykonania, indeksy, refaktoryzacja kodu pod kątem szybkości.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
-        <h3 data-i18n="services.s4.title">Raportowanie i dashboardy</h3>
-        <p data-i18n="services.s4.desc">Power BI, Looker Studio, kostki OLAP i modele DAX — czytelne dashboardy zamieniające dane w decyzje.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        <h3 data-i18n="services.s5.title">Sprawozdawczość regulacyjna COREP</h3>
-        <p data-i18n="services.s5.desc">Wsparcie w raportowaniu regulacyjnym sektora bankowego — COREP i podobne wymogi nadzorcze, oparte na rzetelnych danych.</p>
-      </div>
-
-      <div class="service-card reveal new">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>
-        <h3 data-i18n="services.s6.title">AI w pracy z danymi</h3>
-        <p data-i18n="services.s6.desc">Wdrażanie promptów, automatyzacji i asystentów AI w codziennej pracy analityka i dewelopera danych.</p>
-        <span class="tag-new" data-i18n="services.s6.tag">Nowy obszar — rozwijam się</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<svg class="trace reveal" viewBox="0 0 1180 34" preserveAspectRatio="none"><path d="M0 29 H300 L330 5 H600 L630 29 H1180"/><circle cx="330" cy="5" r="3"/><circle cx="630" cy="29" r="3"/></svg>
-
-<!-- ===================== PROJEKTY ===================== -->
-<section id="projects">
-  <div class="container">
-    <div class="eyebrow reveal" data-i18n="projects.eyebrow">Projekty</div>
-    <h2 class="section-title reveal" data-i18n="projects.title">Wybrane doświadczenie</h2>
-    <p class="section-lead reveal" data-i18n="projects.lead">Oś kariery — od kostek OLAP w sektorze publicznym, przez branżę automotive i wydawnictwa, po sprawozdawczość regulacyjną w bankowości.</p>
-
-    <div class="timeline">
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2023 — obecnie</span>
-            <h3>Aion Bank (UniCredit Group)</h3>
-            <span class="industry" data-i18n="projects.p1.industry">Sektor bankowy</span>
-          </div>
-          <p data-i18n="projects.p1.desc">Sprawozdawczość regulacyjna COREP, integracja danych w BigQuery oraz budowa dashboardów w Looker Studio na potrzeby raportowania nadzorczego.</p>
-          <div class="pills"><span class="pill">BigQuery</span><span class="pill">COREP</span><span class="pill">Looker Studio</span><span class="pill">SQL</span></div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2021 — 2022</span>
-            <h3>PKO BP Finat</h3>
-            <span class="industry" data-i18n="projects.p2.industry">Bankowość / Finanse</span>
-          </div>
-          <p data-i18n="projects.p2.desc">Raportowanie w Power BI oraz budowa i optymalizacja kostek analitycznych OLAP Tabular dla wewnętrznych zespołów analitycznych.</p>
-          <div class="pills"><span class="pill">Power BI</span><span class="pill">OLAP Tabular</span><span class="pill">DAX</span><span class="pill">SSAS</span></div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2022 — 2023</span>
-            <h3>EBIS</h3>
-            <span class="industry" data-i18n="projects.p3.industry">Sektor produkcyjny</span>
-          </div>
-          <p data-i18n="projects.p3.desc">Budowa kostek OLAP oraz procesów ETL zasilających dane z systemów ERP i CRM, a następnie dashboardy Power BI z modelami DAX.</p>
-          <div class="pills"><span class="pill">SSAS</span><span class="pill">ETL</span><span class="pill">Power BI</span><span class="pill">DAX</span></div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2014 — 2019</span>
-            <h3>Wolters Kluwer Polska</h3>
-            <span class="industry" data-i18n="projects.p4.industry">Wydawnictwo / Legal-tech</span>
-          </div>
-          <p data-i18n="projects.p4.desc">Rozwój hurtowni danych, integracja procesów w SSIS oraz migracja wybranych rozwiązań do Google Cloud.</p>
-          <div class="pills"><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">Google Cloud</span><span class="pill">T-SQL</span></div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2013 — 2014</span>
-            <h3>Volkswagen Group Polska</h3>
-            <span class="industry" data-i18n="projects.p5.industry">Automotive (kontrakt)</span>
-          </div>
-          <p data-i18n="projects.p5.desc">Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne — projektowanie struktur danych oraz implementacja w SSIS.</p>
-          <div class="pills"><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">BI</span></div>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="project-card">
-          <div class="meta">
-            <span class="date">2013</span>
-            <h3>GUS — Główny Urząd Statystyczny</h3>
-            <span class="industry" data-i18n="projects.p6.industry">Sektor publiczny</span>
-          </div>
-          <p data-i18n="projects.p6.desc">Budowa i optymalizacja kostek analitycznych SSAS oraz raportowania opartego na Excel Services dla potrzeb statystyki publicznej.</p>
-          <div class="pills"><span class="pill">SSAS</span><span class="pill">Excel Services</span><span class="pill">OLAP</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="earlier-note reveal" data-i18n="projects.earlier">
-      Wcześniejsze lata (2007–2013): projekty BI/ETL dla sektora farmaceutycznego (Sanofi-Aventis, Zentiva, Adamed) — budowa systemów raportowych z danych CRM, oraz pierwsze wdrożenia hurtowni danych od podstaw.
-    </div>
-
-  </div>
-</section>
-
-<svg class="trace reveal" viewBox="0 0 1180 34" preserveAspectRatio="none"><path d="M0 5 H500 L530 29 H850 L880 5 H1180"/><circle cx="530" cy="29" r="3"/><circle cx="880" cy="5" r="3"/></svg>
-
-<!-- ===================== TECHNOLOGIE ===================== -->
-<section id="tech">
-  <div class="container">
-    <div class="eyebrow reveal" data-i18n="tech.eyebrow">Technologie</div>
-    <h2 class="section-title reveal" data-i18n="tech.title">Stack technologiczny</h2>
-    <p class="section-lead reveal" data-i18n="tech.lead">Narzędzia i technologie, z którymi pracuję najczęściej — od baz danych po wczesne wdrożenia AI.</p>
-    <div class="tech-grid">
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g1.title">Bazy danych & języki</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">T-SQL</span><span class="tech-tag">PL/SQL</span><span class="tech-tag">MySQL</span><span class="tech-tag">BigQuery SQL</span><span class="tech-tag">C#</span>
-        </div>
-      </div>
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g2.title">ETL / ELT</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">SSIS</span><span class="tech-tag">BigQuery Data Transfer</span><span class="tech-tag">ELT (cloud)</span><span class="tech-tag">Integration Services</span>
-        </div>
-      </div>
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g3.title">Modelowanie & OLAP</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">SSAS</span><span class="tech-tag">Kostki OLAP</span><span class="tech-tag">Star / Snowflake Schema</span><span class="tech-tag">DAX</span>
-        </div>
-      </div>
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g4.title">BI & raportowanie</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">Power BI</span><span class="tech-tag">Looker Studio</span><span class="tech-tag">SharePoint / PerformancePoint</span><span class="tech-tag">Excel Services</span>
-        </div>
-      </div>
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g5.title">AI & automatyzacja</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">Gemini</span><span class="tech-tag">LM Studio (local LLM)</span><span class="tech-tag">Prompt Engineering</span><span class="tech-tag">Automatyzacja analiz</span>
-        </div>
-      </div>
-
-      <div class="tech-group reveal">
-        <h3 data-i18n="tech.g6.title">Narzędzia & SCM</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">Git</span><span class="tech-tag">TOAD</span><span class="tech-tag">Visual Studio</span><span class="tech-tag">JIRA</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<svg class="trace reveal" viewBox="0 0 1180 34" preserveAspectRatio="none"><path d="M0 17 H400 L430 5 H750 L780 29 H1180"/><circle cx="430" cy="5" r="3"/><circle cx="780" cy="29" r="3"/></svg>
-
-<!-- ===================== KONTAKT ===================== -->
-<section id="contact">
-  <div class="container">
-    <div class="eyebrow reveal" data-i18n="contact.eyebrow">Kontakt</div>
-    <h2 class="section-title reveal" data-i18n="contact.title">Porozmawiajmy o Twoim projekcie</h2>
-    <p class="section-lead reveal" data-i18n="contact.lead">Niezależnie czy potrzebujesz wsparcia przy hurtowni danych, optymalizacji procesów ETL, czy chcesz porozmawiać o wdrożeniu AI — napisz, odpowiem najszybciej jak mogę.</p>
-
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <ul class="contact-list">
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>
-            <a href="mailto:contact@zalka.it">contact@zalka.it</a>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-            <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">linkedin.com/in/marcin-zaluski</a>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-            <a href="https://zalka.it/CV" target="_blank" rel="noopener" data-i18n="contact.cvlink">zalka.it/CV — pełne CV</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="contact-form reveal">
-        <!--
-          FORMULARZ — Formspree.
-          1) Zarejestruj się na https://formspree.io i utwórz formularz dla contact@zalka.it.
-          2) Zamień YOUR_FORM_ID poniżej na ID otrzymane od Formspree.
-          3) Pole "temat" (select) jest wysyłane jako _subject — w skrzynce możesz
-             filtrować wiadomości po temacie i kierować je do odpowiednich folderów/adresów.
-          Alternatywa: jeśli wolisz osobne adresy e-mail dla każdego tematu,
-          stwórz w Formspree osobny formularz (osobny endpoint) na każdy temat
-          i podmień action dynamicznie w JS na podstawie wyboru w select (patrz funkcja
-          handleSubjectChange w skrypcie poniżej — zawiera zakomentowany przykład).
-        -->
-        <form action="https://formspree.io/f/mjgdjwjn" method="POST" id="contact-form">
-          <div class="form-group">
-            <label for="name" data-i18n="contact.form.name">Imię i nazwisko</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email" data-i18n="contact.form.email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="subject" data-i18n="contact.form.subject">Temat</label>
-            <select id="subject" name="_subject" required>
-              <option value="Zapytanie ogólne" data-i18n="contact.form.opt1">Zapytanie ogólne</option>
-              <option value="Projekt BI-ETL" data-i18n="contact.form.opt2">Projekt BI / ETL</option>
-              <option value="Szkolenie" data-i18n="contact.form.opt3">Szkolenie</option>
-              <option value="Automatyzacja AI" data-i18n="contact.form.opt4">Automatyzacja AI</option>
-              <option value="Inne" data-i18n="contact.form.opt5">Inne</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message" data-i18n="contact.form.message">Wiadomość</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Wyślij wiadomość</button>
-          <p class="form-note" data-i18n="contact.form.note">Formularz wysyła wiadomość bezpośrednio na adres kontaktowy. Jeśli wolisz, możesz też napisać e-mail prosto z klienta poczty.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FOOTER ===================== -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">
-          <img src="assets/logo-mark.jpg" alt="ZalkaIT logo">
-          <span>Zalka<span class="it" style="color:var(--cyan)">IT</span></span>
-        </div>
-        <p class="footer-tagline" data-i18n="footer.tagline">BI / ETL Developer · Data Engineer · SQL · Data Warehouse & Cloud Solutions · AI</p>
-      </div>
-      <div class="footer-links">
-        <a href="#about" data-i18n="nav.about">O mnie</a>
-        <a href="#services" data-i18n="nav.services">Usługi</a>
-        <a href="#projects" data-i18n="nav.projects">Projekty</a>
-        <a href="#tech" data-i18n="nav.tech">Technologie</a>
-        <a href="#contact" data-i18n="nav.contact">Kontakt</a>
-        <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 ZalkaIT — Marcin Załuski</span>
-      <span data-i18n="footer.made">Made with AI-assisted development</span>
-    </div>
+  <div class="footer-bottom">
+    <span>© 2026 ZalkaIT — Marcin Załuski. <span data-i18n="footer.rights">Wszelkie prawa zastrzeżone.</span></span>
+    <span data-i18n="footer.made">Made with AI-assisted development</span>
   </div>
 </footer>
 
-<!-- ===================== CHAT PLACEHOLDER ===================== -->
-<!-- TODO: integracja z Gemini API — asystent odpowiadający na pytania o usługi i doświadczenie Marcina -->
-<button class="chat-fab" id="chat-fab" aria-label="Asystent AI (wkrótce)">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+<button class="chat-fab" id="chat-fab" aria-label="Asystent AI" aria-expanded="false">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 1 1-3.6-6.7" stroke-linecap="round"/><path d="M21 4l-9 9-4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
-<div class="chat-tooltip" data-i18n="chat.tooltip">Asystent AI — wkrótce dostępny</div>
+<!-- TODO: integracja z Gemini API — asystent odpowiadający na pytania o usługi i doświadczenie Marcina -->
+<div class="chat-panel" id="chat-panel" hidden>
+  <h4 data-i18n="chat.title">Asystent AI</h4>
+  <p data-i18n="chat.desc">Wkrótce odpowie na pytania o moje usługi i doświadczenie. W międzyczasie — napisz bezpośrednio.</p>
+  <input type="text" disabled data-i18n-placeholder="chat.placeholder" placeholder="Wkrótce dostępne...">
+</div>
 
 <script>
-/* =========================================================
-   I18N
-   ========================================================= */
-const translations = {
-  pl: {
-    "nav.about":"O mnie","nav.services":"Usługi","nav.projects":"Projekty","nav.tech":"Technologie","nav.contact":"Kontakt",
-    "hero.badge":"Dostępny do kontraktów B2B",
-    "hero.eyebrow":"BI / ETL Developer · Data Engineer · AI",
-    "hero.h1":'Projektuję wydajne architektury <span class="accent">DWH</span> oraz skalowalne procesy <span class="accent">ETL/ELT</span>',
-    "hero.lead":"Ponad 20 lat doświadczenia w Business Intelligence i inżynierii danych — od T-SQL i SSIS po BigQuery, Power BI i raportowanie regulacyjne sektora bankowego. Obecnie wdrażam AI do realnych problemów analitycznych.",
-    "hero.cta1":"Napisz do mnie","hero.cta2":"Zobacz CV",
-    "about.eyebrow":"O mnie",
-    "about.title":"Dane, które mają sens — i AI, które pomaga je odkrywać",
-    "about.p1":"Od ponad 20 lat pracuję jako BI/ETL Developer i Data Engineer. Specjalizuję się w T-SQL i PL/SQL, projektowaniu i optymalizacji hurtowni danych (DWH) oraz procesach ETL/ELT — od klasycznego SSIS po BigQuery.",
-    "about.p2":"Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.",
-    "about.p3":"Od kilku lat aktywnie wykorzystuję modele LLM (Gemini, lokalne modele w LM Studio) i prompt engineering, by zwiększać produktywność, automatyzować analizę danych i rozwiązywać złożone problemy biznesowe. Obecnie poszerzam kompetencje w kierunku AI — automatyzacje, asystenci, agenty.",
-    "about.linkedin":"Profil LinkedIn",
-    "about.stat1.num":"20+ lat doświadczenia","about.stat1.label":"w BI, ETL i inżynierii danych",
-    "about.stat2.num":"Sektor bankowy","about.stat2.label":"COREP · Leverage Ratio · Large Exposures",
-    "about.stat3.num":"BigQuery · T-SQL","about.stat3.label":"SSIS · Power BI · OLAP/DAX",
-    "about.stat4.num":"AI & Prompt Engineering","about.stat4.label":"w codziennej pracy z danymi",
-    "services.eyebrow":"Usługi","services.title":"W czym mogę pomóc",
-    "services.lead":"Zakres współpracy B2B — od projektowania architektury danych, przez optymalizację wydajności, po raportowanie i wczesne wdrożenia AI.",
-    "services.s1.title":"Projektowanie i optymalizacja DWH",
-    "services.s1.desc":"Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.",
-    "services.s2.title":"Procesy ETL/ELT",
-    "services.s2.desc":"Budowa i wdrażanie procesów ETL/ELT — SSIS, BigQuery i rozwiązania cross-platform, od źródeł po raporty.",
-    "services.s3.title":"Optymalizacja T-SQL / PL-SQL",
-    "services.s3.desc":"Performance tuning procedur i zapytań — analiza planów wykonania, indeksy, refaktoryzacja kodu pod kątem szybkości.",
-    "services.s4.title":"Raportowanie i dashboardy",
-    "services.s4.desc":"Power BI, Looker Studio, kostki OLAP i modele DAX — czytelne dashboardy zamieniające dane w decyzje.",
-    "services.s5.title":"Sprawozdawczość regulacyjna COREP",
-    "services.s5.desc":"Wsparcie w raportowaniu regulacyjnym sektora bankowego — COREP i podobne wymogi nadzorcze, oparte na rzetelnych danych.",
-    "services.s6.title":"AI w pracy z danymi",
-    "services.s6.desc":"Wdrażanie promptów, automatyzacji i asystentów AI w codziennej pracy analityka i dewelopera danych.",
-    "services.s6.tag":"Nowy obszar — rozwijam się",
-    "projects.eyebrow":"Projekty","projects.title":"Wybrane doświadczenie",
-    "projects.lead":"Oś kariery — od kostek OLAP w sektorze publicznym, przez branżę automotive i wydawnictwa, po sprawozdawczość regulacyjną w bankowości.",
-    "projects.p1.industry":"Sektor bankowy",
-    "projects.p1.desc":"Sprawozdawczość regulacyjna COREP, integracja danych w BigQuery oraz budowa dashboardów w Looker Studio na potrzeby raportowania nadzorczego.",
-    "projects.p2.industry":"Bankowość / Finanse",
-    "projects.p2.desc":"Raportowanie w Power BI oraz budowa i optymalizacja kostek analitycznych OLAP Tabular dla wewnętrznych zespołów analitycznych.",
-    "projects.p3.industry":"Sektor produkcyjny",
-    "projects.p3.desc":"Budowa kostek OLAP oraz procesów ETL zasilających dane z systemów ERP i CRM, a następnie dashboardy Power BI z modelami DAX.",
-    "projects.p4.industry":"Wydawnictwo / Legal-tech",
-    "projects.p4.desc":"Rozwój hurtowni danych, integracja procesów w SSIS oraz migracja wybranych rozwiązań do Google Cloud.",
-    "projects.p5.industry":"Automotive (kontrakt)",
-    "projects.p5.desc":"Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne — projektowanie struktur danych oraz implementacja w SSIS.",
-    "projects.p6.industry":"Sektor publiczny",
-    "projects.p6.desc":"Budowa i optymalizacja kostek analitycznych SSAS oraz raportowania opartego na Excel Services dla potrzeb statystyki publicznej.",
-    "projects.earlier":"Wcześniejsze lata (2007–2013): projekty BI/ETL dla sektora farmaceutycznego (Sanofi-Aventis, Zentiva, Adamed) — budowa systemów raportowych z danych CRM, oraz pierwsze wdrożenia hurtowni danych od podstaw.",
-    "tech.eyebrow":"Technologie","tech.title":"Stack technologiczny",
-    "tech.lead":"Narzędzia i technologie, z którymi pracuję najczęściej — od baz danych po wczesne wdrożenia AI.",
-    "tech.g1.title":"Bazy danych & języki","tech.g2.title":"ETL / ELT","tech.g3.title":"Modelowanie & OLAP",
-    "tech.g4.title":"BI & raportowanie","tech.g5.title":"AI & automatyzacja","tech.g6.title":"Narzędzia & SCM",
-    "contact.eyebrow":"Kontakt","contact.title":"Porozmawiajmy o Twoim projekcie",
-    "contact.lead":"Niezależnie czy potrzebujesz wsparcia przy hurtowni danych, optymalizacji procesów ETL, czy chcesz porozmawiać o wdrożeniu AI — napisz, odpowiem najszybciej jak mogę.",
-    "contact.cvlink":"zalka.it/CV — pełne CV",
-    "contact.form.name":"Imię i nazwisko","contact.form.email":"Email","contact.form.subject":"Temat","contact.form.message":"Wiadomość","contact.form.submit":"Wyślij wiadomość",
-    "contact.form.opt1":"Zapytanie ogólne","contact.form.opt2":"Projekt BI / ETL","contact.form.opt3":"Szkolenie","contact.form.opt4":"Automatyzacja AI","contact.form.opt5":"Inne",
-    "contact.form.note":"Formularz wysyła wiadomość bezpośrednio na adres kontaktowy. Jeśli wolisz, możesz też napisać e-mail prosto z klienta poczty.",
-    "footer.tagline":"BI / ETL Developer · Data Engineer · SQL · Data Warehouse & Cloud Solutions · AI",
-    "footer.made":"Made with AI-assisted development",
-    "chat.tooltip":"Asystent AI — wkrótce dostępny"
-  },
-  en: {
-    "nav.about":"About","nav.services":"Services","nav.projects":"Projects","nav.tech":"Technologies","nav.contact":"Contact",
-    "hero.badge":"Available for B2B contracts",
-    "hero.eyebrow":"BI / ETL Developer · Data Engineer · AI",
-    "hero.h1":'I design efficient <span class="accent">DWH</span> architectures and scalable <span class="accent">ETL/ELT</span> pipelines',
-    "hero.lead":"20+ years of experience in Business Intelligence and data engineering — from T-SQL and SSIS to BigQuery, Power BI, and regulatory reporting for the banking sector. Currently applying AI to real analytical problems.",
-    "hero.cta1":"Get in touch","hero.cta2":"View CV",
-    "about.eyebrow":"About",
-    "about.title":"Data that makes sense — and AI that helps uncover it",
-    "about.p1":"For over 20 years I've worked as a BI/ETL Developer and Data Engineer. I specialize in T-SQL and PL/SQL, designing and optimizing data warehouses (DWH), and ETL/ELT processes — from classic SSIS to BigQuery.",
-    "about.p2":"I bring unique experience from the banking sector: regulatory reporting (COREP, Leverage Ratio, Large Exposures) — areas where data accuracy isn't optional, it's required.",
-    "about.p3":"For the past few years I've actively used LLMs (Gemini, local models in LM Studio) and prompt engineering to boost productivity, automate data analysis, and solve complex business problems. I'm currently expanding into AI — automations, assistants, agents.",
-    "about.linkedin":"LinkedIn profile",
-    "about.stat1.num":"20+ years of experience","about.stat1.label":"in BI, ETL and data engineering",
-    "about.stat2.num":"Banking sector","about.stat2.label":"COREP · Leverage Ratio · Large Exposures",
-    "about.stat3.num":"BigQuery · T-SQL","about.stat3.label":"SSIS · Power BI · OLAP/DAX",
-    "about.stat4.num":"AI & Prompt Engineering","about.stat4.label":"in everyday data work",
-    "services.eyebrow":"Services","services.title":"How I can help",
-    "services.lead":"B2B collaboration scope — from data architecture design and performance tuning to reporting and early AI implementations.",
-    "services.s1.title":"DWH design & optimization",
-    "services.s1.desc":"Data warehouse architecture from scratch or refactoring of existing structures — dimensional models, performance, scalability.",
-    "services.s2.title":"ETL/ELT pipelines",
-    "services.s2.desc":"Building and deploying ETL/ELT processes — SSIS, BigQuery and cross-platform solutions, from source systems to reports.",
-    "services.s3.title":"T-SQL / PL-SQL optimization",
-    "services.s3.desc":"Performance tuning of procedures and queries — execution plan analysis, indexing, refactoring for speed.",
-    "services.s4.title":"Reporting & dashboards",
-    "services.s4.desc":"Power BI, Looker Studio, OLAP cubes and DAX models — clear dashboards that turn data into decisions.",
-    "services.s5.title":"COREP regulatory reporting",
-    "services.s5.desc":"Support for banking-sector regulatory reporting — COREP and similar supervisory requirements, built on reliable data.",
-    "services.s6.title":"AI for data work",
-    "services.s6.desc":"Implementing prompts, automations and AI assistants in the daily work of data analysts and developers.",
-    "services.s6.tag":"New area — growing into it",
-    "projects.eyebrow":"Projects","projects.title":"Selected experience",
-    "projects.lead":"A career timeline — from public-sector OLAP cubes, through automotive and publishing, to regulatory reporting in banking.",
-    "projects.p1.industry":"Banking sector",
-    "projects.p1.desc":"COREP regulatory reporting, BigQuery data integration, and Looker Studio dashboards for supervisory reporting.",
-    "projects.p2.industry":"Banking / Finance",
-    "projects.p2.desc":"Power BI reporting and building/optimizing OLAP Tabular cubes for internal analytics teams.",
-    "projects.p3.industry":"Manufacturing",
-    "projects.p3.desc":"Built OLAP cubes and ETL processes feeding data from ERP/CRM systems, plus Power BI dashboards with DAX models.",
-    "projects.p4.industry":"Publishing / Legal-tech",
-    "projects.p4.desc":"Data warehouse development, SSIS integration processes, and migration of selected solutions to Google Cloud.",
-    "projects.p5.industry":"Automotive (contract)",
-    "projects.p5.desc":"Designed and implemented ETL processes feeding operational reports — data structure design and SSIS implementation.",
-    "projects.p6.industry":"Public sector",
-    "projects.p6.desc":"Built and optimized SSAS analytical cubes and Excel Services-based reporting for public statistics.",
-    "projects.earlier":"Earlier years (2007–2013): BI/ETL projects for the pharmaceutical sector (Sanofi-Aventis, Zentiva, Adamed) — building CRM-based reporting systems, plus early data warehouse implementations from scratch.",
-    "tech.eyebrow":"Technologies","tech.title":"Tech stack",
-    "tech.lead":"Tools and technologies I work with most often — from databases to early AI implementations.",
-    "tech.g1.title":"Databases & languages","tech.g2.title":"ETL / ELT","tech.g3.title":"Modeling & OLAP",
-    "tech.g4.title":"BI & reporting","tech.g5.title":"AI & automation","tech.g6.title":"Tools & SCM",
-    "contact.eyebrow":"Contact","contact.title":"Let's talk about your project",
-    "contact.lead":"Whether you need help with a data warehouse, ETL optimization, or want to discuss an AI implementation — get in touch, I'll reply as soon as I can.",
-    "contact.cvlink":"zalka.it/CV — full CV",
-    "contact.form.name":"Full name","contact.form.email":"Email","contact.form.subject":"Subject","contact.form.message":"Message","contact.form.submit":"Send message",
-    "contact.form.opt1":"General inquiry","contact.form.opt2":"BI / ETL project","contact.form.opt3":"Training","contact.form.opt4":"AI automation","contact.form.opt5":"Other",
-    "contact.form.note":"This form sends your message directly to the contact address. You can also email directly from your mail client.",
-    "footer.tagline":"BI / ETL Developer · Data Engineer · SQL · Data Warehouse & Cloud Solutions · AI",
-    "footer.made":"Made with AI-assisted development",
-    "chat.tooltip":"AI assistant — coming soon"
-  }
-};
-
-function applyTranslations(lang){
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(translations[lang] && translations[lang][key] !== undefined){
-      el.innerHTML = translations[lang][key];
-    }
-  });
-  document.documentElement.lang = lang;
-  document.getElementById('lang-toggle').textContent = lang === 'pl' ? 'EN' : 'PL';
-  localStorage.setItem('zalkait-lang', lang);
-}
-
-let currentLang = localStorage.getItem('zalkait-lang') || 'pl';
-applyTranslations(currentLang);
-
-document.getElementById('lang-toggle').addEventListener('click', ()=>{
-  currentLang = currentLang === 'pl' ? 'en' : 'pl';
-  applyTranslations(currentLang);
-});
-
-/* =========================================================
-   THEME TOGGLE
-   ========================================================= */
-const themeIcon = document.getElementById('theme-icon');
-function setTheme(theme){
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('zalkait-theme', theme);
-  if(theme === 'light'){
-    themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" stroke="none"/>';
-  } else {
-    themeIcon.innerHTML = '<path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/>';
-  }
-}
-const savedTheme = localStorage.getItem('zalkait-theme') || 'dark';
-setTheme(savedTheme);
-
-document.getElementById('theme-toggle').addEventListener('click', ()=>{
-  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  setTheme(next);
-});
-
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
-const navLinks = document.getElementById('nav-links');
-document.getElementById('hamburger').addEventListener('click', ()=>{
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navLinks.classList.remove('open')));
-
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-/* =========================================================
-   NETWORK CANVAS ANIMATION (hero background)
-   Subtle node/connection animation echoing the ZalkaIT logo.
-   ========================================================= */
 (function(){
-  const canvas = document.getElementById('network-canvas');
-  const ctx = canvas.getContext('2d');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let nodes = [];
-  const NODE_COUNT = 46;
+  "use strict";
 
-  function resize(){
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+  /* ============ I18N DICTIONARY ============ */
+  var dict = {
+    pl: {
+      "skip":"Przejdź do treści",
+      "nav.about":"O mnie","nav.services":"Usługi","nav.projects":"Projekty","nav.tech":"Technologie","nav.contact":"Kontakt",
+      "hero.badge":"Dostępny do kontraktów B2B",
+      "hero.h1":'Projektuję wydajne architektury <span class="accent">DWH</span> i skalowalne potoki <span class="accent">ETL/ELT</span>',
+      "hero.lead":"Ponad 20 lat w Business Intelligence i inżynierii danych — od T-SQL i SSIS po BigQuery, Power BI i sprawozdawczość regulacyjną sektora bankowego. Obecnie wdrażam AI do realnych problemów analitycznych.",
+      "hero.cta1":"Napisz do mnie","hero.cta2":"Zobacz projekty",
+      "hero.console.corep":"0 rozbieżności",
+      "hero.console.q":"Zoptymalizuj ten CTE",
+      "hero.console.a":"Indeks na (acct_id, period) → -88% czasu",
+      "about.eyebrow":"-- o_mnie",
+      "about.h2":"Dane, które mają sens — i AI, które pomaga je odkrywać",
+      "about.p1":"Od ponad 20 lat pracuję jako BI/ETL Developer i Data Engineer. Specjalizuję się w T-SQL i PL/SQL, projektowaniu i optymalizacji hurtowni danych (DWH) oraz procesach ETL/ELT — od klasycznego SSIS po BigQuery.",
+      "about.p2":"Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.",
+      "about.p3":"Od kilku miesięcy intensywnie zgłębiam możliwości AI — testuję modele LLM i prompt engineering, wykorzystując narzędzia AI do przyspieszania i optymalizacji pracy nad złożonymi projektami oraz automatyzacji analizy danych. To nowy, ale bardzo praktyczny kierunek rozwoju, który aktywnie rozwijam.",
+      "about.linkedin":"Profil LinkedIn",
+      "about.stat1":"lat doświadczenia w BI, ETL i inżynierii danych",
+      "about.stat2":"Sektor bankowy — Leverage Ratio, Large Exposures",
+      "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
+      "about.stat4":"Prompt engineering w codziennej pracy z danymi",
+      "services.eyebrow":"-- uslugi","services.h2":"W czym mogę pomóc",
+      "services.c1.title":"Projektowanie i optymalizacja DWH",
+      "services.c1.desc":"Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.",
+      "services.c2.title":"Procesy ETL/ELT",
+      "services.c2.desc":"Budowa i wdrażanie procesów ETL/ELT — SSIS, BigQuery i rozwiązania cross-platform, od źródeł po raporty.",
+      "services.c3.title":"Optymalizacja T-SQL / PL-SQL",
+      "services.c3.desc":"Performance tuning procedur i zapytań — analiza planów wykonania, indeksy, refaktoryzacja kodu pod kątem szybkości.",
+      "services.c4.title":"Raportowanie i dashboardy",
+      "services.c4.desc":"Power BI, Looker Studio, kostki OLAP i modele DAX — czytelne dashboardy zamieniające dane w decyzje.",
+      "services.c5.title":"Sprawozdawczość regulacyjna COREP",
+      "services.c5.desc":"Wsparcie w raportowaniu regulacyjnym sektora bankowego — COREP i podobne wymogi nadzorcze, oparte na rzetelnych danych.",
+      "services.c6.title":"AI w pracy z danymi",
+      "services.c6.desc":"Praktyczne wykorzystanie modeli LLM i prompt engineeringu — automatyzacja analiz oraz przyspieszanie pracy nad złożonymi projektami BI/ETL.",
+      "services.c6.badge":"NOWY OBSZAR — ROZWIJAM SIĘ",
+      "projects.eyebrow":"-- projekty","projects.h2":"Wybrane doświadczenie",
+      "projects.sub":"Oś kariery — od kostek OLAP w sektorze publicznym, przez branżę automotive i wydawnictwo, po sprawozdawczość regulacyjną w bankowości.",
+      "projects.now":"obecnie",
+      "projects.p1.industry":"Sektor bankowy",
+      "projects.p1.desc":"Sprawozdawczość regulacyjna COREP, integracja danych w BigQuery oraz budowa dashboardów w Looker Studio na potrzeby raportowania nadzorczego.",
+      "projects.p2.industry":"Sektor produkcyjny",
+      "projects.p2.desc":"Budowa kostek OLAP oraz procesów ETL zasilających dane z systemów ERP i CRM, a następnie dashboardy Power BI z modelami DAX.",
+      "projects.p3.industry":"Sektor bankowy",
+      "projects.p3.desc":"Tworzenie dedykowanych raportów Power BI oraz rozbudowa i strojenie wydajnościowe kostek OLAP (Tabular) wspierających decyzje w grupie kapitałowej.",
+      "projects.p4.industry":"Wydawnictwo / Legal-tech",
+      "projects.p4.desc":"Rozwój hurtowni danych, integracja procesów w SSIS oraz migracja wybranych rozwiązań do Google Cloud.",
+      "projects.p5.industry":"Automotive (kontrakt)",
+      "projects.p5.desc":"Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne — projektowanie struktur danych oraz implementacja w SSIS.",
+      "projects.p6.industry":"Sektor publiczny",
+      "projects.p6.desc":"Budowa i optymalizacja kostek analitycznych SSAS oraz raportowania opartego na Excel Services dla potrzeb statystyki publicznej.",
+      "projects.note":"Wcześniejsze lata (2007–2013): projekty BI/ETL dla sektora farmaceutycznego (Sanofi-Aventis, Zentiva, Adamed) — budowa systemów raportowych z danych CRM, oraz pierwsze wdrożenia hurtowni danych od podstaw.",
+      "tech.eyebrow":"-- stack","tech.h2":"Technologie, które napędzają Twoje dane",
+      "tech.sub":"Narzędzia i technologie, z którymi pracuję najczęściej — od baz danych po wczesne wdrożenia AI.",
+      "tech.g1":"Bazy danych & Języki","tech.g2":"ETL / ELT","tech.g3":"Modelowanie & OLAP",
+      "tech.g4":"BI & Raportowanie","tech.g5":"AI & Automatyzacja","tech.g6":"Narzędzia & SCM",
+      "contact.eyebrow":"-- kontakt","contact.h2":"Porozmawiajmy o Twoim projekcie",
+      "contact.lead":"Niezależnie czy potrzebujesz wsparcia przy hurtowni danych, optymalizacji procesów ETL, czy chcesz porozmawiać o wdrożeniu AI — napisz, odpowiem najszybciej jak mogę.",
+      "contact.form.name":"Imię i nazwisko","contact.form.email":"Email","contact.form.subject":"Temat",
+      "contact.form.opt1":"Zapytanie ogólne","contact.form.opt2":"Projekt BI / ETL","contact.form.opt3":"Szkolenie",
+      "contact.form.opt4":"Automatyzacja AI","contact.form.opt5":"Inne",
+      "contact.form.message":"Wiadomość","contact.form.submit":"Wyślij wiadomość",
+      "contact.form.note":"Wiadomość (temat: „%TOPIC%”) trafi na adres %EMAIL% — bez otwierania programu pocztowego.",
+      "contact.form.sending":"Wysyłanie…",
+      "contact.form.success":"Dziękuję! Wiadomość została wysłana — odezwę się najszybciej, jak będę mógł.",
+      "contact.form.error":"Coś poszło nie tak. Napisz proszę bezpośrednio na contact@zalka.it.",
+      "contact.form.consent":"Wyrażam zgodę na przetwarzanie podanych danych w celu odpowiedzi na zapytanie (RODO).",
+      "contact.form.rodo":"Administrator danych: Marcin Załuski (ZalkaIT), contact@zalka.it. Dane służą wyłącznie do udzielenia odpowiedzi na wiadomość i nie są przekazywane dalej poza dostawcą formularza (FormSubmit). Przysługuje Ci prawo dostępu, sprostowania, usunięcia i sprzeciwu wobec przetwarzania.",
+      "contact.form.validation":"Uzupełnij wymagane pola i zaznacz zgodę na przetwarzanie danych.",
+      "footer.tagline":"BI / ETL Developer · Data Engineer · SQL · Data Warehouse & Cloud Solutions · AI",
+      "footer.rights":"Wszelkie prawa zastrzeżone.","footer.made":"Made with AI-assisted development",
+      "chat.title":"Asystent AI",
+      "chat.desc":"Wkrótce odpowie na pytania o moje usługi i doświadczenie. W międzyczasie — napisz bezpośrednio.",
+      "chat.placeholder":"Wkrótce dostępne..."
+    },
+    en: {
+      "skip":"Skip to content",
+      "nav.about":"About","nav.services":"Services","nav.projects":"Projects","nav.tech":"Tech Stack","nav.contact":"Contact",
+      "hero.badge":"Available for B2B contracts",
+      "hero.h1":'I design high-performance <span class="accent">DWH</span> architectures and scalable <span class="accent">ETL/ELT</span> pipelines',
+      "hero.lead":"20+ years in Business Intelligence and data engineering — from T-SQL and SSIS to BigQuery, Power BI, and regulatory reporting for the banking sector. Currently applying AI to real analytical problems.",
+      "hero.cta1":"Get in touch","hero.cta2":"View projects",
+      "hero.console.corep":"0 discrepancies",
+      "hero.console.q":"Optimize this CTE",
+      "hero.console.a":"Index on (acct_id, period) → -88% time",
+      "about.eyebrow":"-- about_me",
+      "about.h2":"Data that makes sense — and AI that helps uncover it",
+      "about.p1":"I've worked as a BI/ETL Developer and Data Engineer for over 20 years. I specialize in T-SQL and PL/SQL, designing and optimizing data warehouses (DWH), and ETL/ELT processes — from classic SSIS to BigQuery.",
+      "about.p2":"I bring unique banking-sector experience: COREP, Leverage Ratio, and Large Exposures regulatory reporting — areas where data accuracy isn't optional, it's mandatory.",
+      "about.p3":"For the past few months I've been diving deep into AI — experimenting with LLMs and prompt engineering, using AI tools to speed up and optimize work on complex projects and automate data analysis. It's a new but very hands-on direction I'm actively building on.",
+      "about.linkedin":"LinkedIn profile",
+      "about.stat1":"years of experience in BI, ETL and data engineering",
+      "about.stat2":"Banking sector — Leverage Ratio, Large Exposures",
+      "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
+      "about.stat4":"Prompt engineering in everyday data work",
+      "services.eyebrow":"-- services","services.h2":"What I can help with",
+      "services.c1.title":"Data Warehouse design & optimization",
+      "services.c1.desc":"DWH architecture from scratch or refactoring existing structures — dimensional models, performance, scalability.",
+      "services.c2.title":"ETL/ELT pipelines",
+      "services.c2.desc":"Building and deploying ETL/ELT processes — SSIS, BigQuery and cross-platform solutions, from source to report.",
+      "services.c3.title":"T-SQL / PL-SQL optimization",
+      "services.c3.desc":"Performance tuning of procedures and queries — execution plan analysis, indexing, refactoring for speed.",
+      "services.c4.title":"Reporting & dashboards",
+      "services.c4.desc":"Power BI, Looker Studio, OLAP cubes and DAX models — clear dashboards turning data into decisions.",
+      "services.c5.title":"COREP regulatory reporting",
+      "services.c5.desc":"Support for banking-sector regulatory reporting — COREP and similar supervisory requirements, built on reliable data.",
+      "services.c6.title":"AI in data workflows",
+      "services.c6.desc":"Hands-on use of LLMs and prompt engineering — automating analysis and speeding up work on complex BI/ETL projects.",
+      "services.c6.badge":"NEW AREA — ACTIVELY LEARNING",
+      "projects.eyebrow":"-- projects","projects.h2":"Selected experience",
+      "projects.sub":"Career timeline — from OLAP cubes in the public sector, through automotive and publishing, to regulatory reporting in banking.",
+      "projects.now":"present",
+      "projects.p1.industry":"Banking sector",
+      "projects.p1.desc":"COREP regulatory reporting, data integration in BigQuery, and building Looker Studio dashboards for supervisory reporting.",
+      "projects.p2.industry":"Manufacturing sector",
+      "projects.p2.desc":"Building OLAP cubes and ETL processes feeding data from ERP and CRM systems, plus Power BI dashboards with DAX models.",
+      "projects.p3.industry":"Banking sector",
+      "projects.p3.desc":"Creating dedicated Power BI reports and extending / performance-tuning OLAP (Tabular) cubes supporting decisions across the capital group.",
+      "projects.p4.industry":"Publishing / Legal-tech",
+      "projects.p4.desc":"Data warehouse development, SSIS process integration, and migration of selected solutions to Google Cloud.",
+      "projects.p5.industry":"Automotive (contract)",
+      "projects.p5.desc":"Preparing and implementing ETL processes feeding operational reports — data structure design and SSIS implementation.",
+      "projects.p6.industry":"Public sector",
+      "projects.p6.desc":"Building and optimizing SSAS analytical cubes and Excel Services-based reporting for public statistics.",
+      "projects.note":"Earlier years (2007–2013): BI/ETL projects for the pharmaceutical sector (Sanofi-Aventis, Zentiva, Adamed) — building CRM-based reporting systems, plus first data warehouse builds from scratch.",
+      "tech.eyebrow":"-- tech_stack","tech.h2":"Technologies that power your data",
+      "tech.sub":"The tools and technologies I work with most — from databases to early AI deployments.",
+      "tech.g1":"Databases & Languages","tech.g2":"ETL / ELT","tech.g3":"Modeling & OLAP",
+      "tech.g4":"BI & Reporting","tech.g5":"AI & Automation","tech.g6":"Tools & SCM",
+      "contact.eyebrow":"-- contact","contact.h2":"Let's talk about your project",
+      "contact.lead":"Whether you need help with a data warehouse, ETL process optimization, or want to talk about AI adoption — get in touch, I'll respond as soon as I can.",
+      "contact.form.name":"Full name","contact.form.email":"Email","contact.form.subject":"Subject",
+      "contact.form.opt1":"General inquiry","contact.form.opt2":"BI / ETL project","contact.form.opt3":"Training",
+      "contact.form.opt4":"AI automation","contact.form.opt5":"Other",
+      "contact.form.message":"Message","contact.form.submit":"Send message",
+      "contact.form.note":"Your message (topic: “%TOPIC%”) goes to %EMAIL% — no email client opens.",
+      "contact.form.sending":"Sending…",
+      "contact.form.success":"Thank you! Your message has been sent — I'll get back to you as soon as I can.",
+      "contact.form.error":"Something went wrong. Please email contact@zalka.it directly.",
+      "contact.form.consent":"I agree to the processing of my data in order to receive a reply (GDPR).",
+      "contact.form.rodo":"Data controller: Marcin Załuski (ZalkaIT), contact@zalka.it. Your data is used solely to respond to your message and isn't shared beyond the form-processing provider (FormSubmit). You have the right to access, rectify, erase, and object to processing.",
+      "contact.form.validation":"Please fill in all required fields and accept the data processing consent.",
+      "footer.tagline":"BI / ETL Developer · Data Engineer · SQL · Data Warehouse & Cloud Solutions · AI",
+      "footer.rights":"All rights reserved.","footer.made":"Made with AI-assisted development",
+      "chat.title":"AI Assistant",
+      "chat.desc":"Coming soon — will answer questions about my services and experience. Until then, reach out directly.",
+      "chat.placeholder":"Coming soon..."
+    }
+  };
+
+  var htmlKeys = { "hero.h1": true };
+
+  function applyI18n(lang){
+    var nodes = document.querySelectorAll('[data-i18n]');
+    nodes.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var val = dict[lang] && dict[lang][key];
+      if(val === undefined) return;
+      if(htmlKeys[key]) el.innerHTML = val; else el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      var val = dict[lang] && dict[lang][key];
+      if(val !== undefined) el.setAttribute('placeholder', val);
+    });
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('data-lang', lang);
+    var btn = document.getElementById('lang-toggle');
+    if(btn) btn.textContent = (lang === 'pl') ? 'EN' : 'PL';
+    if(typeof updateFormNote === 'function') updateFormNote();
   }
 
-  function init(){
-    resize();
-    nodes = [];
-    for(let i=0;i<NODE_COUNT;i++){
-      nodes.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        vx: (Math.random()-0.5)*0.25,
-        vy: (Math.random()-0.5)*0.25,
-        r: Math.random()*2+1
-      });
+  /* ============ THEME ============ */
+  function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    var sun = document.getElementById('icon-sun'), moon = document.getElementById('icon-moon');
+    if(sun && moon){
+      sun.style.display = theme === 'dark' ? 'block' : 'none';
+      moon.style.display = theme === 'dark' ? 'none' : 'block';
     }
   }
 
-  function colorFor(theme){
-    return theme === 'light'
-      ? {line:'rgba(20,40,70,0.18)', node:'rgba(14,165,191,0.55)'}
-      : {line:'rgba(45,212,232,0.18)', node:'rgba(45,212,232,0.55)'};
-  }
+  var savedTheme = localStorage.getItem('zalkait-theme') ||
+    (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  applyTheme(savedTheme);
 
-  function draw(){
-    const theme = document.documentElement.getAttribute('data-theme');
-    const c = colorFor(theme);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for(let i=0;i<nodes.length;i++){
-      const n = nodes[i];
-      n.x += n.vx; n.y += n.vy;
-      if(n.x<0||n.x>canvas.width) n.vx*=-1;
-      if(n.y<0||n.y>canvas.height) n.vy*=-1;
-    }
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const a=nodes[i], b=nodes[j];
-        const dx=a.x-b.x, dy=a.y-b.y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<150){
-          ctx.strokeStyle = c.line;
-          ctx.lineWidth = 1;
-          ctx.globalAlpha = 1 - dist/150;
-          ctx.beginPath();
-          ctx.moveTo(a.x,a.y);
-          ctx.lineTo(b.x,b.y);
-          ctx.stroke();
-          ctx.globalAlpha = 1;
+  var savedLang = localStorage.getItem('zalkait-lang') || 'pl';
+  applyI18n(savedLang);
+
+  document.getElementById('theme-toggle').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('zalkait-theme', next);
+  });
+
+  document.getElementById('lang-toggle').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-lang') || 'pl';
+    var next = cur === 'pl' ? 'en' : 'pl';
+    applyI18n(next);
+    localStorage.setItem('zalkait-lang', next);
+  });
+
+  /* ============ MOBILE MENU ============ */
+  var burger = document.getElementById('burger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  /* ============ SCROLL REVEAL ============ */
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !prefersReduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ============ CONTACT FORM (AJAX — no mail client) ============ */
+  var form = document.getElementById('contact-form');
+  var submitBtn = document.getElementById('f-submit');
+  var statusEl = document.getElementById('form-status');
+  var subjectSelect = document.getElementById('f-subject');
+
+  /* Adres dla każdego tematu. Na razie wszystko trafia na jedną skrzynkę —
+     podmień wartości tutaj, jeśli chcesz realny routing na osobne adresy. */
+  var SUBJECT_EMAILS = {
+    'general':'contact@zalka.it',
+    'bi-etl':'dev@zalka.it',
+    'training':'contact@zalka.it', /* TODO: podany adres "@zalka.it" był niepełny — podmień, gdy ustalisz docelowy */
+    'ai':'dev@zalka.it',
+    'other':'contact@zalka.it'
+  };
+
+  function currentTargetEmail(){
+    return SUBJECT_EMAILS[subjectSelect.value] || 'contact@zalka.it';
+  }
+
+  function updateFormNote(){
+    if(!statusEl || !subjectSelect) return;
+    var lang = document.documentElement.getAttribute('data-lang') || 'pl';
+    var topic = subjectSelect.options[subjectSelect.selectedIndex].textContent;
+    var tpl = (dict[lang] && dict[lang]['contact.form.note']) || dict.pl['contact.form.note'];
+    statusEl.textContent = tpl.replace('%TOPIC%', topic).replace('%EMAIL%', currentTargetEmail());
+    statusEl.style.color = '';
+  }
+
+  subjectSelect.addEventListener('change', updateFormNote);
+  updateFormNote();
+
+  function setStatus(key, isError){
+    var lang = document.documentElement.getAttribute('data-lang') || 'pl';
+    statusEl.textContent = dict[lang][key] || dict.pl[key];
+    statusEl.style.color = isError ? 'var(--coral)' : '';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(form._honey.value){ return; } /* honeypot — bot caught */
+
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var subject = form.subject.value;
+    var subjectLabel = subjectSelect.options[subjectSelect.selectedIndex].textContent;
+    var message = form.message.value.trim();
+    if(!name || !email || !message || !form.consent.checked){
+      setStatus('contact.form.validation', true);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    var lang = document.documentElement.getAttribute('data-lang') || 'pl';
+    statusEl.textContent = dict[lang]['contact.form.sending'];
+    statusEl.style.color = '';
+
+    var targetEmail = currentTargetEmail();
+    var endpoint = 'https://formsubmit.co/ajax/' + targetEmail;
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        subject: subjectLabel,
+        message: message,
+        _subject: '[zalka.it] ' + subjectLabel
+      })
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status');
+      return res.json();
+    }).then(function(){
+      setStatus('contact.form.success', false);
+      form.reset();
+      updateFormNote();
+    }).catch(function(){
+      setStatus('contact.form.error', true);
+    }).finally(function(){
+      submitBtn.disabled = false;
+    });
+  });
+
+  /* ============ CHAT FAB (placeholder) ============ */
+  var chatFab = document.getElementById('chat-fab');
+  var chatPanel = document.getElementById('chat-panel');
+  chatFab.addEventListener('click', function(){
+    var hidden = chatPanel.hasAttribute('hidden');
+    if(hidden){ chatPanel.removeAttribute('hidden'); chatFab.setAttribute('aria-expanded','true'); }
+    else { chatPanel.setAttribute('hidden',''); chatFab.setAttribute('aria-expanded','false'); }
+  });
+
+  /* ============ HERO CANVAS — circuit network ============ */
+  var canvas = document.getElementById('hero-canvas');
+  if(canvas && canvas.getContext){
+    var ctx = canvas.getContext('2d');
+    var W, H, nodes = [], pulses = [];
+    var NODE_COUNT = 38;
+    var MAX_DIST = 150;
+    var canvasRunning = true;
+
+    function resize(){
+      var hero = document.getElementById('hero');
+      W = canvas.width = hero.clientWidth;
+      H = canvas.height = hero.clientHeight;
+    }
+    function initNodes(){
+      nodes = [];
+      for(var i=0;i<NODE_COUNT;i++){
+        nodes.push({
+          x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18,
+          r: Math.random()*1.6+1
+        });
       }
     }
-    for(const n of nodes){
-      ctx.fillStyle = c.node;
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fill();
+    function isLight(){ return document.documentElement.getAttribute('data-theme') === 'light'; }
+
+    function step(){
+      if(!canvasRunning) return;
+      ctx.clearRect(0,0,W,H);
+      var lineColor = isLight() ? '15,23,38' : '180,220,235';
+      var nodeColor = isLight() ? '11,147,168' : '45,212,232';
+
+      for(var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        n.x += n.vx; n.y += n.vy;
+        if(n.x<0||n.x>W) n.vx*=-1;
+        if(n.y<0||n.y>H) n.vy*=-1;
+      }
+      for(var i=0;i<nodes.length;i++){
+        for(var j=i+1;j<nodes.length;j++){
+          var a=nodes[i], b=nodes[j];
+          var dx=a.x-b.x, dy=a.y-b.y, dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<MAX_DIST){
+            ctx.strokeStyle = 'rgba('+lineColor+','+ (0.12*(1-dist/MAX_DIST)) +')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        }
+      }
+      for(var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba('+nodeColor+',0.55)';
+        ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      if(!prefersReduced) requestAnimationFrame(step);
     }
-    if(!prefersReduced) requestAnimationFrame(draw);
+
+    resize(); initNodes();
+    window.addEventListener('resize', function(){ resize(); initNodes(); });
+    step();
+
+    /* Pause the animation loop when the hero scrolls out of view — saves CPU/battery. */
+    if('IntersectionObserver' in window){
+      var heroObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var wasRunning = canvasRunning;
+          canvasRunning = entry.isIntersecting;
+          if(canvasRunning && !wasRunning && !prefersReduced) requestAnimationFrame(step);
+        });
+      }, { threshold: 0 });
+      heroObserver.observe(document.getElementById('hero'));
+    }
   }
 
-  window.addEventListener('resize', ()=>{ resize(); });
-  init();
-  if(prefersReduced){
-    draw(); // single static frame
-  } else {
-    draw();
+  /* ============ HERO CONSOLE PARALLAX ============ */
+  var consoleEl = document.querySelector('.hero-console');
+  if(consoleEl && !prefersReduced && window.matchMedia('(min-width:1101px)').matches){
+    var cards = consoleEl.querySelectorAll('.console-card');
+    document.getElementById('hero').addEventListener('mousemove', function(e){
+      var rect = consoleEl.getBoundingClientRect();
+      var mx = (e.clientX - rect.left - rect.width/2) / rect.width;
+      var my = (e.clientY - rect.top - rect.height/2) / rect.height;
+      cards.forEach(function(card, idx){
+        var depth = (idx % 3 + 1) * 4;
+        card.style.transform = 'translate(' + (mx*depth) + 'px,' + (my*depth) + 'px)';
+      });
+    });
   }
+
 })();
-
-/* =========================================================
-   CHAT FAB — placeholder only
-   TODO: integracja z Gemini API — asystent odpowiadający na
-   pytania o usługi i doświadczenie Marcina.
-   ========================================================= */
-document.getElementById('chat-fab').addEventListener('click', ()=>{
-  alert(currentLang === 'pl'
-    ? 'Asystent AI będzie tu dostępny wkrótce.'
-    : 'The AI assistant will be available here soon.');
-});
 </script>
-
 </body>
 </html>
