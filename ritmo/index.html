@@ -111,6 +111,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     BPM data: <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM.com</a>
   </div>
 
+  <div class="divider" style="margin-top:28px"><span>SZUKAJ PO BPM</span></div>
+
+  <div class="row">
+    <input type="number" class="field" id="bpmSearch" placeholder="np. 128" min="20" max="240"
+      style="font-size:20px;font-family:monospace;font-weight:700;text-align:center">
+    <button class="btn-orange" id="bpmSearchBtn" onclick="searchByBpm()">⌕</button>
+    <button class="btn-orange" onclick="document.getElementById('bpmSearch').value=bpm;searchByBpm();"
+      style="white-space:nowrap;font-size:11px">Z metronomu</button>
+  </div>
+
+  <div id="tempoResults" style="margin-top:10px"></div>
+
+  <div class="powered" style="margin-top:16px">
+    BPM data: <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM.com</a>
+  </div>
+
 </div>
 <script>
 const API = '/api/bpm';
@@ -214,7 +230,10 @@ function showResults(items){
         <div class="track-artist">${r.artist}</div>
       </div>
       ${r.bpm
-        ?`<div class="track-bpm">${r.bpm}</div><button class="btn-set" id="s${i}" onclick="applyBpm(${r.bpm},${i})">USTAW</button>`
+        ?`<div class="track-bpm">${r.bpm}</div>
+          <button class="btn-set" id="s${i}" onclick="applyBpm(${r.bpm},${i})">USTAW</button>
+          <a href="https://open.spotify.com/search/${encodeURIComponent((r.name+' '+r.artist).trim())}" target="_blank" rel="noopener"
+            style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#1DB954;flex-shrink:0;text-decoration:none;font-size:16px">▶</a>`
         :`<div style="font-size:11px;color:var(--muted)">brak BPM</div>`}
     </div>`).join('');
 }
@@ -226,6 +245,48 @@ function applyBpm(val,i){
   b.textContent='✓ OK';b.classList.add('ok');
   setTimeout(()=>{b.textContent='USTAW';b.classList.remove('ok');},1000);
 }
+
+// ── Szukaj po BPM ─────────────────────────────
+async function searchByBpm(){
+  const val=parseInt(document.getElementById('bpmSearch').value);
+  if(!val||val<20||val>240)return;
+  const btn=document.getElementById('bpmSearchBtn');
+  btn.textContent='…';btn.disabled=true;
+  document.getElementById('tempoResults').innerHTML='';
+  try{
+    const res=await fetch(`${API}?bpm=${val}`);
+    if(!res.ok){document.getElementById('tempoResults').innerHTML='<div class="msg">Błąd połączenia</div>';return;}
+    const data=await res.json();
+    const songs=data.tempo||[];
+    if(!songs.length){document.getElementById('tempoResults').innerHTML='<div class="msg">Brak utworów dla tego BPM</div>';return;}
+    const items=songs.map(s=>({
+      name:s.title||s.name,
+      artist:s.artist?.name||'',
+      bpm:s.tempo?parseInt(s.tempo):val
+    }));
+    showTempoResults(items);
+  }catch(e){
+    document.getElementById('tempoResults').innerHTML='<div class="msg">Błąd połączenia</div>';
+  }finally{btn.textContent='⌕';btn.disabled=false;}
+}
+
+function showTempoResults(items){
+  const box=document.getElementById('tempoResults');
+  if(!items.length){box.innerHTML='<div class="msg">Brak wyników</div>';return;}
+  box.innerHTML=items.map((r,i)=>`
+    <div class="track">
+      <div class="track-info">
+        <div class="track-name">${r.name}</div>
+        <div class="track-artist">${r.artist}</div>
+      </div>
+      <div class="track-bpm">${r.bpm}</div>
+      <button class="btn-set" id="t${i}" onclick="applyBpm(${r.bpm},'t${i}')">USTAW</button>
+      <a href="https://open.spotify.com/search/${encodeURIComponent((r.name+' '+r.artist).trim())}" target="_blank" rel="noopener"
+        style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#1DB954;flex-shrink:0;text-decoration:none;font-size:16px">▶</a>
+    </div>`).join('');
+}
+
+document.getElementById('bpmSearch').addEventListener('keydown',e=>{if(e.key==='Enter')searchByBpm();});
 
 renderDots();setBpm(80);
 </script>
