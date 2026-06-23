@@ -94,6 +94,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
   <div class="divider"><span>BPM FINDER</span></div>
 
+  <div class="sig-row" id="typeRow" style="margin-bottom:12px">
+    <button class="btn-sig"        onclick="setType('song')">Tytuł</button>
+    <button class="btn-sig active" onclick="setType('both')">Obydwa</button>
+    <button class="btn-sig"        onclick="setType('artist')">Wykonawca</button>
+  </div>
+
   <div class="row">
     <input type="text" class="field" id="searchInput" placeholder="Artysta – tytuł…">
     <button class="btn-orange" id="searchBtn" onclick="doSearch()">⌕</button>
@@ -162,6 +168,15 @@ function tapTempo(){
   if(tapTimes.length>=2){const d=tapTimes.slice(1).map((t,i)=>t-tapTimes[i]);setBpm(Math.round(60000/(d.reduce((a,b)=>a+b,0)/d.length)));}
 }
 
+let searchType = 'both';
+function setType(t) {
+  searchType = t;
+  const labels = {song:'Tytuł', both:'Obydwa', artist:'Wykonawca'};
+  document.querySelectorAll('#typeRow .btn-sig').forEach(b => {
+    b.classList.toggle('active', b.textContent === labels[t]);
+  });
+}
+
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
 async function doSearch(){
@@ -171,7 +186,7 @@ async function doSearch(){
   btn.textContent='…';btn.disabled=true;
   document.getElementById('results').innerHTML='';
   try{
-    const res=await fetch(`${API}?q=${encodeURIComponent(q)}`);
+    const res=await fetch(`${API}?q=${encodeURIComponent(q)}&type=${searchType}`);
     if(!res.ok){document.getElementById('results').innerHTML='<div class="msg">Błąd połączenia z serwerem</div>';return;}
     const data=await res.json();
     const songs=data.search||[];
