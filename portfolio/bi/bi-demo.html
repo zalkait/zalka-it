@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZalkaIT – Przykładowe analizy BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root[data-theme="dark"] {
+    --bg:       #0B1629;
+    --surface:  #0f1e38;
+    --card:     #132040;
+    --border:   #1e3158;
+    --text:     #e8eaf6;
+    --muted:    #7b8fc5;
+    --cyan:     #38BDF8;
+    --violet:   #818CF8;
+    --green:    #22c55e;
+    --red:      #ef4444;
+    --amber:    #f59e0b;
+    --grad: linear-gradient(90deg, #38BDF8, #818CF8);
+  }
+  :root[data-theme="light"] {
+    --bg:       #F7F9FC;
+    --surface:  #ffffff;
+    --card:     #ffffff;
+    --border:   #dce8f8;
+    --text:     #0B1629;
+    --muted:    #5a6e9a;
+    --cyan:     #0ea5e9;
+    --violet:   #6366f1;
+    --green:    #16a34a;
+    --red:      #dc2626;
+    --amber:    #d97706;
+    --grad: linear-gradient(90deg, #0ea5e9, #6366f1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background .3s, color .3s;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(8px);
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    border-left: 1px solid var(--border);
+    padding-left: 16px;
+  }
+  .theme-toggle {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .theme-toggle:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  /* ─── TABS ─── */
+  .tabs-bar {
+    display: flex;
+    padding: 0 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    gap: 0;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 14px 22px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--cyan);
+    border-bottom-color: var(--cyan);
+  }
+
+  /* ─── MAIN ─── */
+  .main { padding: 28px 32px 48px; max-width: 1300px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: lowercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    opacity: .8;
+  }
+  .section-title::before { content: '-- '; opacity: .5; }
+
+  /* ─── KPI CARDS ─── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px) { .kpi-row { grid-template-columns: 1fr; } }
+
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .kpi.visible {
+    animation: fadeUp .45s ease forwards;
+  }
+  .kpi:nth-child(1) { animation-delay: .00s; }
+  .kpi:nth-child(2) { animation-delay: .08s; }
+  .kpi:nth-child(3) { animation-delay: .16s; }
+  .kpi:nth-child(4) { animation-delay: .24s; }
+  .kpi:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(56,189,248,.1);
+  }
+  .kpi-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--grad);
+    border-radius: 10px 10px 0 0;
+  }
+  .kpi-bar.green { background: var(--green); }
+  .kpi-bar.red   { background: var(--red); }
+  .kpi-bar.amber { background: var(--amber); }
+  .kpi-bar.violet { background: var(--violet); }
+
+  .kpi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 7px; display: flex; align-items: center; gap: 4px; }
+  .delta { font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+  .delta.up { color: var(--green); }
+  .delta.down { color: var(--red); }
+
+  /* ─── CHART GRID ─── */
+  .chart-grid { display: grid; gap: 14px; margin-bottom: 18px; }
+  .chart-grid-2 { grid-template-columns: 1fr 1fr; }
+  .chart-grid-13 { grid-template-columns: 2fr 1fr; }
+  @media (max-width: 900px) {
+    .chart-grid-2, .chart-grid-13 { grid-template-columns: 1fr; }
+  }
+
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color .25s, box-shadow .25s;
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .chart-card.visible { animation: fadeUp .5s ease forwards; }
+  .chart-card:hover {
+    border-color: var(--border);
+    box-shadow: 0 4px 20px rgba(56,189,248,.06);
+  }
+  .chart-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .chart-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .chart-h200 { position: relative; height: 200px; }
+  .chart-h240 { position: relative; height: 240px; }
+  .chart-h260 { position: relative; height: 260px; }
+
+  /* ─── SLICER ─── */
+  .slicer-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .slicer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-right: 4px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .slicer-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .slicer-btn.active, .slicer-btn:hover {
+    background: var(--grad);
+    border-color: transparent;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: .05em;
+  }
+  .footer a { color: var(--cyan); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">-- ZalkaIT.bi_demo</div>
+    <h1>Przykładowe analizy BI</h1>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">☀</span> <span id="theme-label">Jasny</span>
+  </button>
+</div>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <div class="tab active" data-tab="credit" onclick="switchTab('credit')">📊 Ryzyko Kredytowe</div>
+  <div class="tab" data-tab="pnl" onclick="switchTab('pnl')">💼 Controlling / P&L</div>
+  <div class="tab" data-tab="oee" onclick="switchTab('oee')">⚙️ Produkcja / OEE</div>
+</div>
+
+<div class="main">
+
+  <!-- ══════════════════════════════════════
+       TAB 1 — RYZYKO KREDYTOWE
+  ══════════════════════════════════════ -->
+  <div class="panel active" id="panel-credit">
+    <div class="slicer-row">
+      <span class="slicer-label">Okres:</span>
+      <button class="slicer-btn active">Q1 2024</button>
+      <button class="slicer-btn">Q2 2024</button>
+      <button class="slicer-btn">Q3 2024</button>
+      <button class="slicer-btn">Q4 2024</button>
+    </div>
+
+    <div class="section-title">ryzyko_kredytowe.kpi</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-bar"></div>
+        <div class="kpi-label">Ekspozycja kredytowa</div>
+        <div class="kpi-value">4,82 mld</div>
+        <div class="kpi-sub"><span class="delta up">▲ 3,2%</span> vs poprzedni kwartał</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar red"></div>
+        <div class="kpi-label">NPL Ratio</div>
+        <div class="kpi-value">3,7%</div>
+        <div class="kpi-sub"><span class="delta up">▼ 0,4 pp</span> poprawa r/r</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar green"></div>
+        <div class="kpi-label">Pokrycie rezerwami</div>
+        <div class="kpi-value">68,2%</div>
+        <div class="kpi-sub"><span class="delta up">▲ 1,8 pp</span> vs Q4 2023</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar violet"></div>
+        <div class="kpi-label">Umowy aktywne</div>
+        <div class="kpi-value">124 180</div>
+        <div class="kpi-sub"><span class="delta up">▲ 2,1%</span> wzrost portfela</div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-13">
+      <div class="chart-card">
+        <div class="chart-title">Trend NPL Ratio – 12 miesięcy</div>
+        <div class="chart-sub">-- udział kredytów zagrożonych (%)</div>
+        <div class="chart-h260"><canvas id="nplTrend"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Portfel wg segmentów</div>
+        <div class="chart-sub">-- struktura ekspozycji</div>
+        <div class="chart-h260"><canvas id="portfelSegment"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-title">Ekspozycja wg branż (top 6)</div>
+        <div class="chart-sub">-- wartość w mln PLN</div>
+        <div class="chart-h200"><canvas id="ekspozyBranze"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Rezerwy vs. Ekspozycja NPL</div>
+        <div class="chart-sub">-- miesięcznie, mln PLN</div>
+        <div class="chart-h200"><canvas id="rezerwyNpl"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB 2 — CONTROLLING / P&L
+  ══════════════════════════════════════ -->
+  <div class="panel" id="panel-pnl">
+    <div class="slicer-row">
+      <span class="slicer-label">Rok:</span>
+      <button class="slicer-btn active">2024</button>
+      <button class="slicer-btn">2023</button>
+      <button class="slicer-btn">2022</button>
+    </div>
+
+    <div class="section-title">controlling.wyniki_finansowe</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-bar"></div>
+        <div class="kpi-label">Przychody netto</div>
+        <div class="kpi-value">218 mln</div>
+        <div class="kpi-sub"><span class="delta up">▲ 11,4%</span> vs 2023</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar green"></div>
+        <div class="kpi-label">EBITDA</div>
+        <div class="kpi-value">52,3 mln</div>
+        <div class="kpi-sub"><span class="delta up">▲ 8,7%</span> marża 24%</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar red"></div>
+        <div class="kpi-label">Koszty operacyjne</div>
+        <div class="kpi-value">165,7 mln</div>
+        <div class="kpi-sub"><span class="delta down">▲ 12,1%</span> wzrost kosztów</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar amber"></div>
+        <div class="kpi-label">Marża netto</div>
+        <div class="kpi-value">18,6%</div>
+        <div class="kpi-sub"><span class="delta down">▼ 0,5 pp</span> vs plan</div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-title">Przychody vs Koszty – miesięcznie</div>
+        <div class="chart-sub">-- wartości w mln PLN, 2024</div>
+        <div class="chart-h260"><canvas id="pnlBar"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Marża EBITDA – trend</div>
+        <div class="chart-sub">-- % miesięcznie vs cel 24%</div>
+        <div class="chart-h260"><canvas id="ebitdaTrend"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-13">
+      <div class="chart-card">
+        <div class="chart-title">Wykonanie budżetu – działy</div>
+        <div class="chart-sub">-- rzeczywiste vs. plan (%)</div>
+        <div class="chart-h200"><canvas id="budzetDzialy"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Struktura kosztów</div>
+        <div class="chart-sub">-- podział procentowy</div>
+        <div class="chart-h200"><canvas id="strukturaKosztow"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB 3 — PRODUKCJA / OEE
+  ══════════════════════════════════════ -->
+  <div class="panel" id="panel-oee">
+    <div class="slicer-row">
+      <span class="slicer-label">Linia:</span>
+      <button class="slicer-btn active">Wszystkie</button>
+      <button class="slicer-btn">Linia A</button>
+      <button class="slicer-btn">Linia B</button>
+      <button class="slicer-btn">Linia C</button>
+    </div>
+
+    <div class="section-title">produkcja.oee_dashboard</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-bar"></div>
+        <div class="kpi-label">OEE ogółem</div>
+        <div class="kpi-value">76,4%</div>
+        <div class="kpi-sub"><span class="delta up">▲ 2,8 pp</span> cel: 80%</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar green"></div>
+        <div class="kpi-label">Dostępność</div>
+        <div class="kpi-value">91,2%</div>
+        <div class="kpi-sub"><span class="delta up">▲ 1,4 pp</span> m/m</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar amber"></div>
+        <div class="kpi-label">Wydajność</div>
+        <div class="kpi-value">88,7%</div>
+        <div class="kpi-sub"><span class="delta down">▼ 0,9 pp</span> m/m</div>
+      </div>
+      <div class="kpi"><div class="kpi-bar violet"></div>
+        <div class="kpi-label">Jakość</div>
+        <div class="kpi-value">94,5%</div>
+        <div class="kpi-sub"><span class="delta up">▲ 0,6 pp</span> m/m</div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-13">
+      <div class="chart-card">
+        <div class="chart-title">OEE Trend – 12 miesięcy</div>
+        <div class="chart-sub">-- dostępność / wydajność / jakość (%)</div>
+        <div class="chart-h260"><canvas id="oeeTrend"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Straty wg przyczyn</div>
+        <div class="chart-sub">-- godziny w miesiącu</div>
+        <div class="chart-h260"><canvas id="straty"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-title">OEE wg linii produkcyjnych</div>
+        <div class="chart-sub">-- porównanie komponentów (%)</div>
+        <div class="chart-h200"><canvas id="oeeLinies"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Produkcja rzeczywista vs. plan</div>
+        <div class="chart-sub">-- sztuki / 1000, 2024</div>
+        <div class="chart-h200"><canvas id="prodPlan"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  -- © 2024 <a href="https://zalka.it">zalka.it</a> · Marcin Załuski · ZalkaIT · dane demonstracyjne
+</div>
+
+<script>
+/* ─── THEME ─── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-icon').textContent = isDark ? '☾' : '☀';
+  document.getElementById('theme-label').textContent = isDark ? 'Ciemny' : 'Jasny';
+  rebuildCharts();
+}
+
+/* ─── TABS ─── */
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+  const panel = document.getElementById(`panel-${id}`);
+  panel.classList.add('active');
+  triggerAnimations(panel);
+}
+
+/* ─── SLICER ─── */
+document.querySelectorAll('.slicer-row').forEach(row => {
+  row.querySelectorAll('.slicer-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      row.querySelectorAll('.slicer-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+});
+
+/* ─── ANIMATIONS via IntersectionObserver ─── */
+function triggerAnimations(root) {
+  const els = root.querySelectorAll('.kpi, .chart-card');
+  els.forEach(el => { el.classList.remove('visible'); el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; });
+  requestAnimationFrame(() => {
+    els.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.animation = 'none';
+        el.offsetHeight; // reflow
+        el.style.animation = '';
+        el.style.animationDelay = `${i * 0.07}s`;
+        el.classList.add('visible');
+      }, i * 60);
+    });
+  });
+}
+
+/* ─── CSS VAR HELPER ─── */
+function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+/* ─── CHART DEFAULTS ─── */
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.font.size = 11;
+
+const M12 = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+
+let charts = {};
+
+function baseOpts() {
+  const border = css('--border'), muted = css('--muted');
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: muted, boxWidth: 10, padding: 12, font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: muted }, grid: { color: border + '88' } },
+      y: { ticks: { color: muted }, grid: { color: border + '88' } }
+    }
+  };
+}
+function pieOpts() {
+  const muted = css('--muted');
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { color: muted, boxWidth: 10, padding: 10, font: { size: 11 } } } }
+  };
+}
+
+function buildCharts() {
+  const cyan   = css('--cyan');
+  const violet = css('--violet');
+  const green  = css('--green');
+  const red    = css('--red');
+  const amber  = css('--amber');
+  const muted  = css('--muted');
+  const border = css('--border');
+
+  const palette = [cyan, violet, green, red, amber, muted];
+
+  /* ── TAB 1: RYZYKO ── */
+  charts.nplTrend = new Chart(document.getElementById('nplTrend'), {
+    type: 'line',
+    data: {
+      labels: M12,
+      datasets: [{
+        label: 'NPL Ratio (%)',
+        data: [4.8,4.6,4.5,4.3,4.2,4.1,4.0,3.9,3.8,3.7,3.7,3.6],
+        borderColor: red, backgroundColor: red+'22',
+        fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: red
+      }]
+    },
+    options: baseOpts()
+  });
+
+  charts.portfelSegment = new Chart(document.getElementById('portfelSegment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Korporacyjne','Hipoteczne','Konsumpcyjne','MŚP','Karty kredytowe'],
+      datasets: [{ data: [38,28,18,11,5], backgroundColor: palette, borderWidth: 0, hoverOffset: 8 }]
+    },
+    options: pieOpts()
+  });
+
+  charts.ekspozyBranze = new Chart(document.getElementById('ekspozyBranze'), {
+    type: 'bar',
+    data: {
+      labels: ['Handel','Budownictwo','Produkcja','Nieruchomości','Transport','Usługi'],
+      datasets: [{ label: 'Ekspozycja (mln PLN)', data: [820,650,540,480,310,290],
+        backgroundColor: cyan+'bb', borderRadius: 5 }]
+    },
+    options: baseOpts()
+  });
+
+  charts.rezerwyNpl = new Chart(document.getElementById('rezerwyNpl'), {
+    type: 'bar',
+    data: {
+      labels: M12.slice(6),
+      datasets: [
+        { label: 'Rezerwy', data: [126,131,138,142,148,155], backgroundColor: green+'bb', borderRadius: 4 },
+        { label: 'NPL', data: [184,180,175,170,168,165], backgroundColor: red+'bb', borderRadius: 4 }
+      ]
+    },
+    options: baseOpts()
+  });
+
+  /* ── TAB 2: P&L ── */
+  charts.pnlBar = new Chart(document.getElementById('pnlBar'), {
+    type: 'bar',
+    data: {
+      labels: M12,
+      datasets: [
+        { label: 'Przychody', data: [15.2,14.8,18.1,17.4,19.2,18.8,20.1,17.6,18.9,19.4,20.8,18.0],
+          backgroundColor: cyan+'bb', borderRadius: 4 },
+        { label: 'Koszty', data: [11.8,11.4,14.2,13.8,15.1,14.6,15.8,13.9,14.7,15.2,16.1,14.0],
+          backgroundColor: red+'88', borderRadius: 4 }
+      ]
+    },
+    options: baseOpts()
+  });
+
+  charts.ebitdaTrend = new Chart(document.getElementById('ebitdaTrend'), {
+    type: 'line',
+    data: {
+      labels: M12,
+      datasets: [
+        { label: 'EBITDA %', data: [22.4,23.0,21.5,20.7,21.4,22.3,21.4,21.0,22.1,21.6,22.6,22.2],
+          borderColor: green, backgroundColor: green+'22', fill: true, tension: .4, pointRadius: 3 },
+        { label: 'Cel 24%', data: Array(12).fill(24),
+          borderColor: muted, borderDash: [6,4], borderWidth: 1.5, pointRadius: 0 }
+      ]
+    },
+    options: baseOpts()
+  });
+
+  charts.budzetDzialy = new Chart(document.getElementById('budzetDzialy'), {
+    type: 'bar',
+    data: {
+      labels: ['Sprzedaż','Marketing','IT','HR','Logistyka','Finanse'],
+      datasets: [{ label: 'Wykonanie vs. plan (%)',
+        data: [104,97,108,95,101,99],
+        backgroundColor: (ctx) => [104,97,108,95,101,99][ctx.dataIndex] >= 100 ? green+'bb' : red+'bb',
+        borderRadius: 5 }]
+    },
+    options: { ...baseOpts(), plugins: { legend: { display: false } } }
+  });
+
+  charts.strukturaKosztow = new Chart(document.getElementById('strukturaKosztow'), {
+    type: 'pie',
+    data: {
+      labels: ['Wynagrodzenia','Materiały','Logistyka','IT','Marketing','Inne'],
+      datasets: [{ data: [38,22,15,10,8,7], backgroundColor: palette, borderWidth: 0, hoverOffset: 8 }]
+    },
+    options: pieOpts()
+  });
+
+  /* ── TAB 3: OEE ── */
+  charts.oeeTrend = new Chart(document.getElementById('oeeTrend'), {
+    type: 'line',
+    data: {
+      labels: M12,
+      datasets: [
+        { label: 'OEE %', data: [71,72,73,74,74,75,75,76,76,77,76,76],
+          borderColor: cyan, backgroundColor: cyan+'22', fill: true, tension: .4, pointRadius: 3 },
+        { label: 'Dostępność', data: [88,89,90,90,91,91,91,92,92,92,91,91],
+          borderColor: green, tension: .4, pointRadius: 2 },
+        { label: 'Wydajność', data: [84,85,86,87,87,88,88,89,89,90,89,89],
+          borderColor: amber, tension: .4, pointRadius: 2 },
+        { label: 'Jakość', data: [93,93,94,94,94,95,95,95,95,95,94,94],
+          borderColor: violet, tension: .4, pointRadius: 2 }
+      ]
+    },
+    options: baseOpts()
+  });
+
+  charts.straty = new Chart(document.getElementById('straty'), {
+    type: 'bar',
+    data: {
+      labels: ['Awarie','Przezbrojenia','Mikroprzerwy','Zła jakość','Wolne tempo','Inne'],
+      datasets: [{ label: 'Godziny strat', data: [48,32,24,18,14,9],
+        backgroundColor: [red,amber,cyan,violet,green,muted].map(c => c+'cc'),
+        borderRadius: 5 }]
+    },
+    options: {
+      ...baseOpts(),
+      indexAxis: 'y',
+      plugins: { legend: { display: false } }
+    }
+  });
+
+  charts.oeeLinies = new Chart(document.getElementById('oeeLinies'), {
+    type: 'bar',
+    data: {
+      labels: ['Linia A','Linia B','Linia C','Linia D'],
+      datasets: [
+        { label: 'Dostępność', data: [93,90,89,92], backgroundColor: green+'bb', borderRadius: 4 },
+        { label: 'Wydajność', data: [90,87,85,91], backgroundColor: amber+'bb', borderRadius: 4 },
+        { label: 'Jakość', data: [96,93,95,94], backgroundColor: violet+'bb', borderRadius: 4 }
+      ]
+    },
+    options: baseOpts()
+  });
+
+  charts.prodPlan = new Chart(document.getElementById('prodPlan'), {
+    type: 'line',
+    data: {
+      labels: M12,
+      datasets: [
+        { label: 'Produkcja rzecz.', data: [412,398,445,430,462,455,478,441,449,468,482,440],
+          borderColor: cyan, backgroundColor: cyan+'22', fill: true, tension: .4, pointRadius: 3 },
+        { label: 'Plan', data: [420,420,440,440,460,460,475,475,450,465,480,445],
+          borderColor: muted, borderDash: [6,4], borderWidth: 1.5, pointRadius: 0 }
+      ]
+    },
+    options: baseOpts()
+  });
+}
+
+function rebuildCharts() {
+  Object.values(charts).forEach(c => c.destroy());
+  charts = {};
+  buildCharts();
+}
+
+/* ─── INIT ─── */
+buildCharts();
+
+// Odczytaj ?tab= z URL i przełącz właściwą zakładkę
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var tab = params.get('tab');
+  if(tab && ['credit','pnl','oee'].includes(tab)){
+    switchTab(tab);
+  } else {
+    triggerAnimations(document.getElementById('panel-credit'));
+  }
+})();
+</script>
+</body>
+</html>
