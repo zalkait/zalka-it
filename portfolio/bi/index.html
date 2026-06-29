@@ -505,10 +505,18 @@ function setSlicerOee(key, btn){
 ═══════════════════════════════════════════════ */
 buildCharts();
 
-/* URL param ?tab= */
+/* URL params: ?tab= i ?back= */
 (function(){
-  var p=new URLSearchParams(window.location.search).get('tab');
-  if(p&&['credit','pnl','oee'].includes(p)) switchTab(p);
+  var params = new URLSearchParams(window.location.search);
+  var tab  = params.get('tab');
+  var back = params.get('back');
+
+  /* ustaw href przycisku powrotu */
+  var backBtn = document.querySelector('.back-btn');
+  backBtn.setAttribute('href', back ? '/#' + back : '/');
+
+  /* przełącz zakładkę */
+  if(tab && ['credit','pnl','oee'].includes(tab)) switchTab(tab);
   else animatePanel(document.getElementById('panel-credit'));
 })();
 </script>
