@@ -352,36 +352,6 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .t-tags{display:flex;flex-wrap:wrap;gap:8px}
 .t-note{margin-top:26px;padding-left:6px;font-size:.86rem;color:var(--text-faint);font-style:italic;max-width:70ch}
 
-/* ── COLLAPSIBLE CLIENTS ── */
-.t-expand-btn{
-  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
-  padding:6px 13px;border-radius:7px;border:1px solid var(--card-border);
-  background:transparent;color:var(--text-dim);
-  font-family:var(--font-mono);font-size:.74rem;cursor:pointer;
-  transition:border-color .2s,color .2s;
-}
-.t-expand-btn:hover{border-color:var(--cyan);color:var(--cyan)}
-.t-expand-btn .arr{transition:transform .25s}
-.t-expand-btn.open .arr{transform:rotate(90deg)}
-.t-clients{
-  margin-top:14px;
-  border-left:2px solid rgba(var(--cyan-rgb),.22);
-  padding-left:16px;
-  display:flex;flex-direction:column;gap:12px;
-}
-.t-clients[hidden]{display:none}
-.t-client{
-  padding:14px 16px;
-  background:rgba(var(--cyan-rgb),.03);
-  border:1px solid rgba(var(--cyan-rgb),.1);
-  border-radius:var(--radius-sm);
-}
-.t-client-hdr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.t-client-name{font-family:var(--font-display);font-size:.95rem;font-weight:600;color:var(--text)}
-.t-client-period{font-family:var(--font-mono);font-size:.72rem;color:var(--cyan)}
-.t-client p{font-size:.88rem;color:var(--text-dim);margin-bottom:10px;line-height:1.6}
-.t-client .t-tags{margin-top:8px}
-
 /* ============ TECH ============ */
 .tech-head{max-width:62ch;margin-bottom:46px}
 .tech-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:14px}
@@ -437,6 +407,7 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 
 /* ============ CHAT FAB — ukryty do czasu integracji API ============ */
 .chat-fab,.chat-panel{display:none}
+.chat-fab-DISABLED{
   position:fixed;right:22px;bottom:22px;z-index:200;
   width:54px;height:54px;border-radius:50%;
   background:linear-gradient(135deg,var(--cyan),var(--violet));
@@ -454,27 +425,6 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .chat-panel p{font-size:.82rem;color:var(--text-dim);margin-bottom:14px}
 .chat-panel input{width:100%;padding:9px 12px;font-size:.85rem;opacity:.6}
 
-/* ============ PORTFOLIO LINK ============ */
-.portfolio-chips{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-.portfolio-chips-label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);white-space:nowrap}
-.btn-portfolio{
-  display:inline-flex;align-items:center;gap:6px;
-  margin-top:14px;
-  padding:7px 14px;border-radius:8px;
-  font-size:.8rem;font-weight:600;
-  color:var(--cyan);
-  border:1px solid rgba(var(--cyan-rgb),0.35);
-  background:rgba(var(--cyan-rgb),0.07);
-  transition:background .2s ease,border-color .2s ease,transform .2s ease;
-}
-.btn-portfolio:hover{
-  background:rgba(var(--cyan-rgb),0.15);
-  border-color:var(--cyan);
-  transform:translateX(3px);
-}
-.btn-portfolio svg{flex:none;transition:transform .2s ease}
-.btn-portfolio:hover svg{transform:translateX(3px)}
-
 /* ── NAV PORTFOLIO LINK ── */
 .nav-portfolio{
   display:inline-flex;align-items:center;gap:6px;
@@ -484,17 +434,12 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
   font-size:.85rem;font-weight:600;
   transition:background .2s,border-color .2s,transform .15s;
 }
-.nav-portfolio:hover{
-  background:rgba(var(--cyan-rgb),0.1);
-  border-color:var(--cyan);
-  transform:translateY(-1px);
-}
+.nav-portfolio:hover{background:rgba(var(--cyan-rgb),0.1);border-color:var(--cyan);transform:translateY(-1px)}
 .nav-portfolio::after{display:none !important}
 
 /* ── EARLY EXPERIENCE TOGGLE ── */
 .early-toggle{
-  display:flex;align-items:center;gap:9px;
-  margin-top:6px;padding:11px 16px;
+  display:flex;align-items:center;gap:9px;margin-top:6px;padding:11px 16px;
   border:1px dashed var(--card-border);border-radius:var(--radius);
   background:transparent;color:var(--text-dim);
   font-family:var(--font-mono);font-size:.78rem;cursor:pointer;
@@ -509,28 +454,46 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 /* ── TECH LEVELS ── */
 .tech-level{margin-bottom:12px}
 .tech-level:last-child{margin-bottom:0}
-.level-lbl{
-  font-family:var(--font-mono);font-size:.67rem;
-  color:var(--text-faint);text-transform:uppercase;letter-spacing:.07em;
-  display:block;margin-bottom:7px;
-}
+.level-lbl{font-family:var(--font-mono);font-size:.67rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:7px}
 .level-lbl.exp{color:var(--cyan);opacity:.9}
 .level-lbl.adv{color:var(--violet);opacity:.8}
 
-/* ── BI CTA ── */
-.bi-cta{
-  margin:32px 24px 0;padding:28px 32px;
-  background:var(--surface);border:1px solid var(--border);border-radius:10px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+/* ── COLLAPSIBLE CLIENTS ── */
+.t-expand-btn{
+  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  padding:6px 13px;border-radius:7px;border:1px solid var(--card-border);
+  background:transparent;color:var(--text-dim);
+  font-family:var(--font-mono);font-size:.74rem;cursor:pointer;
+  transition:border-color .2s,color .2s;
 }
+.t-expand-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.t-expand-btn .arr{transition:transform .25s}
+.t-expand-btn.open .arr{transform:rotate(90deg)}
+.t-clients{margin-top:14px;border-left:2px solid rgba(var(--cyan-rgb),.22);padding-left:16px;display:flex;flex-direction:column;gap:12px}
+.t-clients[hidden]{display:none}
+.t-client{padding:14px 16px;background:rgba(var(--cyan-rgb),.03);border:1px solid rgba(var(--cyan-rgb),.1);border-radius:var(--radius-sm)}
+.t-client-hdr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.t-client-name{font-family:var(--font-display);font-size:.95rem;font-weight:600;color:var(--text)}
+.t-client-period{font-family:var(--font-mono);font-size:.72rem;color:var(--cyan)}
+.t-client p{font-size:.88rem;color:var(--text-dim);margin-bottom:10px;line-height:1.6}
+.t-client .t-tags{margin-top:8px}
+
+/* ── PORTFOLIO CHIPS ── */
+.portfolio-chips{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.portfolio-chips-label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);white-space:nowrap}
+.btn-portfolio{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:8px;
+  border:1px solid rgba(var(--cyan-rgb),0.35);color:var(--cyan);
+  font-family:var(--font-display);font-size:.8rem;font-weight:600;
+  text-decoration:none;transition:background .2s,border-color .2s,transform .2s;
+}
+.btn-portfolio:hover{background:rgba(var(--cyan-rgb),.1);border-color:var(--cyan);transform:translateX(3px)}
+
+/* ── BI CTA (portfolio page) ── */
+.bi-cta{margin:32px 24px 0;padding:28px 32px;background:var(--surface);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .bi-cta p{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text)}
 .bi-cta span{font-size:.82rem;color:var(--muted);display:block;margin-top:4px;font-family:'Inter',sans-serif;font-weight:400}
-.bi-cta-btn{
-  display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;
-  background:linear-gradient(90deg,#38BDF8,#818CF8);color:#04141a;
-  font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;
-  text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s;
-}
+.bi-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;background:linear-gradient(90deg,#38BDF8,#818CF8);color:#04141a;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s}
 .bi-cta-btn:hover{opacity:.88;transform:translateY(-2px)}
 
 /* ============ REVEAL ============ */
@@ -585,7 +548,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
       <li><a href="#tech" data-i18n="nav.tech">Technologie</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
-      <li><a href="/portfolio/bi" class="nav-portfolio" style="display:inline-flex;margin:8px 0">Portfolio BI</a></li>
+      <li><a href="/portfolio/bi" class="nav-portfolio" style="display:inline-flex;margin:8px 0" data-i18n="nav.portfolio">Portfolio BI</a></li>
       <li><a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
     </ul>
   </div>
@@ -746,39 +709,36 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2023 — <span data-i18n="projects.now">obecnie</span></span>
               <span class="t-company">Aion Bank (UniCredit Group)</span>
-              <span class="t-industry">Sektor bankowy · Senior Obligatory Reporting Contributor</span>
+              <span class="t-industry" data-i18n="proj.aion.ind">Sektor bankowy · Senior Obligatory Reporting Contributor</span>
             </div>
-            <p class="t-desc">Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.</p>
+            <p class="t-desc" data-i18n="proj.aion.desc">Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.</p>
             <div class="t-tags"><span class="pill">BigQuery</span><span class="pill">COREP</span><span class="pill">Looker Studio</span><span class="pill">T-SQL</span><span class="pill">ETL</span></div>
           </div>
         </div>
 
-        <!-- ═══ EBIS → Vesuvius ═══ -->
+        <!-- ═══ EBIS ═══ -->
         <div class="t-item reveal" id="proj-ebis">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2022 — 2023</span>
               <span class="t-company">EBIS</span>
-              <span class="t-industry">Sektor produkcyjny · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.ebis.ind">Sektor produkcyjny · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Projektowanie, rozszerzanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular. Budowa procesów ETL integrujących dane z systemów ERP i CRM oraz kompleksowych raportów Power BI z modelami DAX.</p>
+            <p class="t-desc" data-i18n="proj.ebis.desc">Projektowanie, rozszerzanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular. Budowa procesów ETL integrujących dane z systemów ERP i CRM oraz kompleksowych raportów Power BI z modelami DAX.</p>
             <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">MS SQL Server 2022</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekt klienta (1)
+              <span data-i18n="proj.ebis.expand">Projekt klienta (1)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Vesuvius Poland Sp. z o.o.</span>
-                  <span class="t-client-period">09.2022 – 11.2023</span>
-                </div>
-                <p>Migracja środowiska OLAP z modelu wielowymiarowego (SSAS Multidimensional / MDX) na model tabelaryczny (SSAS Tabular). Integracja zewnętrznych źródeł danych poprzez API (CSV). Budowa raportów Power BI osadzonych na nowym modelu analitycznym.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Vesuvius Poland Sp. z o.o.</span><span class="t-client-period">09.2022 – 11.2023</span></div>
+                <p data-i18n="proj.ebis.vesuvius">Migracja środowiska OLAP z modelu wielowymiarowego (SSAS Multidimensional / MDX) na model tabelaryczny (SSAS Tabular). Integracja zewnętrznych źródeł danych poprzez API (CSV). Budowa raportów Power BI osadzonych na nowym modelu analitycznym.</p>
                 <div class="t-tags"><span class="pill">SSAS Multidim. → Tabular</span><span class="pill">MDX</span><span class="pill">Power BI</span><span class="pill">API / CSV</span></div>
               </div>
             </div>
             <div class="portfolio-chips">
-              <span class="portfolio-chips-label">Przykładowe analizy:</span>
+              <span class="portfolio-chips-label" data-i18n="proj.chips.label">Przykładowe analizy:</span>
               <a href="/portfolio/bi?tab=oee&back=proj-ebis" class="btn-portfolio">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
                 Produkcja / OEE
@@ -793,39 +753,36 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2022</span>
               <span class="t-company">ISCG Sp. z o.o.</span>
-              <span class="t-industry">BI / Data Engineering · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.iscg.ind">BI / Data Engineering · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Migracja systemów Business Intelligence do nowoczesnych architektur MS SQL Server. Kompleksowe projektowanie i implementacja produkcyjnych procesów ETL oraz cross-platform data integration.</p>
+            <p class="t-desc" data-i18n="proj.iscg.desc">Migracja systemów Business Intelligence do nowoczesnych architektur MS SQL Server. Kompleksowe projektowanie i implementacja produkcyjnych procesów ETL oraz cross-platform data integration.</p>
             <div class="t-tags"><span class="pill">MS SQL Server 2022</span><span class="pill">SSIS</span><span class="pill">ETL</span><span class="pill">Data Migration</span></div>
           </div>
         </div>
 
-        <!-- ═══ PKO Finat → PKO BP ═══ -->
+        <!-- ═══ PKO BP Finat ═══ -->
         <div class="t-item reveal" id="proj-pko">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2021 — 2022</span>
               <span class="t-company">PKO BP Finat</span>
-              <span class="t-industry">Sektor bankowy · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.pko.ind">Sektor bankowy · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Tworzenie dedykowanych raportów i dashboardów Power BI wspierających procesy decyzyjne grupy kapitałowej. Projektowanie i wdrożenie nowej kostki analitycznej SSAS Tabular. Strojenie wydajnościowe modeli DAX oraz procedur T-SQL.</p>
+            <p class="t-desc" data-i18n="proj.pko.desc">Tworzenie dedykowanych raportów i dashboardów Power BI wspierających procesy decyzyjne grupy kapitałowej. Projektowanie i wdrożenie nowej kostki analitycznej SSAS Tabular. Strojenie wydajnościowe modeli DAX oraz procedur T-SQL.</p>
             <div class="t-tags"><span class="pill">Power BI</span><span class="pill">SSAS Tabular</span><span class="pill">DAX</span><span class="pill">SSIS</span><span class="pill">T-SQL</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekt klienta (1)
+              <span data-i18n="proj.pko.expand">Projekt klienta (1)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">PKO Bank Polski</span>
-                  <span class="t-client-period">05.2021 – 08.2022</span>
-                </div>
-                <p>Budowa nowej kostki analitycznej SSAS Tabular oraz raportowania w Power BI na potrzeby grupy kapitałowej PKO BP. Obszary: ryzyko kredytowe i controlling. Projektowanie modelu danych, tworzenie miar DAX i optymalizacja procedur T-SQL pod kątem wydajności.</p>
+                <div class="t-client-hdr"><span class="t-client-name">PKO Bank Polski</span><span class="t-client-period">05.2021 – 08.2022</span></div>
+                <p data-i18n="proj.pko.client">Budowa nowej kostki analitycznej SSAS Tabular oraz raportowania w Power BI na potrzeby grupy kapitałowej PKO BP. Obszary: ryzyko kredytowe i controlling. Projektowanie modelu danych, tworzenie miar DAX i optymalizacja procedur T-SQL pod kątem wydajności.</p>
                 <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Ryzyko kredytowe</span><span class="pill">Controlling</span></div>
               </div>
             </div>
             <div class="portfolio-chips">
-              <span class="portfolio-chips-label">Przykładowe analizy:</span>
+              <span class="portfolio-chips-label" data-i18n="proj.chips.label">Przykładowe analizy:</span>
               <a href="/portfolio/bi?tab=credit&back=proj-pko" class="btn-portfolio">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
                 Ryzyko Kredytowe
@@ -844,61 +801,55 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2020 — 2021</span>
               <span class="t-company">FlexiSolutions</span>
-              <span class="t-industry">Finanse / Raportowanie korporacyjne · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.flexi.ind">Finanse / Raportowanie korporacyjne · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Rozwój, utrzymanie i optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego i korporacyjnego. Rozbudowa struktur hurtowni danych OLAP (Tabular) oraz procesów zasilających ETL z wykorzystaniem SSIS.</p>
+            <p class="t-desc" data-i18n="proj.flexi.desc">Rozwój, utrzymanie i optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego i korporacyjnego. Rozbudowa struktur hurtowni danych OLAP (Tabular) oraz procesów zasilających ETL z wykorzystaniem SSIS.</p>
             <div class="t-tags"><span class="pill">SSIS</span><span class="pill">SSAS Tabular</span><span class="pill">DWH</span><span class="pill">MS SQL Server</span><span class="pill">Excel</span></div>
           </div>
         </div>
 
-        <!-- ═══ Mindbox SA → PKO BP ═══ -->
+        <!-- ═══ Mindbox SA ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2019 — 2020</span>
               <span class="t-company">Mindbox SA</span>
-              <span class="t-industry">Sektor bankowy / Fintech · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.mindbox.ind">Sektor bankowy / Fintech · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego dla banku. Migracja dużych wolumenów danych finansowych z systemów dziedzinowych za pomocą pakietów SSIS. Profilowanie, analiza i optymalizacja złożonych procedur SQL w procesach zamknięcia dnia (EOD).</p>
+            <p class="t-desc" data-i18n="proj.mindbox.desc">Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego dla banku. Migracja dużych wolumenów danych finansowych z systemów dziedzinowych za pomocą pakietów SSIS. Profilowanie, analiza i optymalizacja złożonych procedur SQL w procesach zamknięcia dnia (EOD).</p>
             <div class="t-tags"><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">Credit Risk</span><span class="pill">SQL Server</span><span class="pill">EOD Processing</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekt klienta (1)
+              <span data-i18n="proj.mindbox.expand">Projekt klienta (1)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">PKO Bank Polski</span>
-                  <span class="t-client-period">09.2019 – 09.2020</span>
-                </div>
-                <p>Rozwój systemu Ryzyka Kredytowego: migracja danych z systemów dziedzinowych, optymalizacja procesów ETL (SSIS) oraz strojenie procedur T-SQL działających w krytycznych oknach End-of-Day. Profilowanie i analiza jakości danych finansowych.</p>
+                <div class="t-client-hdr"><span class="t-client-name">PKO Bank Polski</span><span class="t-client-period">09.2019 – 09.2020</span></div>
+                <p data-i18n="proj.mindbox.client">Rozwój systemu Ryzyka Kredytowego: migracja danych z systemów dziedzinowych, optymalizacja procesów ETL (SSIS) oraz strojenie procedur T-SQL działających w krytycznych oknach End-of-Day. Profilowanie i analiza jakości danych finansowych.</p>
                 <div class="t-tags"><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">Credit Risk</span><span class="pill">EOD</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ═══ VlogIT → Provident ═══ -->
+        <!-- ═══ VlogIT ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2019</span>
               <span class="t-company">VlogIT</span>
-              <span class="t-industry">Finanse / Pożyczki · Business Intelligence Developer</span>
+              <span class="t-industry" data-i18n="proj.vlogit.ind">Finanse / Pożyczki · Business Intelligence Developer</span>
             </div>
-            <p class="t-desc">Rozbudowa hurtowni danych SQL Server oraz projektowanie procesów ETL z wykorzystaniem SSIS. Rozwój, modyfikacja i optymalizacja wielowymiarowych kostek analitycznych SSAS Tabular.</p>
+            <p class="t-desc" data-i18n="proj.vlogit.desc">Rozbudowa hurtowni danych SQL Server oraz projektowanie procesów ETL z wykorzystaniem SSIS. Rozwój, modyfikacja i optymalizacja wielowymiarowych kostek analitycznych SSAS Tabular.</p>
             <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">DWH</span><span class="pill">SSIS</span><span class="pill">ETL</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekt klienta (1)
+              <span data-i18n="proj.vlogit.expand">Projekt klienta (1)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Provident Polska</span>
-                  <span class="t-client-period">03.2019 – 08.2019</span>
-                </div>
-                <p>Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego. Optymalizacja i rozwój kostek analitycznych SSAS Tabular zasilanych danymi z systemów operacyjnych.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Provident Polska</span><span class="t-client-period">03.2019 – 08.2019</span></div>
+                <p data-i18n="proj.vlogit.client">Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego. Optymalizacja i rozwój kostek analitycznych SSAS Tabular zasilanych danymi z systemów operacyjnych.</p>
                 <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">SQL Server</span></div>
               </div>
             </div>
@@ -911,36 +862,30 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2014 — 2019</span>
               <span class="t-company">Wolters Kluwer Polska</span>
-              <span class="t-industry">Wydawnictwo / Legal-tech · ETL Developer / Analityk bazodanowy</span>
+              <span class="t-industry" data-i18n="proj.wk.ind">Wydawnictwo / Legal-tech · ETL Developer / Analityk bazodanowy</span>
             </div>
-            <p class="t-desc">Prace programistyczne przy rozbudowie wewnętrznych systemów CMS i CRM. Projektowanie i implementacja potoków ETL, budowa struktur DWH, optymalizacja wydajności SQL Server oraz migracja wybranych rozwiązań do środowiska Google Cloud.</p>
+            <p class="t-desc" data-i18n="proj.wk.desc">Prace programistyczne przy rozbudowie wewnętrznych systemów CMS i CRM. Projektowanie i implementacja potoków ETL, budowa struktur DWH, optymalizacja wydajności SQL Server oraz migracja wybranych rozwiązań do środowiska Google Cloud.</p>
             <div class="t-tags"><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">T-SQL</span><span class="pill">Google Cloud</span><span class="pill">MS SQL Server</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekty wewnętrzne (2)
+              <span data-i18n="proj.wk.expand">Projekty wewnętrzne (2)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">System CMS</span>
-                  <span class="t-client-period">2016 – 2019</span>
-                </div>
-                <p>Prace programistyczne przy rozbudowie wewnętrznego systemu CMS. Projektowanie i implementacja struktur danych oraz procedur T-SQL. Optymalizacja wydajności zapytań i indeksów SQL Server.</p>
+                <div class="t-client-hdr"><span class="t-client-name">System CMS</span><span class="t-client-period">2016 – 2019</span></div>
+                <p data-i18n="proj.wk.cms">Prace programistyczne przy rozbudowie wewnętrznego systemu CMS. Projektowanie i implementacja struktur danych oraz procedur T-SQL. Optymalizacja wydajności zapytań i indeksów SQL Server.</p>
                 <div class="t-tags"><span class="pill">MS SQL Server 2012</span><span class="pill">Visual Studio 2012</span><span class="pill">PowerBuilder 10</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">System CRM / ETL</span>
-                  <span class="t-client-period">2014 – 2016</span>
-                </div>
-                <p>Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Budowa i rozbudowa struktur hurtowni danych. Migracja wybranych komponentów do środowiska Google Cloud.</p>
+                <div class="t-client-hdr"><span class="t-client-name">System CRM / ETL</span><span class="t-client-period">2014 – 2016</span></div>
+                <p data-i18n="proj.wk.crm">Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Budowa i rozbudowa struktur hurtowni danych. Migracja wybranych komponentów do środowiska Google Cloud.</p>
                 <div class="t-tags"><span class="pill">MS SQL Server 2008R2</span><span class="pill">SSIS</span><span class="pill">Google Cloud</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ═══ WCZEŚNIEJSZE DOŚWIADCZENIE (toggle) ═══ -->
+        <!-- ═══ WCZEŚNIEJSZE DOŚWIADCZENIE ═══ -->
         <button class="early-toggle" onclick="toggleEarly(this)">
           <svg class="arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span data-i18n="projects.early">Wcześniejsze doświadczenie (2006–2013) · 6 pozycji</span>
@@ -954,107 +899,86 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2013 — 2014</span>
               <span class="t-company">Britenet</span>
-              <span class="t-industry">Software House · ETL Developer / BI Developer</span>
+              <span class="t-industry" data-i18n="proj.britenet.ind">Software House · ETL Developer / BI Developer</span>
             </div>
-            <p class="t-desc">Realizacja projektów ETL i Business Intelligence dla klientów z sektora automotive i bankowego. Projektowanie struktur danych, implementacja procesów ETL oraz budowa środowisk raportowych.</p>
+            <p class="t-desc" data-i18n="proj.britenet.desc">Realizacja projektów ETL i Business Intelligence dla klientów z sektora automotive i bankowego. Projektowanie struktur danych, implementacja procesów ETL oraz budowa środowisk raportowych.</p>
             <div class="t-tags"><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span><span class="pill">BI</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekty klientów (2)
+              <span data-i18n="proj.britenet.expand">Projekty klientów (2)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Volkswagen Group Polska</span>
-                  <span class="t-client-period">11.2013 – 03.2014</span>
-                </div>
-                <p>Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne importera. Projektowanie i implementacja struktur danych w MS SQL Server. Budowa i optymalizacja pakietów SSIS do codziennego zasilania hurtowni.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Volkswagen Group Polska</span><span class="t-client-period">11.2013 – 03.2014</span></div>
+                <p data-i18n="proj.britenet.vw">Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne importera. Projektowanie i implementacja struktur danych w MS SQL Server. Budowa i optymalizacja pakietów SSIS do codziennego zasilania hurtowni.</p>
                 <div class="t-tags"><span class="pill">SSIS</span><span class="pill">MS SQL Server 2008R2</span><span class="pill">ETL</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">PKO Bank Polski SA</span>
-                  <span class="t-client-period">05.2013 – 07.2013</span>
-                </div>
-                <p>Budowa i optymalizacja rozwiązań Business Intelligence dla banku. Realizacja raportowania analitycznego z wykorzystaniem SharePoint, PerformancePoint i Excel Services. Opracowanie procedur PL/SQL do agregacji danych.</p>
+                <div class="t-client-hdr"><span class="t-client-name">PKO Bank Polski SA</span><span class="t-client-period">05.2013 – 07.2013</span></div>
+                <p data-i18n="proj.britenet.pko">Budowa i optymalizacja rozwiązań Business Intelligence dla banku. Realizacja raportowania analitycznego z wykorzystaniem SharePoint, PerformancePoint i Excel Services. Opracowanie procedur PL/SQL do agregacji danych.</p>
                 <div class="t-tags"><span class="pill">SharePoint</span><span class="pill">PerformancePoint</span><span class="pill">Excel Services</span><span class="pill">MS SQL Server 2008R2</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ═══ Pentacomp → GUS ═══ -->
+        <!-- ═══ Pentacomp ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2013</span>
               <span class="t-company">Pentacomp Systemy Informatyczne S.A.</span>
-              <span class="t-industry">Sektor publiczny · ETL Developer / BI Developer</span>
+              <span class="t-industry" data-i18n="proj.pentacomp.ind">Sektor publiczny · ETL Developer / BI Developer</span>
             </div>
-            <p class="t-desc">Projektowanie, budowa i optymalizacja rozwiązań Business Intelligence oraz procesów ETL. Projektowanie kostek analitycznych SSAS i realizacja raportowania w oparciu o Excel Services.</p>
+            <p class="t-desc" data-i18n="proj.pentacomp.desc">Projektowanie, budowa i optymalizacja rozwiązań Business Intelligence oraz procesów ETL. Projektowanie kostek analitycznych SSAS i realizacja raportowania w oparciu o Excel Services.</p>
             <div class="t-tags"><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">Excel Services</span><span class="pill">MS SQL Server 2012</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekt klienta (1)
+              <span data-i18n="proj.pentacomp.expand">Projekt klienta (1)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">GUS — Główny Urząd Statystyczny</span>
-                  <span class="t-client-period">08.2013 – 10.2013</span>
-                </div>
-                <p>Budowa i optymalizacja środowiska Business Intelligence dla potrzeb statystyki publicznej. Projektowanie kostek analitycznych SSAS Analysis Services oraz implementacja procesów ETL. Realizacja raportowania z wykorzystaniem Excel Services na platformie SharePoint.</p>
+                <div class="t-client-hdr"><span class="t-client-name">GUS — Główny Urząd Statystyczny</span><span class="t-client-period">08.2013 – 10.2013</span></div>
+                <p data-i18n="proj.pentacomp.gus">Budowa i optymalizacja środowiska Business Intelligence dla potrzeb statystyki publicznej. Projektowanie kostek analitycznych SSAS oraz implementacja procesów ETL. Realizacja raportowania z wykorzystaniem Excel Services na platformie SharePoint.</p>
                 <div class="t-tags"><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">Excel Services</span><span class="pill">MS SQL Server 2012</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ═══ Cegedim (2011–2013) ═══ -->
+        <!-- ═══ Cegedim 2011-2013 ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2011 — 2013</span>
               <span class="t-company">Cegedim</span>
-              <span class="t-industry">Farmacja / CRM / Medical · Software Customization Specialist</span>
+              <span class="t-industry" data-i18n="proj.cegedim2.ind">Farmacja / CRM / Medical · Software Customization Specialist</span>
             </div>
-            <p class="t-desc">Projektowanie i implementacja raportów analitycznych, skryptów ETL oraz rozwiązań integracyjnych dla wiodących firm farmaceutycznych. Praca z systemami CRM opartymi na Oracle PL/SQL, Sybase i MS SQL Server.</p>
+            <p class="t-desc" data-i18n="proj.cegedim2.desc">Projektowanie i implementacja raportów analitycznych, skryptów ETL oraz rozwiązań integracyjnych dla wiodących firm farmaceutycznych. Praca z systemami CRM opartymi na Oracle PL/SQL, Sybase i MS SQL Server.</p>
             <div class="t-tags"><span class="pill">Oracle PL/SQL</span><span class="pill">Sybase</span><span class="pill">SSIS</span><span class="pill">MS SQL</span><span class="pill">CRM</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekty klientów (4)
+              <span data-i18n="proj.cegedim2.expand">Projekty klientów (4)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Teva Pharmaceuticals Polska</span>
-                  <span class="t-client-period">03.2011</span>
-                </div>
-                <p>Zaprojektowanie i wdrożenie procesów ETL, kostki OLAP oraz wstępnych raportów analitycznych na bazie danych z systemu CRM. Współodpowiedzialność za architekturę modelu danych i procesów zasilających.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Teva Pharmaceuticals Polska</span><span class="t-client-period">03.2011</span></div>
+                <p data-i18n="proj.cegedim2.teva">Zaprojektowanie i wdrożenie procesów ETL, kostki OLAP oraz wstępnych raportów analitycznych na bazie danych z systemu CRM. Współodpowiedzialność za architekturę modelu danych i procesów zasilających.</p>
                 <div class="t-tags"><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">SSRS</span><span class="pill">MS SQL Server 2008R2</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Zentiva Sp. z o.o.</span>
-                  <span class="t-client-period">05.2011 – 07.2011</span>
-                </div>
-                <p>Budowa systemu cyklicznego generowania i automatycznej dystrybucji raportów analitycznych. Źródło danych: system CRM oparty na silnikach PervasiveSQL i Oracle 9i. Raporty wysyłane automatycznie do klientów co miesiąc.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Zentiva Sp. z o.o.</span><span class="t-client-period">05.2011 – 07.2011</span></div>
+                <p data-i18n="proj.cegedim2.zentiva">Budowa systemu cyklicznego generowania i automatycznej dystrybucji raportów analitycznych. Źródło danych: system CRM oparty na silnikach PervasiveSQL i Oracle 9i. Raporty wysyłane automatycznie do klientów co miesiąc.</p>
                 <div class="t-tags"><span class="pill">PervasiveSQL</span><span class="pill">Oracle 9i</span><span class="pill">MS SQL Server 2008R2</span><span class="pill">Visual Studio 2008</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Sanofi-Aventis Sp. z o.o.</span>
-                  <span class="t-client-period">08.2011 – 11.2011</span>
-                </div>
-                <p>Dwa etapy projektu: (1) budowa systemu ekstrakcji danych z CRM (PervasiveSQL) i generowania raportów analitycznych; (2) rozszerzenie o animowane wykresy flash prezentowane w PowerPoint. Aplikacja wydobywała dane i tworzyła gotowe raporty automatycznie.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Sanofi-Aventis Sp. z o.o.</span><span class="t-client-period">08.2011 – 11.2011</span></div>
+                <p data-i18n="proj.cegedim2.sanofi">Dwa etapy projektu: (1) budowa systemu ekstrakcji danych z CRM (PervasiveSQL) i generowania raportów analitycznych; (2) rozszerzenie o animowane wykresy flash prezentowane w PowerPoint.</p>
                 <div class="t-tags"><span class="pill">PervasiveSQL</span><span class="pill">Visual Studio 2008</span><span class="pill">Office 2007</span><span class="pill">oomfo Charts</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Adamed Sp. z o.o.</span>
-                  <span class="t-client-period">02.2013 – 03.2013</span>
-                </div>
-                <p>Opracowanie aplikacji do ekstrakcji danych z bazy klienckiej (Sybase) do plików płaskich przygotowanych do importu do nowego systemu opartego na .NET i MS SQL Server. Transformacja i walidacja danych migrowanych między platformami.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Adamed Sp. z o.o.</span><span class="t-client-period">02.2013 – 03.2013</span></div>
+                <p data-i18n="proj.cegedim2.adamed">Opracowanie aplikacji do ekstrakcji danych z bazy klienckiej (Sybase) do plików płaskich przygotowanych do importu do nowego systemu opartego na .NET i MS SQL Server. Transformacja i walidacja danych migrowanych między platformami.</p>
                 <div class="t-tags"><span class="pill">WPF / .NET</span><span class="pill">Sybase</span><span class="pill">MS SQL Server</span><span class="pill">ETL / Migracja</span></div>
               </div>
             </div>
@@ -1067,22 +991,22 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2011</span>
               <span class="t-company">Praxis</span>
-              <span class="t-industry">BI / OLAP · Programmer</span>
+              <span class="t-industry" data-i18n="proj.praxis.ind">BI / OLAP · Programmer</span>
             </div>
-            <p class="t-desc">Analiza i budowa procesów ETL (SSIS). Rozszerzanie i strojenie wydajnościowe kostek OLAP w modelu Tabular (SSAS). Profilowanie, refaktoryzacja i optymalizacja złożonych procedur T-SQL pod kątem eliminacji wąskich gardeł wydajnościowych.</p>
+            <p class="t-desc" data-i18n="proj.praxis.desc">Analiza i budowa procesów ETL (SSIS). Rozszerzanie i strojenie wydajnościowe kostek OLAP w modelu Tabular (SSAS). Profilowanie, refaktoryzacja i optymalizacja złożonych procedur T-SQL pod kątem eliminacji wąskich gardeł wydajnościowych.</p>
             <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span></div>
           </div>
         </div>
 
-        <!-- ═══ Cegedim (2008–2011) ═══ -->
+        <!-- ═══ Cegedim 2008-2011 ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
             <div class="t-top">
               <span class="t-period mono">2008 — 2011</span>
               <span class="t-company">Cegedim</span>
-              <span class="t-industry">Farmacja / CRM / Medical · CRM Customization Specialist</span>
+              <span class="t-industry" data-i18n="proj.cegedim1.ind">Farmacja / CRM / Medical · CRM Customization Specialist</span>
             </div>
-            <p class="t-desc">Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle PL/SQL, Sybase i MS SQL Server. Wdrażanie standardów raportowania z dedykowanymi narzędziami CRM dla sektora farmaceutycznego i medycznego.</p>
+            <p class="t-desc" data-i18n="proj.cegedim1.desc">Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle PL/SQL, Sybase i MS SQL Server. Wdrażanie standardów raportowania z dedykowanymi narzędziami CRM dla sektora farmaceutycznego i medycznego.</p>
             <div class="t-tags"><span class="pill">Oracle PL/SQL</span><span class="pill">Sybase</span><span class="pill">MS SQL Server</span><span class="pill">CRM Reporting</span></div>
           </div>
         </div>
@@ -1093,29 +1017,23 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-top">
               <span class="t-period mono">2006 — 2008</span>
               <span class="t-company">ILC Sp. z o.o.</span>
-              <span class="t-industry">Data Warehouse · IT Specialist / BI Developer</span>
+              <span class="t-industry" data-i18n="proj.ilc.ind">Data Warehouse · IT Specialist / BI Developer</span>
             </div>
-            <p class="t-desc">Budowa hurtowni danych od podstaw na platformie MS SQL Server 2005. Tworzenie i optymalizacja procesów ETL (SSIS) oraz kostek analitycznych SSAS. Pisanie zapytań i skryptów analitycznych MDX i T-SQL. Obsługa klientów z sektora retail i farmacji.</p>
+            <p class="t-desc" data-i18n="proj.ilc.desc">Budowa hurtowni danych od podstaw na platformie MS SQL Server 2005. Tworzenie i optymalizacja procesów ETL (SSIS) oraz kostek analitycznych SSAS. Pisanie zapytań i skryptów analitycznych MDX i T-SQL.</p>
             <div class="t-tags"><span class="pill">MS SQL Server 2005</span><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">SSRS</span><span class="pill">MDX</span></div>
             <button class="t-expand-btn" onclick="toggleClients(this)">
               <svg class="arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Projekty klientów (2)
+              <span data-i18n="proj.ilc.expand">Projekty klientów (2)</span>
             </button>
             <div class="t-clients" hidden>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">Empik</span>
-                  <span class="t-client-period">07.2007 – 12.2007</span>
-                </div>
-                <p>Rozwój i dostosowanie istniejących procesów ETL, kostki OLAP oraz raportów do bieżących wymagań sieci handlowej. Usprawnienie dziennego zasilania kostki SSAS. Dane źródłowe z bazy Oracle.</p>
+                <div class="t-client-hdr"><span class="t-client-name">Empik</span><span class="t-client-period">07.2007 – 12.2007</span></div>
+                <p data-i18n="proj.ilc.empik">Rozwój i dostosowanie istniejących procesów ETL, kostki OLAP oraz raportów do bieżących wymagań sieci handlowej. Usprawnienie dziennego zasilania kostki SSAS. Dane źródłowe z bazy Oracle.</p>
                 <div class="t-tags"><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">SSRS</span><span class="pill">Oracle (źródło)</span><span class="pill">Panorama BI</span></div>
               </div>
               <div class="t-client">
-                <div class="t-client-hdr">
-                  <span class="t-client-name">CNC Apteki Sp. z o.o.</span>
-                  <span class="t-client-period">01.2008 – 06.2008</span>
-                </div>
-                <p>Budowa od podstaw procesów ETL, kostki OLAP oraz dashboardu analitycznego z przykładowymi raportami dla sieci aptecznej. Dane pochodziły z systemu CRM. Pełna odpowiedzialność za architekturę i implementację.</p>
+                <div class="t-client-hdr"><span class="t-client-name">CNC Apteki Sp. z o.o.</span><span class="t-client-period">01.2008 – 06.2008</span></div>
+                <p data-i18n="proj.ilc.cnc">Budowa od podstaw procesów ETL, kostki OLAP oraz dashboardu analitycznego z przykładowymi raportami dla sieci aptecznej. Dane z systemu CRM. Pełna odpowiedzialność za architekturę i implementację.</p>
                 <div class="t-tags"><span class="pill">SSAS</span><span class="pill">SSIS</span><span class="pill">SSRS</span><span class="pill">Panorama BI</span><span class="pill">Dashboard</span></div>
               </div>
             </div>
@@ -1124,7 +1042,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 
         </div><!-- /early-block -->
 
-      </div><!-- /timeline -->
+      </div>
     </div>
   </section>
 
@@ -1142,74 +1060,38 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g1">Bazy danych &amp; Języki</h3>
-          <div class="tech-level">
-            <span class="level-lbl exp">● Ekspert</span>
-            <div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">C#</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">C#</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g2">ETL / ELT</h3>
-          <div class="tech-level">
-            <span class="level-lbl exp">● Ekspert</span>
-            <div class="tech-tags"><span class="pill">SSIS</span><span class="pill">Integration Services</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">SSIS</span><span class="pill">Integration Services</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g3">Modelowanie &amp; OLAP</h3>
-          <div class="tech-level">
-            <span class="level-lbl exp">● Ekspert</span>
-            <div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">DAX</span><span class="pill">Star/Snowflake Schema</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">DAX</span><span class="pill">Star/Snowflake Schema</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g4">BI &amp; Raportowanie</h3>
-          <div class="tech-level">
-            <span class="level-lbl exp">● Ekspert</span>
-            <div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Excel Services</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Excel Services</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g5">AI &amp; Automatyzacja</h3>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">Prompt Engineering</span><span class="pill">Claude / Gemini</span><span class="pill">LM Studio (local LLM)</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl" style="color:var(--text-faint)">● W rozwoju</span>
-            <div class="tech-tags"><span class="pill">Microsoft Fabric</span><span class="pill">Automatyzacja analiz</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Prompt Engineering</span><span class="pill">Claude / Gemini</span><span class="pill">LM Studio (local LLM)</span></div></div>
+          <div class="tech-level"><span class="level-lbl" data-i18n="level.dev" style="color:var(--text-faint)">● W rozwoju</span><div class="tech-tags"><span class="pill">Microsoft Fabric</span><span class="pill">Automatyzacja analiz</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g6">Narzędzia &amp; SCM</h3>
-          <div class="tech-level">
-            <span class="level-lbl exp">● Ekspert</span>
-            <div class="tech-tags"><span class="pill">TOAD</span><span class="pill">Visual Studio</span><span class="pill">SSMS</span></div>
-          </div>
-          <div class="tech-level">
-            <span class="level-lbl adv">● Zaawansowany</span>
-            <div class="tech-tags"><span class="pill">Git</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div>
-          </div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">TOAD</span><span class="pill">Visual Studio</span><span class="pill">SSMS</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Git</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div></div>
         </div>
 
       </div>
@@ -1326,11 +1208,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.p2":"Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.",
       "about.p3":"Od kilku miesięcy intensywnie zgłębiam możliwości AI — testuję modele LLM i prompt engineering, wykorzystując narzędzia AI do przyspieszania i optymalizacji pracy nad złożonymi projektami oraz automatyzacji analizy danych. To nowy, ale bardzo praktyczny kierunek rozwoju, który aktywnie rozwijam.",
       "about.linkedin":"Profil LinkedIn",
-      "about.stat1":"lat w BI, ETL i inżynierii danych (od 2006)",
+      "about.stat1":"lat doświadczenia w BI, ETL i inżynierii danych",
       "about.stat2":"Sektor bankowy — Leverage Ratio, Large Exposures",
-      "about.stat3":"unikalnych klientów w 8 branżach",
-      "about.stat4":"wdrożeń DWH / OLAP od zera lub migracji",
-      "projects.early":"Wcześniejsze doświadczenie (2006–2013) · 6 pozycji",
+      "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
+      "about.stat4":"Prompt engineering w codziennej pracy z danymi",
       "services.eyebrow":"-- uslugi","services.h2":"W czym mogę pomóc",
       "services.c1.title":"Projektowanie i optymalizacja DWH",
       "services.c1.desc":"Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.",
@@ -1361,6 +1242,65 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "projects.p6.industry":"Sektor publiczny",
       "projects.p6.desc":"Budowa i optymalizacja kostek analitycznych SSAS oraz raportowania opartego na Excel Services dla potrzeb statystyki publicznej.",
       "projects.note":"Wcześniejsze lata (2007–2013): projekty BI/ETL dla sektora farmaceutycznego (Sanofi-Aventis, Zentiva, Adamed) — budowa systemów raportowych z danych CRM, oraz pierwsze wdrożenia hurtowni danych od podstaw.",
+      "nav.portfolio":"Portfolio BI",
+      "about.stat1":"lat w BI, ETL i inżynierii danych (od 2006)",
+      "about.stat3":"unikalnych klientów w 8 branżach",
+      "about.stat4":"wdrożeń DWH / OLAP od zera lub migracji",
+      "projects.early":"Wcześniejsze doświadczenie (2006–2013) · 6 pozycji",
+      "level.exp":"● Ekspert","level.adv":"● Zaawansowany","level.dev":"● W rozwoju",
+      "proj.chips.label":"Przykładowe analizy:",
+      "proj.aion.ind":"Sektor bankowy · Senior Obligatory Reporting Contributor",
+      "proj.aion.desc":"Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.",
+      "proj.ebis.ind":"Sektor produkcyjny · Business Intelligence Developer",
+      "proj.ebis.desc":"Projektowanie, rozszerzanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular. Budowa procesów ETL integrujących dane z systemów ERP i CRM oraz kompleksowych raportów Power BI z modelami DAX.",
+      "proj.ebis.expand":"Projekt klienta (1)",
+      "proj.ebis.vesuvius":"Migracja środowiska OLAP z modelu wielowymiarowego (SSAS Multidimensional / MDX) na model tabelaryczny (SSAS Tabular). Integracja zewnętrznych źródeł danych poprzez API (CSV). Budowa raportów Power BI osadzonych na nowym modelu analitycznym.",
+      "proj.iscg.ind":"BI / Data Engineering · Business Intelligence Developer",
+      "proj.iscg.desc":"Migracja systemów Business Intelligence do nowoczesnych architektur MS SQL Server. Kompleksowe projektowanie i implementacja produkcyjnych procesów ETL oraz cross-platform data integration.",
+      "proj.pko.ind":"Sektor bankowy · Business Intelligence Developer",
+      "proj.pko.desc":"Tworzenie dedykowanych raportów i dashboardów Power BI wspierających procesy decyzyjne grupy kapitałowej. Projektowanie i wdrożenie nowej kostki analitycznej SSAS Tabular. Strojenie wydajnościowe modeli DAX oraz procedur T-SQL.",
+      "proj.pko.expand":"Projekt klienta (1)",
+      "proj.pko.client":"Budowa nowej kostki analitycznej SSAS Tabular oraz raportowania w Power BI na potrzeby grupy kapitałowej PKO BP. Obszary: ryzyko kredytowe i controlling. Projektowanie modelu danych, tworzenie miar DAX i optymalizacja procedur T-SQL pod kątem wydajności.",
+      "proj.flexi.ind":"Finanse / Raportowanie korporacyjne · Business Intelligence Developer",
+      "proj.flexi.desc":"Rozwój, utrzymanie i optymalizacja wydajnościowa autorskiego systemu FlexiReporting dedykowanego do raportowania finansowego i korporacyjnego. Rozbudowa struktur hurtowni danych OLAP (Tabular) oraz procesów zasilających ETL z wykorzystaniem SSIS.",
+      "proj.mindbox.ind":"Sektor bankowy / Fintech · Business Intelligence Developer",
+      "proj.mindbox.desc":"Prace programistyczne w zespole rozbudowującym krytyczny system Ryzyka Kredytowego dla banku. Migracja dużych wolumenów danych finansowych z systemów dziedzinowych za pomocą pakietów SSIS. Profilowanie, analiza i optymalizacja złożonych procedur SQL w procesach zamknięcia dnia (EOD).",
+      "proj.mindbox.expand":"Projekt klienta (1)",
+      "proj.mindbox.client":"Rozwój systemu Ryzyka Kredytowego: migracja danych z systemów dziedzinowych, optymalizacja procesów ETL (SSIS) oraz strojenie procedur T-SQL działających w krytycznych oknach End-of-Day. Profilowanie i analiza jakości danych finansowych.",
+      "proj.vlogit.ind":"Finanse / Pożyczki · Business Intelligence Developer",
+      "proj.vlogit.desc":"Rozbudowa hurtowni danych SQL Server oraz projektowanie procesów ETL z wykorzystaniem SSIS. Rozwój, modyfikacja i optymalizacja wielowymiarowych kostek analitycznych SSAS Tabular.",
+      "proj.vlogit.expand":"Projekt klienta (1)",
+      "proj.vlogit.client":"Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego. Optymalizacja i rozwój kostek analitycznych SSAS Tabular zasilanych danymi z systemów operacyjnych.",
+      "proj.wk.ind":"Wydawnictwo / Legal-tech · ETL Developer / Analityk bazodanowy",
+      "proj.wk.desc":"Prace programistyczne przy rozbudowie wewnętrznych systemów CMS i CRM. Projektowanie i implementacja potoków ETL, budowa struktur DWH, optymalizacja wydajności SQL Server oraz migracja wybranych rozwiązań do środowiska Google Cloud.",
+      "proj.wk.expand":"Projekty wewnętrzne (2)",
+      "proj.wk.cms":"Prace programistyczne przy rozbudowie wewnętrznego systemu CMS. Projektowanie i implementacja struktur danych oraz procedur T-SQL. Optymalizacja wydajności zapytań i indeksów SQL Server.",
+      "proj.wk.crm":"Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Budowa i rozbudowa struktur hurtowni danych. Migracja wybranych komponentów do środowiska Google Cloud.",
+      "proj.britenet.ind":"Software House · ETL Developer / BI Developer",
+      "proj.britenet.desc":"Realizacja projektów ETL i Business Intelligence dla klientów z sektora automotive i bankowego. Projektowanie struktur danych, implementacja procesów ETL oraz budowa środowisk raportowych.",
+      "proj.britenet.expand":"Projekty klientów (2)",
+      "proj.britenet.vw":"Przygotowanie i wdrożenie procesów ETL zasilających raporty operacyjne importera. Projektowanie i implementacja struktur danych w MS SQL Server. Budowa i optymalizacja pakietów SSIS do codziennego zasilania hurtowni.",
+      "proj.britenet.pko":"Budowa i optymalizacja rozwiązań Business Intelligence dla banku. Realizacja raportowania analitycznego z wykorzystaniem SharePoint, PerformancePoint i Excel Services. Opracowanie procedur PL/SQL do agregacji danych.",
+      "proj.pentacomp.ind":"Sektor publiczny · ETL Developer / BI Developer",
+      "proj.pentacomp.desc":"Projektowanie, budowa i optymalizacja rozwiązań Business Intelligence oraz procesów ETL. Projektowanie kostek analitycznych SSAS i realizacja raportowania w oparciu o Excel Services.",
+      "proj.pentacomp.expand":"Projekt klienta (1)",
+      "proj.pentacomp.gus":"Budowa i optymalizacja środowiska Business Intelligence dla potrzeb statystyki publicznej. Projektowanie kostek analitycznych SSAS oraz implementacja procesów ETL. Realizacja raportowania z wykorzystaniem Excel Services na platformie SharePoint.",
+      "proj.cegedim2.ind":"Farmacja / CRM / Medical · Software Customization Specialist",
+      "proj.cegedim2.desc":"Projektowanie i implementacja raportów analitycznych, skryptów ETL oraz rozwiązań integracyjnych dla wiodących firm farmaceutycznych. Praca z systemami CRM opartymi na Oracle PL/SQL, Sybase i MS SQL Server.",
+      "proj.cegedim2.expand":"Projekty klientów (4)",
+      "proj.cegedim2.teva":"Zaprojektowanie i wdrożenie procesów ETL, kostki OLAP oraz wstępnych raportów analitycznych na bazie danych z systemu CRM. Współodpowiedzialność za architekturę modelu danych i procesów zasilających.",
+      "proj.cegedim2.zentiva":"Budowa systemu cyklicznego generowania i automatycznej dystrybucji raportów analitycznych. Źródło danych: system CRM oparty na silnikach PervasiveSQL i Oracle 9i. Raporty wysyłane automatycznie do klientów co miesiąc.",
+      "proj.cegedim2.sanofi":"Dwa etapy projektu: (1) budowa systemu ekstrakcji danych z CRM (PervasiveSQL) i generowania raportów analitycznych; (2) rozszerzenie o animowane wykresy flash prezentowane w PowerPoint.",
+      "proj.cegedim2.adamed":"Opracowanie aplikacji do ekstrakcji danych z bazy klienckiej (Sybase) do plików płaskich przygotowanych do importu do nowego systemu opartego na .NET i MS SQL Server. Transformacja i walidacja danych.",
+      "proj.praxis.ind":"BI / OLAP · Programmer",
+      "proj.praxis.desc":"Analiza i budowa procesów ETL (SSIS). Rozszerzanie i strojenie wydajnościowe kostek OLAP w modelu Tabular (SSAS). Profilowanie, refaktoryzacja i optymalizacja złożonych procedur T-SQL pod kątem eliminacji wąskich gardeł wydajnościowych.",
+      "proj.cegedim1.ind":"Farmacja / CRM / Medical · CRM Customization Specialist",
+      "proj.cegedim1.desc":"Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle PL/SQL, Sybase i MS SQL Server. Wdrażanie standardów raportowania z dedykowanymi narzędziami CRM dla sektora farmaceutycznego i medycznego.",
+      "proj.ilc.ind":"Data Warehouse · IT Specialist / BI Developer",
+      "proj.ilc.desc":"Budowa hurtowni danych od podstaw na platformie MS SQL Server 2005. Tworzenie i optymalizacja procesów ETL (SSIS) oraz kostek analitycznych SSAS. Pisanie zapytań i skryptów analitycznych MDX i T-SQL.",
+      "proj.ilc.expand":"Projekty klientów (2)",
+      "proj.ilc.empik":"Rozwój i dostosowanie istniejących procesów ETL, kostki OLAP oraz raportów do bieżących wymagań sieci handlowej. Usprawnienie dziennego zasilania kostki SSAS. Dane źródłowe z bazy Oracle.",
+      "proj.ilc.cnc":"Budowa od podstaw procesów ETL, kostki OLAP oraz dashboardu analitycznego z przykładowymi raportami dla sieci aptecznej. Dane z systemu CRM. Pełna odpowiedzialność za architekturę i implementację.",
       "tech.eyebrow":"-- stack","tech.h2":"Technologie, które napędzają Twoje dane",
       "tech.sub":"Narzędzia i technologie, z którymi pracuję najczęściej — od baz danych po wczesne wdrożenia AI.",
       "tech.g1":"Bazy danych & Języki","tech.g2":"ETL / ELT","tech.g3":"Modelowanie & OLAP",
@@ -1400,11 +1340,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.p2":"I bring unique banking-sector experience: COREP, Leverage Ratio, and Large Exposures regulatory reporting — areas where data accuracy isn't optional, it's mandatory.",
       "about.p3":"For the past few months I've been diving deep into AI — experimenting with LLMs and prompt engineering, using AI tools to speed up and optimize work on complex projects and automate data analysis. It's a new but very hands-on direction I'm actively building on.",
       "about.linkedin":"LinkedIn profile",
-      "about.stat1":"years in BI, ETL & data engineering (since 2006)",
+      "about.stat1":"years of experience in BI, ETL and data engineering",
       "about.stat2":"Banking sector — Leverage Ratio, Large Exposures",
-      "about.stat3":"unique clients across 8 industries",
-      "about.stat4":"DWH / OLAP implementations from scratch or migrations",
-      "projects.early":"Earlier experience (2006–2013) · 6 positions",
+      "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
+      "about.stat4":"Prompt engineering in everyday data work",
       "services.eyebrow":"-- services","services.h2":"What I can help with",
       "services.c1.title":"Data Warehouse design & optimization",
       "services.c1.desc":"DWH architecture from scratch or refactoring existing structures — dimensional models, performance, scalability.",
@@ -1435,6 +1374,65 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "projects.p6.industry":"Public sector",
       "projects.p6.desc":"Building and optimizing SSAS analytical cubes and Excel Services-based reporting for public statistics.",
       "projects.note":"Earlier years (2007–2013): BI/ETL projects for the pharmaceutical sector (Sanofi-Aventis, Zentiva, Adamed) — building CRM-based reporting systems, plus first data warehouse builds from scratch.",
+      "nav.portfolio":"BI Portfolio",
+      "about.stat1":"years in BI, ETL & data engineering (since 2006)",
+      "about.stat3":"unique clients across 8 industries",
+      "about.stat4":"DWH / OLAP builds from scratch or migrations",
+      "projects.early":"Earlier experience (2006–2013) · 6 positions",
+      "level.exp":"● Expert","level.adv":"● Advanced","level.dev":"● In progress",
+      "proj.chips.label":"Live demos:",
+      "proj.aion.ind":"Banking sector · Senior Obligatory Reporting Contributor",
+      "proj.aion.desc":"Designing and implementing ETL processes, procedures and functions in BigQuery for mandatory bank regulatory reporting (COREP, Leverage Ratio, Large Exposures). Integrating and importing data into UniCredit Group systems. Building interactive analytical dashboards and management reports in Looker Studio.",
+      "proj.ebis.ind":"Manufacturing sector · Business Intelligence Developer",
+      "proj.ebis.desc":"Designing, extending and performance-tuning advanced OLAP cubes in the Tabular model. Building ETL processes integrating data from ERP and CRM systems, and comprehensive Power BI reports with DAX models.",
+      "proj.ebis.expand":"Client project (1)",
+      "proj.ebis.vesuvius":"Migration of the OLAP environment from multidimensional model (SSAS Multidimensional / MDX) to tabular model (SSAS Tabular). Integration of external data sources via API (CSV). Building Power BI reports embedded on the new analytical model.",
+      "proj.iscg.ind":"BI / Data Engineering · Business Intelligence Developer",
+      "proj.iscg.desc":"Migration of Business Intelligence systems to modern MS SQL Server architectures. End-to-end design and implementation of production ETL processes and cross-platform data integration.",
+      "proj.pko.ind":"Banking sector · Business Intelligence Developer",
+      "proj.pko.desc":"Creating dedicated Power BI reports and dashboards supporting decision-making processes across the capital group. Designing and deploying a new SSAS Tabular analytical cube. Performance tuning of DAX models and T-SQL procedures.",
+      "proj.pko.expand":"Client project (1)",
+      "proj.pko.client":"Building a new SSAS Tabular analytical cube and Power BI reporting for the PKO BP capital group. Areas: credit risk and controlling. Data model design, DAX measure creation and T-SQL procedure performance optimization.",
+      "proj.flexi.ind":"Finance / Corporate Reporting · Business Intelligence Developer",
+      "proj.flexi.desc":"Development, maintenance and performance optimization of the proprietary FlexiReporting system for financial and corporate reporting. Expanding DWH OLAP (Tabular) structures and ETL feeding processes using SSIS.",
+      "proj.mindbox.ind":"Banking / Fintech · Business Intelligence Developer",
+      "proj.mindbox.desc":"Software development within the team expanding a critical Credit Risk system for the bank. Migration of large volumes of financial data from domain systems using SSIS packages. Profiling, analysis and optimization of complex SQL procedures in End-of-Day (EOD) processing windows.",
+      "proj.mindbox.expand":"Client project (1)",
+      "proj.mindbox.client":"Credit Risk system development: data migration from domain systems, ETL (SSIS) optimization and T-SQL procedure tuning in critical End-of-Day windows. Financial data quality profiling and analysis.",
+      "proj.vlogit.ind":"Finance / Consumer Loans · Business Intelligence Developer",
+      "proj.vlogit.desc":"Expanding the SQL Server data warehouse and designing ETL processes using SSIS. Development, modification and optimization of multidimensional SSAS Tabular analytical cubes.",
+      "proj.vlogit.expand":"Client project (1)",
+      "proj.vlogit.client":"Data warehouse and ETL process development for a consumer finance company. Optimization and development of SSAS Tabular analytical cubes fed from operational systems.",
+      "proj.wk.ind":"Publishing / Legal-tech · ETL Developer / Database Analyst",
+      "proj.wk.desc":"Development work on internal CMS and CRM systems. Designing and implementing ETL pipelines, building DWH structures, SQL Server performance optimization and migration of selected solutions to Google Cloud.",
+      "proj.wk.expand":"Internal projects (2)",
+      "proj.wk.cms":"Development work on the internal CMS system. Data structure design and T-SQL procedure implementation. SQL Server query and index performance optimization.",
+      "proj.wk.crm":"Designing, implementing and optimizing ETL processes feeding company CRM systems. Building and expanding data warehouse structures. Migration of selected components to Google Cloud.",
+      "proj.britenet.ind":"Software House · ETL Developer / BI Developer",
+      "proj.britenet.desc":"Delivering ETL and Business Intelligence projects for clients in the automotive and banking sectors. Data structure design, ETL process implementation and reporting environment development.",
+      "proj.britenet.expand":"Client projects (2)",
+      "proj.britenet.vw":"Preparation and implementation of ETL processes feeding operational reports for the automotive importer. Data structure design and implementation in MS SQL Server. Building and optimizing SSIS packages for daily warehouse loading.",
+      "proj.britenet.pko":"Building and optimization of Business Intelligence solutions for the bank. Analytical reporting using SharePoint, PerformancePoint and Excel Services. Development of PL/SQL procedures for data aggregation.",
+      "proj.pentacomp.ind":"Public sector · ETL Developer / BI Developer",
+      "proj.pentacomp.desc":"Designing, building and optimizing Business Intelligence solutions and ETL processes. SSAS analytical cube design and reporting implementation based on Excel Services.",
+      "proj.pentacomp.expand":"Client project (1)",
+      "proj.pentacomp.gus":"Building and optimization of the Business Intelligence environment for public statistics needs. SSAS cube design and ETL process implementation. Reporting using Excel Services on SharePoint.",
+      "proj.cegedim2.ind":"Pharma / CRM / Medical · Software Customization Specialist",
+      "proj.cegedim2.desc":"Designing and implementing analytical reports, ETL scripts and integration solutions for leading pharmaceutical companies. Working with CRM systems based on Oracle PL/SQL, Sybase and MS SQL Server.",
+      "proj.cegedim2.expand":"Client projects (4)",
+      "proj.cegedim2.teva":"Designing and deploying ETL processes, OLAP cube and initial analytical reports based on CRM system data. Co-responsibility for data model architecture and feeding processes.",
+      "proj.cegedim2.zentiva":"Building a system for cyclic generation and automatic distribution of analytical reports. Data source: CRM based on PervasiveSQL and Oracle 9i. Reports sent automatically to clients monthly.",
+      "proj.cegedim2.sanofi":"Two-phase project: (1) CRM data extraction system (PervasiveSQL) and analytical report generation; (2) extension with animated flash charts presented in PowerPoint.",
+      "proj.cegedim2.adamed":"Development of an application to extract data from client database (Sybase) to flat files for import into a new .NET and MS SQL Server system. Data transformation and validation across platforms.",
+      "proj.praxis.ind":"BI / OLAP · Programmer",
+      "proj.praxis.desc":"Analysis and development of ETL processes (SSIS). Extending and performance-tuning OLAP cubes in Tabular model (SSAS). Profiling, refactoring and optimization of complex T-SQL procedures to eliminate performance bottlenecks.",
+      "proj.cegedim1.ind":"Pharma / CRM / Medical · CRM Customization Specialist",
+      "proj.cegedim1.desc":"Designing and implementing dedicated reports and analytical scripts in Oracle PL/SQL, Sybase and MS SQL Server environments. Implementing reporting standards with dedicated CRM tools for the pharmaceutical and medical sectors.",
+      "proj.ilc.ind":"Data Warehouse · IT Specialist / BI Developer",
+      "proj.ilc.desc":"Building a data warehouse from scratch on MS SQL Server 2005. Creating and optimizing ETL processes (SSIS) and SSAS analytical cubes. Writing MDX and T-SQL analytical queries and scripts.",
+      "proj.ilc.expand":"Client projects (2)",
+      "proj.ilc.empik":"Development and adaptation of existing ETL processes, OLAP cubes and reports to current retail chain requirements. Improving daily SSAS cube loading. Source data from Oracle database.",
+      "proj.ilc.cnc":"Building ETL processes, OLAP cube and analytical dashboard with sample reports for a pharmacy chain from scratch. Data from CRM system. Full responsibility for architecture and implementation.",
       "tech.eyebrow":"-- tech_stack","tech.h2":"Technologies that power your data",
       "tech.sub":"The tools and technologies I work with most — from databases to early AI deployments.",
       "tech.g1":"Databases & Languages","tech.g2":"ETL / ELT","tech.g3":"Modeling & OLAP",
@@ -1724,14 +1722,13 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
     });
   }
 
-  /* ============ COLLAPSIBLE CLIENTS ============ */
+  /* ============ COLLAPSIBLE ============ */
   window.toggleClients = function(btn){
     var panel = btn.nextElementSibling;
     var open = btn.classList.toggle('open');
     if(open){ panel.removeAttribute('hidden'); }
     else { panel.setAttribute('hidden',''); }
   };
-
   window.toggleEarly = function(btn){
     var block = document.getElementById('early-block');
     var open = btn.classList.toggle('open');
