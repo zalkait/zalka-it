@@ -425,8 +425,10 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .chat-panel input{width:100%;padding:9px 12px;font-size:.85rem;opacity:.6}
 
 /* ============ PORTFOLIO LINK ============ */
+.portfolio-chips{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.portfolio-chips-label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);white-space:nowrap}
 .btn-portfolio{
-  display:inline-flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;gap:6px;
   margin-top:14px;
   padding:7px 14px;border-radius:8px;
   font-size:.8rem;font-weight:600;
@@ -666,11 +668,13 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             </div>
             <p class="t-desc" data-i18n="projects.p2.desc">Budowa kostek OLAP oraz procesów ETL zasilających dane z systemów ERP i CRM, a następnie dashboardy Power BI z modelami DAX.</p>
             <div class="t-tags"><span class="pill">SSAS</span><span class="pill">ETL</span><span class="pill">Power BI</span><span class="pill">DAX</span></div>
-            <a href="/portfolio/bi?tab=oee&back=proj-ebis" class="btn-portfolio">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
-              Zobacz przykładową analizę BI — Produkcja / OEE
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="portfolio-chips">
+              <span class="portfolio-chips-label">Przykładowe analizy:</span>
+              <a href="/portfolio/bi?tab=oee&back=proj-ebis" class="btn-portfolio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
+                Produkcja / OEE
+              </a>
+            </div>
           </div>
         </div>
 
@@ -683,11 +687,17 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             </div>
             <p class="t-desc" data-i18n="projects.p3.desc">Tworzenie dedykowanych raportów Power BI oraz rozbudowa i strojenie wydajnościowe kostek OLAP (Tabular) wspierających decyzje w grupie kapitałowej.</p>
             <div class="t-tags"><span class="pill">Power BI</span><span class="pill">OLAP Tabular</span><span class="pill">DAX</span><span class="pill">SSAS</span></div>
-            <a href="/portfolio/bi?tab=credit&back=proj-pko" class="btn-portfolio">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
-              Zobacz przykładową analizę BI — Ryzyko Kredytowe
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="portfolio-chips">
+              <span class="portfolio-chips-label">Przykładowe analizy:</span>
+              <a href="/portfolio/bi?tab=credit&back=proj-pko" class="btn-portfolio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
+                Ryzyko Kredytowe
+              </a>
+              <a href="/portfolio/bi?tab=pnl&back=proj-pko" class="btn-portfolio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
+                Controlling / P&L
+              </a>
+            </div>
           </div>
         </div>
 
