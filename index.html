@@ -435,8 +435,8 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
   font-size:.78rem;color:var(--text-faint);
 }
 
-/* ============ CHAT FAB ============ */
-.chat-fab{
+/* ============ CHAT FAB — ukryty do czasu integracji API ============ */
+.chat-fab,.chat-panel{display:none}
   position:fixed;right:22px;bottom:22px;z-index:200;
   width:54px;height:54px;border-radius:50%;
   background:linear-gradient(135deg,var(--cyan),var(--violet));
@@ -475,6 +475,59 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .btn-portfolio svg{flex:none;transition:transform .2s ease}
 .btn-portfolio:hover svg{transform:translateX(3px)}
 
+/* ── NAV PORTFOLIO LINK ── */
+.nav-portfolio{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:8px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  color:#04141a !important;font-weight:600 !important;font-size:.85rem;
+  transition:opacity .2s,transform .2s;
+}
+.nav-portfolio:hover{opacity:.88;transform:translateY(-1px)}
+.nav-portfolio::after{display:none !important}
+
+/* ── EARLY EXPERIENCE TOGGLE ── */
+.early-toggle{
+  display:flex;align-items:center;gap:9px;
+  margin-top:6px;padding:11px 16px;
+  border:1px dashed var(--card-border);border-radius:var(--radius);
+  background:transparent;color:var(--text-dim);
+  font-family:var(--font-mono);font-size:.78rem;cursor:pointer;
+  transition:border-color .2s,color .2s;width:100%;text-align:left;
+}
+.early-toggle:hover{border-color:var(--cyan);color:var(--cyan)}
+.early-toggle .arr{transition:transform .25s;flex-shrink:0}
+.early-toggle.open .arr{transform:rotate(90deg)}
+#early-block{margin-top:10px}
+#early-block[hidden]{display:none}
+
+/* ── TECH LEVELS ── */
+.tech-level{margin-bottom:12px}
+.tech-level:last-child{margin-bottom:0}
+.level-lbl{
+  font-family:var(--font-mono);font-size:.67rem;
+  color:var(--text-faint);text-transform:uppercase;letter-spacing:.07em;
+  display:block;margin-bottom:7px;
+}
+.level-lbl.exp{color:var(--cyan);opacity:.9}
+.level-lbl.adv{color:var(--violet);opacity:.8}
+
+/* ── BI CTA ── */
+.bi-cta{
+  margin:32px 24px 0;padding:28px 32px;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.bi-cta p{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text)}
+.bi-cta span{font-size:.82rem;color:var(--muted);display:block;margin-top:4px;font-family:'Inter',sans-serif;font-weight:400}
+.bi-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;
+  background:linear-gradient(90deg,#38BDF8,#818CF8);color:#04141a;
+  font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;
+  text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s;
+}
+.bi-cta-btn:hover{opacity:.88;transform:translateY(-2px)}
+
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in-view{opacity:1;transform:translateY(0)}
@@ -501,6 +554,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       <a href="#projects" data-i18n="nav.projects">Projekty</a>
       <a href="#tech" data-i18n="nav.tech">Technologie</a>
       <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+      <a href="/portfolio/bi" class="nav-portfolio">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V11M12 17V7M15 17v-4" stroke-linecap="round"/></svg>
+        Portfolio BI
+      </a>
     </nav>
     <div class="nav-actions">
       <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn">
@@ -523,6 +580,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
       <li><a href="#tech" data-i18n="nav.tech">Technologie</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+      <li><a href="/portfolio/bi" class="nav-portfolio" style="display:inline-flex;margin:8px 0">Portfolio BI</a></li>
       <li><a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
     </ul>
   </div>
@@ -604,10 +662,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
         </a>
       </div>
       <div class="stat-grid reveal">
-        <div class="stat-card"><div class="v">20+</div><div class="l" data-i18n="about.stat1">lat doświadczenia w BI, ETL i inżynierii danych</div></div>
+        <div class="stat-card"><div class="v">20+</div><div class="l" data-i18n="about.stat1">lat w BI, ETL i inżynierii danych (od 2006)</div></div>
+        <div class="stat-card"><div class="v">15+</div><div class="l">unikalnych klientów w 8 branżach</div></div>
+        <div class="stat-card"><div class="v">10+</div><div class="l">wdrożeń DWH / OLAP od zera lub migracji</div></div>
         <div class="stat-card"><div class="v mono">COREP</div><div class="l" data-i18n="about.stat2">Sektor bankowy — Leverage Ratio, Large Exposures</div></div>
-        <div class="stat-card"><div class="v mono">T-SQL</div><div class="l" data-i18n="about.stat3">BigQuery, SSIS, Power BI, OLAP/DAX</div></div>
-        <div class="stat-card"><div class="v mono">AI</div><div class="l" data-i18n="about.stat4">Prompt engineering w codziennej pracy z danymi</div></div>
       </div>
     </div>
   </section>
@@ -877,6 +935,14 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
           </div>
         </div>
 
+        <!-- ═══ WCZEŚNIEJSZE DOŚWIADCZENIE (toggle) ═══ -->
+        <button class="early-toggle" onclick="toggleEarly(this)">
+          <svg class="arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Wcześniejsze doświadczenie (2006 – 2013) · 6 pozycji
+        </button>
+
+        <div id="early-block" hidden>
+
         <!-- ═══ Britenet ═══ -->
         <div class="t-item reveal">
           <div class="t-card">
@@ -1051,7 +1117,9 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
           </div>
         </div>
 
-      </div>
+        </div><!-- /early-block -->
+
+      </div><!-- /timeline -->
     </div>
   </section>
 
@@ -1069,32 +1137,74 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g1">Bazy danych &amp; Języki</h3>
-          <div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">MySQL</span><span class="pill">C#</span></div>
+          <div class="tech-level">
+            <span class="level-lbl exp">● Ekspert</span>
+            <div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">C#</span></div>
+          </div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g2">ETL / ELT</h3>
-          <div class="tech-tags"><span class="pill">SSIS</span><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span><span class="pill">Integration Services</span></div>
+          <div class="tech-level">
+            <span class="level-lbl exp">● Ekspert</span>
+            <div class="tech-tags"><span class="pill">SSIS</span><span class="pill">Integration Services</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span></div>
+          </div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g3">Modelowanie &amp; OLAP</h3>
-          <div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span><span class="pill">DAX</span><span class="pill">Star/Snowflake</span></div>
+          <div class="tech-level">
+            <span class="level-lbl exp">● Ekspert</span>
+            <div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">DAX</span><span class="pill">Star/Snowflake Schema</span></div>
+          </div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g4">BI &amp; Raportowanie</h3>
-          <div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span><span class="pill">Excel Services</span></div>
+          <div class="tech-level">
+            <span class="level-lbl exp">● Ekspert</span>
+            <div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Excel Services</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span></div>
+          </div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g5">AI &amp; Automatyzacja</h3>
-          <div class="tech-tags"><span class="pill">Gemini / Deep Search</span><span class="pill">LM Studio (local LLM)</span><span class="pill">Prompt Engineering</span><span class="pill">Automatyzacja analiz</span></div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">Prompt Engineering</span><span class="pill">Claude / Gemini</span><span class="pill">LM Studio (local LLM)</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl" style="color:var(--text-faint)">● W rozwoju</span>
+            <div class="tech-tags"><span class="pill">Microsoft Fabric</span><span class="pill">Automatyzacja analiz</span></div>
+          </div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g6">Narzędzia &amp; SCM</h3>
-          <div class="tech-tags"><span class="pill">Git / SVN</span><span class="pill">TOAD</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div>
+          <div class="tech-level">
+            <span class="level-lbl exp">● Ekspert</span>
+            <div class="tech-tags"><span class="pill">TOAD</span><span class="pill">Visual Studio</span><span class="pill">SSMS</span></div>
+          </div>
+          <div class="tech-level">
+            <span class="level-lbl adv">● Zaawansowany</span>
+            <div class="tech-tags"><span class="pill">Git</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div>
+          </div>
         </div>
 
       </div>
@@ -1613,6 +1723,13 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
     var open = btn.classList.toggle('open');
     if(open){ panel.removeAttribute('hidden'); }
     else { panel.setAttribute('hidden',''); }
+  };
+
+  window.toggleEarly = function(btn){
+    var block = document.getElementById('early-block');
+    var open = btn.classList.toggle('open');
+    if(open){ block.removeAttribute('hidden'); }
+    else { block.setAttribute('hidden',''); }
   };
 
 })();
