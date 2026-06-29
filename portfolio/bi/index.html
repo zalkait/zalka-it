@@ -9,307 +9,98 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root[data-theme="dark"] {
-    --bg:       #0B1629;
-    --surface:  #0f1e38;
-    --card:     #132040;
-    --border:   #1e3158;
-    --text:     #e8eaf6;
-    --muted:    #7b8fc5;
-    --cyan:     #38BDF8;
-    --violet:   #818CF8;
-    --green:    #22c55e;
-    --red:      #ef4444;
-    --amber:    #f59e0b;
-    --grad: linear-gradient(90deg, #38BDF8, #818CF8);
-  }
-  :root[data-theme="light"] {
-    --bg:       #F7F9FC;
-    --surface:  #ffffff;
-    --card:     #ffffff;
-    --border:   #dce8f8;
-    --text:     #0B1629;
-    --muted:    #5a6e9a;
-    --cyan:     #0ea5e9;
-    --violet:   #6366f1;
-    --green:    #16a34a;
-    --red:      #dc2626;
-    --amber:    #d97706;
-    --grad: linear-gradient(90deg, #0ea5e9, #6366f1);
-  }
+:root[data-theme="dark"]{--bg:#0B1629;--surface:#0f1e38;--card:#132040;--border:#1e3158;--text:#e8eaf6;--muted:#7b8fc5;--cyan:#38BDF8;--violet:#818CF8;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--grad:linear-gradient(90deg,#38BDF8,#818CF8)}
+:root[data-theme="light"]{--bg:#F7F9FC;--surface:#ffffff;--card:#ffffff;--border:#dce8f8;--text:#0B1629;--muted:#5a6e9a;--cyan:#0ea5e9;--violet:#6366f1;--green:#16a34a;--red:#dc2626;--amber:#d97706;--grad:linear-gradient(90deg,#0ea5e9,#6366f1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;gap:12px;flex-wrap:wrap}
+.header-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap}
+.back-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.back-btn svg{transition:transform .2s}
+.back-btn:hover svg{transform:translateX(-3px)}
+.logo{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.header-title{font-size:13px;font-weight:400;color:var(--muted);border-left:1px solid var(--border);padding-left:12px;white-space:nowrap}
+@media(max-width:640px){.header-title{display:none}}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.theme-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:6px 14px;font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.theme-btn:hover{border-color:var(--cyan);color:var(--cyan)}
 
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    transition: background .3s, color .3s;
-  }
+/* TABS */
+.tabs-bar{display:flex;padding:0 24px;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{padding:13px 20px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;user-select:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
 
-  /* ─── HEADER ─── */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(8px);
-  }
-  .header-left { display: flex; align-items: center; gap: 16px; }
-  .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .header h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    border-left: 1px solid var(--border);
-    padding-left: 16px;
-  }
-  .theme-toggle {
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 20px;
-    padding: 7px 16px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all .2s;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .theme-toggle:hover {
-    border-color: var(--cyan);
-    color: var(--cyan);
-  }
+/* MAIN */
+.main{padding:24px 24px 48px;max-width:1300px;margin:0 auto}
+.panel{display:none}
+.panel.active{display:block}
 
-  /* ─── TABS ─── */
-  .tabs-bar {
-    display: flex;
-    padding: 0 32px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    gap: 0;
-    overflow-x: auto;
-  }
-  .tab {
-    padding: 14px 22px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all .2s;
-    white-space: nowrap;
-    user-select: none;
-  }
-  .tab:hover { color: var(--text); }
-  .tab.active {
-    color: var(--cyan);
-    border-bottom-color: var(--cyan);
-  }
+/* SECTION TITLE */
+.section-title{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--cyan);margin-bottom:14px;opacity:.8}
+.section-title::before{content:'-- ';opacity:.5}
 
-  /* ─── MAIN ─── */
-  .main { padding: 28px 32px 48px; max-width: 1300px; margin: 0 auto; }
-  .panel { display: none; }
-  .panel.active { display: block; }
+/* SLICER */
+.slicer-row{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.slicer-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:2px}
+.slicer-btn{padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.slicer-btn.active,.slicer-btn:hover{background:var(--grad);border-color:transparent;color:#fff;font-weight:600}
 
-  /* ─── SECTION TITLE ─── */
-  .section-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: lowercase;
-    color: var(--cyan);
-    margin-bottom: 16px;
-    opacity: .8;
-  }
-  .section-title::before { content: '-- '; opacity: .5; }
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.kpi-row{grid-template-columns:1fr}}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s;opacity:0;transform:translateY(16px)}
+.kpi.visible{animation:fadeUp .4s ease forwards}
+.kpi:nth-child(1){animation-delay:0s}.kpi:nth-child(2){animation-delay:.07s}.kpi:nth-child(3){animation-delay:.14s}.kpi:nth-child(4){animation-delay:.21s}
+.kpi:hover{border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 28px rgba(56,189,248,.1)}
+.kpi-bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);border-radius:10px 10px 0 0}
+.kpi-bar.green{background:var(--green)}.kpi-bar.red{background:var(--red)}.kpi-bar.amber{background:var(--amber)}.kpi-bar.violet{background:var(--violet)}
+.kpi-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px}
+.kpi-value{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--text);line-height:1;transition:all .3s}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:4px}
+.delta{font-weight:600;font-family:'Space Grotesk',sans-serif;transition:color .3s}
+.delta.up{color:var(--green)}.delta.down{color:var(--red)}
 
-  /* ─── KPI CARDS ─── */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2,1fr); } }
-  @media (max-width: 480px) { .kpi-row { grid-template-columns: 1fr; } }
+/* CHARTS */
+.chart-grid{display:grid;gap:12px;margin-bottom:14px}
+.chart-grid-2{grid-template-columns:1fr 1fr}
+.chart-grid-13{grid-template-columns:2fr 1fr}
+@media(max-width:900px){.chart-grid-2,.chart-grid-13{grid-template-columns:1fr}}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;transition:box-shadow .25s;opacity:0;transform:translateY(16px)}
+.chart-card.visible{animation:fadeUp .5s ease forwards}
+.chart-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.chart-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:14px}
+.ch200{position:relative;height:200px}.ch240{position:relative;height:240px}.ch260{position:relative;height:260px}
 
-  .kpi {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .25s, transform .25s, box-shadow .25s;
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  .kpi.visible {
-    animation: fadeUp .45s ease forwards;
-  }
-  .kpi:nth-child(1) { animation-delay: .00s; }
-  .kpi:nth-child(2) { animation-delay: .08s; }
-  .kpi:nth-child(3) { animation-delay: .16s; }
-  .kpi:nth-child(4) { animation-delay: .24s; }
-  .kpi:hover {
-    border-color: var(--cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(56,189,248,.1);
-  }
-  .kpi-bar {
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--grad);
-    border-radius: 10px 10px 0 0;
-  }
-  .kpi-bar.green { background: var(--green); }
-  .kpi-bar.red   { background: var(--red); }
-  .kpi-bar.amber { background: var(--amber); }
-  .kpi-bar.violet { background: var(--violet); }
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-  .kpi-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-bottom: 10px;
-  }
-  .kpi-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1;
-  }
-  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 7px; display: flex; align-items: center; gap: 4px; }
-  .delta { font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
-  .delta.up { color: var(--green); }
-  .delta.down { color: var(--red); }
-
-  /* ─── CHART GRID ─── */
-  .chart-grid { display: grid; gap: 14px; margin-bottom: 18px; }
-  .chart-grid-2 { grid-template-columns: 1fr 1fr; }
-  .chart-grid-13 { grid-template-columns: 2fr 1fr; }
-  @media (max-width: 900px) {
-    .chart-grid-2, .chart-grid-13 { grid-template-columns: 1fr; }
-  }
-
-  .chart-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    transition: border-color .25s, box-shadow .25s;
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  .chart-card.visible { animation: fadeUp .5s ease forwards; }
-  .chart-card:hover {
-    border-color: var(--border);
-    box-shadow: 0 4px 20px rgba(56,189,248,.06);
-  }
-  .chart-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-  .chart-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-  .chart-h200 { position: relative; height: 200px; }
-  .chart-h240 { position: relative; height: 240px; }
-  .chart-h260 { position: relative; height: 260px; }
-
-  /* ─── SLICER ─── */
-  .slicer-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .slicer-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    margin-right: 4px;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-  }
-  .slicer-btn {
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .slicer-btn.active, .slicer-btn:hover {
-    background: var(--grad);
-    border-color: transparent;
-    color: #fff;
-    font-weight: 600;
-  }
-
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─── FOOTER ─── */
-  .footer {
-    text-align: center;
-    padding: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    letter-spacing: .05em;
-  }
-  .footer a { color: var(--cyan); text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
+/* FOOTER */
+.footer{text-align:center;padding:18px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid var(--border);letter-spacing:.04em}
+.footer a{color:var(--cyan);text-decoration:none}
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
 <div class="header">
   <div class="header-left">
+    <a href="/" class="back-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      zalka.it
+    </a>
     <div class="logo">-- ZalkaIT.bi_demo</div>
-    <h1>Przykładowe analizy BI</h1>
+    <span class="header-title">Przykładowe analizy BI</span>
   </div>
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <span id="theme-icon">☀</span> <span id="theme-label">Jasny</span>
-  </button>
+  <div class="header-right">
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="ti">☀</span><span id="tl">Jasny</span>
+    </button>
+  </div>
 </div>
 
-<!-- ═══ TABS ═══ -->
 <div class="tabs-bar">
   <div class="tab active" data-tab="credit" onclick="switchTab('credit')">📊 Ryzyko Kredytowe</div>
   <div class="tab" data-tab="pnl" onclick="switchTab('pnl')">💼 Controlling / P&L</div>
@@ -318,465 +109,407 @@
 
 <div class="main">
 
-  <!-- ══════════════════════════════════════
-       TAB 1 — RYZYKO KREDYTOWE
-  ══════════════════════════════════════ -->
+  <!-- TAB 1: RYZYKO KREDYTOWE -->
   <div class="panel active" id="panel-credit">
     <div class="slicer-row">
       <span class="slicer-label">Okres:</span>
-      <button class="slicer-btn active">Q1 2024</button>
-      <button class="slicer-btn">Q2 2024</button>
-      <button class="slicer-btn">Q3 2024</button>
-      <button class="slicer-btn">Q4 2024</button>
+      <button class="slicer-btn active" onclick="setSlicerCredit('Q1 2024',this)">Q1 2024</button>
+      <button class="slicer-btn" onclick="setSlicerCredit('Q2 2024',this)">Q2 2024</button>
+      <button class="slicer-btn" onclick="setSlicerCredit('Q3 2024',this)">Q3 2024</button>
+      <button class="slicer-btn" onclick="setSlicerCredit('Q4 2024',this)">Q4 2024</button>
     </div>
-
     <div class="section-title">ryzyko_kredytowe.kpi</div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-bar"></div>
-        <div class="kpi-label">Ekspozycja kredytowa</div>
-        <div class="kpi-value">4,82 mld</div>
-        <div class="kpi-sub"><span class="delta up">▲ 3,2%</span> vs poprzedni kwartał</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar red"></div>
-        <div class="kpi-label">NPL Ratio</div>
-        <div class="kpi-value">3,7%</div>
-        <div class="kpi-sub"><span class="delta up">▼ 0,4 pp</span> poprawa r/r</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar green"></div>
-        <div class="kpi-label">Pokrycie rezerwami</div>
-        <div class="kpi-value">68,2%</div>
-        <div class="kpi-sub"><span class="delta up">▲ 1,8 pp</span> vs Q4 2023</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar violet"></div>
-        <div class="kpi-label">Umowy aktywne</div>
-        <div class="kpi-value">124 180</div>
-        <div class="kpi-sub"><span class="delta up">▲ 2,1%</span> wzrost portfela</div>
-      </div>
+      <div class="kpi"><div class="kpi-bar"></div><div class="kpi-label">Ekspozycja kredytowa</div><div class="kpi-value" id="c-expo">4,61 mld</div><div class="kpi-sub"><span class="delta up" id="c-expo-d">▲ 2,1%</span> vs poprzedni kw.</div></div>
+      <div class="kpi"><div class="kpi-bar red"></div><div class="kpi-label">NPL Ratio</div><div class="kpi-value" id="c-npl">4,5%</div><div class="kpi-sub"><span class="delta up" id="c-npl-d">▼ 0,3 pp</span> poprawa r/r</div></div>
+      <div class="kpi"><div class="kpi-bar green"></div><div class="kpi-label">Pokrycie rezerwami</div><div class="kpi-value" id="c-cov">65,8%</div><div class="kpi-sub"><span class="delta up" id="c-cov-d">▲ 1,2 pp</span> vs Q4 2023</div></div>
+      <div class="kpi"><div class="kpi-bar violet"></div><div class="kpi-label">Umowy aktywne</div><div class="kpi-value" id="c-cnt">120 340</div><div class="kpi-sub"><span class="delta up" id="c-cnt-d">▲ 1,4%</span> wzrost portfela</div></div>
     </div>
-
     <div class="chart-grid chart-grid-13">
-      <div class="chart-card">
-        <div class="chart-title">Trend NPL Ratio – 12 miesięcy</div>
-        <div class="chart-sub">-- udział kredytów zagrożonych (%)</div>
-        <div class="chart-h260"><canvas id="nplTrend"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Portfel wg segmentów</div>
-        <div class="chart-sub">-- struktura ekspozycji</div>
-        <div class="chart-h260"><canvas id="portfelSegment"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">Trend NPL Ratio</div><div class="chart-sub">-- udział kredytów zagrożonych (%)</div><div class="ch260"><canvas id="nplTrend"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Portfel wg segmentów</div><div class="chart-sub">-- struktura ekspozycji</div><div class="ch260"><canvas id="portfelSegment"></canvas></div></div>
     </div>
-
     <div class="chart-grid chart-grid-2">
-      <div class="chart-card">
-        <div class="chart-title">Ekspozycja wg branż (top 6)</div>
-        <div class="chart-sub">-- wartość w mln PLN</div>
-        <div class="chart-h200"><canvas id="ekspozyBranze"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Rezerwy vs. Ekspozycja NPL</div>
-        <div class="chart-sub">-- miesięcznie, mln PLN</div>
-        <div class="chart-h200"><canvas id="rezerwyNpl"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">Ekspozycja wg branż (top 6)</div><div class="chart-sub">-- wartość w mln PLN</div><div class="ch200"><canvas id="ekspozyBranze"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Rezerwy vs. NPL</div><div class="chart-sub">-- mln PLN</div><div class="ch200"><canvas id="rezerwyNpl"></canvas></div></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       TAB 2 — CONTROLLING / P&L
-  ══════════════════════════════════════ -->
+  <!-- TAB 2: CONTROLLING / P&L -->
   <div class="panel" id="panel-pnl">
     <div class="slicer-row">
       <span class="slicer-label">Rok:</span>
-      <button class="slicer-btn active">2024</button>
-      <button class="slicer-btn">2023</button>
-      <button class="slicer-btn">2022</button>
+      <button class="slicer-btn active" onclick="setSlicerPnl('2024',this)">2024</button>
+      <button class="slicer-btn" onclick="setSlicerPnl('2023',this)">2023</button>
+      <button class="slicer-btn" onclick="setSlicerPnl('2022',this)">2022</button>
     </div>
-
     <div class="section-title">controlling.wyniki_finansowe</div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-bar"></div>
-        <div class="kpi-label">Przychody netto</div>
-        <div class="kpi-value">218 mln</div>
-        <div class="kpi-sub"><span class="delta up">▲ 11,4%</span> vs 2023</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar green"></div>
-        <div class="kpi-label">EBITDA</div>
-        <div class="kpi-value">52,3 mln</div>
-        <div class="kpi-sub"><span class="delta up">▲ 8,7%</span> marża 24%</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar red"></div>
-        <div class="kpi-label">Koszty operacyjne</div>
-        <div class="kpi-value">165,7 mln</div>
-        <div class="kpi-sub"><span class="delta down">▲ 12,1%</span> wzrost kosztów</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar amber"></div>
-        <div class="kpi-label">Marża netto</div>
-        <div class="kpi-value">18,6%</div>
-        <div class="kpi-sub"><span class="delta down">▼ 0,5 pp</span> vs plan</div>
-      </div>
+      <div class="kpi"><div class="kpi-bar"></div><div class="kpi-label">Przychody netto</div><div class="kpi-value" id="p-rev">218 mln</div><div class="kpi-sub"><span class="delta up" id="p-rev-d">▲ 11,8%</span> vs rok poprzedni</div></div>
+      <div class="kpi"><div class="kpi-bar green"></div><div class="kpi-label">EBITDA</div><div class="kpi-value" id="p-ebitda">52,3 mln</div><div class="kpi-sub"><span class="delta up" id="p-ebitda-d">▲ 8,7%</span> marża <span id="p-marzas">24%</span></div></div>
+      <div class="kpi"><div class="kpi-bar red"></div><div class="kpi-label">Koszty operacyjne</div><div class="kpi-value" id="p-cost">165,7 mln</div><div class="kpi-sub"><span class="delta down" id="p-cost-d">▲ 12,8%</span> wzrost kosztów</div></div>
+      <div class="kpi"><div class="kpi-bar amber"></div><div class="kpi-label">Marża netto</div><div class="kpi-value" id="p-margin">18,6%</div><div class="kpi-sub"><span class="delta down" id="p-margin-d">▼ 0,5 pp</span> vs plan</div></div>
     </div>
-
     <div class="chart-grid chart-grid-2">
-      <div class="chart-card">
-        <div class="chart-title">Przychody vs Koszty – miesięcznie</div>
-        <div class="chart-sub">-- wartości w mln PLN, 2024</div>
-        <div class="chart-h260"><canvas id="pnlBar"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Marża EBITDA – trend</div>
-        <div class="chart-sub">-- % miesięcznie vs cel 24%</div>
-        <div class="chart-h260"><canvas id="ebitdaTrend"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">Przychody vs Koszty – miesięcznie</div><div class="chart-sub">-- wartości w mln PLN</div><div class="ch260"><canvas id="pnlBar"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Marża EBITDA – trend</div><div class="chart-sub">-- % miesięcznie vs cel</div><div class="ch260"><canvas id="ebitdaTrend"></canvas></div></div>
     </div>
-
     <div class="chart-grid chart-grid-13">
-      <div class="chart-card">
-        <div class="chart-title">Wykonanie budżetu – działy</div>
-        <div class="chart-sub">-- rzeczywiste vs. plan (%)</div>
-        <div class="chart-h200"><canvas id="budzetDzialy"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Struktura kosztów</div>
-        <div class="chart-sub">-- podział procentowy</div>
-        <div class="chart-h200"><canvas id="strukturaKosztow"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">Wykonanie budżetu – działy</div><div class="chart-sub">-- rzeczywiste vs. plan (%)</div><div class="ch200"><canvas id="budzetDzialy"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Struktura kosztów</div><div class="chart-sub">-- podział procentowy</div><div class="ch200"><canvas id="strukturaKosztow"></canvas></div></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       TAB 3 — PRODUKCJA / OEE
-  ══════════════════════════════════════ -->
+  <!-- TAB 3: PRODUKCJA / OEE -->
   <div class="panel" id="panel-oee">
     <div class="slicer-row">
       <span class="slicer-label">Linia:</span>
-      <button class="slicer-btn active">Wszystkie</button>
-      <button class="slicer-btn">Linia A</button>
-      <button class="slicer-btn">Linia B</button>
-      <button class="slicer-btn">Linia C</button>
+      <button class="slicer-btn active" onclick="setSlicerOee('all',this)">Wszystkie</button>
+      <button class="slicer-btn" onclick="setSlicerOee('A',this)">Linia A</button>
+      <button class="slicer-btn" onclick="setSlicerOee('B',this)">Linia B</button>
+      <button class="slicer-btn" onclick="setSlicerOee('C',this)">Linia C</button>
     </div>
-
     <div class="section-title">produkcja.oee_dashboard</div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-bar"></div>
-        <div class="kpi-label">OEE ogółem</div>
-        <div class="kpi-value">76,4%</div>
-        <div class="kpi-sub"><span class="delta up">▲ 2,8 pp</span> cel: 80%</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar green"></div>
-        <div class="kpi-label">Dostępność</div>
-        <div class="kpi-value">91,2%</div>
-        <div class="kpi-sub"><span class="delta up">▲ 1,4 pp</span> m/m</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar amber"></div>
-        <div class="kpi-label">Wydajność</div>
-        <div class="kpi-value">88,7%</div>
-        <div class="kpi-sub"><span class="delta down">▼ 0,9 pp</span> m/m</div>
-      </div>
-      <div class="kpi"><div class="kpi-bar violet"></div>
-        <div class="kpi-label">Jakość</div>
-        <div class="kpi-value">94,5%</div>
-        <div class="kpi-sub"><span class="delta up">▲ 0,6 pp</span> m/m</div>
-      </div>
+      <div class="kpi"><div class="kpi-bar"></div><div class="kpi-label">OEE ogółem</div><div class="kpi-value" id="o-oee">76,4%</div><div class="kpi-sub"><span class="delta up" id="o-oee-d">▲ 2,8 pp</span> cel: 80%</div></div>
+      <div class="kpi"><div class="kpi-bar green"></div><div class="kpi-label">Dostępność</div><div class="kpi-value" id="o-avail">91,2%</div><div class="kpi-sub"><span class="delta up" id="o-avail-d">▲ 1,4 pp</span> m/m</div></div>
+      <div class="kpi"><div class="kpi-bar amber"></div><div class="kpi-label">Wydajność</div><div class="kpi-value" id="o-perf">88,7%</div><div class="kpi-sub"><span class="delta down" id="o-perf-d">▼ 0,9 pp</span> m/m</div></div>
+      <div class="kpi"><div class="kpi-bar violet"></div><div class="kpi-label">Jakość</div><div class="kpi-value" id="o-qual">94,5%</div><div class="kpi-sub"><span class="delta up" id="o-qual-d">▲ 0,6 pp</span> m/m</div></div>
     </div>
-
     <div class="chart-grid chart-grid-13">
-      <div class="chart-card">
-        <div class="chart-title">OEE Trend – 12 miesięcy</div>
-        <div class="chart-sub">-- dostępność / wydajność / jakość (%)</div>
-        <div class="chart-h260"><canvas id="oeeTrend"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Straty wg przyczyn</div>
-        <div class="chart-sub">-- godziny w miesiącu</div>
-        <div class="chart-h260"><canvas id="straty"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">OEE Trend – 12 miesięcy</div><div class="chart-sub">-- dostępność / wydajność / jakość (%)</div><div class="ch260"><canvas id="oeeTrend"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Straty wg przyczyn</div><div class="chart-sub">-- godziny w miesiącu</div><div class="ch260"><canvas id="straty"></canvas></div></div>
     </div>
-
     <div class="chart-grid chart-grid-2">
-      <div class="chart-card">
-        <div class="chart-title">OEE wg linii produkcyjnych</div>
-        <div class="chart-sub">-- porównanie komponentów (%)</div>
-        <div class="chart-h200"><canvas id="oeeLinies"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Produkcja rzeczywista vs. plan</div>
-        <div class="chart-sub">-- sztuki / 1000, 2024</div>
-        <div class="chart-h200"><canvas id="prodPlan"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="chart-title">OEE wg linii produkcyjnych</div><div class="chart-sub">-- porównanie komponentów (%)</div><div class="ch200"><canvas id="oeeLinies"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Produkcja rzeczywista vs. plan</div><div class="chart-sub">-- sztuki / 1000</div><div class="ch200"><canvas id="prodPlan"></canvas></div></div>
     </div>
   </div>
 
 </div>
 
-<div class="footer">
-  -- © 2024 <a href="https://zalka.it">zalka.it</a> · Marcin Załuski · ZalkaIT · dane demonstracyjne
-</div>
+<div class="footer">-- © 2024 <a href="/">zalka.it</a> · Marcin Załuski · ZalkaIT · dane demonstracyjne</div>
 
 <script>
-/* ─── THEME ─── */
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('theme-icon').textContent = isDark ? '☾' : '☀';
-  document.getElementById('theme-label').textContent = isDark ? 'Ciemny' : 'Jasny';
+/* ═══════════════════════════════════════════════
+   DATASETY — SLICER DATA
+═══════════════════════════════════════════════ */
+
+/* TAB 1 — Ryzyko kredytowe per kwartał */
+var DS_CREDIT = {
+  'Q1 2024': {
+    kpi: { expo:'4,61 mld', expoD:'▲ 2,1%', npl:'4,5%', nplD:'▼ 0,3 pp', cov:'65,8%', covD:'▲ 1,2 pp', cnt:'120 340', cntD:'▲ 1,4%' },
+    nplLabels: ['Sty','Lut','Mar'], nplData: [4.8, 4.6, 4.5],
+    segment: [36, 28, 19, 11, 6],
+    branze: [780, 610, 510, 450, 290, 260],
+    rezerwyL: ['Sty','Lut','Mar'], rezerwyRes: [118, 122, 126], rezerwyNpl: [192, 188, 184]
+  },
+  'Q2 2024': {
+    kpi: { expo:'4,72 mld', expoD:'▲ 2,4%', npl:'4,1%', nplD:'▼ 0,4 pp', cov:'66,9%', covD:'▲ 1,1 pp', cnt:'121 880', cntD:'▲ 1,3%' },
+    nplLabels: ['Kwi','Maj','Cze'], nplData: [4.3, 4.2, 4.1],
+    segment: [37, 28, 18, 11, 6],
+    branze: [795, 625, 525, 462, 298, 271],
+    rezerwyL: ['Kwi','Maj','Cze'], rezerwyRes: [128, 132, 136], rezerwyNpl: [181, 178, 174]
+  },
+  'Q3 2024': {
+    kpi: { expo:'4,76 mld', expoD:'▲ 0,8%', npl:'3,9%', nplD:'▼ 0,2 pp', cov:'67,5%', covD:'▲ 0,6 pp', cnt:'122 940', cntD:'▲ 0,9%' },
+    nplLabels: ['Lip','Sie','Wrz'], nplData: [4.0, 3.9, 3.8],
+    segment: [37, 28, 18, 11, 6],
+    branze: [805, 638, 533, 470, 302, 278],
+    rezerwyL: ['Lip','Sie','Wrz'], rezerwyRes: [138, 142, 146], rezerwyNpl: [172, 169, 167]
+  },
+  'Q4 2024': {
+    kpi: { expo:'4,82 mld', expoD:'▲ 1,3%', npl:'3,7%', nplD:'▼ 0,2 pp', cov:'68,2%', covD:'▲ 0,7 pp', cnt:'124 180', cntD:'▲ 1,0%' },
+    nplLabels: ['Paź','Lis','Gru'], nplData: [3.7, 3.7, 3.6],
+    segment: [38, 28, 18, 11, 5],
+    branze: [820, 650, 540, 480, 310, 290],
+    rezerwyL: ['Paź','Lis','Gru'], rezerwyRes: [148, 151, 155], rezerwyNpl: [168, 167, 165]
+  }
+};
+
+/* TAB 2 — P&L per rok */
+var DS_PNL = {
+  '2024': {
+    kpi: { rev:'218 mln', revD:'▲ 11,8%', ebitda:'52,3 mln', ebitdaD:'▲ 8,7%', marzas:'24%', cost:'165,7 mln', costD:'▲ 12,8%', margin:'18,6%', marginD:'▼ 0,5 pp', marginCls:'down' },
+    revData:  [15.2,14.8,18.1,17.4,19.2,18.8,20.1,17.6,18.9,19.4,20.8,18.0],
+    costData: [11.8,11.4,14.2,13.8,15.1,14.6,15.8,13.9,14.7,15.2,16.1,14.0],
+    ebitdaData: [22.4,23.0,21.5,20.7,21.4,22.3,21.4,21.0,22.1,21.6,22.6,22.2], cel: 24,
+    budzet: [104, 97, 108, 95, 101, 99],
+    struct: [38, 22, 15, 10, 8, 7]
+  },
+  '2023': {
+    kpi: { rev:'195 mln', revD:'▲ 9,6%', ebitda:'48,1 mln', ebitdaD:'▲ 14,3%', marzas:'24,7%', cost:'146,9 mln', costD:'▲ 8,1%', margin:'19,1%', marginD:'▲ 1,3 pp', marginCls:'up' },
+    revData:  [13.8,13.2,16.1,15.6,17.2,16.9,18.0,15.8,16.9,17.3,18.6,15.6],
+    costData: [10.8,10.2,12.7,12.2,13.4,12.9,14.1,12.3,13.0,13.4,14.4,12.5],
+    ebitdaData: [21.7,22.7,21.1,21.8,22.1,23.7,21.7,22.2,23.1,22.5,22.6,19.9], cel: 23,
+    budzet: [101, 103, 96, 98, 105, 102],
+    struct: [36, 24, 14, 11, 8, 7]
+  },
+  '2022': {
+    kpi: { rev:'178 mln', revD:'▲ 5,2%', ebitda:'42,1 mln', ebitdaD:'▲ 3,8%', marzas:'23,6%', cost:'135.9 mln', costD:'▲ 5,5%', margin:'17,8%', marginD:'▼ 0,2 pp', marginCls:'down' },
+    revData:  [12.5,11.9,14.8,14.2,15.4,15.0,16.3,14.0,14.9,15.6,16.8,16.6],
+    costData: [9.9,9.5,11.6,11.1,12.0,11.7,12.8,10.9,11.5,11.9,12.9,10.1],
+    ebitdaData: [20.8,20.2,21.6,21.8,22.1,22.0,21.5,22.1,22.8,23.7,23.2,22.3], cel: 22,
+    budzet: [98, 101, 94, 102, 99, 97],
+    struct: [35, 25, 14, 11, 8, 7]
+  }
+};
+
+/* TAB 3 — OEE per linia */
+var DS_OEE = {
+  all: {
+    kpi: { oee:'76,4%', oeeD:'▲ 2,8 pp', avail:'91,2%', availD:'▲ 1,4 pp', perf:'88,7%', perfD:'▼ 0,9 pp', qual:'94,5%', qualD:'▲ 0,6 pp', oeeCls:'up', availCls:'up', perfCls:'down', qualCls:'up' },
+    oeeT:   [71,72,73,74,74,75,75,76,76,77,76,76],
+    availT: [88,89,90,90,91,91,91,92,92,92,91,91],
+    perfT:  [84,85,86,87,87,88,88,89,89,90,89,89],
+    qualT:  [93,93,94,94,94,95,95,95,95,95,94,94],
+    straty: [48,32,24,18,14,9],
+    liniesA:[93,90,89,92], liniesW:[90,87,85,91], liniesJ:[96,93,95,94],
+    prodReal:[412,398,445,430,462,455,478,441,449,468,482,440],
+    prodPlan:[420,420,440,440,460,460,475,475,450,465,480,445]
+  },
+  A: {
+    kpi: { oee:'79,2%', oeeD:'▲ 4,1 pp', avail:'93,0%', availD:'▲ 2,3 pp', perf:'90,3%', perfD:'▲ 1,1 pp', qual:'96,4%', qualD:'▲ 0,8 pp', oeeCls:'up', availCls:'up', perfCls:'up', qualCls:'up' },
+    oeeT:   [74,75,76,77,77,78,78,79,79,80,79,79],
+    availT: [90,91,92,92,93,93,93,93,94,94,93,93],
+    perfT:  [86,87,88,89,89,90,90,91,91,91,90,90],
+    qualT:  [95,95,96,96,96,97,97,97,97,97,96,96],
+    straty: [32,22,18,14,10,6],
+    liniesA:[93,90,89,92], liniesW:[90,87,85,91], liniesJ:[96,93,95,94],
+    prodReal:[142,138,152,148,158,155,163,151,154,160,165,152],
+    prodPlan:[140,140,150,150,155,155,160,160,155,158,163,150]
+  },
+  B: {
+    kpi: { oee:'74,1%', oeeD:'▲ 1,8 pp', avail:'89,8%', availD:'▲ 0,9 pp', perf:'87,3%', perfD:'▼ 1,4 pp', qual:'94,2%', qualD:'▲ 0,3 pp', oeeCls:'up', availCls:'up', perfCls:'down', qualCls:'up' },
+    oeeT:   [70,70,71,72,72,73,73,74,74,75,74,74],
+    availT: [87,88,88,89,89,90,90,90,91,91,90,90],
+    perfT:  [83,84,85,86,86,87,87,88,88,89,87,87],
+    qualT:  [93,93,94,94,94,94,95,95,95,95,94,94],
+    straty: [55,38,27,20,16,10],
+    liniesA:[93,90,89,92], liniesW:[90,87,85,91], liniesJ:[96,93,95,94],
+    prodReal:[138,132,148,142,154,149,158,146,148,155,159,144],
+    prodPlan:[140,140,150,150,155,155,160,160,150,158,162,148]
+  },
+  C: {
+    kpi: { oee:'73,6%', oeeD:'▲ 1,2 pp', avail:'89,2%', availD:'▲ 0,7 pp', perf:'86,8%', perfD:'▼ 1,8 pp', qual:'95,1%', qualD:'▲ 1,1 pp', oeeCls:'up', availCls:'up', perfCls:'down', qualCls:'up' },
+    oeeT:   [69,70,71,71,72,72,73,73,74,74,73,74],
+    availT: [86,87,88,88,89,89,89,90,90,90,89,89],
+    perfT:  [82,83,84,85,85,86,86,87,87,88,87,87],
+    qualT:  [94,94,95,95,95,95,96,96,96,96,95,95],
+    straty: [52,35,25,17,13,8],
+    liniesA:[93,90,89,92], liniesW:[90,87,85,91], liniesJ:[96,93,95,94],
+    prodReal:[132,128,145,140,150,151,157,144,147,153,158,144],
+    prodPlan:[135,135,148,148,152,152,158,158,148,154,158,145]
+  }
+};
+
+/* ═══════════════════════════════════════════════
+   THEME
+═══════════════════════════════════════════════ */
+function toggleTheme(){
+  var d=document.documentElement,dark=d.getAttribute('data-theme')==='dark';
+  d.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('ti').textContent=dark?'☾':'☀';
+  document.getElementById('tl').textContent=dark?'Ciemny':'Jasny';
   rebuildCharts();
 }
 
-/* ─── TABS ─── */
-function switchTab(id) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
-  const panel = document.getElementById(`panel-${id}`);
+/* ═══════════════════════════════════════════════
+   TABS
+═══════════════════════════════════════════════ */
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelector('[data-tab="'+id+'"]').classList.add('active');
+  var panel=document.getElementById('panel-'+id);
   panel.classList.add('active');
-  triggerAnimations(panel);
+  animatePanel(panel);
 }
 
-/* ─── SLICER ─── */
-document.querySelectorAll('.slicer-row').forEach(row => {
-  row.querySelectorAll('.slicer-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      row.querySelectorAll('.slicer-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-});
-
-/* ─── ANIMATIONS via IntersectionObserver ─── */
-function triggerAnimations(root) {
-  const els = root.querySelectorAll('.kpi, .chart-card');
-  els.forEach(el => { el.classList.remove('visible'); el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; });
-  requestAnimationFrame(() => {
-    els.forEach((el, i) => {
-      setTimeout(() => {
-        el.style.animation = 'none';
-        el.offsetHeight; // reflow
-        el.style.animation = '';
-        el.style.animationDelay = `${i * 0.07}s`;
-        el.classList.add('visible');
-      }, i * 60);
-    });
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+function animatePanel(panel){
+  var els=panel.querySelectorAll('.kpi,.chart-card');
+  els.forEach(function(el){el.classList.remove('visible');el.style.opacity='0';el.style.transform='translateY(16px)'});
+  els.forEach(function(el,i){
+    setTimeout(function(){
+      el.style.animation='none';el.offsetHeight;el.style.animation='';
+      el.style.animationDelay=(i*0.06)+'s';el.classList.add('visible');
+    },i*50);
   });
 }
 
-/* ─── CSS VAR HELPER ─── */
-function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+/* ═══════════════════════════════════════════════
+   CSS VAR HELPER
+═══════════════════════════════════════════════ */
+function cv(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
 
-/* ─── CHART DEFAULTS ─── */
-Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
-Chart.defaults.font.size = 11;
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.font.size=11;
+var M12=['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+var charts={};
 
-const M12 = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
-
-let charts = {};
-
-function baseOpts() {
-  const border = css('--border'), muted = css('--muted');
-  return {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { labels: { color: muted, boxWidth: 10, padding: 12, font: { size: 11 } } } },
-    scales: {
-      x: { ticks: { color: muted }, grid: { color: border + '88' } },
-      y: { ticks: { color: muted }, grid: { color: border + '88' } }
-    }
-  };
+function baseOpts(){
+  var b=cv('--border'),m=cv('--muted');
+  return{responsive:true,maintainAspectRatio:false,animation:{duration:400},
+    plugins:{legend:{labels:{color:m,boxWidth:10,padding:10,font:{size:11}}}},
+    scales:{x:{ticks:{color:m},grid:{color:b+'66'}},y:{ticks:{color:m},grid:{color:b+'66'}}}};
 }
-function pieOpts() {
-  const muted = css('--muted');
-  return {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'bottom', labels: { color: muted, boxWidth: 10, padding: 10, font: { size: 11 } } } }
-  };
+function pieOpts(){
+  var m=cv('--muted');
+  return{responsive:true,maintainAspectRatio:false,animation:{duration:400},
+    plugins:{legend:{position:'bottom',labels:{color:m,boxWidth:10,padding:10,font:{size:11}}}}};
 }
 
-function buildCharts() {
-  const cyan   = css('--cyan');
-  const violet = css('--violet');
-  const green  = css('--green');
-  const red    = css('--red');
-  const amber  = css('--amber');
-  const muted  = css('--muted');
-  const border = css('--border');
+/* ═══════════════════════════════════════════════
+   BUILD ALL CHARTS
+═══════════════════════════════════════════════ */
+function buildCharts(){
+  var cy=cv('--cyan'),vi=cv('--violet'),gr=cv('--green'),re=cv('--red'),am=cv('--amber'),mu=cv('--muted');
+  var pal=[cy,vi,gr,re,am,mu];
 
-  const palette = [cyan, violet, green, red, amber, muted];
+  /* --- TAB 1 initial: Q1 2024 --- */
+  var d1=DS_CREDIT['Q1 2024'];
+  charts.nplTrend=new Chart(document.getElementById('nplTrend'),{type:'line',data:{labels:d1.nplLabels,datasets:[{label:'NPL Ratio (%)',data:d1.nplData,borderColor:re,backgroundColor:re+'22',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:re}]},options:baseOpts()});
+  charts.portfelSegment=new Chart(document.getElementById('portfelSegment'),{type:'doughnut',data:{labels:['Korporacyjne','Hipoteczne','Konsumpcyjne','MŚP','Karty'],datasets:[{data:d1.segment,backgroundColor:pal,borderWidth:0,hoverOffset:8}]},options:pieOpts()});
+  charts.ekspozyBranze=new Chart(document.getElementById('ekspozyBranze'),{type:'bar',data:{labels:['Handel','Budownictwo','Produkcja','Nieruchomości','Transport','Usługi'],datasets:[{label:'Ekspozycja (mln PLN)',data:d1.branze,backgroundColor:cy+'bb',borderRadius:4}]},options:baseOpts()});
+  charts.rezerwyNpl=new Chart(document.getElementById('rezerwyNpl'),{type:'bar',data:{labels:d1.rezerwyL,datasets:[{label:'Rezerwy',data:d1.rezerwyRes,backgroundColor:gr+'bb',borderRadius:3},{label:'NPL',data:d1.rezerwyNpl,backgroundColor:re+'bb',borderRadius:3}]},options:baseOpts()});
 
-  /* ── TAB 1: RYZYKO ── */
-  charts.nplTrend = new Chart(document.getElementById('nplTrend'), {
-    type: 'line',
-    data: {
-      labels: M12,
-      datasets: [{
-        label: 'NPL Ratio (%)',
-        data: [4.8,4.6,4.5,4.3,4.2,4.1,4.0,3.9,3.8,3.7,3.7,3.6],
-        borderColor: red, backgroundColor: red+'22',
-        fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: red
-      }]
-    },
-    options: baseOpts()
-  });
+  /* --- TAB 2 initial: 2024 --- */
+  var d2=DS_PNL['2024'];
+  charts.pnlBar=new Chart(document.getElementById('pnlBar'),{type:'bar',data:{labels:M12,datasets:[{label:'Przychody',data:d2.revData,backgroundColor:cy+'bb',borderRadius:4},{label:'Koszty',data:d2.costData,backgroundColor:re+'88',borderRadius:4}]},options:baseOpts()});
+  charts.ebitdaTrend=new Chart(document.getElementById('ebitdaTrend'),{type:'line',data:{labels:M12,datasets:[{label:'EBITDA %',data:d2.ebitdaData,borderColor:gr,backgroundColor:gr+'22',fill:true,tension:.4,pointRadius:3},{label:'Cel '+d2.cel+'%',data:Array(12).fill(d2.cel),borderColor:mu,borderDash:[6,4],borderWidth:1.5,pointRadius:0}]},options:baseOpts()});
+  charts.budzetDzialy=new Chart(document.getElementById('budzetDzialy'),{type:'bar',data:{labels:['Sprzedaż','Marketing','IT','HR','Logistyka','Finanse'],datasets:[{label:'vs plan (%)',data:d2.budzet,backgroundColor:function(ctx){return d2.budzet[ctx.dataIndex]>=100?gr+'bb':re+'bb'},borderRadius:4}]},options:{...baseOpts(),plugins:{legend:{display:false}}}});
+  charts.strukturaKosztow=new Chart(document.getElementById('strukturaKosztow'),{type:'pie',data:{labels:['Wynagrodzenia','Materiały','Logistyka','IT','Marketing','Inne'],datasets:[{data:d2.struct,backgroundColor:pal,borderWidth:0,hoverOffset:8}]},options:pieOpts()});
 
-  charts.portfelSegment = new Chart(document.getElementById('portfelSegment'), {
-    type: 'doughnut',
-    data: {
-      labels: ['Korporacyjne','Hipoteczne','Konsumpcyjne','MŚP','Karty kredytowe'],
-      datasets: [{ data: [38,28,18,11,5], backgroundColor: palette, borderWidth: 0, hoverOffset: 8 }]
-    },
-    options: pieOpts()
-  });
-
-  charts.ekspozyBranze = new Chart(document.getElementById('ekspozyBranze'), {
-    type: 'bar',
-    data: {
-      labels: ['Handel','Budownictwo','Produkcja','Nieruchomości','Transport','Usługi'],
-      datasets: [{ label: 'Ekspozycja (mln PLN)', data: [820,650,540,480,310,290],
-        backgroundColor: cyan+'bb', borderRadius: 5 }]
-    },
-    options: baseOpts()
-  });
-
-  charts.rezerwyNpl = new Chart(document.getElementById('rezerwyNpl'), {
-    type: 'bar',
-    data: {
-      labels: M12.slice(6),
-      datasets: [
-        { label: 'Rezerwy', data: [126,131,138,142,148,155], backgroundColor: green+'bb', borderRadius: 4 },
-        { label: 'NPL', data: [184,180,175,170,168,165], backgroundColor: red+'bb', borderRadius: 4 }
-      ]
-    },
-    options: baseOpts()
-  });
-
-  /* ── TAB 2: P&L ── */
-  charts.pnlBar = new Chart(document.getElementById('pnlBar'), {
-    type: 'bar',
-    data: {
-      labels: M12,
-      datasets: [
-        { label: 'Przychody', data: [15.2,14.8,18.1,17.4,19.2,18.8,20.1,17.6,18.9,19.4,20.8,18.0],
-          backgroundColor: cyan+'bb', borderRadius: 4 },
-        { label: 'Koszty', data: [11.8,11.4,14.2,13.8,15.1,14.6,15.8,13.9,14.7,15.2,16.1,14.0],
-          backgroundColor: red+'88', borderRadius: 4 }
-      ]
-    },
-    options: baseOpts()
-  });
-
-  charts.ebitdaTrend = new Chart(document.getElementById('ebitdaTrend'), {
-    type: 'line',
-    data: {
-      labels: M12,
-      datasets: [
-        { label: 'EBITDA %', data: [22.4,23.0,21.5,20.7,21.4,22.3,21.4,21.0,22.1,21.6,22.6,22.2],
-          borderColor: green, backgroundColor: green+'22', fill: true, tension: .4, pointRadius: 3 },
-        { label: 'Cel 24%', data: Array(12).fill(24),
-          borderColor: muted, borderDash: [6,4], borderWidth: 1.5, pointRadius: 0 }
-      ]
-    },
-    options: baseOpts()
-  });
-
-  charts.budzetDzialy = new Chart(document.getElementById('budzetDzialy'), {
-    type: 'bar',
-    data: {
-      labels: ['Sprzedaż','Marketing','IT','HR','Logistyka','Finanse'],
-      datasets: [{ label: 'Wykonanie vs. plan (%)',
-        data: [104,97,108,95,101,99],
-        backgroundColor: (ctx) => [104,97,108,95,101,99][ctx.dataIndex] >= 100 ? green+'bb' : red+'bb',
-        borderRadius: 5 }]
-    },
-    options: { ...baseOpts(), plugins: { legend: { display: false } } }
-  });
-
-  charts.strukturaKosztow = new Chart(document.getElementById('strukturaKosztow'), {
-    type: 'pie',
-    data: {
-      labels: ['Wynagrodzenia','Materiały','Logistyka','IT','Marketing','Inne'],
-      datasets: [{ data: [38,22,15,10,8,7], backgroundColor: palette, borderWidth: 0, hoverOffset: 8 }]
-    },
-    options: pieOpts()
-  });
-
-  /* ── TAB 3: OEE ── */
-  charts.oeeTrend = new Chart(document.getElementById('oeeTrend'), {
-    type: 'line',
-    data: {
-      labels: M12,
-      datasets: [
-        { label: 'OEE %', data: [71,72,73,74,74,75,75,76,76,77,76,76],
-          borderColor: cyan, backgroundColor: cyan+'22', fill: true, tension: .4, pointRadius: 3 },
-        { label: 'Dostępność', data: [88,89,90,90,91,91,91,92,92,92,91,91],
-          borderColor: green, tension: .4, pointRadius: 2 },
-        { label: 'Wydajność', data: [84,85,86,87,87,88,88,89,89,90,89,89],
-          borderColor: amber, tension: .4, pointRadius: 2 },
-        { label: 'Jakość', data: [93,93,94,94,94,95,95,95,95,95,94,94],
-          borderColor: violet, tension: .4, pointRadius: 2 }
-      ]
-    },
-    options: baseOpts()
-  });
-
-  charts.straty = new Chart(document.getElementById('straty'), {
-    type: 'bar',
-    data: {
-      labels: ['Awarie','Przezbrojenia','Mikroprzerwy','Zła jakość','Wolne tempo','Inne'],
-      datasets: [{ label: 'Godziny strat', data: [48,32,24,18,14,9],
-        backgroundColor: [red,amber,cyan,violet,green,muted].map(c => c+'cc'),
-        borderRadius: 5 }]
-    },
-    options: {
-      ...baseOpts(),
-      indexAxis: 'y',
-      plugins: { legend: { display: false } }
-    }
-  });
-
-  charts.oeeLinies = new Chart(document.getElementById('oeeLinies'), {
-    type: 'bar',
-    data: {
-      labels: ['Linia A','Linia B','Linia C','Linia D'],
-      datasets: [
-        { label: 'Dostępność', data: [93,90,89,92], backgroundColor: green+'bb', borderRadius: 4 },
-        { label: 'Wydajność', data: [90,87,85,91], backgroundColor: amber+'bb', borderRadius: 4 },
-        { label: 'Jakość', data: [96,93,95,94], backgroundColor: violet+'bb', borderRadius: 4 }
-      ]
-    },
-    options: baseOpts()
-  });
-
-  charts.prodPlan = new Chart(document.getElementById('prodPlan'), {
-    type: 'line',
-    data: {
-      labels: M12,
-      datasets: [
-        { label: 'Produkcja rzecz.', data: [412,398,445,430,462,455,478,441,449,468,482,440],
-          borderColor: cyan, backgroundColor: cyan+'22', fill: true, tension: .4, pointRadius: 3 },
-        { label: 'Plan', data: [420,420,440,440,460,460,475,475,450,465,480,445],
-          borderColor: muted, borderDash: [6,4], borderWidth: 1.5, pointRadius: 0 }
-      ]
-    },
-    options: baseOpts()
-  });
+  /* --- TAB 3 initial: all --- */
+  var d3=DS_OEE['all'];
+  charts.oeeTrend=new Chart(document.getElementById('oeeTrend'),{type:'line',data:{labels:M12,datasets:[{label:'OEE %',data:d3.oeeT,borderColor:cy,backgroundColor:cy+'22',fill:true,tension:.4,pointRadius:3},{label:'Dostępność',data:d3.availT,borderColor:gr,tension:.4,pointRadius:2},{label:'Wydajność',data:d3.perfT,borderColor:am,tension:.4,pointRadius:2},{label:'Jakość',data:d3.qualT,borderColor:vi,tension:.4,pointRadius:2}]},options:baseOpts()});
+  charts.straty=new Chart(document.getElementById('straty'),{type:'bar',data:{labels:['Awarie','Przezbrojenia','Mikroprzerwy','Zła jakość','Wolne tempo','Inne'],datasets:[{label:'Godziny',data:d3.straty,backgroundColor:[re,am,cy,vi,gr,mu].map(function(c){return c+'cc'}),borderRadius:4}]},options:{...baseOpts(),indexAxis:'y',plugins:{legend:{display:false}}}});
+  charts.oeeLinies=new Chart(document.getElementById('oeeLinies'),{type:'bar',data:{labels:['Linia A','Linia B','Linia C','Linia D'],datasets:[{label:'Dostępność',data:d3.liniesA,backgroundColor:gr+'bb',borderRadius:3},{label:'Wydajność',data:d3.liniesW,backgroundColor:am+'bb',borderRadius:3},{label:'Jakość',data:d3.liniesJ,backgroundColor:vi+'bb',borderRadius:3}]},options:baseOpts()});
+  charts.prodPlan=new Chart(document.getElementById('prodPlan'),{type:'line',data:{labels:M12,datasets:[{label:'Produkcja rzecz.',data:d3.prodReal,borderColor:cy,backgroundColor:cy+'22',fill:true,tension:.4,pointRadius:3},{label:'Plan',data:d3.prodPlan,borderColor:mu,borderDash:[6,4],borderWidth:1.5,pointRadius:0}]},options:baseOpts()});
 }
 
-function rebuildCharts() {
-  Object.values(charts).forEach(c => c.destroy());
-  charts = {};
-  buildCharts();
+function rebuildCharts(){Object.values(charts).forEach(function(c){c.destroy()});charts={};buildCharts()}
+
+/* ═══════════════════════════════════════════════
+   SLICER HANDLERS
+═══════════════════════════════════════════════ */
+function setSlicerCredit(key, btn){
+  /* update button state */
+  btn.closest('.slicer-row').querySelectorAll('.slicer-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+
+  var d=DS_CREDIT[key];
+
+  /* KPI */
+  document.getElementById('c-expo').textContent=d.kpi.expo;
+  document.getElementById('c-expo-d').textContent=d.kpi.expoD;
+  document.getElementById('c-npl').textContent=d.kpi.npl;
+  document.getElementById('c-npl-d').textContent=d.kpi.nplD;
+  document.getElementById('c-cov').textContent=d.kpi.cov;
+  document.getElementById('c-cov-d').textContent=d.kpi.covD;
+  document.getElementById('c-cnt').textContent=d.kpi.cnt;
+  document.getElementById('c-cnt-d').textContent=d.kpi.cntD;
+
+  /* charts */
+  charts.nplTrend.data.labels=d.nplLabels;
+  charts.nplTrend.data.datasets[0].data=d.nplData;
+  charts.nplTrend.update();
+
+  charts.portfelSegment.data.datasets[0].data=d.segment;
+  charts.portfelSegment.update();
+
+  charts.ekspozyBranze.data.datasets[0].data=d.branze;
+  charts.ekspozyBranze.update();
+
+  charts.rezerwyNpl.data.labels=d.rezerwyL;
+  charts.rezerwyNpl.data.datasets[0].data=d.rezerwyRes;
+  charts.rezerwyNpl.data.datasets[1].data=d.rezerwyNpl;
+  charts.rezerwyNpl.update();
 }
 
-/* ─── INIT ─── */
+function setSlicerPnl(key, btn){
+  btn.closest('.slicer-row').querySelectorAll('.slicer-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+
+  var d=DS_PNL[key];
+  var gr=cv('--green'),re=cv('--red'),mu=cv('--muted');
+
+  /* KPI */
+  document.getElementById('p-rev').textContent=d.kpi.rev;
+  document.getElementById('p-rev-d').textContent=d.kpi.revD;
+  document.getElementById('p-ebitda').textContent=d.kpi.ebitda;
+  document.getElementById('p-ebitda-d').textContent=d.kpi.ebitdaD;
+  document.getElementById('p-marzas').textContent=d.kpi.marzas;
+  document.getElementById('p-cost').textContent=d.kpi.cost;
+  document.getElementById('p-cost-d').textContent=d.kpi.costD;
+  document.getElementById('p-margin').textContent=d.kpi.margin;
+  var md=document.getElementById('p-margin-d');
+  md.textContent=d.kpi.marginD;
+  md.className='delta '+d.kpi.marginCls;
+
+  /* charts */
+  charts.pnlBar.data.datasets[0].data=d.revData;
+  charts.pnlBar.data.datasets[1].data=d.costData;
+  charts.pnlBar.update();
+
+  charts.ebitdaTrend.data.datasets[0].data=d.ebitdaData;
+  charts.ebitdaTrend.data.datasets[1].data=Array(12).fill(d.cel);
+  charts.ebitdaTrend.data.datasets[1].label='Cel '+d.cel+'%';
+  charts.ebitdaTrend.update();
+
+  var bud=d.budzet;
+  charts.budzetDzialy.data.datasets[0].data=bud;
+  charts.budzetDzialy.data.datasets[0].backgroundColor=bud.map(function(v){return v>=100?gr+'bb':re+'bb'});
+  charts.budzetDzialy.update();
+
+  charts.strukturaKosztow.data.datasets[0].data=d.struct;
+  charts.strukturaKosztow.update();
+}
+
+function setSlicerOee(key, btn){
+  btn.closest('.slicer-row').querySelectorAll('.slicer-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+
+  var d=DS_OEE[key];
+
+  /* KPI */
+  document.getElementById('o-oee').textContent=d.kpi.oee;
+  var od=document.getElementById('o-oee-d'); od.textContent=d.kpi.oeeD; od.className='delta '+d.kpi.oeeCls;
+  document.getElementById('o-avail').textContent=d.kpi.avail;
+  var avd=document.getElementById('o-avail-d'); avd.textContent=d.kpi.availD; avd.className='delta '+d.kpi.availCls;
+  document.getElementById('o-perf').textContent=d.kpi.perf;
+  var pd=document.getElementById('o-perf-d'); pd.textContent=d.kpi.perfD; pd.className='delta '+d.kpi.perfCls;
+  document.getElementById('o-qual').textContent=d.kpi.qual;
+  var qd=document.getElementById('o-qual-d'); qd.textContent=d.kpi.qualD; qd.className='delta '+d.kpi.qualCls;
+
+  /* charts */
+  charts.oeeTrend.data.datasets[0].data=d.oeeT;
+  charts.oeeTrend.data.datasets[1].data=d.availT;
+  charts.oeeTrend.data.datasets[2].data=d.perfT;
+  charts.oeeTrend.data.datasets[3].data=d.qualT;
+  charts.oeeTrend.update();
+
+  charts.straty.data.datasets[0].data=d.straty;
+  charts.straty.update();
+
+  charts.prodPlan.data.datasets[0].data=d.prodReal;
+  charts.prodPlan.data.datasets[1].data=d.prodPlan;
+  charts.prodPlan.update();
+}
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
 buildCharts();
 
-// Odczytaj ?tab= z URL i przełącz właściwą zakładkę
+/* URL param ?tab= */
 (function(){
-  var params = new URLSearchParams(window.location.search);
-  var tab = params.get('tab');
-  if(tab && ['credit','pnl','oee'].includes(tab)){
-    switchTab(tab);
-  } else {
-    triggerAnimations(document.getElementById('panel-credit'));
-  }
+  var p=new URLSearchParams(window.location.search).get('tab');
+  if(p&&['credit','pnl','oee'].includes(p)) switchTab(p);
+  else animatePanel(document.getElementById('panel-credit'));
 })();
 </script>
 </body>
