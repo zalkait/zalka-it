@@ -513,12 +513,30 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 }
 .hero-direct-mail:hover{color:var(--cyan);border-color:var(--cyan)}
 
-/* ── WORKED WITH STRIP ── */
-.worked-strip{padding:22px 0;border-bottom:1px solid var(--card-border)}
-.worked-strip .wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+/* ── WORKED WITH STRIP (marquee) ── */
+.worked-strip{padding:20px 0;border-bottom:1px solid var(--card-border);overflow:hidden}
+.worked-strip .wrap{display:flex;align-items:center;gap:24px}
 .worked-label{font-size:.72rem;color:var(--text-faint);white-space:nowrap;flex-shrink:0}
-.worked-names{display:flex;gap:28px;flex-wrap:wrap;opacity:.7}
-.worked-names span{font-family:var(--font-display);font-size:.86rem;font-weight:600;color:var(--text-dim);white-space:nowrap}
+.worked-marquee{
+  overflow:hidden;flex:1;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.worked-track{
+  display:flex;gap:40px;width:max-content;
+  animation:worked-scroll 42s linear infinite;
+}
+.worked-strip:hover .worked-track{animation-play-state:paused}
+.worked-track span{
+  font-family:var(--font-display);font-size:.86rem;font-weight:600;
+  color:var(--text-dim);white-space:nowrap;opacity:.65;flex-shrink:0;
+}
+@keyframes worked-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .worked-track{animation:none;flex-wrap:wrap;width:auto}
+  .worked-marquee{-webkit-mask-image:none;mask-image:none;overflow:visible}
+}
+@media (max-width:640px){.worked-label{display:none}}
 
 /* ── SERVICES POSITIONING ── */
 .svc-positioning{max-width:62ch;margin-top:10px;font-size:.95rem;color:var(--text-dim);line-height:1.6}
@@ -676,13 +694,41 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
   <section class="worked-strip" aria-label="Klienci">
     <div class="wrap">
       <span class="worked-label mono" data-i18n="worked.label">-- pracowałem dla / z</span>
-      <div class="worked-names">
+      <div class="worked-marquee">
+        <div class="worked-track">
         <span>Aion Bank · UniCredit Group</span>
         <span>PKO Bank Polski</span>
         <span>Vesuvius</span>
         <span>Wolters Kluwer</span>
-        <span>GUS</span>
         <span>Provident</span>
+        <span>Volkswagen Group Polska</span>
+        <span>GUS</span>
+        <span>Teva</span>
+        <span>Zentiva</span>
+        <span>Sanofi-Aventis</span>
+        <span>AstraZeneca</span>
+        <span>Bayer</span>
+        <span>Adamed</span>
+        <span>Polpharma</span>
+        <span>Empik</span>
+        <span>CNC Apteki</span>
+        <span>Aion Bank · UniCredit Group</span>
+        <span>PKO Bank Polski</span>
+        <span>Vesuvius</span>
+        <span>Wolters Kluwer</span>
+        <span>Provident</span>
+        <span>Volkswagen Group Polska</span>
+        <span>GUS</span>
+        <span>Teva</span>
+        <span>Zentiva</span>
+        <span>Sanofi-Aventis</span>
+        <span>AstraZeneca</span>
+        <span>Bayer</span>
+        <span>Adamed</span>
+        <span>Polpharma</span>
+        <span>Empik</span>
+        <span>CNC Apteki</span>
+        </div>
       </div>
     </div>
   </section>
