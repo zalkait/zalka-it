@@ -16,7 +16,8 @@
 <meta property="og:locale" content="pl_PL">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -457,7 +458,7 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .level-lbl{font-family:var(--font-mono);font-size:.67rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:7px}
 .level-lbl.exp{color:var(--cyan);opacity:.9}
 .level-lbl.adv{color:var(--violet);opacity:.8}
-.level-lbl.mid{color:var(--amber, #f5a623);opacity:.85}
+.level-lbl.mid{color:var(--gold, #b89150);opacity:.9}
 .level-lbl.basic{color:var(--text-faint);opacity:.7}
 
 /* ── FLAT CLIENT LIST (no expand needed) ── */
@@ -504,6 +505,39 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .bi-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:9px;background:linear-gradient(90deg,#38BDF8,#818CF8);color:#04141a;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .2s}
 .bi-cta-btn:hover{opacity:.88;transform:translateY(-2px)}
 
+/* ── HERO DIRECT MAIL ── */
+.hero-direct-mail{
+  display:inline-block;margin-top:16px;font-family:var(--font-mono);font-size:.78rem;
+  color:var(--text-faint);text-decoration:none;border-bottom:1px dashed var(--card-border);
+  transition:color .2s,border-color .2s;
+}
+.hero-direct-mail:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* ── WORKED WITH STRIP ── */
+.worked-strip{padding:22px 0;border-bottom:1px solid var(--card-border)}
+.worked-strip .wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.worked-label{font-size:.72rem;color:var(--text-faint);white-space:nowrap;flex-shrink:0}
+.worked-names{display:flex;gap:28px;flex-wrap:wrap;opacity:.7}
+.worked-names span{font-family:var(--font-display);font-size:.86rem;font-weight:600;color:var(--text-dim);white-space:nowrap}
+
+/* ── SERVICES POSITIONING ── */
+.svc-positioning{max-width:62ch;margin-top:10px;font-size:.95rem;color:var(--text-dim);line-height:1.6}
+
+/* ── SCROLLSPY ── */
+.scrollspy{
+  position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;
+  display:flex;flex-direction:column;gap:14px;
+}
+.scrollspy a{
+  width:9px;height:9px;border-radius:50%;border:1.5px solid var(--card-border);
+  display:block;transition:border-color .25s,background .25s,transform .25s;
+  position:relative;
+}
+.scrollspy a span{display:none}
+.scrollspy a:hover{transform:scale(1.3);border-color:var(--cyan)}
+.scrollspy a.active{background:var(--cyan);border-color:var(--cyan);transform:scale(1.25)}
+@media (max-width:1180px){.scrollspy{display:none}}
+
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in-view{opacity:1;transform:translateY(0)}
@@ -521,7 +555,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 <header class="nav">
   <div class="wrap">
     <a href="#main" class="brand">
-      <span class="brand-mark"><img src="assets/zt-mark-96.png" alt="ZalkaIT"></span>
+      <span class="brand-mark"><img src="assets/zt-mark-96.png" srcset="assets/zt-mark-96.png 1x, assets/zt-mark-192.png 2x" alt="ZalkaIT"></span>
       <span>Zalka<span class="it">IT</span></span>
     </a>
     <nav class="nav-links" aria-label="Sekcje strony">
@@ -538,6 +572,9 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
     <div class="nav-actions">
       <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="mailto:contact@zalka.it" class="icon-btn" aria-label="Email" title="contact@zalka.it">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <button id="lang-toggle" class="icon-btn mono" aria-label="Zmień język">EN</button>
       <button id="theme-toggle" class="icon-btn" aria-label="Przełącz tryb jasny/ciemny">
@@ -557,12 +594,23 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       <li><a href="#tech" data-i18n="nav.tech">Technologie</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
       <li><a href="/portfolio/bi" class="nav-portfolio" style="display:inline-flex;margin:8px 0" data-i18n="nav.portfolio">Portfolio BI</a></li>
+      <li><a href="mailto:contact@zalka.it">contact@zalka.it ✉</a></li>
       <li><a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
     </ul>
   </div>
 </header>
 
 <main id="main">
+
+<nav class="scrollspy" aria-label="Nawigacja sekcji" id="scrollspy">
+  <a href="#hero" data-section="hero" aria-label="Start"><span></span></a>
+  <a href="#about" data-section="about" aria-label="O mnie"><span></span></a>
+  <a href="#services" data-section="services" aria-label="Usługi"><span></span></a>
+  <a href="#projects" data-section="projects" aria-label="Projekty"><span></span></a>
+  <a href="#tech" data-section="tech" aria-label="Technologie"><span></span></a>
+  <a href="#contact" data-section="contact" aria-label="Kontakt"><span></span></a>
+</nav>
+
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
@@ -577,6 +625,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
           <a href="#contact" class="btn btn-primary" data-i18n="hero.cta1">Napisz do mnie</a>
           <a href="#projects" class="btn btn-ghost" data-i18n="hero.cta2">Zobacz projekty</a>
         </div>
+        <a href="mailto:contact@zalka.it" class="hero-direct-mail" data-i18n="hero.direct">lub napisz bezpośrednio: contact@zalka.it</a>
       </div>
 
       <div class="hero-console" aria-hidden="true">
@@ -623,6 +672,21 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 
   <div class="divider" aria-hidden="true"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0,17 L470,17 L540,4 L630,30 L700,17 L1200,17"/><circle cx="540" cy="4" r="3.4"/><circle cx="630" cy="30" r="3.4"/></svg></div>
 
+  <!-- ============ WORKED WITH ============ -->
+  <section class="worked-strip" aria-label="Klienci">
+    <div class="wrap">
+      <span class="worked-label mono" data-i18n="worked.label">-- pracowałem dla / z</span>
+      <div class="worked-names">
+        <span>Aion Bank · UniCredit Group</span>
+        <span>PKO Bank Polski</span>
+        <span>Vesuvius</span>
+        <span>Wolters Kluwer</span>
+        <span>GUS</span>
+        <span>Provident</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ ABOUT ============ -->
   <section class="section" id="about">
     <div class="wrap about-grid">
@@ -654,6 +718,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       <div class="svc-head reveal">
         <span class="eyebrow mono" data-i18n="services.eyebrow">-- uslugi</span>
         <h2 data-i18n="services.h2">W czym mogę pomóc</h2>
+        <p class="svc-positioning" data-i18n="services.positioning">Rzadkie połączenie: doświadczenie w sprawozdawczości regulacyjnej sektora bankowego (COREP) oraz praktyczne wdrażanie AI do automatyzacji pracy z danymi — dwa obszary, które razem rzadko spotyka się u jednego specjalisty.</p>
       </div>
       <div class="svc-grid">
 
@@ -858,7 +923,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
               <div class="t-client">
                 <div class="t-client-hdr"><span class="t-client-name">Provident Polska</span><span class="t-client-period">03.2019 – 08.2019</span></div>
                 <p data-i18n="proj.vlogit.client">Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego — projektowanie i wdrażanie nowych pakietów SSIS. Współudział w optymalizacji mechanizmu wyszukiwania i walidacji adresów klientów, obejmującej korektę błędnie wprowadzonych danych adresowych w procesach ETL oraz jednoznaczne dopasowywanie adresów przy wyszukiwaniu. Efekt: skrócenie czasu przetwarzania z ok. godziny do kilku minut.</p>
-                <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">SQL Server</span></div>
+                <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">SQL Server</span><span class="pill">Performance Tuning</span><span class="pill">Data Quality</span></div>
               </div>
             </div>
           </div>
@@ -887,7 +952,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
               <div class="t-client">
                 <div class="t-client-hdr"><span class="t-client-name">System CRM / ETL</span><span class="t-client-period">2014 – 2016</span></div>
                 <p data-i18n="proj.wk.crm">Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Usprawnienie działania codziennych zadań przetwarzania danych — eliminacja zakleszczeń (deadlocków) oraz wdrożenie obsługi błędów w przetwarzaniu dziennym. Optymalizacja procesu wyszukiwania i usuwania danych klienta na potrzeby RODO dla oddziału niemieckiego — skrócenie czasu pełnego odnalezienia powiązanych danych klienta (zależności w systemie CRM) z kilkunastu minut do kilkunastu sekund. Migracja wybranych komponentów do środowiska Google Cloud.</p>
-                <div class="t-tags"><span class="pill">MS SQL Server 2008R2</span><span class="pill">SSIS</span><span class="pill">Google Cloud</span></div>
+                <div class="t-tags"><span class="pill">MS SQL Server 2008R2</span><span class="pill">SSIS</span><span class="pill">Google Cloud</span><span class="pill">Performance Tuning</span><span class="pill">Data Quality</span></div>
               </div>
             </div>
           </div>
@@ -1167,7 +1232,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
 <footer class="footer">
   <div class="wrap">
     <div class="footer-brand">
-      <a href="#main" class="brand"><span class="brand-mark"><img src="assets/zt-mark-96.png" alt="ZalkaIT"></span><span>Zalka<span class="it">IT</span></span></a>
+      <a href="#main" class="brand"><span class="brand-mark"><img src="assets/zt-mark-96.png" srcset="assets/zt-mark-96.png 1x, assets/zt-mark-192.png 2x" alt="ZalkaIT"></span><span>Zalka<span class="it">IT</span></span></a>
       <p data-i18n="footer.tagline">BI / ETL Developer · Data Engineer · SQL · Data Warehouse &amp; Cloud Solutions · AI</p>
     </div>
     <nav class="footer-links" aria-label="Stopka — sekcje">
@@ -1207,7 +1272,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "hero.badge":"Dostępny do kontraktów B2B",
       "hero.h1":'Projektuję wydajne architektury <span class="accent">DWH</span> i skalowalne potoki <span class="accent">ETL/ELT</span>',
       "hero.lead":"Ponad 20 lat w Business Intelligence i inżynierii danych — od T-SQL i SSIS po BigQuery, Power BI i sprawozdawczość regulacyjną sektora bankowego. Obecnie wdrażam AI do realnych problemów analitycznych.",
-      "hero.cta1":"Napisz do mnie","hero.cta2":"Zobacz projekty",
+      "hero.cta1":"Napisz do mnie","hero.cta2":"Zobacz projekty","hero.direct":"lub napisz bezpośrednio: contact@zalka.it",
       "hero.console.corep":"0 rozbieżności",
       "hero.console.q":"Zoptymalizuj ten CTE",
       "hero.console.a":"Indeks na (acct_id, period) → -88% czasu",
@@ -1221,7 +1286,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat2":"redukcji wolumenu danych w BigQuery (Aion Bank): 2-5 TB → 200-500 MB",
       "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
       "about.stat4":"Prompt engineering w codziennej pracy z danymi",
-      "services.eyebrow":"-- uslugi","services.h2":"W czym mogę pomóc",
+      "services.eyebrow":"-- uslugi","services.h2":"W czym mogę pomóc","services.positioning":"Rzadkie połączenie: doświadczenie w sprawozdawczości regulacyjnej sektora bankowego (COREP) oraz praktyczne wdrażanie AI do automatyzacji pracy z danymi — dwa obszary, które razem rzadko spotyka się u jednego specjalisty.",
       "services.c1.title":"Projektowanie i optymalizacja DWH",
       "services.c1.desc":"Architektura hurtowni danych od podstaw lub refaktoryzacja istniejących struktur — modele wymiarowe, wydajność, skalowalność.",
       "services.c2.title":"Procesy ETL/ELT",
@@ -1257,6 +1322,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat4":"wdrożeń DWH / OLAP od zera lub migracji",
       "projects.early":"Wcześniejsze doświadczenie (2006–2013) · 6 pozycji",
       "level.exp":"● Ekspert","level.adv":"● Zaawansowany","level.mid":"● Średniozaawansowany","level.basic":"● Podstawowy / użytkowy","level.dev":"● W rozwoju",
+      "hero.console.pipeline.rows":"<span>wiersze: 12.4M</span><span>błędy: 0</span>",
+      "worked.label":"-- pracowałem dla / z",
       "proj.chips.label":"Przykładowe analizy:",
       "proj.aion.ind":"Sektor bankowy · Senior Obligatory Reporting Contributor",
       "proj.aion.desc":"Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Optymalizacja kosztowa procedur składowanych przetwarzających dane w BigQuery — redukcja przetwarzanego wolumenu z 2–5 TB do 200–500 MB na uruchomienie, co radykalnie obniżyło koszty zapytań w chmurze Google. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.",
@@ -1340,7 +1407,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "hero.badge":"Available for B2B contracts",
       "hero.h1":'I design high-performance <span class="accent">DWH</span> architectures and scalable <span class="accent">ETL/ELT</span> pipelines',
       "hero.lead":"20+ years in Business Intelligence and data engineering — from T-SQL and SSIS to BigQuery, Power BI, and regulatory reporting for the banking sector. Currently applying AI to real analytical problems.",
-      "hero.cta1":"Get in touch","hero.cta2":"View projects",
+      "hero.cta1":"Get in touch","hero.cta2":"View projects","hero.direct":"or email directly: contact@zalka.it",
       "hero.console.corep":"0 discrepancies",
       "hero.console.q":"Optimize this CTE",
       "hero.console.a":"Index on (acct_id, period) → -88% time",
@@ -1354,7 +1421,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat2":"BigQuery data volume reduction (Aion Bank): 2-5 TB → 200-500 MB",
       "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
       "about.stat4":"Prompt engineering in everyday data work",
-      "services.eyebrow":"-- services","services.h2":"What I can help with",
+      "services.eyebrow":"-- services","services.h2":"What I can help with","services.positioning":"A rare combination: experience in banking-sector regulatory reporting (COREP) alongside hands-on AI implementation for data-workflow automation — two areas you don't often find together in a single specialist.",
       "services.c1.title":"Data Warehouse design & optimization",
       "services.c1.desc":"DWH architecture from scratch or refactoring existing structures — dimensional models, performance, scalability.",
       "services.c2.title":"ETL/ELT pipelines",
@@ -1390,6 +1457,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat4":"DWH / OLAP builds from scratch or migrations",
       "projects.early":"Earlier experience (2006–2013) · 6 positions",
       "level.exp":"● Expert","level.adv":"● Advanced","level.mid":"● Intermediate","level.basic":"● Basic / functional","level.dev":"● In progress",
+      "hero.console.pipeline.rows":"<span>rows: 12.4M</span><span>errors: 0</span>",
+      "worked.label":"-- worked with",
       "proj.chips.label":"Live demos:",
       "proj.aion.ind":"Banking sector · Senior Obligatory Reporting Contributor",
       "proj.aion.desc":"Designing and implementing ETL processes, procedures and functions in BigQuery for mandatory bank regulatory reporting (COREP, Leverage Ratio, Large Exposures). Integrating and importing data into UniCredit Group systems. Cost optimization of stored procedures processing data in BigQuery — reducing processed volume from 2–5 TB down to 200–500 MB per run, drastically lowering Google Cloud query costs. Building interactive analytical dashboards and management reports in Looker Studio.",
@@ -1469,7 +1538,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
     }
   };
 
-  var htmlKeys = { "hero.h1": true };
+  var htmlKeys = { "hero.h1": true, "hero.console.pipeline.rows": true };
 
   function applyI18n(lang){
     var nodes = document.querySelectorAll('[data-i18n]');
@@ -1746,6 +1815,29 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
     if(open){ block.removeAttribute('hidden'); }
     else { block.setAttribute('hidden',''); }
   };
+
+  /* ============ SCROLLSPY ============ */
+  (function(){
+    var spy = document.getElementById('scrollspy');
+    if(!spy) return;
+    var links = spy.querySelectorAll('a');
+    var sections = ['hero','about','services','projects','tech','contact']
+      .map(function(id){ return document.getElementById(id); })
+      .filter(Boolean);
+    if('IntersectionObserver' in window){
+      var spyObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            var id = entry.target.id;
+            links.forEach(function(a){
+              a.classList.toggle('active', a.getAttribute('data-section') === id);
+            });
+          }
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      sections.forEach(function(s){ spyObserver.observe(s); });
+    }
+  })();
 
 })();
 </script>
