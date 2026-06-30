@@ -457,6 +457,14 @@ html[data-theme="light"] .nav{background:rgba(245,247,251,0.78)}
 .level-lbl{font-family:var(--font-mono);font-size:.67rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:7px}
 .level-lbl.exp{color:var(--cyan);opacity:.9}
 .level-lbl.adv{color:var(--violet);opacity:.8}
+.level-lbl.mid{color:var(--amber, #f5a623);opacity:.85}
+.level-lbl.basic{color:var(--text-faint);opacity:.7}
+
+/* ── FLAT CLIENT LIST (no expand needed) ── */
+.t-clients-flat{
+  margin-top:12px;font-family:var(--font-mono);font-size:.76rem;
+  color:var(--text-faint);padding-top:10px;border-top:1px dashed var(--card-border);
+}
 
 /* ── COLLAPSIBLE CLIENTS ── */
 .t-expand-btn{
@@ -622,7 +630,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
         <span class="eyebrow mono" data-i18n="about.eyebrow">-- o_mnie</span>
         <h2 data-i18n="about.h2">Dane, które mają sens — i AI, które pomaga je odkrywać</h2>
         <p data-i18n="about.p1">Od ponad 20 lat pracuję jako BI/ETL Developer i Data Engineer. Specjalizuję się w T-SQL i PL/SQL, projektowaniu i optymalizacji hurtowni danych (DWH) oraz procesach ETL/ELT — od klasycznego SSIS po BigQuery.</p>
-        <p data-i18n="about.p2">Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.</p>
+        <p data-i18n="about.p2">Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem. Optymalizacja wydajności to dla mnie nie deklaracja, lecz mierzalne efekty: skrócenie procesu walidacji adresów klientów z godziny do kilku minut, redukcja czasu wyszukiwania danych klienta na potrzeby RODO z kilkunastu minut do kilkunastu sekund, czy zmniejszenie wolumenu danych przetwarzanych w BigQuery z kilku terabajtów do kilkuset megabajtów na uruchomienie — z bezpośrednim przełożeniem na koszty chmury.</p>
         <p data-i18n="about.p3">Od kilku miesięcy intensywnie zgłębiam możliwości AI — testuję modele LLM i prompt engineering, wykorzystując narzędzia AI do przyspieszania i optymalizacji pracy nad złożonymi projektami oraz automatyzacji analizy danych. To nowy, ale bardzo praktyczny kierunek rozwoju, który aktywnie rozwijam.</p>
         <a href="https://www.linkedin.com/in/marcin-zaluski/" target="_blank" rel="noopener" class="li-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
@@ -633,7 +641,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
         <div class="stat-card"><div class="v">20+</div><div class="l" data-i18n="about.stat1">lat w BI, ETL i inżynierii danych (od 2006)</div></div>
         <div class="stat-card"><div class="v">15+</div><div class="l" data-i18n="about.stat3">unikalnych klientów w 8 branżach</div></div>
         <div class="stat-card"><div class="v">10+</div><div class="l" data-i18n="about.stat4">wdrożeń DWH / OLAP od zera lub migracji</div></div>
-        <div class="stat-card"><div class="v mono">COREP</div><div class="l" data-i18n="about.stat2">Sektor bankowy — Leverage Ratio, Large Exposures</div></div>
+        <div class="stat-card"><div class="v">99%</div><div class="l" data-i18n="about.stat2">redukcji wolumenu danych w BigQuery (Aion Bank): 2-5 TB → 200-500 MB</div></div>
       </div>
     </div>
   </section>
@@ -711,8 +719,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
               <span class="t-company">Aion Bank (UniCredit Group)</span>
               <span class="t-industry" data-i18n="proj.aion.ind">Sektor bankowy · Senior Obligatory Reporting Contributor</span>
             </div>
-            <p class="t-desc" data-i18n="proj.aion.desc">Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.</p>
-            <div class="t-tags"><span class="pill">BigQuery</span><span class="pill">COREP</span><span class="pill">Looker Studio</span><span class="pill">T-SQL</span><span class="pill">ETL</span></div>
+            <p class="t-desc" data-i18n="proj.aion.desc">Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Optymalizacja kosztowa procedur składowanych przetwarzających dane w BigQuery — redukcja przetwarzanego wolumenu z 2–5 TB do 200–500 MB na uruchomienie, co radykalnie obniżyło koszty zapytań w chmurze Google. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.</p>
+            <div class="t-tags"><span class="pill">BigQuery</span><span class="pill">COREP</span><span class="pill">Cost Optimization</span><span class="pill">Looker Studio</span><span class="pill">T-SQL</span><span class="pill">ETL</span></div>
           </div>
         </div>
 
@@ -849,7 +857,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
             <div class="t-clients" hidden>
               <div class="t-client">
                 <div class="t-client-hdr"><span class="t-client-name">Provident Polska</span><span class="t-client-period">03.2019 – 08.2019</span></div>
-                <p data-i18n="proj.vlogit.client">Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego. Optymalizacja i rozwój kostek analitycznych SSAS Tabular zasilanych danymi z systemów operacyjnych.</p>
+                <p data-i18n="proj.vlogit.client">Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego — projektowanie i wdrażanie nowych pakietów SSIS. Współudział w optymalizacji mechanizmu wyszukiwania i walidacji adresów klientów, obejmującej korektę błędnie wprowadzonych danych adresowych w procesach ETL oraz jednoznaczne dopasowywanie adresów przy wyszukiwaniu. Efekt: skrócenie czasu przetwarzania z ok. godziny do kilku minut.</p>
                 <div class="t-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSIS</span><span class="pill">DWH</span><span class="pill">SQL Server</span></div>
               </div>
             </div>
@@ -878,7 +886,7 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
               </div>
               <div class="t-client">
                 <div class="t-client-hdr"><span class="t-client-name">System CRM / ETL</span><span class="t-client-period">2014 – 2016</span></div>
-                <p data-i18n="proj.wk.crm">Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Budowa i rozbudowa struktur hurtowni danych. Migracja wybranych komponentów do środowiska Google Cloud.</p>
+                <p data-i18n="proj.wk.crm">Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Usprawnienie działania codziennych zadań przetwarzania danych — eliminacja zakleszczeń (deadlocków) oraz wdrożenie obsługi błędów w przetwarzaniu dziennym. Optymalizacja procesu wyszukiwania i usuwania danych klienta na potrzeby RODO dla oddziału niemieckiego — skrócenie czasu pełnego odnalezienia powiązanych danych klienta (zależności w systemie CRM) z kilkunastu minut do kilkunastu sekund. Migracja wybranych komponentów do środowiska Google Cloud.</p>
                 <div class="t-tags"><span class="pill">MS SQL Server 2008R2</span><span class="pill">SSIS</span><span class="pill">Google Cloud</span></div>
               </div>
             </div>
@@ -1006,8 +1014,9 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
               <span class="t-company">Cegedim</span>
               <span class="t-industry" data-i18n="proj.cegedim1.ind">Farmacja / CRM / Medical · CRM Customization Specialist</span>
             </div>
-            <p class="t-desc" data-i18n="proj.cegedim1.desc">Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle PL/SQL, Sybase i MS SQL Server. Wdrażanie standardów raportowania z dedykowanymi narzędziami CRM dla sektora farmaceutycznego i medycznego.</p>
-            <div class="t-tags"><span class="pill">Oracle PL/SQL</span><span class="pill">Sybase</span><span class="pill">MS SQL Server</span><span class="pill">CRM Reporting</span></div>
+            <p class="t-desc" data-i18n="proj.cegedim1.desc">Tworzenie i rozbudowa raportów dla systemu CRM wykorzystywanego przez firmy z sektora farmaceutycznego, w oparciu o silnik bazodanowy Sybase. Rozwój funkcjonalności dedykowanej aplikacji raportującej (C#) generującej zestawienia aktywności z systemu CRM. Dbałość o wydajność, spójność i jakość danych klientów w środowisku Oracle — optymalizacja i modyfikacja procedur składowanych z wykorzystaniem narzędzia TOAD.</p>
+            <div class="t-tags"><span class="pill">Sybase</span><span class="pill">C#</span><span class="pill">Oracle PL/SQL</span><span class="pill">TOAD</span><span class="pill">CRM Reporting</span></div>
+            <div class="t-clients-flat" data-i18n="proj.cegedim1.clients">Klienci: Teva, Polpharma, Adamed, Zentiva, AstraZeneca, Bayer</div>
           </div>
         </div>
 
@@ -1061,25 +1070,24 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g1">Bazy danych &amp; Języki</h3>
           <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">T-SQL</span><span class="pill">MS SQL Server</span></div></div>
-          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">PL/SQL</span><span class="pill">BigQuery SQL</span><span class="pill">C#</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">PL/SQL</span><span class="pill">Sybase</span><span class="pill">BigQuery SQL</span></div></div>
+          <div class="tech-level"><span class="level-lbl mid" data-i18n="level.mid">● Średniozaawansowany</span><div class="tech-tags"><span class="pill">C#</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g2">ETL / ELT</h3>
           <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">SSIS</span><span class="pill">Integration Services</span></div></div>
-          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">BigQuery Data Transfer</span><span class="pill">ELT (cloud)</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g3">Modelowanie &amp; OLAP</h3>
-          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">MDX</span></div></div>
-          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">DAX</span><span class="pill">Star/Snowflake Schema</span></div></div>
+          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">SSAS Tabular</span><span class="pill">SSAS Multidim.</span><span class="pill">Star/Snowflake Schema</span><span class="pill">MDX</span><span class="pill">DAX</span></div></div>
+          <div class="tech-level"><span class="level-lbl mid" data-i18n="level.mid">● Średniozaawansowany</span><div class="tech-tags"><span class="pill">Power Query (Excel)</span></div></div>
         </div>
 
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g4">BI &amp; Raportowanie</h3>
-          <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Excel Services</span></div></div>
-          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Power BI</span><span class="pill">Excel Services</span><span class="pill">Looker Studio</span><span class="pill">SSRS</span><span class="pill">SharePoint / PerformancePoint</span></div></div>
         </div>
 
         <div class="tech-card reveal">
@@ -1091,7 +1099,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
         <div class="tech-card reveal">
           <h3 data-i18n="tech.g6">Narzędzia &amp; SCM</h3>
           <div class="tech-level"><span class="level-lbl exp" data-i18n="level.exp">● Ekspert</span><div class="tech-tags"><span class="pill">TOAD</span><span class="pill">Visual Studio</span><span class="pill">SSMS</span></div></div>
-          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Git</span><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div></div>
+          <div class="tech-level"><span class="level-lbl adv" data-i18n="level.adv">● Zaawansowany</span><div class="tech-tags"><span class="pill">Git</span><span class="pill">SVN</span><span class="pill">TortoiseSVN</span></div></div>
+          <div class="tech-level"><span class="level-lbl basic" data-i18n="level.basic">● Podstawowy / użytkowy</span><div class="tech-tags"><span class="pill">PowerShell</span><span class="pill">Python</span><span class="pill">JIRA</span></div></div>
         </div>
 
       </div>
@@ -1205,11 +1214,11 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.eyebrow":"-- o_mnie",
       "about.h2":"Dane, które mają sens — i AI, które pomaga je odkrywać",
       "about.p1":"Od ponad 20 lat pracuję jako BI/ETL Developer i Data Engineer. Specjalizuję się w T-SQL i PL/SQL, projektowaniu i optymalizacji hurtowni danych (DWH) oraz procesach ETL/ELT — od klasycznego SSIS po BigQuery.",
-      "about.p2":"Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem.",
+      "about.p2":"Mam unikalne doświadczenie w sektorze bankowym: sprawozdawczość regulacyjna COREP, Leverage Ratio i Large Exposures — obszary, w których precyzja danych nie jest opcją, lecz wymogiem. Optymalizacja wydajności to dla mnie nie deklaracja, lecz mierzalne efekty: skrócenie procesu walidacji adresów klientów z godziny do kilku minut, redukcja czasu wyszukiwania danych klienta na potrzeby RODO z kilkunastu minut do kilkunastu sekund, czy zmniejszenie wolumenu danych przetwarzanych w BigQuery z kilku terabajtów do kilkuset megabajtów na uruchomienie — z bezpośrednim przełożeniem na koszty chmury.",
       "about.p3":"Od kilku miesięcy intensywnie zgłębiam możliwości AI — testuję modele LLM i prompt engineering, wykorzystując narzędzia AI do przyspieszania i optymalizacji pracy nad złożonymi projektami oraz automatyzacji analizy danych. To nowy, ale bardzo praktyczny kierunek rozwoju, który aktywnie rozwijam.",
       "about.linkedin":"Profil LinkedIn",
       "about.stat1":"lat doświadczenia w BI, ETL i inżynierii danych",
-      "about.stat2":"Sektor bankowy — Leverage Ratio, Large Exposures",
+      "about.stat2":"redukcji wolumenu danych w BigQuery (Aion Bank): 2-5 TB → 200-500 MB",
       "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
       "about.stat4":"Prompt engineering w codziennej pracy z danymi",
       "services.eyebrow":"-- uslugi","services.h2":"W czym mogę pomóc",
@@ -1247,10 +1256,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat3":"unikalnych klientów w 8 branżach",
       "about.stat4":"wdrożeń DWH / OLAP od zera lub migracji",
       "projects.early":"Wcześniejsze doświadczenie (2006–2013) · 6 pozycji",
-      "level.exp":"● Ekspert","level.adv":"● Zaawansowany","level.dev":"● W rozwoju",
+      "level.exp":"● Ekspert","level.adv":"● Zaawansowany","level.mid":"● Średniozaawansowany","level.basic":"● Podstawowy / użytkowy","level.dev":"● W rozwoju",
       "proj.chips.label":"Przykładowe analizy:",
       "proj.aion.ind":"Sektor bankowy · Senior Obligatory Reporting Contributor",
-      "proj.aion.desc":"Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.",
+      "proj.aion.desc":"Projektowanie i implementacja procesów ETL, procedur i funkcji w BigQuery na potrzeby obligatoryjnej sprawozdawczości bankowej (COREP, Leverage Ratio, Large Exposures). Integracja i import danych do systemów Grupy UniCredit. Optymalizacja kosztowa procedur składowanych przetwarzających dane w BigQuery — redukcja przetwarzanego wolumenu z 2–5 TB do 200–500 MB na uruchomienie, co radykalnie obniżyło koszty zapytań w chmurze Google. Budowa interaktywnych dashboardów analitycznych i raportów zarządczych w środowisku Looker Studio.",
       "proj.ebis.ind":"Sektor produkcyjny · Business Intelligence Developer",
       "proj.ebis.desc":"Projektowanie, rozszerzanie i strojenie wydajnościowe zaawansowanych kostek OLAP w modelu Tabular. Budowa procesów ETL integrujących dane z systemów ERP i CRM oraz kompleksowych raportów Power BI z modelami DAX.",
       "proj.ebis.expand":"Projekt klienta (1)",
@@ -1270,12 +1279,12 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "proj.vlogit.ind":"Finanse / Pożyczki · Business Intelligence Developer",
       "proj.vlogit.desc":"Rozbudowa hurtowni danych SQL Server oraz projektowanie procesów ETL z wykorzystaniem SSIS. Rozwój, modyfikacja i optymalizacja wielowymiarowych kostek analitycznych SSAS Tabular.",
       "proj.vlogit.expand":"Projekt klienta (1)",
-      "proj.vlogit.client":"Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego. Optymalizacja i rozwój kostek analitycznych SSAS Tabular zasilanych danymi z systemów operacyjnych.",
+      "proj.vlogit.client":"Rozbudowa hurtowni danych i procesów ETL dla firmy finansowej z sektora pożyczkowego — projektowanie i wdrażanie nowych pakietów SSIS. Współudział w optymalizacji mechanizmu wyszukiwania i walidacji adresów klientów, obejmującej korektę błędnie wprowadzonych danych adresowych w procesach ETL oraz jednoznaczne dopasowywanie adresów przy wyszukiwaniu. Efekt: skrócenie czasu przetwarzania z ok. godziny do kilku minut.",
       "proj.wk.ind":"Wydawnictwo / Legal-tech · ETL Developer / Analityk bazodanowy",
       "proj.wk.desc":"Prace programistyczne przy rozbudowie wewnętrznych systemów CMS i CRM. Projektowanie i implementacja potoków ETL, budowa struktur DWH, optymalizacja wydajności SQL Server oraz migracja wybranych rozwiązań do środowiska Google Cloud.",
       "proj.wk.expand":"Projekty wewnętrzne (2)",
       "proj.wk.cms":"Prace programistyczne przy rozbudowie wewnętrznego systemu CMS. Projektowanie i implementacja struktur danych oraz procedur T-SQL. Optymalizacja wydajności zapytań i indeksów SQL Server.",
-      "proj.wk.crm":"Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Budowa i rozbudowa struktur hurtowni danych. Migracja wybranych komponentów do środowiska Google Cloud.",
+      "proj.wk.crm":"Projektowanie, implementacja i optymalizacja procesów ETL zasilających systemy CRM firmy. Usprawnienie działania codziennych zadań przetwarzania danych — eliminacja zakleszczeń (deadlocków) oraz wdrożenie obsługi błędów w przetwarzaniu dziennym. Optymalizacja procesu wyszukiwania i usuwania danych klienta na potrzeby RODO dla oddziału niemieckiego — skrócenie czasu pełnego odnalezienia powiązanych danych klienta (zależności w systemie CRM) z kilkunastu minut do kilkunastu sekund. Migracja wybranych komponentów do środowiska Google Cloud.",
       "proj.britenet.ind":"Software House · ETL Developer / BI Developer",
       "proj.britenet.desc":"Realizacja projektów ETL i Business Intelligence dla klientów z sektora automotive i bankowego. Projektowanie struktur danych, implementacja procesów ETL oraz budowa środowisk raportowych.",
       "proj.britenet.expand":"Projekty klientów (2)",
@@ -1295,7 +1304,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "proj.praxis.ind":"BI / OLAP · Programmer",
       "proj.praxis.desc":"Analiza i budowa procesów ETL (SSIS). Rozszerzanie i strojenie wydajnościowe kostek OLAP w modelu Tabular (SSAS). Profilowanie, refaktoryzacja i optymalizacja złożonych procedur T-SQL pod kątem eliminacji wąskich gardeł wydajnościowych.",
       "proj.cegedim1.ind":"Farmacja / CRM / Medical · CRM Customization Specialist",
-      "proj.cegedim1.desc":"Projektowanie i implementacja dedykowanych raportów oraz skryptów analitycznych w środowiskach Oracle PL/SQL, Sybase i MS SQL Server. Wdrażanie standardów raportowania z dedykowanymi narzędziami CRM dla sektora farmaceutycznego i medycznego.",
+      "proj.cegedim1.desc":"Tworzenie i rozbudowa raportów dla systemu CRM wykorzystywanego przez firmy z sektora farmaceutycznego, w oparciu o silnik bazodanowy Sybase. Rozwój funkcjonalności dedykowanej aplikacji raportującej (C#) generującej zestawienia aktywności z systemu CRM. Dbałość o wydajność, spójność i jakość danych klientów w środowisku Oracle — optymalizacja i modyfikacja procedur składowanych z wykorzystaniem narzędzia TOAD.",
+      "proj.cegedim1.clients":"Klienci: Teva, Polpharma, Adamed, Zentiva, AstraZeneca, Bayer",
       "proj.ilc.ind":"Data Warehouse · IT Specialist / BI Developer",
       "proj.ilc.desc":"Budowa hurtowni danych od podstaw na platformie MS SQL Server 2005. Tworzenie i optymalizacja procesów ETL (SSIS) oraz kostek analitycznych SSAS. Pisanie zapytań i skryptów analitycznych MDX i T-SQL.",
       "proj.ilc.expand":"Projekty klientów (2)",
@@ -1337,11 +1347,11 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.eyebrow":"-- about_me",
       "about.h2":"Data that makes sense — and AI that helps uncover it",
       "about.p1":"I've worked as a BI/ETL Developer and Data Engineer for over 20 years. I specialize in T-SQL and PL/SQL, designing and optimizing data warehouses (DWH), and ETL/ELT processes — from classic SSIS to BigQuery.",
-      "about.p2":"I bring unique banking-sector experience: COREP, Leverage Ratio, and Large Exposures regulatory reporting — areas where data accuracy isn't optional, it's mandatory.",
+      "about.p2":"I bring unique banking-sector experience: COREP, Leverage Ratio, and Large Exposures regulatory reporting — areas where data accuracy isn't optional, it's mandatory. Performance optimization isn't just a claim for me — it's measurable results: cutting customer address validation from an hour down to minutes, reducing GDPR customer data lookup time from over ten minutes to mere seconds, or shrinking BigQuery data volume processed per run from several terabytes down to a few hundred megabytes — with a direct impact on cloud costs.",
       "about.p3":"For the past few months I've been diving deep into AI — experimenting with LLMs and prompt engineering, using AI tools to speed up and optimize work on complex projects and automate data analysis. It's a new but very hands-on direction I'm actively building on.",
       "about.linkedin":"LinkedIn profile",
       "about.stat1":"years of experience in BI, ETL and data engineering",
-      "about.stat2":"Banking sector — Leverage Ratio, Large Exposures",
+      "about.stat2":"BigQuery data volume reduction (Aion Bank): 2-5 TB → 200-500 MB",
       "about.stat3":"BigQuery, SSIS, Power BI, OLAP/DAX",
       "about.stat4":"Prompt engineering in everyday data work",
       "services.eyebrow":"-- services","services.h2":"What I can help with",
@@ -1379,10 +1389,10 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "about.stat3":"unique clients across 8 industries",
       "about.stat4":"DWH / OLAP builds from scratch or migrations",
       "projects.early":"Earlier experience (2006–2013) · 6 positions",
-      "level.exp":"● Expert","level.adv":"● Advanced","level.dev":"● In progress",
+      "level.exp":"● Expert","level.adv":"● Advanced","level.mid":"● Intermediate","level.basic":"● Basic / functional","level.dev":"● In progress",
       "proj.chips.label":"Live demos:",
       "proj.aion.ind":"Banking sector · Senior Obligatory Reporting Contributor",
-      "proj.aion.desc":"Designing and implementing ETL processes, procedures and functions in BigQuery for mandatory bank regulatory reporting (COREP, Leverage Ratio, Large Exposures). Integrating and importing data into UniCredit Group systems. Building interactive analytical dashboards and management reports in Looker Studio.",
+      "proj.aion.desc":"Designing and implementing ETL processes, procedures and functions in BigQuery for mandatory bank regulatory reporting (COREP, Leverage Ratio, Large Exposures). Integrating and importing data into UniCredit Group systems. Cost optimization of stored procedures processing data in BigQuery — reducing processed volume from 2–5 TB down to 200–500 MB per run, drastically lowering Google Cloud query costs. Building interactive analytical dashboards and management reports in Looker Studio.",
       "proj.ebis.ind":"Manufacturing sector · Business Intelligence Developer",
       "proj.ebis.desc":"Designing, extending and performance-tuning advanced OLAP cubes in the Tabular model. Building ETL processes integrating data from ERP and CRM systems, and comprehensive Power BI reports with DAX models.",
       "proj.ebis.expand":"Client project (1)",
@@ -1402,12 +1412,12 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "proj.vlogit.ind":"Finance / Consumer Loans · Business Intelligence Developer",
       "proj.vlogit.desc":"Expanding the SQL Server data warehouse and designing ETL processes using SSIS. Development, modification and optimization of multidimensional SSAS Tabular analytical cubes.",
       "proj.vlogit.expand":"Client project (1)",
-      "proj.vlogit.client":"Data warehouse and ETL process development for a consumer finance company. Optimization and development of SSAS Tabular analytical cubes fed from operational systems.",
+      "proj.vlogit.client":"Data warehouse and ETL process development for a consumer finance company — designing and implementing new SSIS packages. Contributed to optimizing the customer address search and validation mechanism, including correcting mis-entered address data in ETL processes and unambiguous address matching during lookup. Result: processing time cut from roughly an hour to a few minutes.",
       "proj.wk.ind":"Publishing / Legal-tech · ETL Developer / Database Analyst",
       "proj.wk.desc":"Development work on internal CMS and CRM systems. Designing and implementing ETL pipelines, building DWH structures, SQL Server performance optimization and migration of selected solutions to Google Cloud.",
       "proj.wk.expand":"Internal projects (2)",
       "proj.wk.cms":"Development work on the internal CMS system. Data structure design and T-SQL procedure implementation. SQL Server query and index performance optimization.",
-      "proj.wk.crm":"Designing, implementing and optimizing ETL processes feeding company CRM systems. Building and expanding data warehouse structures. Migration of selected components to Google Cloud.",
+      "proj.wk.crm":"Designing, implementing and optimizing ETL processes feeding company CRM systems. Improved daily data processing jobs — eliminating deadlocks and implementing error handling for daily processing. Optimized the customer data search-and-deletion process for GDPR compliance at the German branch — cutting the time to fully locate related customer data (CRM system dependencies) from over ten minutes to a matter of seconds. Migration of selected components to Google Cloud.",
       "proj.britenet.ind":"Software House · ETL Developer / BI Developer",
       "proj.britenet.desc":"Delivering ETL and Business Intelligence projects for clients in the automotive and banking sectors. Data structure design, ETL process implementation and reporting environment development.",
       "proj.britenet.expand":"Client projects (2)",
@@ -1427,7 +1437,8 @@ html[data-lang="en"] [data-i18n-lang="pl"]{display:none !important}
       "proj.praxis.ind":"BI / OLAP · Programmer",
       "proj.praxis.desc":"Analysis and development of ETL processes (SSIS). Extending and performance-tuning OLAP cubes in Tabular model (SSAS). Profiling, refactoring and optimization of complex T-SQL procedures to eliminate performance bottlenecks.",
       "proj.cegedim1.ind":"Pharma / CRM / Medical · CRM Customization Specialist",
-      "proj.cegedim1.desc":"Designing and implementing dedicated reports and analytical scripts in Oracle PL/SQL, Sybase and MS SQL Server environments. Implementing reporting standards with dedicated CRM tools for the pharmaceutical and medical sectors.",
+      "proj.cegedim1.desc":"Creating and extending reports for a CRM system used by pharmaceutical companies, built on the Sybase database engine. Developing functionality of a dedicated reporting application (C#) generating CRM activity reports. Ensuring performance, consistency and data quality for pharmaceutical clients in Oracle — optimizing and modifying stored procedures using TOAD.",
+      "proj.cegedim1.clients":"Clients: Teva, Polpharma, Adamed, Zentiva, AstraZeneca, Bayer",
       "proj.ilc.ind":"Data Warehouse · IT Specialist / BI Developer",
       "proj.ilc.desc":"Building a data warehouse from scratch on MS SQL Server 2005. Creating and optimizing ETL processes (SSIS) and SSAS analytical cubes. Writing MDX and T-SQL analytical queries and scripts.",
       "proj.ilc.expand":"Client projects (2)",
